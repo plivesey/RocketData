@@ -1,0 +1,7 @@
+How to Build Docs
+
+- Install Sphinx: $ sudo easy_install sphinx
+- Install the theme: $ ./bin/update_theme.sh
+- Build the docs: $ make clean html
+- Open the docs locally: $ open _build/html/index.html
+
