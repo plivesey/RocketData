@@ -1,0 +1,7 @@
+# User Data
+*.pbxuser
+xcuserdata
+
+# Docs
+docs/_build/*
+

@@ -1,0 +1,12 @@
+FAQ
+===
+
+Immediately after setting new data, I'm getting multiple callbacks that a model has changed. What's going on?
+-------------------------------------------------------------------------------------------------------------
+
+The best way to debug this is to set a breakpoint in the `ConsistencyManagerDelegate` debug method (:doc:`090_otherFeatures`). This will show you which model is changing. This particular bug sometimes occurs when you have data that is inconsistent within one model. So you may have a model with two children with the same ID but different data. This will immediately cause the consistency manager to update one of these children with the other. You should fix your data so it starts out in a consistent way.
+
+If the library doesn't support projections, don't I need to return more data than I need?
+-----------------------------------------------------------------------------------------
+
+Possibly, but there are ways of modeling in ways which reduces total size and duplicated data. You can use composition to reduce the additional data. For instance, let's say you have a FullProfile model and a Person model. In most places, you only need a small part of the profile so you can use Person model which only has a few fields. Then, you can include the Person model in the FullProfile model. This keeps the guarantees about a model with the same ID having the same data, and means there is no duplicate data. Avoiding duplicate data is important if you want to only make one update per change (otherwise, you may need to update multiple models).
