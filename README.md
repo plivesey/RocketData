@@ -31,3 +31,8 @@ pod 'RocketData'
 To get started, you should take a look at the docs:
 
 https://linkedin.github.io/RocketData
+
+# Security
+
+If you believe you have discovered a security issue, please send an email to security@linkedin.com with information and detailed instructions on how to reproduce the issue.
+
