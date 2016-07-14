@@ -21,10 +21,13 @@ The application has two view controllers. One shows a message from a person. The
     override func viewDidLoad() {
       super.viewDidLoad()
 
+      dataProvider.delegate = self
+
       dataProvider.fetchDataFromCache(cacheKey: self.id) { (model, error) in
         self.refreshView()
       }
 
+      // This is your applications NetworkManager
       NetworkManager.fetchMessageWithId(self.id) { (message: Message?) in
         self.dataProvider.setData(message)
         self.refreshView()
@@ -49,10 +52,13 @@ The application has two view controllers. One shows a message from a person. The
     override func viewDidLoad() {
       super.viewDidLoad()
 
+      dataProvider.delegate = self
+
       dataProvider.fetchDataFromCache(cacheKey: "contacts") { (models, error) in
         self.tableView.reloadData()
       }
 
+      // This is your applications NetworkManager
       NetworkManager.fetchContacts() { (contacts: [Person]?) in
         if let contacts = contacts {
           self.dataProvider.setData(contacts, cacheKey: "contacts")
@@ -74,8 +80,8 @@ Fetching from the Network
 =========================
 
   1. The MessageViewController fetches data from the cache and network simultaneously.
-  2. When the data comes back from the cache, the MessageViewController refreshes with this data. If the network data comes back before the cache, then the data provider will ignore the cached data.
-  3. When the fresh data comes back from the network, the MessageViewController again refreshes.
+  2. When the data comes back from the cache, the MessageViewController refreshes its view with this data. If the network data comes back before the cache, then the data provider will ignore the cached data.
+  3. When the fresh data comes back from the network, the MessageViewController again refreshes its view.
   4. This network data will be asynchronously propagated to the cache.
   5. The MessageViewController now has a reference to a Message (id: 34) which has a reference to a Person. Let's say the online property of this Person (id: 12) is false.
   6. Later, the ContactsViewController fetches data from the network and cache following the same steps as above. In the contacts list, there is a Person (id: 12) with online property true.

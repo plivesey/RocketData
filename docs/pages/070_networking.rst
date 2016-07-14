@@ -29,4 +29,4 @@ Given a request class specific to your application (MyNetworkRequest) and a Netw
 
 In this extension, we are fetching from the cache and network in parallel. Since we implement it as an extension, we can write custom logic here and any network stack. You can write a similar extension on DataProvider.
 
-If the network returns before the cache, the cache data should be discarded. Rocket Data automatically handles this. If you setData while a cache request is in flight, it will discard the result of the cache.
+If the network returns before the cache, the cache data should be discarded. Rocket Data automatically handles this. If you ``setData`` while a cache request is in flight, it will discard the result of the cache.
