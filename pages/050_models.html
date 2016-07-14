@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Models &mdash; Rocket Data 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
+        <link rel="next" title="Cache Delegate" href="060_cacheDelegate.html"/>
+        <link rel="prev" title="Setup" href="040_setup.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Rocket Data
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="010_rocketData.html">Rocket Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="030_dataProviders.html">Data Providers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#model-vs-simplemodel">Model vs SimpleModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-protocols">The Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equality">Equality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deletes">Deletes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#message-model">Message Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#person-model">Person Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#json">JSON</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="060_cacheDelegate.html">Cache Delegate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="080_updatingModels.html">Updating Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100_coreData.html">Core Data Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_threading.html">Threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_immutability.html">A Case for Immutability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="140_FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="150_futurePlans.html">Future Plans</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Rocket Data</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/050_models.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="models">
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
+<p>The models used in the library must be immutable and thread-safe. Thread safety is usually trivial if your models are immutable. All the models must either implement the Model or SimpleModel protocol. These protocols inherit from the ConsistencyManagerModel protocol.</p>
+<div class="section" id="model-vs-simplemodel">
+<h2>Model vs SimpleModel<a class="headerlink" href="#model-vs-simplemodel" title="Permalink to this headline">¶</a></h2>
+<p>SimpleModel is easier to implement since there are only two methods to implement, but they are less powerful. All immutable models are trees, and if you implement the Model protocol, the library will keep all subtrees consistent. So, if a child model needs updating, the library will replace it, regenerate a new person model, and update the DataProviders. The Model protocol takes more work to implement, but we would recommend it unless your models are very simple and you only need to keep the top level models consistent.</p>
+<p>For a more detailed discussion on how child models are kept consistent, see <a class="reference external" href="https://linkedin.github.io/ConsistencyManager-iOS/pages/010_consistencyManager.html">https://linkedin.github.io/ConsistencyManager-iOS/pages/010_consistencyManager.html</a>. However, you do not need to call the Consistency Manager directly because Rocket Data will do this automatically for you.</p>
+</div>
+<div class="section" id="the-protocols">
+<h2>The Protocols<a class="headerlink" href="#the-protocols" title="Permalink to this headline">¶</a></h2>
+<p>The Model protocol defines three main features:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The ability to identify models as representing the same data. This is done by returning a globally unique identifier. If this identifier is the same, it means it represents the same data. This also defines a &#8216;node&#8217; in the tree (see <a class="reference internal" href="010_rocketData.html"><em>Rocket Data</em></a>).</li>
+<li>Compare model for equality. Rocket Data needs to compare models to determine if models have actually changed. If a model hasn&#8217;t changed, the library can short circuit.</li>
+<li>The ability to create new models by mapping on old models. The protocol allows the library to iterate over child nodes (and then recursively iterate over the whole tree) and then replace these models with updated models. This ability is not required by SimpleModel and therefore will not get consistency for child models.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="equality">
+<h2>Equality<a class="headerlink" href="#equality" title="Permalink to this headline">¶</a></h2>
+<p>One important requirement for models is that models with the same id must be equal. You cannot have one model that has a child and another model with the same id which does not have this child. This will be considered an update to the Consistency Manager and one model will be updated.</p>
+</div>
+<div class="section" id="deletes">
+<h2>Deletes<a class="headerlink" href="#deletes" title="Permalink to this headline">¶</a></h2>
+<p>Rocket Data supports deleting models. When a model is deleted, the map function in the Model protocol will return nil for a model. This means the model should remove this child model. If the child model is required, we recommend you cascade this delete and return nil for the current model. You do not need to worry about this for SimpleModels.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>These examples use an example of the models shown in <a class="reference internal" href="010_rocketData.html"><em>Rocket Data</em></a>.</p>
+<div class="section" id="message-model">
+<h3>Message Model<a class="headerlink" href="#message-model" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Message</span><span class="o">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Equatable</span> <span class="p">{</span>
+  <span class="n">let</span> <span class="n">id</span><span class="o">:</span> <span class="n">String</span>
+  <span class="n">let</span> <span class="n">text</span><span class="o">:</span> <span class="n">String</span>
+  <span class="n">let</span> <span class="n">author</span><span class="o">:</span> <span class="n">Person</span>
+  <span class="n">let</span> <span class="n">image</span><span class="o">:</span> <span class="n">Image</span><span class="o">?</span>
+
+  <span class="n">var</span> <span class="n">modelIdentifier</span><span class="o">:</span> <span class="n">String</span><span class="o">?</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">&quot;Message-\(id)&quot;</span>
+  <span class="p">}</span>
+
+  <span class="n">func</span> <span class="n">map</span><span class="p">(</span><span class="n">transform</span><span class="o">:</span> <span class="p">(</span><span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Model</span><span class="o">?</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Model</span><span class="o">?</span> <span class="p">{</span>
+    <span class="n">guard</span> <span class="n">let</span> <span class="n">author</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">author</span><span class="p">)</span> <span class="n">as</span><span class="o">?</span> <span class="n">Person</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// required field, so we will cascade the delete if person is deleted</span>
+      <span class="k">return</span> <span class="n">nil</span>
+    <span class="p">}</span>
+    <span class="n">let</span> <span class="n">image</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Message</span><span class="p">(</span><span class="n">id</span><span class="o">:</span> <span class="n">id</span><span class="p">,</span> <span class="n">text</span><span class="o">:</span> <span class="n">text</span><span class="p">,</span> <span class="n">author</span><span class="o">:</span> <span class="n">author</span><span class="p">,</span> <span class="n">image</span><span class="o">:</span> <span class="n">image</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="n">func</span> <span class="n">forEach</span><span class="p">(</span><span class="n">visit</span><span class="o">:</span> <span class="p">(</span><span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">visit</span><span class="p">(</span><span class="n">author</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">let</span> <span class="n">image</span> <span class="o">=</span> <span class="n">image</span> <span class="p">{</span>
+      <span class="n">visit</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">func</span> <span class="o">==</span><span class="p">(</span><span class="n">lhs</span><span class="o">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">rhs</span><span class="o">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bool</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">id</span> <span class="o">&amp;&amp;</span>
+    <span class="n">lhs</span><span class="p">.</span><span class="n">text</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">text</span> <span class="o">&amp;&amp;</span>
+    <span class="n">lhs</span><span class="p">.</span><span class="n">author</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">author</span> <span class="o">&amp;&amp;</span>
+    <span class="n">lhs</span><span class="p">.</span><span class="n">image</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">image</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="person-model">
+<h3>Person Model<a class="headerlink" href="#person-model" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Person</span><span class="o">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Equatable</span> <span class="p">{</span>
+  <span class="n">let</span> <span class="n">id</span><span class="o">:</span> <span class="n">String</span>
+  <span class="n">let</span> <span class="n">name</span><span class="o">:</span> <span class="n">String</span>
+
+  <span class="n">var</span> <span class="n">modelIdentifier</span><span class="o">:</span> <span class="n">String</span><span class="o">?</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">&quot;Person-\(id)&quot;</span>
+  <span class="p">}</span>
+
+  <span class="n">func</span> <span class="n">map</span><span class="p">(</span><span class="n">transform</span><span class="o">:</span> <span class="p">(</span><span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Model</span><span class="o">?</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Model</span><span class="o">?</span> <span class="p">{</span>
+    <span class="c1">// Since the model has no children, there is nothing to map on</span>
+    <span class="k">return</span> <span class="n">self</span>
+  <span class="p">}</span>
+
+  <span class="n">func</span> <span class="n">forEach</span><span class="p">(</span><span class="n">visit</span><span class="o">:</span> <span class="p">(</span><span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">func</span> <span class="o">==</span><span class="p">(</span><span class="n">lhs</span><span class="o">:</span> <span class="n">Person</span><span class="p">,</span> <span class="n">rhs</span><span class="o">:</span> <span class="n">Person</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Bool</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">id</span> <span class="o">&amp;&amp;</span>
+    <span class="n">lhs</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">name</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="json">
+<h3>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h3>
+<p>You can use any networking protocol to represent your models. Here, we show how these models might be represented in JSON.</p>
+<div class="highlight-json"><div class="highlight"><pre>// Message model
+{
+  &quot;id&quot;: &quot;12&quot;,
+  &quot;text&quot;: &quot;Hey, how are you doing?&quot;,
+  &quot;author&quot;: {
+    &quot;id&quot;: &quot;42&quot;,
+    &quot;username&quot;: &quot;plivesey&quot;,
+    &quot;online&quot;: false
+  },
+  &quot;image&quot;: {
+    &quot;path&quot;: &quot;/static/images/img3.png&quot;,
+    &quot;width&quot;: 200
+  }
+}
+
+// Contacts list
+{
+  &quot;contacts&quot;: [
+    {
+      &quot;id&quot;: &quot;42&quot;,
+      &quot;username&quot;: &quot;plivesey&quot;,
+      &quot;online&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;53&quot;,
+      &quot;username&quot;: &quot;nsnyder&quot;,
+      &quot;online&quot;: true
+    }
+  ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="060_cacheDelegate.html" class="btn btn-neutral float-right" title="Cache Delegate" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="040_setup.html" class="btn btn-neutral" title="Setup" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, LinkedIn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

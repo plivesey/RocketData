@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setup &mdash; Rocket Data 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
+        <link rel="next" title="Models" href="050_models.html"/>
+        <link rel="prev" title="Data Providers" href="030_dataProviders.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Rocket Data
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="010_rocketData.html">Rocket Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="030_dataProviders.html">Data Providers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#implement-the-cachedelegate">Implement the CacheDelegate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-your-datamodelmanager">Create your DataModelManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implement-model-or-simplemodel">Implement Model or SimpleModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-extensions-to-dataproviders-for-a-simpler-api">Add Extensions to DataProviders for a simpler API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="050_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_cacheDelegate.html">Cache Delegate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="080_updatingModels.html">Updating Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100_coreData.html">Core Data Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_threading.html">Threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_immutability.html">A Case for Immutability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="140_FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="150_futurePlans.html">Future Plans</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Rocket Data</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Setup</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/040_setup.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
+<p>To setup the library in your app, you need to do a few steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Implement your CacheDelegate</li>
+<li>Create your DataModelManager</li>
+<li>Make your models implement the Model or SimpleModel protocol</li>
+<li>(Optional) Add extensions to classes for a simpler API</li>
+</ol>
+</div></blockquote>
+<div class="section" id="implement-the-cachedelegate">
+<h2>Implement the CacheDelegate<a class="headerlink" href="#implement-the-cachedelegate" title="Permalink to this headline">¶</a></h2>
+<p>Rocket Data allows you to specify your own cache implementation. You should create a class which implements the CacheDelegate protocol to hook up your cache to the library. See <a class="reference internal" href="060_cacheDelegate.html"><em>Cache Delegate</em></a> for more information.</p>
+</div>
+<div class="section" id="create-your-datamodelmanager">
+<h2>Create your DataModelManager<a class="headerlink" href="#create-your-datamodelmanager" title="Permalink to this headline">¶</a></h2>
+<p>Applications can have multiple DataModelManagers, but in most cases, you&#8217;ll just use one. The DataModelManager is the glue which connects the DataProviders with the cache and the Consistency Manager. The easiest way to do this is add a singleton in an extension. For example:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">extension</span> <span class="n">DataModelManager</span> <span class="p">{</span>
+  <span class="n">let</span> <span class="n">sharedInstance</span> <span class="o">=</span> <span class="n">DataModelManager</span><span class="p">(</span><span class="n">cacheDelegate</span><span class="o">:</span> <span class="n">MyCacheDelegate</span><span class="p">())</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implement-model-or-simplemodel">
+<h2>Implement Model or SimpleModel<a class="headerlink" href="#implement-model-or-simplemodel" title="Permalink to this headline">¶</a></h2>
+<p>All the models you use must implement the Model or SimpleModel protocol. See <a class="reference internal" href="050_models.html"><em>Models</em></a> for more information.</p>
+</div>
+<div class="section" id="add-extensions-to-dataproviders-for-a-simpler-api">
+<h2>Add Extensions to DataProviders for a simpler API<a class="headerlink" href="#add-extensions-to-dataproviders-for-a-simpler-api" title="Permalink to this headline">¶</a></h2>
+<p>Since you now have a singleton DataModelManager, we recommend adding these extensions for a simpler API. They simply allow you to avoid passing in the DataModelManager every time. The original init is still available though if you want to use dependency injection.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">extension</span> <span class="n">DataProvider</span> <span class="p">{</span>
+  <span class="n">convenience</span> <span class="n">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">dataModelManager</span><span class="o">:</span> <span class="n">DataModelManager</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">extension</span> <span class="n">CollectionDataProvider</span> <span class="p">{</span>
+  <span class="n">convenience</span> <span class="n">init</span><span class="p">(</span><span class="n">cacheKey</span><span class="o">:</span> <span class="n">String</span><span class="o">?</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">cacheKey</span><span class="o">:</span> <span class="n">cacheKey</span><span class="p">,</span> <span class="n">dataModelManager</span><span class="o">:</span> <span class="n">DataModelManager</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can add similar extensions to any method which takes the DataModelManager as a parameter including the class methods of CollectionDataProvider and the BatchDataProviderListener methods.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="050_models.html" class="btn btn-neutral float-right" title="Models" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="030_dataProviders.html" class="btn btn-neutral" title="Data Providers" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, LinkedIn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

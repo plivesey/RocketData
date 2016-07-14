@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Rocket Data &mdash; Rocket Data 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
+        <link rel="next" title="Requirements" href="020_requirements.html"/>
+        <link rel="prev" title="Welcome to Rocket Data’s documentation!" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Rocket Data
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Rocket Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-simple-example">A Simple Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-flow">Data Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fetching-from-the-network">Fetching from the Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-local-change">A Local Change</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="020_requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="030_dataProviders.html">Data Providers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_cacheDelegate.html">Cache Delegate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="080_updatingModels.html">Updating Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100_coreData.html">Core Data Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_threading.html">Threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_immutability.html">A Case for Immutability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="140_FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="150_futurePlans.html">Future Plans</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Rocket Data</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Rocket Data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/010_rocketData.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rocket-data">
+<h1>Rocket Data<a class="headerlink" href="#rocket-data" title="Permalink to this headline">¶</a></h1>
+<p>Rocket Data provides a simple, synchronous API to manage immutable models. Each user of the library owns a data provider which wraps the immutable model. You can set and edit data providers synchronously. Under the hood, any changes are asynchronously propagated to other data providers and the cache. This allows your application logic to be simple and your model management to never block the main thread or slow down your app.</p>
+<div class="section" id="a-simple-example">
+<h2>A Simple Example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
+<p>For this example, the application uses a message model and a person model. These models can be represented as trees, as shown below. For more details on how these models are implemented, see <a class="reference internal" href="050_models.html"><em>Models</em></a>.</p>
+<img alt="../_images/exampleModels.png" src="../_images/exampleModels.png" />
+<p>The application has two view controllers. One shows a message from a person. The other shows a list of contacts. Note: some setup is needed for the code below to compile. See <a class="reference internal" href="040_setup.html"><em>Setup</em></a>.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">class</span> <span class="n">MessageViewController</span><span class="o">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">DataProviderDelegate</span> <span class="p">{</span>
+
+  <span class="n">let</span> <span class="n">dataProvider</span> <span class="o">=</span> <span class="n">DataProvider</span><span class="o">&lt;</span><span class="n">Message</span><span class="o">&gt;</span><span class="p">()</span>
+
+  <span class="n">override</span> <span class="n">func</span> <span class="n">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+    <span class="n">dataProvider</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span>
+
+    <span class="n">dataProvider</span><span class="p">.</span><span class="n">fetchDataFromCache</span><span class="p">(</span><span class="n">cacheKey</span><span class="o">:</span> <span class="n">self</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="n">in</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">refreshView</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// This is your applications NetworkManager</span>
+    <span class="n">NetworkManager</span><span class="p">.</span><span class="n">fetchMessageWithId</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="o">:</span> <span class="n">Message</span><span class="o">?</span><span class="p">)</span> <span class="n">in</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">dataProvider</span><span class="p">.</span><span class="n">setData</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">refreshView</span><span class="p">()</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">func</span> <span class="n">refreshView</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Access your data through the data provider</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">dataProvider</span><span class="p">.</span><span class="n">data</span><span class="o">?</span><span class="p">.</span><span class="n">title</span>
+    <span class="c1">// Other things to layout your view</span>
+  <span class="p">}</span>
+
+  <span class="n">func</span> <span class="n">dataProviderHasUpdatedData</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">dataProvider</span><span class="o">:</span> <span class="n">DataProvider</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">context</span><span class="o">:</span> <span class="n">Any</span><span class="o">?</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">refreshView</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">class</span> <span class="n">ContactsViewController</span><span class="o">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">CollectionDataProviderDelegate</span> <span class="p">{</span>
+
+  <span class="n">let</span> <span class="n">dataProvider</span> <span class="o">=</span> <span class="n">CollectionDataProvider</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">()</span>
+
+  <span class="n">override</span> <span class="n">func</span> <span class="n">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+    <span class="n">dataProvider</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span>
+
+    <span class="n">dataProvider</span><span class="p">.</span><span class="n">fetchDataFromCache</span><span class="p">(</span><span class="n">cacheKey</span><span class="o">:</span> <span class="s">&quot;contacts&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="n">in</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// This is your applications NetworkManager</span>
+    <span class="n">NetworkManager</span><span class="p">.</span><span class="n">fetchContacts</span><span class="p">()</span> <span class="p">{</span> <span class="p">(</span><span class="n">contacts</span><span class="o">:</span> <span class="p">[</span><span class="n">Person</span><span class="p">]</span><span class="o">?</span><span class="p">)</span> <span class="n">in</span>
+      <span class="k">if</span> <span class="n">let</span> <span class="n">contacts</span> <span class="o">=</span> <span class="n">contacts</span> <span class="p">{</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dataProvider</span><span class="p">.</span><span class="n">setData</span><span class="p">(</span><span class="n">contacts</span><span class="p">,</span> <span class="n">cacheKey</span><span class="o">:</span> <span class="s">&quot;contacts&quot;</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">func</span> <span class="n">collectionDataProviderHasUpdatedData</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">dataProvider</span><span class="o">:</span> <span class="n">CollectionDataProvider</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">collectionChanges</span><span class="o">:</span> <span class="n">CollectionChange</span><span class="p">,</span> <span class="n">context</span><span class="o">:</span> <span class="n">Any</span><span class="o">?</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-flow">
+<h2>Data Flow<a class="headerlink" href="#data-flow" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fetching-from-the-network">
+<h3>Fetching from the Network<a class="headerlink" href="#fetching-from-the-network" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The MessageViewController fetches data from the cache and network simultaneously.</li>
+<li>When the data comes back from the cache, the MessageViewController refreshes its view with this data. If the network data comes back before the cache, then the data provider will ignore the cached data.</li>
+<li>When the fresh data comes back from the network, the MessageViewController again refreshes its view.</li>
+<li>This network data will be asynchronously propagated to the cache.</li>
+<li>The MessageViewController now has a reference to a Message (id: 34) which has a reference to a Person. Let&#8217;s say the online property of this Person (id: 12) is false.</li>
+<li>Later, the ContactsViewController fetches data from the network and cache following the same steps as above. In the contacts list, there is a Person (id: 12) with online property true.</li>
+<li>When we call <cite>setData</cite> with this new list of Person models, Rocket Data detects that the MessageViewController needs to be updated. It will update the DataProvider there and call the delegate method in MessageViewController. MessageViewController now simply refreshes its UI and will render that the Person is online. This consistency management happens automatically for all models used in DataProviders.</li>
+</ol>
+</div></blockquote>
+<p>At the end of these actions, our data now looks like this:</p>
+<img alt="../_images/exampleModelsAfterChange.png" src="../_images/exampleModelsAfterChange.png" />
+</div>
+<div class="section" id="a-local-change">
+<h3>A Local Change<a class="headerlink" href="#a-local-change" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Later in the application, the user creates a new contact. The application now has a new Person object to add to the list of contacts, but is in a different view controller.</li>
+<li>The application can easily add this to the list of contacts with a class method:</li>
+</ol>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">CollectionDataProvider</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">newPerson</span><span class="p">],</span> <span class="n">cacheKey</span><span class="o">:</span> <span class="s">&quot;contacts&quot;</span><span class="p">,</span> <span class="n">dataModelManager</span><span class="o">:</span> <span class="n">DataModelManager</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the ContactsViewController is in memory, this will get appended to the collection and the delegate method will be called. The ContactsViewController can then rerender. The CollectionChanges object will specify that a row has been added at a certain index if you would prefer to only rerender part of the view.
+3. If any data provider has a reference to a Person with the same id as newPerson, it will automatically update and notify its delegate.
+4. Later, the ContactsViewController may want to update, remove, or insert a new contact. This is trivial as all these APIs are available on the CollectionDataProvider. Anyone listening to these models will automatically be updated with the new versions.</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="020_requirements.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Welcome to Rocket Data’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, LinkedIn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

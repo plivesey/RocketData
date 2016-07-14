@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Updating Models &mdash; Rocket Data 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
+        <link rel="next" title="Other Features" href="090_otherFeatures.html"/>
+        <link rel="prev" title="Networking" href="070_networking.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Rocket Data
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="010_rocketData.html">Rocket Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="030_dataProviders.html">Data Providers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_cacheDelegate.html">Cache Delegate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_networking.html">Networking</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Updating Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conflicts">Conflicts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100_coreData.html">Core Data Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_threading.html">Threading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_immutability.html">A Case for Immutability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="140_FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="150_futurePlans.html">Future Plans</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Rocket Data</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Updating Models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/080_updatingModels.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="updating-models">
+<h1>Updating Models<a class="headerlink" href="#updating-models" title="Permalink to this headline">¶</a></h1>
+<p>Whenever a model is updated, Rocket Data will automatically update any models or child models which need updating. If you use the Model protocol, all subtrees will always be kept in sync. There are several ways which can trigger updates:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Any time a DataProvider or CollectionDataProvider is mutated, any new models are considered updated.</li>
+<li>The DataModelManager has specific methods to update a model or array of models.</li>
+<li>The DataModelManager also has a method to delete a model from both the cache and any model which contains this deleted model.</li>
+</ol>
+</div></blockquote>
+<p>Most of these updates happen asynchronously, so other data providers won&#8217;t be updated in the same main thread block. However, these updates nearly always happen extremely quickly (~1 ms), so you don&#8217;t need to worry about this. Updates are asynchronous to ensure that Rocket Data never blocks the main thread and never slows down your app, regardless of the number of models or data providers you use.</p>
+<div class="section" id="conflicts">
+<h2>Conflicts<a class="headerlink" href="#conflicts" title="Permalink to this headline">¶</a></h2>
+<p>Since updates are asynchronous, it is possible to have conflicts. There are automatically resolved by the library by always picking the most recent change. The library keeps track of a change time for all changes. If a change was initiated at a change time in the past, it is discarded.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="090_otherFeatures.html" class="btn btn-neutral float-right" title="Other Features" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="070_networking.html" class="btn btn-neutral" title="Networking" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, LinkedIn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
