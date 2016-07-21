@@ -24,13 +24,13 @@ class RocketDataTestCase: XCTestCase {
         dispatch_barrier_async(consistencyManager.dispatchQueue) {
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         expectation = expectationWithDescription("Wait for main thread to complete pending tasks")
         dispatch_barrier_async(dispatch_get_main_queue()) {
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     /**
@@ -41,13 +41,13 @@ class RocketDataTestCase: XCTestCase {
         dispatch_barrier_async(dataModelManager.externalDispatchQueue) {
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         expectation = expectationWithDescription("Wait for main thread to complete pending tasks")
         dispatch_barrier_async(dispatch_get_main_queue()) {
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
     
 }
