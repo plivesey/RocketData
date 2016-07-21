@@ -1,0 +1,5 @@
+language: objective-c
+osx_image: xcode7.3
+script: sh build.sh
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
