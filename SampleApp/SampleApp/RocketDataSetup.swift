@@ -23,7 +23,7 @@ extension DataProvider {
 }
 
 extension CollectionDataProvider {
-    convenience init(cacheKey: String?) {
+    convenience init() {
         self.init(dataModelManager: DataModelManager.sharedInstance)
     }
 }

@@ -8,48 +8,49 @@
 
 /* Begin PBXBuildFile section */
 		04E4465ED8E979E33657ECF598BA485D /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C9722E3CE3C10CE2A8D1525841591 /* DataProvider.swift */; };
+		098F2AE94644893938E8673F13F5EF8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868955D6D1E041DE85370C32EE9AA086 /* Foundation.framework */; };
 		0F3B2813E248A7638AD4F7976690A59E /* CollectionDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E62C01BFCC9B862B747C241BCEC31B7 /* CollectionDataProvider.swift */; };
 		14FC605D115F0801721F33EA71AE0DDF /* SharedCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D8003AF6E916119020EA3208AD8DC0 /* SharedCollectionManager.swift */; };
 		160ACF77D202C4ADE024B04BEFE6422D /* DataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FB5AC613AE730A99A8CFC5EB740EF2 /* DataHolder.swift */; };
-		1906A7F598DC1209C1539185AC70123B /* WeakArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B7AF33F854D5BFB2B6AAF293E13A48 /* WeakArray.swift */; };
-		22F81B5D194CF29A901A2A6399AF7EB3 /* BatchUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C524BC4203173444E6690B8947D99C30 /* BatchUpdateModel.swift */; };
+		1906A7F598DC1209C1539185AC70123B /* WeakArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1BEFBEC0818C2AD3D5B84104827F3E /* WeakArray.swift */; };
+		22F81B5D194CF29A901A2A6399AF7EB3 /* BatchUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14A903829834CAE3F976761FD58E04A /* BatchUpdateModel.swift */; };
 		2A1E39CB03470D3BCDBE7A26DBE9D61C /* RocketData-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 175BD63046EFF0C2DB8AAF533A42700C /* RocketData-dummy.m */; };
 		2A51D87889023F52D63559B9624B15D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868955D6D1E041DE85370C32EE9AA086 /* Foundation.framework */; };
-		2CE93941851BA6564027344639ADE240 /* CollectionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940044FC63F494077C8CDF50404667C /* CollectionHelpers.swift */; };
+		2CE93941851BA6564027344639ADE240 /* CollectionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE25907FA94C35C68634BABC9DCE42 /* CollectionHelpers.swift */; };
 		312069CD1519D57C5AA77688228F25DA /* CacheDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786CE4EBA620C56B1363ABDBBD43836 /* CacheDelegate.swift */; };
-		354F7EB27F117F91FF5E9BB0496FC6D0 /* PINDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B6646D8C40FF8F1E88E710DDE1DC1B15 /* PINDiskCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		3AEFB576CE0E6308D2FADC9249AAA417 /* PINCache-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B7816B3A1E37095B7C28D7A98074C22 /* PINCache-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		319C3C4CFA8B9C8B1CFEE20C8EDBE57C /* PINMemoryCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C78E40DB693DF276E9CC31D5FD1B6D71 /* PINMemoryCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D1B88E27DAAE39EDA07E9DF82B0A70E /* ConsistencyManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49C9E86A88F4A4E6F5F6B112E0A8035 /* ConsistencyManager.framework */; };
-		466D55718EE2E044090AA5304AFB7427 /* BatchListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193A76B96E51EA0C9F8F33C67460FC53 /* BatchListener.swift */; };
+		43C917738FE2EFA599B2F1138FF30CDA /* PINMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D88FF5AF93C00B6573CAC929BCDCBF0 /* PINMemoryCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		466D55718EE2E044090AA5304AFB7427 /* BatchListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4863ED80051B69536E6669672EC37123 /* BatchListener.swift */; };
 		4730C9E6B24511A1B0843848D99D6DB1 /* RocketData-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 82CB51FE97E0C32F229C68895E5B203F /* RocketData-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4839811DF1BEEDBEECD5B9DF09E75F63 /* ModelUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B658E6AD70F1C0DA0734ED46F8ABCA /* ModelUpdates.swift */; };
-		49B743734DBB42D13DE2E4C95D728258 /* ConsistencyManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76937836A5C6532CEA3605BED21C36 /* ConsistencyManagerModel.swift */; };
-		4B2BE5EF5BCC75C085AF6FB3DFB73BF7 /* ConsistencyManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EC8CF061CB4663A903C8CB65F1CB2E3D /* ConsistencyManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4839811DF1BEEDBEECD5B9DF09E75F63 /* ModelUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AC7ACF33AE0278FC1DA3ADDBE1946E /* ModelUpdates.swift */; };
+		49B743734DBB42D13DE2E4C95D728258 /* ConsistencyManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA404BAC8D35044E3535E7BDC2581BD1 /* ConsistencyManagerModel.swift */; };
+		4B2BE5EF5BCC75C085AF6FB3DFB73BF7 /* ConsistencyManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D19EDC50B553488E7E6D0D0E249B4A4 /* ConsistencyManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B7572978A83D2197DDD4EF9BEFB3D91 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930128D8627D7BF34B173297C35E8CC /* Logger.swift */; };
-		4F13CB5EE8198080C12CF9AB2CDDF538 /* PINCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5F83A640019120B7A55C2D643FEE74 /* PINCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		507FFBDA65F4FBE69B159E35CC870078 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868955D6D1E041DE85370C32EE9AA086 /* Foundation.framework */; };
+		4D150612A8A5242A297C0F776BE02D66 /* PINCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B7E5721391A164872C34EFD770F2EF /* PINCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		55C6D5C705A0634BB06B827CC14E4652 /* DataModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26FA5F575A34BF38D224D31613683E5 /* DataModelManager.swift */; };
-		6604EAB275791183ECA0CC60EB695D40 /* PINCache-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 090AB44B0DC3F6A50BB41E2B63D168FC /* PINCache-dummy.m */; };
-		6A52EA1AB9E49BAF9D979C953CBA94C5 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BAA55E6B84FE20567C461E8F07AE31 /* ErrorManager.swift */; };
-		7045F8A209126D4B84BCC82015F6A700 /* PINMemoryCache.h in Headers */ = {isa = PBXBuildFile; fileRef = DB204856D466E4A5D0663FECB97BAB7E /* PINMemoryCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		672297C4F990022D1768B5D6DEC88A1B /* Nullability.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F973E49A1699B4703854B2945A3EDB8 /* Nullability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A52EA1AB9E49BAF9D979C953CBA94C5 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8257092B7ED57EBC33FDE506F8E31295 /* ErrorManager.swift */; };
 		7341D11CC7A12744D9BEDD8F1C6FC1A0 /* WeakSharedCollectionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151FBD677F73EA2DC5835775E9D615F8 /* WeakSharedCollectionArray.swift */; };
-		77C3D68643E4D0D97A0698CB98B4ACF3 /* Nullability.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C683C445BB03B61E18C27F3340C3094 /* Nullability.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		79F0359EDE2A2DE6C858B37522B08417 /* WeakListenerArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A5D4E9057AC4F5CC3E44AAA4ABA7D5 /* WeakListenerArray.swift */; };
+		79F0359EDE2A2DE6C858B37522B08417 /* WeakListenerArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA60ED55EC2BCF98CC3AF0B067BFCE39 /* WeakListenerArray.swift */; };
 		7AE8EC241EF0E4149E7D456A3677D178 /* ChangeClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9816DD5CA1A8586A083A53455FC9294E /* ChangeClock.swift */; };
 		8265AE9D9D400DF1E9B06A3955F85942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEFEC0AE433459ED42699544630C74D8 /* UIKit.framework */; };
-		8A81955A184E25A4478DF2B3D3107BAB /* PINCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A10BFEFE9458CDB9B2D54A32F6F1532 /* PINCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92E4CF92DEF26530B4633401C42CE37D /* ConsistencyManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A658A4B539A7AF0222EC7F4AE86FD09 /* ConsistencyManager-dummy.m */; };
-		9A2C4A839BC1B0DF4D9FC9F78795162D /* PINDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 03349B4C5358B306FDA285E3335E96F7 /* PINDiskCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9E7CDDB3DBC6BD36B268726BD3C96ECF /* ConsistencyManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA18AE0A13D2C7BE491518CF252B39C /* ConsistencyManagerDelegate.swift */; };
+		8C80D9F9BFBF9147A4AEA6C21755E51C /* PINCache-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 54092D960EFBF6703B6DFCE5EDF9C997 /* PINCache-dummy.m */; };
+		92E4CF92DEF26530B4633401C42CE37D /* ConsistencyManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1385E3B9A19CA4025CE6C0CFC3737371 /* ConsistencyManager-dummy.m */; };
+		9E7CDDB3DBC6BD36B268726BD3C96ECF /* ConsistencyManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9270F1B51422C45FE34685C07D8AB61 /* ConsistencyManagerDelegate.swift */; };
+		9E84BBB31CBC9FD61F463DD5F011D61B /* PINCacheObjectSubscripting.h in Headers */ = {isa = PBXBuildFile; fileRef = 978E615592A6D8B74F7482647FCF1B91 /* PINCacheObjectSubscripting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A719976A746590C76BA27723793C4E2A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EF3B9BEB38472B54D9D14BF6030E7 /* Model.swift */; };
 		A9D68ECF9982B5DD662C003BF240CB6E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868955D6D1E041DE85370C32EE9AA086 /* Foundation.framework */; };
+		ACFD5574A7471D02B64084A57F94EDB3 /* PINDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C8B57021B136859AC65EE1347E2409C3 /* PINDiskCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B5A43386E07922DDA1F0197F44654CCA /* Pods-SampleApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FAFDE20BDDFF0E8A40FBD159EB86BE41 /* Pods-SampleApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6E38A58EF75061995F8BBAE83A21AD5 /* ParsingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF807463CB6188E349A6B29C4DF7EB8 /* ParsingHelpers.swift */; };
-		BD436656590B87187BA25C062EFA52EC /* ConsistencyManagerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A760A39CED1F5382CD9561FEE6F0922A /* ConsistencyManagerListener.swift */; };
+		BD436656590B87187BA25C062EFA52EC /* ConsistencyManagerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F3B7E24602ABC7F74FB51E33994131 /* ConsistencyManagerListener.swift */; };
+		BD9A2265EA812BA9CEAB70FAA192C223 /* PINDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FB3EC4989DC5445D43B64C392E20F7 /* PINDiskCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		CA64E185897D9EF73A60A6699F988EAF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B880EE845E98AA01558D4F1AAF8F5E /* Errors.swift */; };
 		CDF207AA6AD86A1B61CB48F6690B2913 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868955D6D1E041DE85370C32EE9AA086 /* Foundation.framework */; };
-		E4FAF62C8B0838312227C70756F3001E /* PINMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ED064C4128DCA7E22D53962ECE3B602 /* PINMemoryCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E6E7ED38E1CDCE71C37187A17927D8D2 /* ConsistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88EEB49FC88C7A350A0DA2322D3F9E9 /* ConsistencyManager.swift */; };
+		E157D9CFB459204CC8E5D49F988A0782 /* PINCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E77D08D8F150543DE24A2035D6213C /* PINCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6E7ED38E1CDCE71C37187A17927D8D2 /* ConsistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C05C21EB217624E7B979169288827FF /* ConsistencyManager.swift */; };
+		F18E7E3631150CB050F049B3C23FD713 /* PINCache-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D0843965231C593C52D572CE2665D55B /* PINCache-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5FA11EBF964FAA61FBE85C891249165 /* Pods-SampleApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 03134C79E14CFE0BBC83A3961C22A4A2 /* Pods-SampleApp-dummy.m */; };
 		F75B7502ABFB711CE23F124B65F0B20F /* CollectionChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90354EE62CF78C67A3BA5CA2FFC7D18 /* CollectionChange.swift */; };
 		F8951C7530B5A98EEEE90F6833E7483D /* BatchDataProviderListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137FFE2FEE4BD9BAE94E3FDD46AED5A1 /* BatchDataProviderListener.swift */; };
@@ -61,7 +62,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9AB92A2AE7314091D107EAC8561B8977;
+			remoteGlobalIDString = 90C7204433C093B22C6DB3676E135D4C;
 			remoteInfo = PINCache;
 		};
 		70ACCA054DF84CFCFD297D8429C9B130 /* PBXContainerItemProxy */ = {
@@ -89,82 +90,83 @@
 
 /* Begin PBXFileReference section */
 		03134C79E14CFE0BBC83A3961C22A4A2 /* Pods-SampleApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SampleApp-dummy.m"; sourceTree = "<group>"; };
-		03349B4C5358B306FDA285E3335E96F7 /* PINDiskCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PINDiskCache.h; path = PINCache/PINDiskCache.h; sourceTree = "<group>"; };
 		0786CE4EBA620C56B1363ABDBBD43836 /* CacheDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CacheDelegate.swift; sourceTree = "<group>"; };
-		090AB44B0DC3F6A50BB41E2B63D168FC /* PINCache-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PINCache-dummy.m"; sourceTree = "<group>"; };
+		09E77D08D8F150543DE24A2035D6213C /* PINCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PINCache.h; path = PINCache/PINCache.h; sourceTree = "<group>"; };
+		0FCE25907FA94C35C68634BABC9DCE42 /* CollectionHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CollectionHelpers.swift; path = ConsistencyManager/Helpers/CollectionHelpers.swift; sourceTree = "<group>"; };
 		106F5AA8B24AC58F9705F3FA7459B833 /* RocketData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RocketData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		137FFE2FEE4BD9BAE94E3FDD46AED5A1 /* BatchDataProviderListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BatchDataProviderListener.swift; sourceTree = "<group>"; };
+		1385E3B9A19CA4025CE6C0CFC3737371 /* ConsistencyManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ConsistencyManager-dummy.m"; sourceTree = "<group>"; };
+		13B7E5721391A164872C34EFD770F2EF /* PINCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PINCache.m; path = PINCache/PINCache.m; sourceTree = "<group>"; };
 		151FBD677F73EA2DC5835775E9D615F8 /* WeakSharedCollectionArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeakSharedCollectionArray.swift; sourceTree = "<group>"; };
-		17592AAA256F282A6A836D98B72908BA /* ConsistencyManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ConsistencyManager.modulemap; sourceTree = "<group>"; };
 		175BD63046EFF0C2DB8AAF533A42700C /* RocketData-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RocketData-dummy.m"; sourceTree = "<group>"; };
-		193A76B96E51EA0C9F8F33C67460FC53 /* BatchListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BatchListener.swift; path = ConsistencyManager/DataStructures/BatchListener.swift; sourceTree = "<group>"; };
-		1B7816B3A1E37095B7C28D7A98074C22 /* PINCache-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PINCache-umbrella.h"; sourceTree = "<group>"; };
+		1B7AE4DA3F40BE0485A9E9EA03AEC5E0 /* ConsistencyManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ConsistencyManager.modulemap; sourceTree = "<group>"; };
 		1FF807463CB6188E349A6B29C4DF7EB8 /* ParsingHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ParsingHelpers.swift; sourceTree = "<group>"; };
-		21BAA55E6B84FE20567C461E8F07AE31 /* ErrorManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ErrorManager.swift; path = ConsistencyManager/Helpers/ErrorManager.swift; sourceTree = "<group>"; };
+		26AC7ACF33AE0278FC1DA3ADDBE1946E /* ModelUpdates.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelUpdates.swift; path = ConsistencyManager/DataStructures/ModelUpdates.swift; sourceTree = "<group>"; };
 		2FA683888CD1CAD23827B845F6A83CA3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33A6C0BCFB81B520023849987C74522C /* PINCache.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = PINCache.modulemap; sourceTree = "<group>"; };
+		3440320C1CCBCB33886A161A1435D312 /* ConsistencyManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ConsistencyManager-prefix.pch"; sourceTree = "<group>"; };
 		3639016EBE40C22457011D3CDF7AA7A7 /* Pods-SampleApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SampleApp-resources.sh"; sourceTree = "<group>"; };
 		38F7947A116701C3EA7C9E585F6B8EE5 /* Pods-SampleApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SampleApp-acknowledgements.plist"; sourceTree = "<group>"; };
-		42B658E6AD70F1C0DA0734ED46F8ABCA /* ModelUpdates.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelUpdates.swift; path = ConsistencyManager/DataStructures/ModelUpdates.swift; sourceTree = "<group>"; };
+		4863ED80051B69536E6669672EC37123 /* BatchListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BatchListener.swift; path = ConsistencyManager/DataStructures/BatchListener.swift; sourceTree = "<group>"; };
+		498B23327C26D7DC1FDC877BE389F192 /* PINCache-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PINCache-prefix.pch"; sourceTree = "<group>"; };
+		49FB3EC4989DC5445D43B64C392E20F7 /* PINDiskCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PINDiskCache.m; path = PINCache/PINDiskCache.m; sourceTree = "<group>"; };
+		4D88FF5AF93C00B6573CAC929BCDCBF0 /* PINMemoryCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PINMemoryCache.m; path = PINCache/PINMemoryCache.m; sourceTree = "<group>"; };
 		4FFA9C7C1FB7653BA1B5C4CE05C4C0E6 /* PINCache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PINCache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C683C445BB03B61E18C27F3340C3094 /* Nullability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Nullability.h; path = PINCache/Nullability.h; sourceTree = "<group>"; };
-		613E005FA37D4D3E88F560B514001224 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A10BFEFE9458CDB9B2D54A32F6F1532 /* PINCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PINCache.h; path = PINCache/PINCache.h; sourceTree = "<group>"; };
-		7A658A4B539A7AF0222EC7F4AE86FD09 /* ConsistencyManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ConsistencyManager-dummy.m"; sourceTree = "<group>"; };
+		54092D960EFBF6703B6DFCE5EDF9C997 /* PINCache-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PINCache-dummy.m"; sourceTree = "<group>"; };
+		5C05C21EB217624E7B979169288827FF /* ConsistencyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManager.swift; path = ConsistencyManager/ConsistencyManager.swift; sourceTree = "<group>"; };
+		7C803C8144FD5B9CFFC45BE93D7E10CE /* ConsistencyManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConsistencyManager.xcconfig; sourceTree = "<group>"; };
+		7D19EDC50B553488E7E6D0D0E249B4A4 /* ConsistencyManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ConsistencyManager-umbrella.h"; sourceTree = "<group>"; };
 		7D40CBEF202563E3FFB38A7077356EA2 /* Pods-SampleApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SampleApp.modulemap"; sourceTree = "<group>"; };
 		7E62C01BFCC9B862B747C241BCEC31B7 /* CollectionDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CollectionDataProvider.swift; sourceTree = "<group>"; };
+		7F973E49A1699B4703854B2945A3EDB8 /* Nullability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Nullability.h; path = PINCache/Nullability.h; sourceTree = "<group>"; };
+		8257092B7ED57EBC33FDE506F8E31295 /* ErrorManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ErrorManager.swift; path = ConsistencyManager/Helpers/ErrorManager.swift; sourceTree = "<group>"; };
 		82CB51FE97E0C32F229C68895E5B203F /* RocketData-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RocketData-umbrella.h"; sourceTree = "<group>"; };
 		85B880EE845E98AA01558D4F1AAF8F5E /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		868955D6D1E041DE85370C32EE9AA086 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		8FA18AE0A13D2C7BE491518CF252B39C /* ConsistencyManagerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerDelegate.swift; path = ConsistencyManager/Protocols/ConsistencyManagerDelegate.swift; sourceTree = "<group>"; };
+		915175ED60BB324459FB3541E22F7259 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91B47F2C6762232C70D4BDA548192320 /* Pods-SampleApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SampleApp-acknowledgements.markdown"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		977E19306D119D7023F94AC3AE17E4DE /* Pods-SampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		978E615592A6D8B74F7482647FCF1B91 /* PINCacheObjectSubscripting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PINCacheObjectSubscripting.h; path = PINCache/PINCacheObjectSubscripting.h; sourceTree = "<group>"; };
 		9816DD5CA1A8586A083A53455FC9294E /* ChangeClock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChangeClock.swift; sourceTree = "<group>"; };
 		99EC2D3F6E0AA3D387164D1E15C93A31 /* Pods_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9ED064C4128DCA7E22D53962ECE3B602 /* PINMemoryCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PINMemoryCache.m; path = PINCache/PINMemoryCache.m; sourceTree = "<group>"; };
+		A14A903829834CAE3F976761FD58E04A /* BatchUpdateModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BatchUpdateModel.swift; path = ConsistencyManager/DataStructures/BatchUpdateModel.swift; sourceTree = "<group>"; };
 		A64A481DC6C53B266328C55771CD3AF2 /* RocketData.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RocketData.xcconfig; sourceTree = "<group>"; };
-		A760A39CED1F5382CD9561FEE6F0922A /* ConsistencyManagerListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerListener.swift; path = ConsistencyManager/Protocols/ConsistencyManagerListener.swift; sourceTree = "<group>"; };
-		A88EEB49FC88C7A350A0DA2322D3F9E9 /* ConsistencyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManager.swift; path = ConsistencyManager/ConsistencyManager.swift; sourceTree = "<group>"; };
 		A8AF2FE6DB07C0BE6F8792B8FA2C8D9E /* ConsistencyContextWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConsistencyContextWrapper.swift; sourceTree = "<group>"; };
 		B2149B3A4BDF277435FE83E7B88410BC /* RocketData-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RocketData-prefix.pch"; sourceTree = "<group>"; };
 		B51EF3B9BEB38472B54D9D14BF6030E7 /* Model.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		B6646D8C40FF8F1E88E710DDE1DC1B15 /* PINDiskCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PINDiskCache.m; path = PINCache/PINDiskCache.m; sourceTree = "<group>"; };
 		B90354EE62CF78C67A3BA5CA2FFC7D18 /* CollectionChange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CollectionChange.swift; sourceTree = "<group>"; };
 		BDC61426957E156F643F337042983479 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2D8003AF6E916119020EA3208AD8DC0 /* SharedCollectionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedCollectionManager.swift; sourceTree = "<group>"; };
-		C524BC4203173444E6690B8947D99C30 /* BatchUpdateModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BatchUpdateModel.swift; path = ConsistencyManager/DataStructures/BatchUpdateModel.swift; sourceTree = "<group>"; };
 		C58C9722E3CE3C10CE2A8D1525841591 /* DataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		C5FB5AC613AE730A99A8CFC5EB740EF2 /* DataHolder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DataHolder.swift; sourceTree = "<group>"; };
 		C66F570C57AF0FDDB797FC88CB838DF2 /* Pods-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
-		C6B7AF33F854D5BFB2B6AAF293E13A48 /* WeakArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WeakArray.swift; path = ConsistencyManager/DataStructures/WeakArray.swift; sourceTree = "<group>"; };
-		CA9A0C41E874080AE9C421C48F95627E /* PINCache-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PINCache-prefix.pch"; sourceTree = "<group>"; };
+		C78E40DB693DF276E9CC31D5FD1B6D71 /* PINMemoryCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PINMemoryCache.h; path = PINCache/PINMemoryCache.h; sourceTree = "<group>"; };
+		C8B57021B136859AC65EE1347E2409C3 /* PINDiskCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PINDiskCache.h; path = PINCache/PINDiskCache.h; sourceTree = "<group>"; };
+		C9F3B7E24602ABC7F74FB51E33994131 /* ConsistencyManagerListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerListener.swift; path = ConsistencyManager/Protocols/ConsistencyManagerListener.swift; sourceTree = "<group>"; };
+		CA60ED55EC2BCF98CC3AF0B067BFCE39 /* WeakListenerArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WeakListenerArray.swift; path = ConsistencyManager/DataStructures/WeakListenerArray.swift; sourceTree = "<group>"; };
 		CBA97F5884387AA14AB8EFA066145363 /* ConsistencyManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConsistencyManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE9B3BE8D4F19D383F1B484965332F49 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0843965231C593C52D572CE2665D55B /* PINCache-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PINCache-umbrella.h"; sourceTree = "<group>"; };
 		D26FA5F575A34BF38D224D31613683E5 /* DataModelManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DataModelManager.swift; sourceTree = "<group>"; };
+		D3BBC8FA3A1650C24A8C05EF23A85804 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D49C9E86A88F4A4E6F5F6B112E0A8035 /* ConsistencyManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConsistencyManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB204856D466E4A5D0663FECB97BAB7E /* PINMemoryCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PINMemoryCache.h; path = PINCache/PINMemoryCache.h; sourceTree = "<group>"; };
+		DA1BEFBEC0818C2AD3D5B84104827F3E /* WeakArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WeakArray.swift; path = ConsistencyManager/DataStructures/WeakArray.swift; sourceTree = "<group>"; };
 		DEFEC0AE433459ED42699544630C74D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		E0A41846698EC5DA173814CB68E54FD7 /* Pods-SampleApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SampleApp-frameworks.sh"; sourceTree = "<group>"; };
 		E3DCAEF60E47D84FC88C803ACE93A36B /* RocketData.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = RocketData.modulemap; sourceTree = "<group>"; };
-		E5B53C805B97D573EE2585776042B538 /* ConsistencyManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ConsistencyManager-prefix.pch"; sourceTree = "<group>"; };
-		EA76937836A5C6532CEA3605BED21C36 /* ConsistencyManagerModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerModel.swift; path = ConsistencyManager/Protocols/ConsistencyManagerModel.swift; sourceTree = "<group>"; };
-		EC8CF061CB4663A903C8CB65F1CB2E3D /* ConsistencyManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ConsistencyManager-umbrella.h"; sourceTree = "<group>"; };
-		EFC2869639489965063FC5DDE201171E /* PINCache.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = PINCache.modulemap; sourceTree = "<group>"; };
-		F5B38774B81A801C1A7D5698361F7E01 /* PINCache.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PINCache.xcconfig; sourceTree = "<group>"; };
-		F7A5D4E9057AC4F5CC3E44AAA4ABA7D5 /* WeakListenerArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WeakListenerArray.swift; path = ConsistencyManager/DataStructures/WeakListenerArray.swift; sourceTree = "<group>"; };
+		E9270F1B51422C45FE34685C07D8AB61 /* ConsistencyManagerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerDelegate.swift; path = ConsistencyManager/Protocols/ConsistencyManagerDelegate.swift; sourceTree = "<group>"; };
+		E97958A09AFE83E5E1258ACBDBEF9E13 /* PINCache.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PINCache.xcconfig; sourceTree = "<group>"; };
+		EA404BAC8D35044E3535E7BDC2581BD1 /* ConsistencyManagerModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerModel.swift; path = ConsistencyManager/Protocols/ConsistencyManagerModel.swift; sourceTree = "<group>"; };
 		F930128D8627D7BF34B173297C35E8CC /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		F940044FC63F494077C8CDF50404667C /* CollectionHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CollectionHelpers.swift; path = ConsistencyManager/Helpers/CollectionHelpers.swift; sourceTree = "<group>"; };
 		FAFDE20BDDFF0E8A40FBD159EB86BE41 /* Pods-SampleApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SampleApp-umbrella.h"; sourceTree = "<group>"; };
-		FC5F83A640019120B7A55C2D643FEE74 /* PINCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PINCache.m; path = PINCache/PINCache.m; sourceTree = "<group>"; };
-		FF173F8A0308756BA4FCE6374F43A200 /* ConsistencyManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConsistencyManager.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		07E4C4BC2D2C73E31DD7AD42E0AEAEAC /* Frameworks */ = {
+		2C3BB58E9C26D0A874EA41B1E97CC908 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				507FFBDA65F4FBE69B159E35CC870078 /* Foundation.framework in Frameworks */,
+				098F2AE94644893938E8673F13F5EF8D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +199,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A9A071A84E9C2156E27F342970C192E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FAEAB263AAB1804EE34C859BAF9FA6D7 /* ConsistencyManager */,
+				A5E065D7A3AA51B244FAE04E67C313AB /* PINCache */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		0B41BA4D42EE870C2E8EFFAF1BAD81BE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,35 +239,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		503D20E7DA497C51DBB2AF2C2ABF7454 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				17592AAA256F282A6A836D98B72908BA /* ConsistencyManager.modulemap */,
-				FF173F8A0308756BA4FCE6374F43A200 /* ConsistencyManager.xcconfig */,
-				7A658A4B539A7AF0222EC7F4AE86FD09 /* ConsistencyManager-dummy.m */,
-				E5B53C805B97D573EE2585776042B538 /* ConsistencyManager-prefix.pch */,
-				EC8CF061CB4663A903C8CB65F1CB2E3D /* ConsistencyManager-umbrella.h */,
-				613E005FA37D4D3E88F560B514001224 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/ConsistencyManager";
-			sourceTree = "<group>";
-		};
-		6743552CDBAE52399468F5DE2D41FF0A /* PINCache */ = {
-			isa = PBXGroup;
-			children = (
-				5C683C445BB03B61E18C27F3340C3094 /* Nullability.h */,
-				6A10BFEFE9458CDB9B2D54A32F6F1532 /* PINCache.h */,
-				FC5F83A640019120B7A55C2D643FEE74 /* PINCache.m */,
-				03349B4C5358B306FDA285E3335E96F7 /* PINDiskCache.h */,
-				B6646D8C40FF8F1E88E710DDE1DC1B15 /* PINDiskCache.m */,
-				DB204856D466E4A5D0663FECB97BAB7E /* PINMemoryCache.h */,
-				9ED064C4128DCA7E22D53962ECE3B602 /* PINMemoryCache.m */,
-				E0A23A462B8DADF64F301FD867C83E5A /* Support Files */,
-			);
-			path = PINCache;
-			sourceTree = "<group>";
-		};
 		7AB423BAF8548B19913168F5E90DDF2C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +256,7 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				8EF02F865A97F66712C0FB5E90C021F1 /* Development Pods */,
 				49F432E7CB094AD693C0A3BA8443D356 /* Frameworks */,
-				D191B54DC7CC08F7D2475C5D17FC2870 /* Pods */,
+				0A9A071A84E9C2156E27F342970C192E /* Pods */,
 				7AB423BAF8548B19913168F5E90DDF2C /* Products */,
 				3D38DD4AFCE429A93844A67994A1F277 /* Targets Support Files */,
 			);
@@ -288,23 +270,34 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		A7AFEC8C3D4474927D53DB2A4B4D22D3 /* ConsistencyManager */ = {
+		930196F1AF52FE1E306EC066245C5EA9 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				193A76B96E51EA0C9F8F33C67460FC53 /* BatchListener.swift */,
-				C524BC4203173444E6690B8947D99C30 /* BatchUpdateModel.swift */,
-				F940044FC63F494077C8CDF50404667C /* CollectionHelpers.swift */,
-				A88EEB49FC88C7A350A0DA2322D3F9E9 /* ConsistencyManager.swift */,
-				8FA18AE0A13D2C7BE491518CF252B39C /* ConsistencyManagerDelegate.swift */,
-				A760A39CED1F5382CD9561FEE6F0922A /* ConsistencyManagerListener.swift */,
-				EA76937836A5C6532CEA3605BED21C36 /* ConsistencyManagerModel.swift */,
-				21BAA55E6B84FE20567C461E8F07AE31 /* ErrorManager.swift */,
-				42B658E6AD70F1C0DA0734ED46F8ABCA /* ModelUpdates.swift */,
-				C6B7AF33F854D5BFB2B6AAF293E13A48 /* WeakArray.swift */,
-				F7A5D4E9057AC4F5CC3E44AAA4ABA7D5 /* WeakListenerArray.swift */,
-				503D20E7DA497C51DBB2AF2C2ABF7454 /* Support Files */,
+				D3BBC8FA3A1650C24A8C05EF23A85804 /* Info.plist */,
+				33A6C0BCFB81B520023849987C74522C /* PINCache.modulemap */,
+				E97958A09AFE83E5E1258ACBDBEF9E13 /* PINCache.xcconfig */,
+				54092D960EFBF6703B6DFCE5EDF9C997 /* PINCache-dummy.m */,
+				498B23327C26D7DC1FDC877BE389F192 /* PINCache-prefix.pch */,
+				D0843965231C593C52D572CE2665D55B /* PINCache-umbrella.h */,
 			);
-			path = ConsistencyManager;
+			name = "Support Files";
+			path = "../Target Support Files/PINCache";
+			sourceTree = "<group>";
+		};
+		A5E065D7A3AA51B244FAE04E67C313AB /* PINCache */ = {
+			isa = PBXGroup;
+			children = (
+				7F973E49A1699B4703854B2945A3EDB8 /* Nullability.h */,
+				09E77D08D8F150543DE24A2035D6213C /* PINCache.h */,
+				13B7E5721391A164872C34EFD770F2EF /* PINCache.m */,
+				978E615592A6D8B74F7482647FCF1B91 /* PINCacheObjectSubscripting.h */,
+				C8B57021B136859AC65EE1347E2409C3 /* PINDiskCache.h */,
+				49FB3EC4989DC5445D43B64C392E20F7 /* PINDiskCache.m */,
+				C78E40DB693DF276E9CC31D5FD1B6D71 /* PINMemoryCache.h */,
+				4D88FF5AF93C00B6573CAC929BCDCBF0 /* PINMemoryCache.m */,
+				930196F1AF52FE1E306EC066245C5EA9 /* Support Files */,
+			);
+			path = PINCache;
 			sourceTree = "<group>";
 		};
 		C45F4EF14B2F86A4B21A1E2B91082079 /* Pods-SampleApp */ = {
@@ -325,15 +318,6 @@
 			path = "Target Support Files/Pods-SampleApp";
 			sourceTree = "<group>";
 		};
-		D191B54DC7CC08F7D2475C5D17FC2870 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A7AFEC8C3D4474927D53DB2A4B4D22D3 /* ConsistencyManager */,
-				6743552CDBAE52399468F5DE2D41FF0A /* PINCache */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		D6EA01F83914FB20414E14E3500B7184 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +325,20 @@
 				DEFEC0AE433459ED42699544630C74D8 /* UIKit.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		DDA87CFA34D4264AFC9B2F1D566993B6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1B7AE4DA3F40BE0485A9E9EA03AEC5E0 /* ConsistencyManager.modulemap */,
+				7C803C8144FD5B9CFFC45BE93D7E10CE /* ConsistencyManager.xcconfig */,
+				1385E3B9A19CA4025CE6C0CFC3737371 /* ConsistencyManager-dummy.m */,
+				3440320C1CCBCB33886A161A1435D312 /* ConsistencyManager-prefix.pch */,
+				7D19EDC50B553488E7E6D0D0E249B4A4 /* ConsistencyManager-umbrella.h */,
+				915175ED60BB324459FB3541E22F7259 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ConsistencyManager";
 			sourceTree = "<group>";
 		};
 		DF210BF608E829781147A7E146561099 /* RocketData */ = {
@@ -365,18 +363,23 @@
 			path = RocketData;
 			sourceTree = "<group>";
 		};
-		E0A23A462B8DADF64F301FD867C83E5A /* Support Files */ = {
+		FAEAB263AAB1804EE34C859BAF9FA6D7 /* ConsistencyManager */ = {
 			isa = PBXGroup;
 			children = (
-				CE9B3BE8D4F19D383F1B484965332F49 /* Info.plist */,
-				EFC2869639489965063FC5DDE201171E /* PINCache.modulemap */,
-				F5B38774B81A801C1A7D5698361F7E01 /* PINCache.xcconfig */,
-				090AB44B0DC3F6A50BB41E2B63D168FC /* PINCache-dummy.m */,
-				CA9A0C41E874080AE9C421C48F95627E /* PINCache-prefix.pch */,
-				1B7816B3A1E37095B7C28D7A98074C22 /* PINCache-umbrella.h */,
+				4863ED80051B69536E6669672EC37123 /* BatchListener.swift */,
+				A14A903829834CAE3F976761FD58E04A /* BatchUpdateModel.swift */,
+				0FCE25907FA94C35C68634BABC9DCE42 /* CollectionHelpers.swift */,
+				5C05C21EB217624E7B979169288827FF /* ConsistencyManager.swift */,
+				E9270F1B51422C45FE34685C07D8AB61 /* ConsistencyManagerDelegate.swift */,
+				C9F3B7E24602ABC7F74FB51E33994131 /* ConsistencyManagerListener.swift */,
+				EA404BAC8D35044E3535E7BDC2581BD1 /* ConsistencyManagerModel.swift */,
+				8257092B7ED57EBC33FDE506F8E31295 /* ErrorManager.swift */,
+				26AC7ACF33AE0278FC1DA3ADDBE1946E /* ModelUpdates.swift */,
+				DA1BEFBEC0818C2AD3D5B84104827F3E /* WeakArray.swift */,
+				CA60ED55EC2BCF98CC3AF0B067BFCE39 /* WeakListenerArray.swift */,
+				DDA87CFA34D4264AFC9B2F1D566993B6 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/PINCache";
+			path = ConsistencyManager;
 			sourceTree = "<group>";
 		};
 		FD2CEE1577A8B8F71D80789AB9F21617 /* RocketData */ = {
@@ -400,23 +403,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3F3F83DCE3F4420B3D62F1BAD9BFAB65 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77C3D68643E4D0D97A0698CB98B4ACF3 /* Nullability.h in Headers */,
-				3AEFB576CE0E6308D2FADC9249AAA417 /* PINCache-umbrella.h in Headers */,
-				8A81955A184E25A4478DF2B3D3107BAB /* PINCache.h in Headers */,
-				9A2C4A839BC1B0DF4D9FC9F78795162D /* PINDiskCache.h in Headers */,
-				7045F8A209126D4B84BCC82015F6A700 /* PINMemoryCache.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		60A5D22B5D79003AE350A4C56ECA2B33 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4730C9E6B24511A1B0843848D99D6DB1 /* RocketData-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA593B1550C4A1E25E95D16FDD9D3424 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				672297C4F990022D1768B5D6DEC88A1B /* Nullability.h in Headers */,
+				F18E7E3631150CB050F049B3C23FD713 /* PINCache-umbrella.h in Headers */,
+				E157D9CFB459204CC8E5D49F988A0782 /* PINCache.h in Headers */,
+				9E84BBB31CBC9FD61F463DD5F011D61B /* PINCacheObjectSubscripting.h in Headers */,
+				ACFD5574A7471D02B64084A57F94EDB3 /* PINDiskCache.h in Headers */,
+				319C3C4CFA8B9C8B1CFEE20C8EDBE57C /* PINMemoryCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,13 +455,13 @@
 			productReference = 99EC2D3F6E0AA3D387164D1E15C93A31 /* Pods_SampleApp.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9AB92A2AE7314091D107EAC8561B8977 /* PINCache */ = {
+		90C7204433C093B22C6DB3676E135D4C /* PINCache */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FF497A22C21368DD9C91A3DAD14610CF /* Build configuration list for PBXNativeTarget "PINCache" */;
+			buildConfigurationList = EEC88EFEE538B8E091D1CD1A93DA96E8 /* Build configuration list for PBXNativeTarget "PINCache" */;
 			buildPhases = (
-				D25FF78C7543DA07E74D1B681652E021 /* Sources */,
-				07E4C4BC2D2C73E31DD7AD42E0AEAEAC /* Frameworks */,
-				3F3F83DCE3F4420B3D62F1BAD9BFAB65 /* Headers */,
+				EB0911E24D428776602C1DEC35B8ECCE /* Sources */,
+				2C3BB58E9C26D0A874EA41B1E97CC908 /* Frameworks */,
+				AA593B1550C4A1E25E95D16FDD9D3424 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -525,7 +529,7 @@
 			projectRoot = "";
 			targets = (
 				BF143FCB0BDDCCE19A427004B80418A1 /* ConsistencyManager */,
-				9AB92A2AE7314091D107EAC8561B8977 /* PINCache */,
+				90C7204433C093B22C6DB3676E135D4C /* PINCache */,
 				3151EBBA9C25262DCDF5B4DDA1D8DBC8 /* Pods-SampleApp */,
 				C52D31276144224304685822B8987958 /* RocketData */,
 			);
@@ -583,14 +587,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D25FF78C7543DA07E74D1B681652E021 /* Sources */ = {
+		EB0911E24D428776602C1DEC35B8ECCE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6604EAB275791183ECA0CC60EB695D40 /* PINCache-dummy.m in Sources */,
-				4F13CB5EE8198080C12CF9AB2CDDF538 /* PINCache.m in Sources */,
-				354F7EB27F117F91FF5E9BB0496FC6D0 /* PINDiskCache.m in Sources */,
-				E4FAF62C8B0838312227C70756F3001E /* PINMemoryCache.m in Sources */,
+				8C80D9F9BFBF9147A4AEA6C21755E51C /* PINCache-dummy.m in Sources */,
+				4D150612A8A5242A297C0F776BE02D66 /* PINCache.m in Sources */,
+				BD9A2265EA812BA9CEAB70FAA192C223 /* PINDiskCache.m in Sources */,
+				43C917738FE2EFA599B2F1138FF30CDA /* PINMemoryCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +604,7 @@
 		15D472114CFBF2827077B7E00F71DBBD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PINCache;
-			target = 9AB92A2AE7314091D107EAC8561B8977 /* PINCache */;
+			target = 90C7204433C093B22C6DB3676E135D4C /* PINCache */;
 			targetProxy = 5C4729CA0A757B72D017E372B728B6F4 /* PBXContainerItemProxy */;
 		};
 		55AEB9EE12E58FE59762EF2DDA5100A4 /* PBXTargetDependency */ = {
@@ -624,13 +628,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2B8C32E6A824D96CFAD610DB0495FF6F /* Release */ = {
+		18F39971F2C8E25500AE8448FA0C2309 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5B38774B81A801C1A7D5698361F7E01 /* PINCache.xcconfig */;
+			baseConfigurationReference = E97958A09AFE83E5E1258ACBDBEF9E13 /* PINCache.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -643,7 +647,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/PINCache/PINCache.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = PINCache;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -651,7 +655,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		2C3ECBC781B441235523337F5C89AA1B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -797,35 +801,6 @@
 			};
 			name = Debug;
 		};
-		74093318A303CD7A3D51718C1E1685EB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5B38774B81A801C1A7D5698361F7E01 /* PINCache.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/PINCache/PINCache-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PINCache/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PINCache/PINCache.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = PINCache;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		8079F4F9B796D32558939E94A56DC0FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A64A481DC6C53B266328C55771CD3AF2 /* RocketData.xcconfig */;
@@ -857,7 +832,7 @@
 		};
 		95862D656A1FC2E75D074F079970AFB3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF173F8A0308756BA4FCE6374F43A200 /* ConsistencyManager.xcconfig */;
+			baseConfigurationReference = 7C803C8144FD5B9CFFC45BE93D7E10CE /* ConsistencyManager.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -886,7 +861,7 @@
 		};
 		98DB179BB92D609E655EA8E038A348B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF173F8A0308756BA4FCE6374F43A200 /* ConsistencyManager.xcconfig */;
+			baseConfigurationReference = 7C803C8144FD5B9CFFC45BE93D7E10CE /* ConsistencyManager.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -913,6 +888,35 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		A1EA743FEA174003A84A3D90804AFB16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E97958A09AFE83E5E1258ACBDBEF9E13 /* PINCache.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/PINCache/PINCache-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PINCache/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PINCache/PINCache.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = PINCache;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		CD8FAD5105005275DB4DED4523864380 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -986,11 +990,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FF497A22C21368DD9C91A3DAD14610CF /* Build configuration list for PBXNativeTarget "PINCache" */ = {
+		EEC88EFEE538B8E091D1CD1A93DA96E8 /* Build configuration list for PBXNativeTarget "PINCache" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				74093318A303CD7A3D51718C1E1685EB /* Debug */,
-				2B8C32E6A824D96CFAD610DB0495FF6F /* Release */,
+				18F39971F2C8E25500AE8448FA0C2309 /* Debug */,
+				A1EA743FEA174003A84A3D90804AFB16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

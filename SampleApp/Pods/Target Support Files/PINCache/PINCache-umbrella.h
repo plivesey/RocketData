@@ -2,6 +2,7 @@
 
 #import "Nullability.h"
 #import "PINCache.h"
+#import "PINCacheObjectSubscripting.h"
 #import "PINDiskCache.h"
 #import "PINMemoryCache.h"
 

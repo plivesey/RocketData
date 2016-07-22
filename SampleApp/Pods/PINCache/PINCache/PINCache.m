@@ -4,8 +4,8 @@
 
 #import "PINCache.h"
 
-NSString * const PINCachePrefix = @"com.pinterest.PINCache";
-NSString * const PINCacheSharedName = @"PINCacheShared";
+static NSString * const PINCachePrefix = @"com.pinterest.PINCache";
+static NSString * const PINCacheSharedName = @"PINCacheShared";
 
 @interface PINCache ()
 #if OS_OBJECT_USE_OBJC
@@ -27,6 +27,12 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
 }
 #endif
 
+- (instancetype)init
+{
+    @throw [NSException exceptionWithName:@"Must initialize with a name" reason:@"PINCache must be initialized with a name. Call initWithName: instead." userInfo:nil];
+    return [self initWithName:@""];
+}
+
 - (instancetype)initWithName:(NSString *)name
 {
     return [self initWithName:name rootPath:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]];
@@ -40,7 +46,7 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
     if (self = [super init]) {
         _name = [name copy];
         
-        NSString *queueName = [[NSString alloc] initWithFormat:@"%@.%p", PINCachePrefix, self];
+        NSString *queueName = [[NSString alloc] initWithFormat:@"%@.%p", PINCachePrefix, (void *)self];
         _concurrentQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@ Asynchronous Queue", queueName] UTF8String], DISPATCH_QUEUE_CONCURRENT);
         
         _diskCache = [[PINDiskCache alloc] initWithName:_name rootPath:rootPath];
@@ -51,7 +57,7 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
 
 - (NSString *)description
 {
-    return [[NSString alloc] initWithFormat:@"%@.%@.%p", PINCachePrefix, _name, self];
+    return [[NSString alloc] initWithFormat:@"%@.%@.%p", PINCachePrefix, _name, (void *)self];
 }
 
 + (instancetype)sharedCache
@@ -68,6 +74,24 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
 
 #pragma mark - Public Asynchronous Methods -
 
+- (void)containsObjectForKey:(NSString *)key block:(PINCacheObjectContainmentBlock)block
+{
+    if (!key || !block) {
+        return;
+    }
+    
+    __weak PINCache *weakSelf = self;
+    
+    dispatch_async(_concurrentQueue, ^{
+        PINCache *strongSelf = weakSelf;
+        
+        BOOL containsObject = [strongSelf containsObjectForKey:key];
+        block(containsObject);
+    });
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 
 - (void)objectForKey:(NSString *)key block:(PINCacheObjectBlock)block
 {
@@ -80,48 +104,39 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
         PINCache *strongSelf = weakSelf;
         if (!strongSelf)
             return;
-        
-        __weak PINCache *weakSelf = strongSelf;
-        
-        [strongSelf->_memoryCache objectForKey:key block:^(PINMemoryCache *cache, NSString *key, id object) {
+        [strongSelf->_memoryCache objectForKey:key block:^(PINMemoryCache *memoryCache, NSString *memoryCacheKey, id memoryCacheObject) {
             PINCache *strongSelf = weakSelf;
             if (!strongSelf)
                 return;
             
-            if (object) {
-                [strongSelf->_diskCache fileURLForKey:key block:^(PINDiskCache *cache, NSString *key, id <NSCoding> object, NSURL *fileURL) {
-                    // update the access time on disk
-                }];
-                
-                __weak PINCache *weakSelf = strongSelf;
-                
+            if (memoryCacheObject) {
+                [strongSelf->_diskCache fileURLForKey:memoryCacheKey block:NULL];
                 dispatch_async(strongSelf->_concurrentQueue, ^{
                     PINCache *strongSelf = weakSelf;
                     if (strongSelf)
-                        block(strongSelf, key, object);
+                        block(strongSelf, memoryCacheKey, memoryCacheObject);
                 });
             } else {
-                __weak PINCache *weakSelf = strongSelf;
-                
-                [strongSelf->_diskCache objectForKey:key block:^(PINDiskCache *cache, NSString *key, id <NSCoding> object, NSURL *fileURL) {
+                [strongSelf->_diskCache objectForKey:memoryCacheKey block:^(PINDiskCache *diskCache, NSString *diskCacheKey, id <NSCoding> diskCacheObject) {
                     PINCache *strongSelf = weakSelf;
                     if (!strongSelf)
                         return;
                     
-                    [strongSelf->_memoryCache setObject:object forKey:key block:nil];
+                    [strongSelf->_memoryCache setObject:diskCacheObject forKey:diskCacheKey block:nil];
                     
-                    __weak PINCache *weakSelf = strongSelf;
-                    
+
                     dispatch_async(strongSelf->_concurrentQueue, ^{
                         PINCache *strongSelf = weakSelf;
                         if (strongSelf)
-                            block(strongSelf, key, object);
+                            block(strongSelf, diskCacheKey, diskCacheObject);
                     });
                 }];
             }
         }];
     });
 }
+
+#pragma clang diagnostic pop
 
 - (void)setObject:(id <NSCoding>)object forKey:(NSString *)key block:(PINCacheObjectBlock)block
 {
@@ -137,11 +152,11 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
         dispatch_group_enter(group);
         dispatch_group_enter(group);
         
-        memBlock = ^(PINMemoryCache *cache, NSString *key, id object) {
+        memBlock = ^(PINMemoryCache *memoryCache, NSString *memoryCacheKey, id memoryCacheObject) {
             dispatch_group_leave(group);
         };
         
-        diskBlock = ^(PINDiskCache *cache, NSString *key, id <NSCoding> object, NSURL *fileURL) {
+        diskBlock = ^(PINDiskCache *diskCache, NSString *diskCacheKey, id <NSCoding> memoryCacheObject) {
             dispatch_group_leave(group);
         };
     }
@@ -177,11 +192,11 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
         dispatch_group_enter(group);
         dispatch_group_enter(group);
         
-        memBlock = ^(PINMemoryCache *cache, NSString *key, id object) {
+        memBlock = ^(PINMemoryCache *memoryCache, NSString *memoryCacheKey, id memoryCacheObject) {
             dispatch_group_leave(group);
         };
         
-        diskBlock = ^(PINDiskCache *cache, NSString *key, id <NSCoding> object, NSURL *fileURL) {
+        diskBlock = ^(PINDiskCache *diskCache, NSString *diskCacheKey, id <NSCoding> memoryCacheObject) {
             dispatch_group_leave(group);
         };
     }
@@ -293,7 +308,15 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
     return byteCount;
 }
 
-- (id)objectForKey:(NSString *)key
+- (BOOL)containsObjectForKey:(NSString *)key
+{
+    if (!key)
+        return NO;
+    
+    return [_memoryCache containsObjectForKey:key] || [_diskCache containsObjectForKey:key];
+}
+
+- (__nullable id)objectForKey:(NSString *)key
 {
     if (!key)
         return nil;
@@ -320,6 +343,16 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
     
     [_memoryCache setObject:object forKey:key];
     [_diskCache setObject:object forKey:key];
+}
+
+- (id)objectForKeyedSubscript:(NSString *)key
+{
+    return [self objectForKey:key];
+}
+
+- (void)setObject:(id)obj forKeyedSubscript:(NSString *)key
+{
+    [self setObject:obj forKey:key];
 }
 
 - (void)removeObjectForKey:(NSString *)key

@@ -14,14 +14,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  A callback block which provides only the cache as an argument
  */
-
 typedef void (^PINCacheBlock)(PINCache *cache);
 
 /**
  A callback block which provides the cache, key and object as arguments
  */
-
 typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullable object);
+
+/**
+ A callback block which provides a BOOL value as argument
+ */
+typedef void (^PINCacheObjectContainmentBlock)(BOOL containsObject);
+
 
 /**
  `PINCache` is a thread safe key/value store designed for persisting temporary objects that are expensive to
@@ -40,7 +44,7 @@ typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullabl
  @warning when using in extension or watch extension, define PIN_APP_EXTENSIONS=1
  */
 
-@interface PINCache : NSObject
+@interface PINCache : NSObject <PINCacheObjectSubscripting>
 
 #pragma mark -
 /// @name Core
@@ -80,6 +84,8 @@ typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullabl
  */
 + (instancetype)sharedCache;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Multiple instances with the same name are allowed and can safely access
  the same data on disk thanks to the magic of seriality. Also used to create the <diskCache>.
@@ -103,6 +109,17 @@ typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullabl
 
 #pragma mark -
 /// @name Asynchronous Methods
+
+/**
+ This method determines whether an object is present for the given key in the cache. This method returns immediately
+ and executes the passed block after the object is available, potentially in parallel with other blocks on the
+ <concurrentQueue>.
+ 
+ @see containsObjectForKey:
+ @param key The key associated with the object.
+ @param block A block to be executed concurrently after the containment check happened
+ */
+- (void)containsObjectForKey:(NSString *)key block:(PINCacheObjectContainmentBlock)block;
 
 /**
  Retrieves the object for the specified key. This method returns immediately and executes the passed
@@ -153,6 +170,15 @@ typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullabl
 /// @name Synchronous Methods
 
 /**
+ This method determines whether an object is present for the given key in the cache.
+ 
+ @see containsObjectForKey:block:
+ @param key The key associated with the object.
+ @result YES if an object is present for the given key in the cache, otherwise NO.
+ */
+- (BOOL)containsObjectForKey:(NSString *)key;
+
+/**
  Retrieves the object for the specified key. This method blocks the calling thread until the object is available.
  Uses a semaphore to achieve synchronicity on the disk cache.
  
@@ -160,7 +186,7 @@ typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullabl
  @param key The key associated with the object.
  @result The object for the specified key.
  */
-- (id)objectForKey:(NSString *)key;
+- (__nullable id)objectForKey:(NSString *)key;
 
 /**
  Stores an object in the cache for the specified key. This method blocks the calling thread until the object has been set.

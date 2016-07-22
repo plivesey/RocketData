@@ -13,6 +13,11 @@ final class UserModel: SampleAppModel, Equatable {
     let id: Int
     let name: String
 
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+    }
+
     // MARK: - SampleAppModel
 
     required init?(data: [NSObject : AnyObject]) {

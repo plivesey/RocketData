@@ -5,6 +5,8 @@
 #import <Foundation/Foundation.h>
 #import "Nullability.h"
 
+#import "PINCacheObjectSubscripting.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class PINMemoryCache;
@@ -12,13 +14,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  A callback block which provides only the cache as an argument
  */
-
 typedef void (^PINMemoryCacheBlock)(PINMemoryCache *cache);
 
 /**
  A callback block which provides the cache, key and object as arguments
  */
 typedef void (^PINMemoryCacheObjectBlock)(PINMemoryCache *cache, NSString *key, id __nullable object);
+
+/**
+ A callback block which provides a BOOL value as argument
+ */
+typedef void (^PINMemoryCacheContainmentBlock)(BOOL containsObject);
+
 
 /**
  `PINMemoryCache` is a fast, thread safe key/value store similar to `NSCache`. On iOS it will clear itself
@@ -37,7 +44,7 @@ typedef void (^PINMemoryCacheObjectBlock)(PINMemoryCache *cache, NSString *key, 
  a memory cache backed by a disk cache.
  */
 
-@interface PINMemoryCache : NSObject
+@interface PINMemoryCache : NSObject <PINCacheObjectSubscripting>
 
 #pragma mark -
 /// @name Core
@@ -64,6 +71,16 @@ typedef void (^PINMemoryCacheObjectBlock)(PINMemoryCache *cache, NSString *key, 
  Setting it back to `0.0` will stop the timer. Defaults to `0.0`.
  */
 @property (assign) NSTimeInterval ageLimit;
+
+/**
+ If ttlCache is YES, the cache behaves like a ttlCache. This means that once an object enters the
+ cache, it only lives as long as self.ageLimit. This has the following implications:
+ - Accessing an object in the cache does not extend that object's lifetime in the cache
+ - When attempting to access an object in the cache that has lived longer than self.ageLimit,
+ the cache will behave as if the object does not exist
+ 
+ */
+@property (nonatomic, assign, getter=isTTLCache) BOOL ttlCache;
 
 /**
  When `YES` on iOS the cache will remove all objects when the app receives a memory warning.
@@ -146,6 +163,17 @@ typedef void (^PINMemoryCacheObjectBlock)(PINMemoryCache *cache, NSString *key, 
 
 #pragma mark -
 /// @name Asynchronous Methods
+
+/**
+ This method determines whether an object is present for the given key in the cache. This method returns immediately
+ and executes the passed block after the object is available, potentially in parallel with other blocks on the
+ <concurrentQueue>.
+ 
+ @see containsObjectForKey:
+ @param key The key associated with the object.
+ @param block A block to be executed concurrently after the containment check happened
+ */
+- (void)containsObjectForKey:(NSString *)key block:(PINMemoryCacheContainmentBlock)block;
 
 /**
  Retrieves the object for the specified key. This method returns immediately and executes the passed
@@ -239,6 +267,15 @@ typedef void (^PINMemoryCacheObjectBlock)(PINMemoryCache *cache, NSString *key, 
 /// @name Synchronous Methods
 
 /**
+ This method determines whether an object is present for the given key in the cache.
+ 
+ @see containsObjectForKey:block:
+ @param key The key associated with the object.
+ @result YES if an object is present for the given key in the cache, otherwise NO.
+ */
+- (BOOL)containsObjectForKey:(NSString *)key;
+
+/**
  Retrieves the object for the specified key. This method blocks the calling thread until the
  object is available.
  
@@ -246,7 +283,7 @@ typedef void (^PINMemoryCacheObjectBlock)(PINMemoryCache *cache, NSString *key, 
  @param key The key associated with the object.
  @result The object for the specified key.
  */
-- (id)objectForKey:(nullable NSString *)key;
+- (__nullable id)objectForKey:(nullable NSString *)key;
 
 /**
  Stores an object in the cache for the specified key. This method blocks the calling thread until the object
