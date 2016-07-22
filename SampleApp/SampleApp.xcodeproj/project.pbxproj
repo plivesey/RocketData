@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		61C795A71D428D1100631563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795A61D428D1100631563 /* AppDelegate.swift */; };
-		61C795A91D428D1100631563 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795A81D428D1100631563 /* ViewController.swift */; };
-		61C795AC1D428D1100631563 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61C795AA1D428D1100631563 /* Main.storyboard */; };
 		61C795AE1D428D1100631563 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C795AD1D428D1100631563 /* Assets.xcassets */; };
 		61C795B11D428D1100631563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61C795AF1D428D1100631563 /* LaunchScreen.storyboard */; };
+		61C795BA1D428F4800631563 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795B81D428F4800631563 /* ChatsViewController.swift */; };
+		61C795BB1D428F4800631563 /* ChatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C795B91D428F4800631563 /* ChatsViewController.xib */; };
 		7D3B1884B032A1B2D615A0C5 /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -19,11 +19,11 @@
 		4A95683A73DB7ECFA5EC00EB /* Pods-SampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		61C795A31D428D1000631563 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C795A61D428D1100631563 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		61C795A81D428D1100631563 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		61C795AB1D428D1100631563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		61C795AD1D428D1100631563 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61C795B01D428D1100631563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61C795B21D428D1100631563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61C795B81D428F4800631563 /* ChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		61C795B91D428F4800631563 /* ChatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatsViewController.xib; sourceTree = "<group>"; };
 		6475889A5DCB2DF0B7BD9C5C /* Pods-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -62,8 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				61C795A61D428D1100631563 /* AppDelegate.swift */,
-				61C795A81D428D1100631563 /* ViewController.swift */,
-				61C795AA1D428D1100631563 /* Main.storyboard */,
+				61C795B81D428F4800631563 /* ChatsViewController.swift */,
+				61C795B91D428F4800631563 /* ChatsViewController.xib */,
 				61C795AD1D428D1100631563 /* Assets.xcassets */,
 				61C795AF1D428D1100631563 /* LaunchScreen.storyboard */,
 				61C795B21D428D1100631563 /* Info.plist */,
@@ -149,9 +149,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C795BB1D428F4800631563 /* ChatsViewController.xib in Resources */,
 				61C795B11D428D1100631563 /* LaunchScreen.storyboard in Resources */,
 				61C795AE1D428D1100631563 /* Assets.xcassets in Resources */,
-				61C795AC1D428D1100631563 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61C795A91D428D1100631563 /* ViewController.swift in Sources */,
+				61C795BA1D428F4800631563 /* ChatsViewController.swift in Sources */,
 				61C795A71D428D1100631563 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,14 +218,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		61C795AA1D428D1100631563 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61C795AB1D428D1100631563 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		61C795AF1D428D1100631563 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -331,6 +323,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.plivesey.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -343,6 +336,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.plivesey.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
