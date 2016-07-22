@@ -59,6 +59,12 @@ class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UIT
         return cell
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let user = dataProvider[indexPath.row]
+        let messagesViewController = MessagesViewController(otherUser: user)
+        navigationController?.pushViewController(messagesViewController, animated: true)
+    }
+
     // MARK: - DataProvider
 
     func collectionDataProviderHasUpdatedData<T>(dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {

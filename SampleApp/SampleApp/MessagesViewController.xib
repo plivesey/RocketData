@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessagesViewController" customModule="SampleApp" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="2zB-qH-vx9" id="qfj-Ry-xny"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2zB-qH-vx9">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="8Bw-Qn-oNd"/>
+                        <outlet property="delegate" destination="-1" id="Heg-Ro-jLx"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnZ-qi-iil">
+                    <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="6gd-kN-lV8"/>
+                    </constraints>
+                    <state key="normal" title="Hey"/>
+                    <connections>
+                        <action selector="heyButtonPressed" destination="-1" eventType="touchUpInside" id="qgL-sS-QsD"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="FnZ-qi-iil" firstAttribute="top" secondItem="2zB-qH-vx9" secondAttribute="bottom" id="7FI-Q9-M7r"/>
+                <constraint firstAttribute="trailing" secondItem="FnZ-qi-iil" secondAttribute="trailing" id="JvW-Vd-kyI"/>
+                <constraint firstAttribute="bottom" secondItem="FnZ-qi-iil" secondAttribute="bottom" id="RQe-4v-8Gd"/>
+                <constraint firstItem="FnZ-qi-iil" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UED-Rx-2UY"/>
+                <constraint firstAttribute="trailing" secondItem="2zB-qH-vx9" secondAttribute="trailing" id="bYY-q1-3uI"/>
+                <constraint firstItem="2zB-qH-vx9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cNt-67-a63"/>
+                <constraint firstItem="2zB-qH-vx9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zP4-wt-vWI"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

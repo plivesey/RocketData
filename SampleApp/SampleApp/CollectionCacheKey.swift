@@ -10,14 +10,14 @@ import Foundation
 
 enum CollectionCacheKey {
     case chat
-    case messages(String)
+    case messages(Int)
 
     func cacheKey() -> String {
         switch self {
         case .chat:
             return "chat"
-        case .messages(let chatId):
-            return "messages:\(chatId)"
+        case .messages(let userId):
+            return "messages:\(userId)"
         }
     }
 }

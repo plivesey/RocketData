@@ -19,6 +19,8 @@
 		61C795C91D42AD6A00631563 /* RocketDataCacheDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C81D42AD6A00631563 /* RocketDataCacheDelegate.swift */; };
 		61C795CB1D42B7A900631563 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795CA1D42B7A900631563 /* NetworkManager.swift */; };
 		61C795CD1D42B7EB00631563 /* CollectionCacheKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795CC1D42B7EB00631563 /* CollectionCacheKey.swift */; };
+		61C795D01D42C25500631563 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795CE1D42C25500631563 /* MessagesViewController.swift */; };
+		61C795D11D42C25500631563 /* MessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C795CF1D42C25500631563 /* MessagesViewController.xib */; };
 		7D3B1884B032A1B2D615A0C5 /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,8 @@
 		61C795C81D42AD6A00631563 /* RocketDataCacheDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketDataCacheDelegate.swift; sourceTree = "<group>"; };
 		61C795CA1D42B7A900631563 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		61C795CC1D42B7EB00631563 /* CollectionCacheKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCacheKey.swift; sourceTree = "<group>"; };
+		61C795CE1D42C25500631563 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		61C795CF1D42C25500631563 /* MessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesViewController.xib; sourceTree = "<group>"; };
 		6475889A5DCB2DF0B7BD9C5C /* Pods-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -80,6 +84,8 @@
 				61C795CC1D42B7EB00631563 /* CollectionCacheKey.swift */,
 				61C795B81D428F4800631563 /* ChatsViewController.swift */,
 				61C795B91D428F4800631563 /* ChatsViewController.xib */,
+				61C795CE1D42C25500631563 /* MessagesViewController.swift */,
+				61C795CF1D42C25500631563 /* MessagesViewController.xib */,
 				61C795C81D42AD6A00631563 /* RocketDataCacheDelegate.swift */,
 				61C795CA1D42B7A900631563 /* NetworkManager.swift */,
 				61C795BF1D42917F00631563 /* Models */,
@@ -180,6 +186,7 @@
 			files = (
 				61C795BB1D428F4800631563 /* ChatsViewController.xib in Resources */,
 				61C795B11D428D1100631563 /* LaunchScreen.storyboard in Resources */,
+				61C795D11D42C25500631563 /* MessagesViewController.xib in Resources */,
 				61C795AE1D428D1100631563 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C795D01D42C25500631563 /* MessagesViewController.swift in Sources */,
 				61C795C51D42935000631563 /* MessageModel.swift in Sources */,
 				61C795C71D42AD5100631563 /* RocketDataSetup.swift in Sources */,
 				61C795C91D42AD6A00631563 /* RocketDataCacheDelegate.swift in Sources */,
