@@ -12,6 +12,9 @@
 		61C795B11D428D1100631563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61C795AF1D428D1100631563 /* LaunchScreen.storyboard */; };
 		61C795BA1D428F4800631563 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795B81D428F4800631563 /* ChatsViewController.swift */; };
 		61C795BB1D428F4800631563 /* ChatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C795B91D428F4800631563 /* ChatsViewController.xib */; };
+		61C795C11D42917F00631563 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C01D42917F00631563 /* UserModel.swift */; };
+		61C795C31D42918600631563 /* SampleAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C21D42918600631563 /* SampleAppModel.swift */; };
+		61C795C51D42935000631563 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C41D42935000631563 /* MessageModel.swift */; };
 		7D3B1884B032A1B2D615A0C5 /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +27,9 @@
 		61C795B21D428D1100631563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61C795B81D428F4800631563 /* ChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		61C795B91D428F4800631563 /* ChatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatsViewController.xib; sourceTree = "<group>"; };
+		61C795C01D42917F00631563 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		61C795C21D42918600631563 /* SampleAppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleAppModel.swift; sourceTree = "<group>"; };
+		61C795C41D42935000631563 /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		6475889A5DCB2DF0B7BD9C5C /* Pods-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -64,11 +70,22 @@
 				61C795A61D428D1100631563 /* AppDelegate.swift */,
 				61C795B81D428F4800631563 /* ChatsViewController.swift */,
 				61C795B91D428F4800631563 /* ChatsViewController.xib */,
+				61C795BF1D42917F00631563 /* Models */,
 				61C795AD1D428D1100631563 /* Assets.xcassets */,
 				61C795AF1D428D1100631563 /* LaunchScreen.storyboard */,
 				61C795B21D428D1100631563 /* Info.plist */,
 			);
 			path = SampleApp;
+			sourceTree = "<group>";
+		};
+		61C795BF1D42917F00631563 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				61C795C21D42918600631563 /* SampleAppModel.swift */,
+				61C795C01D42917F00631563 /* UserModel.swift */,
+				61C795C41D42935000631563 /* MessageModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		824105054A38320025A74AED /* Pods */ = {
@@ -210,8 +227,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C795C51D42935000631563 /* MessageModel.swift in Sources */,
 				61C795BA1D428F4800631563 /* ChatsViewController.swift in Sources */,
+				61C795C11D42917F00631563 /* UserModel.swift in Sources */,
 				61C795A71D428D1100631563 /* AppDelegate.swift in Sources */,
+				61C795C31D42918600631563 /* SampleAppModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
