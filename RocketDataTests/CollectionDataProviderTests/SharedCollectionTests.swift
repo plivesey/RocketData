@@ -56,7 +56,7 @@ class SharedCollectionTests: RocketDataTestCase {
         dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "cacheContext") { _, _ in
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
         return dataProvider
     }
 }

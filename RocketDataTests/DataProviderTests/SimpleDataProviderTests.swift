@@ -38,7 +38,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
         let model = ParentModel(id: 1)
         dataProvider.setData(model, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testSetDataNoCaching() {
@@ -69,7 +69,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
     }
@@ -93,7 +93,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertNil(dataProvider.data)
     }
@@ -119,7 +119,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 1)
@@ -133,7 +133,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         // Even though we called fetch again, it shouldn't have actually hit the cache
@@ -157,7 +157,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertNil(dataProvider.data)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 1)
@@ -178,7 +178,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 2)
@@ -210,7 +210,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         // We should never have hit the cache
@@ -239,7 +239,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 1)

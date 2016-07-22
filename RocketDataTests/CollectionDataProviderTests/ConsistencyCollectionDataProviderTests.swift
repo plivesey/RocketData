@@ -38,7 +38,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
         otherDataProvider.setData([newModel], cacheKey: nil, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testSettingSameModel() {
@@ -87,7 +87,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
         otherDataProvider.setData([newModel], cacheKey: nil, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     // MARK: Deleting
@@ -110,7 +110,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
         DataModelManager.sharedDataManagerNoCache.deleteModel(initialModel, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testDeletingOptionalModel() {
@@ -132,7 +132,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
         DataModelManager.sharedDataManagerNoCache.deleteModel(ChildModel(id: 2, name: nil), context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testDeletingRequiredModel() {
@@ -153,7 +153,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
         DataModelManager.sharedDataManagerNoCache.deleteModel(ChildModel(id: 3, name: "childInitial"), context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     // MARK: - Other collection methods
@@ -190,7 +190,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.count, 3)
         XCTAssertEqual(otherDataProvider[1].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testInsertListenOnNewItems() {
@@ -226,7 +226,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.count, 3)
         XCTAssertEqual(otherDataProvider[1].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testAppendItems() {
@@ -259,7 +259,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.count, 3)
         XCTAssertEqual(otherDataProvider[2].name, "new")
         
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testAppendListenOnNewItems() {
@@ -295,7 +295,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.count, 3)
         XCTAssertEqual(otherDataProvider[2].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     // MARK: Update
@@ -331,7 +331,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.count, 3)
         XCTAssertEqual(otherDataProvider[2].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testUpdateItemDifferentId() {
@@ -365,7 +365,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.count, 3)
         XCTAssertEqual(otherDataProvider[1].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testUpdateListenOnNewModel() {
@@ -402,7 +402,7 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.count, 3)
         XCTAssertEqual(otherDataProvider[2].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     // MARK: - Delegate tests

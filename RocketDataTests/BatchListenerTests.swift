@@ -67,7 +67,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(calledCollectionDelegate, 1)
     }
@@ -129,7 +129,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
         XCTAssertEqual(calledDelegate, 1)
@@ -199,7 +199,7 @@ class BatchListenerTests: RocketDataTestCase {
 
         DataModelManager.sharedDataManagerNoCache.updateModels([firstUpdatedModel, secondUpdatedModel], updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
         XCTAssertEqual(calledDelegate, 1)
@@ -263,7 +263,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
     }
@@ -323,7 +323,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
     }

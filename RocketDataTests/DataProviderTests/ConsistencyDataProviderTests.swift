@@ -34,7 +34,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         otherDataProvider.setData(newModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testSettingSameModel() {
@@ -81,7 +81,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         otherDataProvider.setData(newModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testDeletingModel() {
@@ -110,7 +110,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         dataModelManager.deleteModel(initialModel, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         waitForCacheToFinish(dataModelManager)
         XCTAssertEqual(numberOfTimesCalled, 1)
@@ -133,7 +133,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         DataModelManager.sharedDataManagerNoCache.deleteModel(ChildModel(id: 2, name: "child"), context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testDeletingRequiredModel() {
@@ -152,7 +152,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         DataModelManager.sharedDataManagerNoCache.deleteModel(ChildModel(id: 3, name: "childInitial"), context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     /**
@@ -193,7 +193,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         // Data provider one will soon get a consistency manager update, but first...
         dataProvider.setData(finalModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     // MARK: Timing Tests

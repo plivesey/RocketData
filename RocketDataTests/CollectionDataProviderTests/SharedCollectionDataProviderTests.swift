@@ -755,7 +755,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         otherDataProvider.fetchDataFromCache(cacheKey: "otherCacheKey", context: "cacheContext") { (_, _) in
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         // Let's run a bunch of changes
         let model = ParentModel(id: 1)
@@ -814,7 +814,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         XCTAssertNil(dataProvider.cacheKey)
 
         finishCacheLoad()
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.cacheKey, "cacheKey")
         XCTAssertEqual(dataProvider.data, otherDataProvider.data)

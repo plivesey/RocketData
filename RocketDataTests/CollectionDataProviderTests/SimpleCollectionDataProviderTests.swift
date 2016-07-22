@@ -42,7 +42,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         let model = ParentModel(id: 1)
         dataProvider.setData([model], cacheKey: "cacheKey", context: "context")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testSetDataNoCaching() {
@@ -73,7 +73,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider[0].id, 1)
     }
@@ -97,7 +97,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.count, 0)
     }
@@ -120,7 +120,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([otherModel, otherModel], cacheKey: "cacheKey", context: "wrong")
 
         // We need to wait for the initial setCollectionCalled to process before we test what we actually want to test
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         expectation = expectationWithDescription("insert")
         cacheDelegate.setCollectionCalled = { collection, key, context in
@@ -136,7 +136,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataProvider.count, 3)
         XCTAssertEqual(dataProvider[1].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testAppend() {
@@ -155,7 +155,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([otherModel, otherModel], cacheKey: "cacheKey", context: "wrong")
 
         // We need to wait for the initial setCollectionCalled to process before we test what we actually want to test
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         expectation = expectationWithDescription("append")
         cacheDelegate.setCollectionCalled = { collection, key, context in
@@ -171,7 +171,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataProvider.count, 3)
         XCTAssertEqual(dataProvider[2].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     func testUpdate() {
@@ -190,7 +190,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([otherModel, otherModel], cacheKey: "cacheKey", context: "wrong")
 
         // We need to wait for the initial setCollectionCalled to process before we test what we actually want to test
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         expectation = expectationWithDescription("update")
         cacheDelegate.setCollectionCalled = { collection, key, context in
@@ -206,7 +206,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataProvider.count, 2)
         XCTAssertEqual(dataProvider[1].name, "new")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
     
     func testRemove() {
@@ -225,7 +225,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         dataProvider.setData([firstModel, secondModel], cacheKey: "cacheKey", context: "wrong")
 
         // We need to wait for the initial setCollectionCalled to process before we test what we actually want to test
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         expectation = expectationWithDescription("update")
         cacheDelegate.setCollectionCalled = { collection, key, context in
@@ -241,7 +241,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataProvider.count, 1)
         XCTAssertEqual(dataProvider[0].name, "initial")
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
 
     // MARK: Fetch data no-ops
@@ -265,7 +265,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider[0].id, 1)
         XCTAssertEqual(dataModelManager.collectionFromCacheCalled, 1)
@@ -277,7 +277,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider[0].id, 1)
         // Even though we fetched again, we shouldn't have actually hit the cache
@@ -308,7 +308,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider[0].id, 1)
         // Since we already setData, we shouldn't have hit the cache
@@ -331,7 +331,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.count, 0)
         XCTAssertEqual(dataModelManager.collectionFromCacheCalled, 1)
@@ -351,7 +351,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider[0].id, 1)
         // Since we needed to fetch twice, this should be 2
