@@ -1,0 +1,6 @@
+framework module ConsistencyManager {
+  umbrella header "ConsistencyManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

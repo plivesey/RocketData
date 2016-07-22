@@ -1,0 +1,19 @@
+PODS:
+  - ConsistencyManager (1.0.1)
+  - RocketData (1.0.0):
+    - ConsistencyManager (~> 1.0.0)
+
+DEPENDENCIES:
+  - RocketData (from `..`)
+
+EXTERNAL SOURCES:
+  RocketData:
+    :path: ..
+
+SPEC CHECKSUMS:
+  ConsistencyManager: d8789b3b9862cb0863515889ecf40c7c7f70239c
+  RocketData: 2732411a7edcb801c6f5d1cc8f037482e366ff43
+
+PODFILE CHECKSUM: 67ec5cefedf6f39e54723b619db6c6a752a6c6ce
+
+COCOAPODS: 1.0.1
