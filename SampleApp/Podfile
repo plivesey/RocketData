@@ -2,5 +2,6 @@ use_frameworks!
 
 target :SampleApp do
   pod 'RocketData', :path => '..'
+  pod 'PINCache', '~> 2.0.0'
 end
 

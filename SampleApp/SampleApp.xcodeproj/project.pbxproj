@@ -15,6 +15,8 @@
 		61C795C11D42917F00631563 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C01D42917F00631563 /* UserModel.swift */; };
 		61C795C31D42918600631563 /* SampleAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C21D42918600631563 /* SampleAppModel.swift */; };
 		61C795C51D42935000631563 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C41D42935000631563 /* MessageModel.swift */; };
+		61C795C71D42AD5100631563 /* RocketDataSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C61D42AD5100631563 /* RocketDataSetup.swift */; };
+		61C795C91D42AD6A00631563 /* RocketDataCacheDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C795C81D42AD6A00631563 /* RocketDataCacheDelegate.swift */; };
 		7D3B1884B032A1B2D615A0C5 /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		61C795C01D42917F00631563 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		61C795C21D42918600631563 /* SampleAppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleAppModel.swift; sourceTree = "<group>"; };
 		61C795C41D42935000631563 /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		61C795C61D42AD5100631563 /* RocketDataSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketDataSetup.swift; sourceTree = "<group>"; };
+		61C795C81D42AD6A00631563 /* RocketDataCacheDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketDataCacheDelegate.swift; sourceTree = "<group>"; };
 		6475889A5DCB2DF0B7BD9C5C /* Pods-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		B258B428B31C77DB3525D1F4 /* Pods_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -68,8 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				61C795A61D428D1100631563 /* AppDelegate.swift */,
+				61C795C61D42AD5100631563 /* RocketDataSetup.swift */,
 				61C795B81D428F4800631563 /* ChatsViewController.swift */,
 				61C795B91D428F4800631563 /* ChatsViewController.xib */,
+				61C795C81D42AD6A00631563 /* RocketDataCacheDelegate.swift */,
 				61C795BF1D42917F00631563 /* Models */,
 				61C795AD1D428D1100631563 /* Assets.xcassets */,
 				61C795AF1D428D1100631563 /* LaunchScreen.storyboard */,
@@ -228,6 +234,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				61C795C51D42935000631563 /* MessageModel.swift in Sources */,
+				61C795C71D42AD5100631563 /* RocketDataSetup.swift in Sources */,
+				61C795C91D42AD6A00631563 /* RocketDataCacheDelegate.swift in Sources */,
 				61C795BA1D428F4800631563 /* ChatsViewController.swift in Sources */,
 				61C795C11D42917F00631563 /* UserModel.swift in Sources */,
 				61C795A71D428D1100631563 /* AppDelegate.swift in Sources */,
