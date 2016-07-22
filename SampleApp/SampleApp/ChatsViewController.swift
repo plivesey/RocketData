@@ -55,7 +55,12 @@ class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UIT
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = dataProvider[indexPath.row].name
+        let user = dataProvider[indexPath.row]
+        var text = user.name
+        if !user.online {
+            text += " (Offline)"
+        }
+        cell.textLabel?.text = text
         return cell
     }
 

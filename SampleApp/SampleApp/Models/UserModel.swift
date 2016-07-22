@@ -12,27 +12,32 @@ import RocketData
 final class UserModel: SampleAppModel, Equatable {
     let id: Int
     let name: String
+    let online: Bool
 
-    init(id: Int, name: String) {
+    init(id: Int, name: String, online: Bool) {
         self.id = id
         self.name = name
+        self.online = online
     }
 
     // MARK: - SampleAppModel
 
     required init?(data: [NSObject : AnyObject]) {
         guard let id = data["id"] as? Int,
-            let name = data["name"] as? String else {
+            let name = data["name"] as? String,
+            let online = data["online"] as? Bool else {
                 return nil
         }
         self.id = id
         self.name = name
+        self.online = online
     }
 
     func data() -> [NSObject : AnyObject] {
         return [
             "id": id,
-            "name": name
+            "name": name,
+            "online": online
         ]
     }
 
@@ -53,5 +58,7 @@ final class UserModel: SampleAppModel, Equatable {
 }
 
 func ==(lhs: UserModel, rhs: UserModel) -> Bool {
-    return lhs.id == rhs.id && lhs.name == rhs.name
+    return lhs.id == rhs.id &&
+        lhs.name == rhs.name &&
+        lhs.online == rhs.online
 }

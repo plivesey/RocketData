@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RocketData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
 
         window?.makeKeyAndVisible()
+
+        NetworkManager.startRandomPushNotifications()
         
         return true
+    }
+
+    func pushNotificationReceivedWithUpdatedUser(user: UserModel) {
+        // This simulates what happens if we get a push notification which makes a user come online or goes offline
+        // This probably isn't where this code should be, but it shows how you could handle this type of event
+
+        DataModelManager.sharedInstance.updateModel(user)
     }
 }

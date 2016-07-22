@@ -23,7 +23,11 @@ class MessagesViewController: UIViewController, CollectionDataProviderDelegate, 
     init(otherUser: UserModel) {
         userDataProvider.setData(otherUser)
         cacheKey = CollectionCacheKey.messages(otherUser.id).cacheKey()
+
         super.init(nibName: "MessagesViewController", bundle: nil)
+
+        userDataProvider.delegate = self
+        dataProvider.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,7 +78,14 @@ class MessagesViewController: UIViewController, CollectionDataProviderDelegate, 
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = "\(dataProvider[indexPath.row].sender.name): \(dataProvider[indexPath.row].text)"
+
+        let message = dataProvider[indexPath.row]
+        var text = message.sender.name
+        if !message.sender.online {
+            text += " (Offline)"
+        }
+        text += ": \(dataProvider[indexPath.row].text)"
+        cell.textLabel?.text = text
         return cell
     }
 

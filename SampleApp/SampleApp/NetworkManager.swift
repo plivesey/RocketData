@@ -15,7 +15,7 @@ import RocketData
 class NetworkManager {
 
     static func loggedInUser() -> UserModel {
-        return UserModel(id: 0, name: "Peter")
+        return UserModel(id: 0, name: "Peter", online: true)
     }
 
     static func fetchChats(completion: ([UserModel], NSError?)->Void) {
@@ -23,8 +23,8 @@ class NetworkManager {
             sleep(2)
             dispatch_async(dispatch_get_main_queue()) {
                 let chats = [
-                    UserModel(id: 1, name: "Nick"),
-                    UserModel(id: 2, name: "Nitesh")
+                    UserModel(id: 1, name: "Nick", online: true),
+                    UserModel(id: 2, name: "Nitesh", online: false)
                 ]
                 completion(chats, nil)
             }
@@ -46,6 +46,21 @@ class NetworkManager {
                     completion(messages, nil)
                 }
             }
+        }
+    }
+
+    static func startRandomPushNotifications() {
+        let delay = Double(arc4random_uniform(4) + 2)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            let userId = Int(arc4random_uniform(2) + 1)
+            let online = arc4random_uniform(2) == 0
+            let username = userId == 1 ? "Nick" : "Nitesh"
+            let newUserModel = UserModel(id: userId, name: username, online: online)
+            (UIApplication.sharedApplication().delegate as? AppDelegate)?.pushNotificationReceivedWithUpdatedUser(newUserModel)
+
+            // Do it again!
+            startRandomPushNotifications()
         }
     }
 
