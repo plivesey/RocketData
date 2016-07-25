@@ -26,6 +26,10 @@ public protocol CacheDelegate {
      If this is the case, the parseModel function in DataModelManager should help parse your model assuming it's a certain superclass or protocol.
      For information on threading, see the CacheDelegate docs.
      
+     Errors
+     
+     Errors in the completion block are completely optional here. The error object is not used by Rocket Data in any way. It is just passed back to the data providers. So, if you ignore the errors in data providers, you can just return (nil, nil) here on cache misses.
+     
      - parameter cacheKey: The cache key for this model. This is always equal to the modelIdentifier.
      - parameter context: A context you can pass in when fetching from the cache.
      - parameter completion: A completion block to call when you have fetched a model. You may call this on any thread and should only call it once.
@@ -48,6 +52,10 @@ public protocol CacheDelegate {
      Likely, you probably have some superclass or protocol which all your models adhere to, and you can't handle it for any T.
      If this is the case, the parseModel function in DataModelManager should help parse your model assuming it's a certain superclass or protocol.
      For information on threading, see the CacheDelegate docs.
+     
+     Errors
+
+     Errors in the completion block are completely optional here. The error object is not used by Rocket Data in any way. It is just passed back to the data providers. So, if you ignore the errors in data providers, you can just return (nil, nil) here on cache misses.
 
      - parameter cacheKey: The cache key for this model. This is defined by the CollectionDataProvider.
      - parameter context: A context you can pass in when fetching from the cache.
