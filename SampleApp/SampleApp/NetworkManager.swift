@@ -19,8 +19,9 @@ class NetworkManager {
     }
 
     static func fetchChats(completion: ([UserModel], NSError?)->Void) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) { 
-            sleep(2)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            // Wait 1.5 seconds
+            usleep(UInt32(1.5 * 1000 * 1000))
             dispatch_async(dispatch_get_main_queue()) {
                 let chats = [
                     UserModel(id: 1, name: "Nick", online: true),
@@ -50,6 +51,11 @@ class NetworkManager {
     }
 
     static func startRandomPushNotifications() {
+        startRandomUserOnlineNotifications()
+        startRandomNewMessagesNotifications()
+    }
+
+    private static func startRandomUserOnlineNotifications() {
         let delay = Double(arc4random_uniform(4) + 2)
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
@@ -60,7 +66,22 @@ class NetworkManager {
             (UIApplication.sharedApplication().delegate as? AppDelegate)?.pushNotificationReceivedWithUpdatedUser(newUserModel)
 
             // Do it again!
-            startRandomPushNotifications()
+            startRandomUserOnlineNotifications()
+        }
+    }
+
+    private static func startRandomNewMessagesNotifications() {
+        let delay = Double(arc4random_uniform(10) + 2)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            let userId = Int(arc4random_uniform(2) + 1)
+            let username = userId == 1 ? "Nick" : "Nitesh"
+            let newUserModel = UserModel(id: userId, name: username, online: true)
+            let newMessageModel = MessageModel(id: nextMessageId(), text: "hey", sender: newUserModel)
+            (UIApplication.sharedApplication().delegate as? AppDelegate)?.pushNotificationReceivedWithNewMessage(newMessageModel)
+
+            // Do it again!
+            startRandomNewMessagesNotifications()
         }
     }
 

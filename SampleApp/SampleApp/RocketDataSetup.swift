@@ -9,6 +9,11 @@
 import Foundation
 import RocketData
 
+/**
+ This file contains some useful setup you could do.
+ See https://linkedin.github.io/RocketData/pages/040_setup.html for more information.
+ */
+
 extension DataModelManager {
     /**
      Singleton accessor for DataModelManager. See https://linkedin.github.io/RocketData/pages/040_setup.html

@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window?.makeKeyAndVisible()
 
+        // We're going to send random push notifications to the app to show how we can use Rocket Data to handle data changes
+        // The push notifications are going to be users coming online/offline and new messages
         NetworkManager.startRandomPushNotifications()
         
         return true
@@ -33,5 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // This probably isn't where this code should be, but it shows how you could handle this type of event
 
         DataModelManager.sharedInstance.updateModel(user)
+    }
+
+    func pushNotificationReceivedWithNewMessage(message: MessageModel) {
+        // We use the sender id as the collection id
+        let collectionCacheKey = CollectionCacheKey.messages(message.sender.id)
+        // We can use this class method to update all collection data providers with this cache key
+        CollectionDataProvider<MessageModel>.append([message], cacheKey: collectionCacheKey.cacheKey(), dataModelManager: DataModelManager.sharedInstance)
     }
 }

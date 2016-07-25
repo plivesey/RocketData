@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ All the collection cache keys should be unique.
+ This enum helps keep this organized.
+ */
 enum CollectionCacheKey {
     case chat
     case messages(Int)

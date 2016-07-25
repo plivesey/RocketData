@@ -22,6 +22,8 @@ class RocketDataCacheDelegate: CacheDelegate {
         guard let cacheKey = cacheKey,
             let data = cache.objectForKey(cacheKey) as? [NSObject: AnyObject],
             let modelType = T.self as? SampleAppModel.Type else {
+                // NOTE: The last cast is to ensure that we only deal with SampleAppModels. This allows us to call init(data:)
+                // We've decided not to return a real error here because we never use it in our data providers
                 completion(nil, nil)
                 return
         }
@@ -36,23 +38,19 @@ class RocketDataCacheDelegate: CacheDelegate {
         }
     }
 
-    func parseModel<T>(parseBlock: SampleAppModel.Type -> SampleAppModel?) -> (T?, NSError?) {
-        if let Model = T.self as? SampleAppModel.Type {
-            let model = parseBlock(Model) as? T
-            return (model, nil)
-        } else {
-            return (nil, nil)
-        }
-    }
-
     func collectionForKey<T : SimpleModel>(cacheKey: String?, context: Any?, completion: ([T]?, NSError?) -> ()) {
         guard let cacheKey = cacheKey,
             let collectionCacheValue = cache.objectForKey(cacheKey) as? [String],
             let modelType = T.self as? SampleAppModel.Type else {
+                // NOTE: The last cast is to ensure that we only deal with SampleAppModels. This allows us to call init(data:)
+                // We've decided not to return a real error here because we never use it in our data providers
                 completion(nil, nil)
                 return
         }
 
+        // For this app, we've decided to save the models from collections seperately
+        // So, collectionCacheValue is an array of ids. We'll try to resolved each of these ids to a real object in the cache
+        // If one fails, that's ok. We'll still return as much as we can
         let collection: [T] = collectionCacheValue.flatMap {
             guard let data = self.cache.objectForKey($0) as? [NSObject: AnyObject] else {
                 return nil

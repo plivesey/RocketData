@@ -68,6 +68,7 @@ class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UIT
         let user = dataProvider[indexPath.row]
         let messagesViewController = MessagesViewController(otherUser: user)
         navigationController?.pushViewController(messagesViewController, animated: true)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     // MARK: - DataProvider
