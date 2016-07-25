@@ -27,6 +27,8 @@ public class ParsingHelpers {
      This is paticularly useful when implementing the CacheDelegate. 
      The CacheDelegate requests a model of type T, but you actually want to provide a model of type T: MyModelClass.
      You can use this function to make that assumption (U is a specific supertype such as MyModelClass).
+     
+     Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
     public static func parseModel<T, U>(parseBlock: U.Type -> U?) -> (T?, NSError?) {
         if let Model = T.self as? U.Type {
@@ -55,6 +57,8 @@ public class ParsingHelpers {
      This is paticularly useful when implementing the CacheDelegate.
      The CacheDelegate requests a model of type T, but you actually want to provide a model of type T: MyModelClass.
      You can use this function to make that assumption (U is a specific supertype such as MyModelClass).
+
+     Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
     public static func parseModel<T, U>(parseBlock: U.Type -> (U?, NSError?)) -> (T?, NSError?) {
         if let Model = T.self as? U.Type {
@@ -81,6 +85,8 @@ public class ParsingHelpers {
      This is paticularly useful when implementing the CacheDelegate.
      The CacheDelegate requests a model of type T, but you actually want to provide a model of type T: MyModelClass.
      You can use this function to make that assumption (U is a specific supertype such as MyModelClass).
+
+     Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
     public static func parseCollection<T, U>(parseBlock: U.Type -> [U]?) -> ([T]?, NSError?) {
         if let Model = T.self as? U.Type {
@@ -111,6 +117,8 @@ public class ParsingHelpers {
      This is paticularly useful when implementing the CacheDelegate.
      The CacheDelegate requests a model of type T, but you actually want to provide a model of type T: MyModelClass.
      You can use this function to make that assumption (U is a specific supertype such as MyModelClass).
+
+     Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
     public static func parseCollection<T, U>(parseBlock: U.Type -> ([U]?, NSError?)) -> ([T]?, NSError?) {
         if let Model = T.self as? U.Type {
