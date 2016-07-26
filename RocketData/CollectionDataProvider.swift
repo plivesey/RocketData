@@ -176,7 +176,10 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
         } else {
             let cacheFetchDate = ChangeTime()
 
+            print("About to hit the cache \(NSDate())")
             dataModelManager.collectionFromCache(cacheKey, context: context) { (collection: [T]?, error) in
+
+                print("Cache hit with count: \(collection?.count) \(NSDate())")
 
                 // While we were fetching from the cache, we may have gotten data in a sibling provider
                 // Let's check again because otherwise, we may get out of sync
@@ -198,6 +201,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
                             self.listenForUpdates()
                             self.cacheKey = cacheKey
                         }
+                        print("About to call cache completion in collection data provider \(NSDate())")
                         completion(collection, error)
                     } else {
                         // Our current data is the most up to date, so we should return that as the result of the cache lookup

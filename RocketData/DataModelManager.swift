@@ -141,8 +141,11 @@ public class DataModelManager {
      */
     public func collectionFromCache<T: SimpleModel>(cacheKey: String?, context: Any?, completion: ([T]?, NSError?)->()) {
         dispatch_async(externalDispatchQueue) {
+            print("About to ask the cachedelegate for a collection \(NSDate())")
             self.cacheDelegate.collectionForKey(cacheKey, context: context) { (models: [T]?, error) in
+                print("CacheDelegate completion called...going back to the main queue \(NSDate())")
                 dispatch_async(dispatch_get_main_queue()) {
+                    print("On the main queue now. Let's do this! \(NSDate())")
                     completion(models, error)
                 }
             }

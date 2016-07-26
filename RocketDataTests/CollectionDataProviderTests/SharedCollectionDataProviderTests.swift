@@ -788,6 +788,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
             self.cacheRequests += 1
             let initialModels: [Any] = [ParentModel(id: 0)]
             finishCacheLoad = {
+                print("Finish cache load called \(NSDate())")
                 completion(initialModels, nil)
             }
         }
@@ -801,6 +802,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         let expectation = expectationWithDescription("waitForCache")
         // Start loading from the cache
         dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "cacheContext") { _, _ in
+            print("expectation about to fulfill \(NSDate())")
             expectation.fulfill()
         }
 
@@ -813,7 +815,9 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         // This is only set once we're synced with the cacheKey
         XCTAssertNil(dataProvider.cacheKey)
 
+        print("Finish cache load about to call  \(NSDate())")
         finishCacheLoad()
+        print("About to start waiting  \(NSDate())")
         waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.cacheKey, "cacheKey")
