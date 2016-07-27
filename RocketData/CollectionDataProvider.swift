@@ -177,7 +177,6 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
             let cacheFetchDate = ChangeTime()
 
             dataModelManager.collectionFromCache(cacheKey, context: context) { (collection: [T]?, error) in
-
                 // While we were fetching from the cache, we may have gotten data in a sibling provider
                 // Let's check again because otherwise, we may get out of sync
                 if let cacheKey = cacheKey,
