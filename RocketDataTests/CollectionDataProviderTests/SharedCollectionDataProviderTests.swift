@@ -781,15 +781,17 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
      This ensures that data providers are always in sync across cache loading boundries.
      */
     func testAddCollectionWhileCacheLoads() {
-        var finishCacheLoad = {}
+        var collectionForKeyCalledExpectation: (()->Void)?
+        let finishCacheLoadExpectation = expectationWithDescription("Wait for collectionForKeyCalledExpectation to be set")
         cacheDelegate.collectionForKeyCalled = { cacheKey, context, completion in
             XCTAssertEqual(context as? String, "cacheContext")
             XCTAssertEqual(cacheKey, "cacheKey")
             self.cacheRequests += 1
             let initialModels: [Any] = [ParentModel(id: 0)]
-            finishCacheLoad = {
+            collectionForKeyCalledExpectation = {
                 completion(initialModels, nil)
             }
+            finishCacheLoadExpectation.fulfill()
         }
 
         let delegate = ClosureCollectionDataProviderDelegate() { _, _ in
@@ -798,11 +800,19 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
 
         let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: dataModelManager)
         dataProvider.delegate = delegate
-        let expectation = expectationWithDescription("waitForCache")
+
+        // This is a little tricky. We want to add another expectation here, but we can't because we already have one waiting for finishCacheLoad to be set
+        // So, we'll create a closure which we can set later in the test
+        var dataProviderLoadFinished = {}
+
         // Start loading from the cache
         dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "cacheContext") { _, _ in
-            expectation.fulfill()
+            dataProviderLoadFinished()
         }
+
+        // Wait for it to hit the cache
+        // This ensures that the finishCacheLoad block will be called
+        waitForExpectationsWithTimeout(10, handler: nil)
 
         // Create another data provider, and call setData before the cache finishes
         let otherDataProvider = CollectionDataProvider<ParentModel>(dataModelManager: dataModelManager)
@@ -813,7 +823,16 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         // This is only set once we're synced with the cacheKey
         XCTAssertNil(dataProvider.cacheKey)
 
-        finishCacheLoad()
+        if let collectionForKeyCalledExpectation = collectionForKeyCalledExpectation {
+            collectionForKeyCalledExpectation()
+        } else {
+            XCTFail("collectionForKeyCalledExpectation closure wasn't set. This means we probably have a race condition in this test. The 'Wait for collectionForKeyCalledExpectation to be set' expectation should wait for this to happen.")
+        }
+
+        let expectation = expectationWithDescription("Wait for data provider to call completion")
+        dataProviderLoadFinished = {
+            expectation.fulfill()
+        }
         waitForExpectationsWithTimeout(10, handler: nil)
 
         XCTAssertEqual(dataProvider.cacheKey, "cacheKey")
