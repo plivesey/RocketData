@@ -11,8 +11,6 @@ Rocket Data is a model management system with persistence for immutable models.
 
 Immutability has [many benefits](see https://linkedin.github.io/RocketData/pages/130_immutability.html), but keeping models consistent and making changes is difficult. This library manages the consistency and caching of immutable models. It is intended to be an ideal replacement for Core Data. However, unlike Core Data, it does not block the main thread and does not crash whenever you do something slightly incorrect (see [Core Data Comparison](https://linkedin.github.io/RocketData/pages/100_coreData.html)). In most setups, the backing cache does not need a schema, and you never need to add migration logic.
 
-For a full comparison to Core Data, see 
-
 ## Scale
 
 Rocket Data scales extremely well to large numbers of models and data providers. Since it does nearly all of its work on a background thread, you never need to worry about one change slowing down the whole application. You can also choose to stop listening to changes when a view controller is off screen to further increase performance.
