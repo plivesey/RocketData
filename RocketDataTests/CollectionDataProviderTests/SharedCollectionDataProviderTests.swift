@@ -781,14 +781,14 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
      This ensures that data providers are always in sync across cache loading boundries.
      */
     func testAddCollectionWhileCacheLoads() {
-        var finishCacheLoad: (()->Void)?
-        let finishCacheLoadExpectation = expectationWithDescription("Wait for finishCacheLoad to be set")
+        var collectionForKeyCalledExpectation: (()->Void)?
+        let finishCacheLoadExpectation = expectationWithDescription("Wait for collectionForKeyCalledExpectation to be set")
         cacheDelegate.collectionForKeyCalled = { cacheKey, context, completion in
             XCTAssertEqual(context as? String, "cacheContext")
             XCTAssertEqual(cacheKey, "cacheKey")
             self.cacheRequests += 1
             let initialModels: [Any] = [ParentModel(id: 0)]
-            finishCacheLoad = {
+            collectionForKeyCalledExpectation = {
                 completion(initialModels, nil)
             }
             finishCacheLoadExpectation.fulfill()
@@ -823,10 +823,10 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         // This is only set once we're synced with the cacheKey
         XCTAssertNil(dataProvider.cacheKey)
 
-        if let finishCacheLoad = finishCacheLoad {
-            finishCacheLoad()
+        if let collectionForKeyCalledExpectation = collectionForKeyCalledExpectation {
+            collectionForKeyCalledExpectation()
         } else {
-            XCTFail("finishCacheLoad closure wasn't set. This means we probably have a race condition in this test. The 'Wait for finishCacheLoad to be set' expectation should wait for this to happen.")
+            XCTFail("collectionForKeyCalledExpectation closure wasn't set. This means we probably have a race condition in this test. The 'Wait for collectionForKeyCalledExpectation to be set' expectation should wait for this to happen.")
         }
 
         let expectation = expectationWithDescription("Wait for data provider to call completion")
