@@ -229,6 +229,77 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         waitForExpectationsWithTimeout(10, handler: nil)
     }
 
+    /**
+     If we insert an item into a collection, possibly, other models in the collection should update.
+     So in this test, all the models have a submodel. We insert a new model which has an updated submodel.
+     This submodel should get updated everywhere in this collection.
+     
+     Specifically, we have two models initially. One has a submodel with id 2, the other without an id.
+     We add a new model to the array which has an updated submodel of id 2.
+     We expect the consistency manager to update this row later.
+     */
+    func testInsertUpdatesOtherItemsInCollections() {
+        let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+
+        let initialChildModel = ChildModel(id: 2, name: "initial")
+        let initialModel = ParentModel(id: 1, name: "initial", requiredChild: initialChildModel, otherChildren: [])
+        let otherModel = ParentModel(id: 3, name: "other", requiredChild: ChildModel(), otherChildren: [])
+        let newChild = ChildModel(id: 2, name: "new")
+        let newModel = ParentModel(id: 5, name: "new", requiredChild: newChild, otherChildren: [])
+
+        var delegateCalled = 0
+        let delegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            delegateCalled += 1
+            switch delegateCalled {
+            case 1:
+                XCTAssertEqual(context as? String, "context")
+                XCTAssertEqual(dataProvider[2].name, "new")
+                XCTAssertEqual(collectionChanges.count, 1)
+                XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.insert(index: 2))
+            case 2:
+                XCTAssertEqual(context as? String, "context")
+                XCTAssertEqual(dataProvider[2].name, "new")
+                // Now, the child should be updated
+                XCTAssertEqual(dataProvider[0].requiredChild.name, "new")
+                XCTAssertEqual(collectionChanges.count, 1)
+                XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 0))
+            default:
+                XCTFail()
+            }
+        }
+        dataProvider.delegate = delegate
+
+        var otherDelegateCalled = 0
+        let otherDelegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            otherDelegateCalled += 1
+            XCTAssertEqual(context as? String, "context")
+            XCTAssertEqual(dataProvider[2].name, "new")
+            // Now, the child should be updated
+            XCTAssertEqual(dataProvider[0].requiredChild.name, "new")
+            XCTAssertEqual(collectionChanges.count, 1)
+            XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 0))
+        }
+        otherDataProvider.delegate = otherDelegate
+
+        dataProvider.setData([initialModel, otherModel], cacheKey: "cacheKey", context: "wrong")
+        otherDataProvider.setData([initialModel, otherModel], cacheKey: "cacheKey", context: "wrong")
+        // This shouldn't have caused any delegates to fire because we didn't update any data
+
+        // Now, let's insert the new model
+        // The first data provider should update immediately with this new data
+        otherDataProvider.insert([newModel], at: 2, context: "context")
+
+        // Now, we should wait for the consistency manager to finish.
+        // Item at index 0 in both collections should update with a new child model
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+
+        XCTAssertEqual(delegateCalled, 2)
+        XCTAssertEqual(otherDelegateCalled, 1)
+    }
+
+    // MARK: Append
+
     func testAppendItems() {
         let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         let otherDataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
@@ -296,6 +367,75 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider[2].name, "new")
 
         waitForExpectationsWithTimeout(10, handler: nil)
+    }
+
+    /**
+     If we append an item into a collection, possibly, other models in the collection should update.
+     So in this test, all the models have a submodel. We append a new model which has an updated submodel.
+     This submodel should get updated everywhere in this collection.
+
+     Specifically, we have two models initially. One has a submodel with id 2, the other without an id.
+     We add a new model to the array which has an updated submodel of id 2.
+     We expect the consistency manager to update this row later.
+     */
+    func testAppendUpdatesOtherItemsInCollections() {
+        let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+
+        let initialChildModel = ChildModel(id: 2, name: "initial")
+        let initialModel = ParentModel(id: 1, name: "initial", requiredChild: initialChildModel, otherChildren: [])
+        let otherModel = ParentModel(id: 3, name: "other", requiredChild: ChildModel(), otherChildren: [])
+        let newChild = ChildModel(id: 2, name: "new")
+        let newModel = ParentModel(id: 5, name: "new", requiredChild: newChild, otherChildren: [])
+
+        var delegateCalled = 0
+        let delegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            delegateCalled += 1
+            switch delegateCalled {
+            case 1:
+                XCTAssertEqual(context as? String, "context")
+                XCTAssertEqual(dataProvider[2].name, "new")
+                XCTAssertEqual(collectionChanges.count, 1)
+                XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.insert(index: 2))
+            case 2:
+                XCTAssertEqual(context as? String, "context")
+                XCTAssertEqual(dataProvider[2].name, "new")
+                // Now, the child should be updated
+                XCTAssertEqual(dataProvider[0].requiredChild.name, "new")
+                XCTAssertEqual(collectionChanges.count, 1)
+                XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 0))
+            default:
+                XCTFail()
+            }
+        }
+        dataProvider.delegate = delegate
+
+        var otherDelegateCalled = 0
+        let otherDelegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            otherDelegateCalled += 1
+            XCTAssertEqual(context as? String, "context")
+            XCTAssertEqual(dataProvider[2].name, "new")
+            // Now, the child should be updated
+            XCTAssertEqual(dataProvider[0].requiredChild.name, "new")
+            XCTAssertEqual(collectionChanges.count, 1)
+            XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 0))
+        }
+        otherDataProvider.delegate = otherDelegate
+
+        dataProvider.setData([initialModel, otherModel], cacheKey: "cacheKey", context: "wrong")
+        otherDataProvider.setData([initialModel, otherModel], cacheKey: "cacheKey", context: "wrong")
+        // This shouldn't have caused any delegates to fire because we didn't update any data
+
+        // Now, let's append the new model
+        // The first data provider should update immediately with this new data
+        otherDataProvider.append([newModel], context: "context")
+
+        // Now, we should wait for the consistency manager to finish.
+        // Item at index 0 in both collections should update with a new child model
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+
+        XCTAssertEqual(delegateCalled, 2)
+        XCTAssertEqual(otherDelegateCalled, 1)
     }
 
     // MARK: Update
@@ -403,6 +543,75 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider[2].name, "new")
 
         waitForExpectationsWithTimeout(10, handler: nil)
+    }
+
+    /**
+     If we update an item in a collection, possibly, other models in the collection should also update.
+     So in this test, all the models have a submodel. We update a new model which has an updated submodel.
+     This submodel should get updated everywhere in this collection.
+
+     Specifically, we have two models initially. One has a submodel with id 2, the other without an id.
+     We update the second model with a new model which has an updated submodel of id 2.
+     We expect the consistency manager to update this row later.
+     */
+    func testUpdateUpdatesOtherItemsInCollections() {
+        let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+
+        let initialChildModel = ChildModel(id: 2, name: "initial")
+        let initialModel = ParentModel(id: 1, name: "initial", requiredChild: initialChildModel, otherChildren: [])
+        let otherModel = ParentModel(id: 3, name: "other", requiredChild: ChildModel(), otherChildren: [])
+        let newChild = ChildModel(id: 2, name: "new")
+        let newModel = ParentModel(id: 5, name: "new", requiredChild: newChild, otherChildren: [])
+
+        var delegateCalled = 0
+        let delegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            delegateCalled += 1
+            switch delegateCalled {
+            case 1:
+                XCTAssertEqual(context as? String, "context")
+                XCTAssertEqual(dataProvider[1].name, "new")
+                XCTAssertEqual(collectionChanges.count, 1)
+                XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 1))
+            case 2:
+                XCTAssertEqual(context as? String, "context")
+                XCTAssertEqual(dataProvider[1].name, "new")
+                // Now, the child should be updated
+                XCTAssertEqual(dataProvider[0].requiredChild.name, "new")
+                XCTAssertEqual(collectionChanges.count, 1)
+                XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 0))
+            default:
+                XCTFail()
+            }
+        }
+        dataProvider.delegate = delegate
+
+        var otherDelegateCalled = 0
+        let otherDelegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            otherDelegateCalled += 1
+            XCTAssertEqual(context as? String, "context")
+            XCTAssertEqual(dataProvider[1].name, "new")
+            // Now, the child should be updated
+            XCTAssertEqual(dataProvider[0].requiredChild.name, "new")
+            XCTAssertEqual(collectionChanges.count, 1)
+            XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 0))
+        }
+        otherDataProvider.delegate = otherDelegate
+
+        dataProvider.setData([initialModel, otherModel], cacheKey: "cacheKey", context: "wrong")
+        otherDataProvider.setData([initialModel, otherModel], cacheKey: "cacheKey", context: "wrong")
+        // This shouldn't have caused any delegates to fire because we didn't update any data
+
+        // Now, let's update the new model
+        // The first data provider should update immediately with this new data
+        otherDataProvider.update(newModel, at: 1, context: "context")
+
+        // Now, we should wait for the consistency manager to finish.
+        // Item at index 0 in both collections should update with a new child model
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+
+        XCTAssertEqual(delegateCalled, 2)
+        XCTAssertEqual(otherDelegateCalled, 1)
     }
 
     // MARK: - Delegate tests
