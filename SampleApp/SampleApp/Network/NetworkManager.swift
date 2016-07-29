@@ -88,6 +88,10 @@ class NetworkManager {
         }
     }
 
+    /**
+     A helper function which has a globally unique incrementing id.
+     Normally, we'd get ids from the server, but since we don't have a server, we're going to use this to mock it out.
+     */
     static func nextMessageId() -> Int {
         let key = "com.sampleapp.nextMessageId"
         let nextMessageId = NSUserDefaults.standardUserDefaults().integerForKey(key) + 1

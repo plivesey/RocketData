@@ -16,7 +16,7 @@ class RocketDataCacheDelegate: CacheDelegate {
      This is the underlying cache implementation. We're going to use a PINCache because it's thread safe (so we can avoid using GCD here).
      You should feel free to use any cache you'd like.
      */
-    let cache = PINCache(name: "SampleAppCache")
+    private let cache = PINCache(name: "SampleAppCache")
 
     func modelForKey<T : SimpleModel>(cacheKey: String?, context: Any?, completion: (T?, NSError?) -> ()) {
         guard let cacheKey = cacheKey,

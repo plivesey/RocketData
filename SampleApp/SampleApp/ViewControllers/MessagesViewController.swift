@@ -16,12 +16,12 @@ import RocketData
 class MessagesViewController: UIViewController, CollectionDataProviderDelegate, DataProviderDelegate, UITableViewDataSource, UITableViewDelegate {
 
     /// This data provider is for the other user. We only use this to display the title of the view controller.
-    let userDataProvider = DataProvider<UserModel>()
+    private let userDataProvider = DataProvider<UserModel>()
     /// This data provider is for all the messages in our table view.
-    let dataProvider = CollectionDataProvider<MessageModel>()
+    private let dataProvider = CollectionDataProvider<MessageModel>()
 
     /// This is the cache key we use for the CollectionDataProvider. It's generated based on the other user's id.
-    let cacheKey: String
+    private let cacheKey: String
 
     // MARK: - IBOutlets
 

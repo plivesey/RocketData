@@ -17,9 +17,9 @@ import RocketData
 class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UITableViewDataSource, UITableViewDelegate {
 
     /// The data provider which backs this view controller
-    let dataProvider = CollectionDataProvider<UserModel>()
+    private let dataProvider = CollectionDataProvider<UserModel>()
     /// The cache key for our data provider
-    let cacheKey = CollectionCacheKey.chat.cacheKey()
+    private let cacheKey = CollectionCacheKey.chat.cacheKey()
 
     // MARK: - IBOutlets
 
