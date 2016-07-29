@@ -35,6 +35,8 @@ class RocketDataCacheDelegate: CacheDelegate {
     func setModel<T : SimpleModel>(model: T, forKey cacheKey: String, context: Any?) {
         if let model = model as? SampleAppModel {
             cache.setObject(model.data(), forKey: cacheKey, block: nil)
+        } else {
+            assertionFailure("In our app, we only want to use RocketData with SampleAppModels")
         }
     }
 

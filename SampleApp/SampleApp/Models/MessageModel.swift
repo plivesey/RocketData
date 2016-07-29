@@ -63,5 +63,7 @@ final class MessageModel: SampleAppModel, Equatable {
 }
 
 func ==(lhs: MessageModel, rhs: MessageModel) -> Bool {
-    return lhs.id == rhs.id && lhs.text == rhs.text
+    return lhs.id == rhs.id &&
+        lhs.text == rhs.text &&
+        lhs.sender == rhs.sender
 }
