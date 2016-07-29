@@ -237,7 +237,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
             // First, we want to make sure we update the consistency manager after we've updated all the other data providers so we're in sync.
             // Next, we actually need to do two things:
             // - Update the whole collection. This will actually only affect paused collections because all the other collections were updated above.
-            // - Update all the new models. This will update all the model individually and possibly cause other rows in the current collection to update.
+            // - Update all the new models. This will update all the models individually and possibly cause other rows in the current collection to update.
             updateAndListenToNewModelsInConsistencyManager(context: context)
             // NOTE: No cache key here, because this is just updating all the new models
             let newModelsBatchModel = batchModelFromModels(newData, cacheKey: nil)
