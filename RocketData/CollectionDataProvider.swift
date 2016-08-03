@@ -225,7 +225,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
             if shouldCache, let cacheKey = cacheKey {
                 dataModelManager.cacheCollection(data, forKey: cacheKey, context: context)
             }
-            updateAndListenToNewModelsInConsistencyManager(context: context)
+
             // Update all shared collections
             if let cacheKey = cacheKey {
                 let anyData = newData.map { $0 as Any }
@@ -233,6 +233,15 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
                     provider.insertAny(anyData, at: index, context: context)
                 }
             }
+
+            // First, we want to make sure we update the consistency manager after we've updated all the other data providers so we're in sync.
+            // Next, we actually need to do two things:
+            // - Update the whole collection. This will actually only affect paused collections because all the other collections were updated above.
+            // - Update all the new models. This will update all the models individually and possibly cause other rows in the current collection to update.
+            updateAndListenToNewModelsInConsistencyManager(context: context)
+            // NOTE: No cache key here, because this is just updating all the new models
+            let newModelsBatchModel = batchModelFromModels(newData, cacheKey: nil)
+            dataModelManager.consistencyManager.updateWithNewModel(newModelsBatchModel, context: ConsistencyContextWrapper(context: context))
         }
     }
 
@@ -263,13 +272,20 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
         if shouldCache, let cacheKey = cacheKey {
             self.dataModelManager.cacheCollection(data, forKey: cacheKey, context: context)
         }
-        updateAndListenToNewModelsInConsistencyManager(context: context)
+
         // Update all shared collections
         if let cacheKey = cacheKey {
             dataModelManager.sharedCollectionManager.siblingProvidersForProvider(self, cacheKey: cacheKey).forEach { provider in
                 provider.updateAny(element, at: index, context: context)
             }
         }
+
+        // First, we want to make sure we update the consistency manager after we've updated all the other data providers so we're in sync.
+        // Next, we actually need to do two things:
+        // - Update the whole collection. This will actually only affect paused collections because all the other collections were updated above.
+        // - Update the new model. This will possibly cause other rows in the current collection to update.
+        updateAndListenToNewModelsInConsistencyManager(context: context)
+        dataModelManager.consistencyManager.updateWithNewModel(element, context: ConsistencyContextWrapper(context: context))
     }
 
     /**
@@ -498,12 +514,20 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      Updates an array of models in the consistency manager and relistens to these new models.
      */
     private func updateAndListenToNewModelsInConsistencyManager(context context: Any?, shouldListen: Bool = true) {
-        let consistencyManagerModels = data.map { model in model as ConsistencyManagerModel }
-        let batchModel = BatchUpdateModel(models: consistencyManagerModels, modelIdentifier: cacheKey)
+        let batchModel = batchModelFromModels(data, cacheKey: cacheKey)
         dataModelManager.consistencyManager.updateWithNewModel(batchModel, context: ConsistencyContextWrapper(context: context))
         if shouldListen {
             listenForUpdates(model: batchModel)
         }
+    }
+
+    /**
+     Returns a batch model from an array of models.
+     */
+    private func batchModelFromModels(models: [T], cacheKey: String?) -> BatchUpdateModel {
+        // Need to map to do this cast sadly
+        let consistencyManagerModels = models.map { model in model as ConsistencyManagerModel }
+        return BatchUpdateModel(models: consistencyManagerModels, modelIdentifier: cacheKey)
     }
 
     /**
