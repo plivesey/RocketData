@@ -1,0 +1,6 @@
+framework module RocketData {
+  umbrella header "RocketData-umbrella.h"
+
+  export *
+  module * { export * }
+}

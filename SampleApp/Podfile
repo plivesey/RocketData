@@ -1,0 +1,7 @@
+use_frameworks!
+
+target :SampleApp do
+  pod 'RocketData', :path => '..'
+  pod 'PINCache', :git => 'https://github.com/pinterest/PINCache.git', :commit => '58635e4ff8d00fcd25084259a625c0615e9d071a'
+end
+
