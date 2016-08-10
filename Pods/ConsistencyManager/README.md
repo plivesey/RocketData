@@ -2,6 +2,14 @@
 
 This library provides a way of keeping immutable models consistent. First, listeners listen to an immutable model. Whenever this model (or any child model) is updated, the Consistency Manager will generate a new model and notify its listeners.
 
+## Rocket Data
+
+If you are interested in this project, you may want to consider using Rocket Data which provides a higher level API for the Consistency Manager. It implements caching, collection support, and conflict resolution. It's the recommended way for consuming the Consistency Manager.
+
+GitHub: https://github.com/linkedin/RocketData
+
+Documentation: https://linkedin.github.io/RocketData
+
 ## Installation
 
 ```ruby
@@ -10,7 +18,7 @@ pod 'ConsistencyManager'
 
 ## Motivation
 
-Immutable models have many advantages including thread-safety, performance, and more functional and understandable code. However, many applications need to be able to update their models, and these models are often shared across different screens. The models are also often shared across different screens. Since the models are immutable, you always need to create new models for changes. Then, you need to propagate these changes to all the screens rendering this model. The Consistency Manager provides a pub-sub API and automatically regenerates new models for listeners.
+Immutable models have many advantages including thread-safety, performance, and more functional and understandable code. However, many applications need to be able to update their models, and these models are often shared across different screens. Since the models are immutable, you always need to create new models for changes. Then, you need to propagate these changes to all the screens rendering this model. The Consistency Manager provides a pub-sub API and automatically regenerates new models for listeners.
 
 ## How It Works
 

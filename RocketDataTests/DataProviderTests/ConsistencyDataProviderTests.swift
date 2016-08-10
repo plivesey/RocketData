@@ -199,25 +199,96 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
     // MARK: Timing Tests
 
     func testConsistencyManagerUpdateAfterSetData() {
-        func testDeletingModel() {
-            let dataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let dataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
 
-            // Let's create this before we do the setData. This ensures that this change happened before the setData.
-            let contextWrapper = ConsistencyContextWrapper(context: nil)
+        // Let's create this before we do the setData. This ensures that this change happened before the setData.
+        let contextWrapper = ConsistencyContextWrapper(context: nil)
 
-            let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(), otherChildren: [])
-            let newModel = ParentModel(id: 1, name: "new", requiredChild: ChildModel(), otherChildren: [])
+        let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(), otherChildren: [])
+        let newModel = ParentModel(id: 1, name: "new", requiredChild: ChildModel(), otherChildren: [])
 
-            let delegate = ClosureDataProviderDelegate() { context in
-                XCTFail()
-            }
-            dataProvider.delegate = delegate
-
-            dataProvider.setData(initialModel, updateCache: false, context: "wrong")
-            // This uses a date before the setData, so should be a no-op
-            DataModelManager.sharedDataManagerNoCache.consistencyManager.updateWithNewModel(newModel, context: contextWrapper)
-            
-            waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+        let delegate = ClosureDataProviderDelegate() { context in
+            XCTFail()
         }
+        dataProvider.delegate = delegate
+
+        dataProvider.setData(initialModel, updateCache: false, context: "wrong")
+        // This uses a date before the setData, so should be a no-op
+        DataModelManager.sharedDataManagerNoCache.consistencyManager.updateWithNewModel(newModel, context: contextWrapper)
+
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+    }
+
+    // MARK: Projection Tests
+
+    /**
+     This test is a sanity check that different model projections work.
+     Most of the tests for this feature are in the ConsistencyManager project.
+     It takes two data providers with different versions of the same model.
+     Then, it updates one data provider and expects the other to update as well.
+     */
+    func testDataProviderUpdatesWhenUsingDifferentModelProjection() {
+        let dataProvider = DataProvider<FullChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = DataProvider<ChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+
+        let initialModel = FullChildModel(id: 1, name: "initial", otherData: 42)
+        let newModel = ChildModel(id: 1, name: "new")
+
+        let expectation = expectationWithDescription("Wait for delegate")
+        let delegate = ClosureDataProviderDelegate() { context in
+            XCTAssertEqual(context as? String, "context")
+            XCTAssertEqual(dataProvider.data?.name, "new")
+            XCTAssertEqual(dataProvider.data?.otherData, 42)
+            expectation.fulfill()
+        }
+        dataProvider.delegate = delegate
+        let otherDelegate = ClosureDataProviderDelegate() { context in
+            XCTFail()
+        }
+        otherDataProvider.delegate = otherDelegate
+
+        dataProvider.setData(initialModel, updateCache: false, context: "wrong")
+        otherDataProvider.setData(newModel, updateCache: false, context: "context")
+
+        waitForExpectationsWithTimeout(10, handler: nil)
+    }
+
+    /**
+     This test is a sanity check that different model projections work.
+     Most of the tests for this feature are in the ConsistencyManager project.
+     It takes two data providers with different versions of the same model.
+     It updates one data provider with a new model which doesn't affect the original model in any way.
+     Then does the same thing the other way.
+     */
+    func testDataProviderDoesntUpdateWhenNewModelHasNoChanges() {
+        let dataProvider = DataProvider<ChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = DataProvider<FullChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+
+        let initialModel = ChildModel(id: 1, name: "initial")
+        // No actual change here
+        let newModel = FullChildModel(id: 1, name: "initial", otherData: 42)
+
+        let delegate = ClosureDataProviderDelegate() { context in
+            XCTFail()
+        }
+        dataProvider.delegate = delegate
+        let otherDelegate = ClosureDataProviderDelegate() { context in
+            XCTFail()
+        }
+        otherDataProvider.delegate = otherDelegate
+
+        dataProvider.setData(initialModel, updateCache: false, context: "wrong")
+        otherDataProvider.setData(newModel, updateCache: false, context: "context")
+
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+
+        XCTAssertEqual(dataProvider.data?.name, "initial")
+
+        dataProvider.setData(initialModel, updateCache: false, context: "wrong")
+
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+
+        XCTAssertEqual(otherDataProvider.data?.name, "initial")
+        XCTAssertEqual(otherDataProvider.data?.otherData, 42)
     }
 }

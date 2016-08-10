@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		611323AA1D5BB0070046625E /* FullChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611323A91D5BB0070046625E /* FullChildModel.swift */; };
 		611562DB1CC16B490001F5CE /* CollectionChangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611562DA1CC16B490001F5CE /* CollectionChangeTests.swift */; };
 		6117DDF81CD7A8EB002F57C1 /* BatchDataProviderListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDE51CD7A8EB002F57C1 /* BatchDataProviderListener.swift */; };
 		6117DDFA1CD7A8EB002F57C1 /* CacheDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDE71CD7A8EB002F57C1 /* CacheDelegate.swift */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		566307F55691F221608078D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		611323A91D5BB0070046625E /* FullChildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullChildModel.swift; sourceTree = "<group>"; };
 		611562DA1CC16B490001F5CE /* CollectionChangeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionChangeTests.swift; sourceTree = "<group>"; };
 		6117DDE51CD7A8EB002F57C1 /* BatchDataProviderListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchDataProviderListener.swift; sourceTree = "<group>"; };
 		6117DDE71CD7A8EB002F57C1 /* CacheDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheDelegate.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				61FD70A81C8E1BC800DFAD2E /* ParentModel.swift */,
 				61FD70AA1C8E1BED00DFAD2E /* ChildModel.swift */,
+				611323A91D5BB0070046625E /* FullChildModel.swift */,
 			);
 			path = TestModels;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				61FD70AB1C8E1BED00DFAD2E /* ChildModel.swift in Sources */,
 				611562DB1CC16B490001F5CE /* CollectionChangeTests.swift in Sources */,
 				612B73621C8F9CD2005B12B1 /* ScherzoTestCase.swift in Sources */,
+				611323AA1D5BB0070046625E /* FullChildModel.swift in Sources */,
 				6165455E1CC7E8F600AC68C9 /* CollectionChangeHelpers.swift in Sources */,
 				612AB3E11CCE7C1C0034EADD /* PauseDataProviderTests.swift in Sources */,
 				61FD70A91C8E1BC800DFAD2E /* ParentModel.swift in Sources */,
