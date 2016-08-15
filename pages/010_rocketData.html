@@ -31,7 +31,7 @@
 
   
     <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
-        <link rel="next" title="Requirements" href="020_requirements.html"/>
+        <link rel="next" title="Architecture" href="015_architecture.html"/>
         <link rel="prev" title="Welcome to Rocket Data’s documentation!" href="../index.html"/> 
 
   
@@ -92,6 +92,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="015_architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="020_requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="030_dataProviders.html">Data Providers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="040_setup.html">Setup</a></li>
@@ -100,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="070_networking.html">Networking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="080_updatingModels.html">Updating Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="095_projections.html">Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="100_coreData.html">Core Data Comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="110_threading.html">Threading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
@@ -118,8 +120,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">Rocket Data</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Rocket Data</a>
+        
       </nav>
 
 
@@ -183,7 +187,7 @@
       <span class="n">self</span><span class="p">.</span><span class="n">refreshView</span><span class="p">()</span>
     <span class="p">}</span>
 
-    <span class="c1">// This is your applications NetworkManager</span>
+    <span class="c1">// This is your application&#39;s NetworkManager</span>
     <span class="n">NetworkManager</span><span class="p">.</span><span class="n">fetchMessageWithId</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">message</span><span class="o">:</span> <span class="n">Message</span><span class="o">?</span><span class="p">)</span> <span class="n">in</span>
       <span class="n">self</span><span class="p">.</span><span class="n">dataProvider</span><span class="p">.</span><span class="n">setData</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
       <span class="n">self</span><span class="p">.</span><span class="n">refreshView</span><span class="p">()</span>
@@ -206,7 +210,7 @@
   <span class="n">let</span> <span class="n">dataProvider</span> <span class="o">=</span> <span class="n">CollectionDataProvider</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">()</span>
 
   <span class="n">override</span> <span class="n">func</span> <span class="n">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+    <span class="n">super</span><span class="p">.</span><span class="n">viewDidLoad</span>
 
     <span class="n">dataProvider</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span>
 
@@ -214,7 +218,7 @@
       <span class="n">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
     <span class="p">}</span>
 
-    <span class="c1">// This is your applications NetworkManager</span>
+    <span class="c1">// This is your application&#39;s NetworkManager</span>
     <span class="n">NetworkManager</span><span class="p">.</span><span class="n">fetchContacts</span><span class="p">()</span> <span class="p">{</span> <span class="p">(</span><span class="n">contacts</span><span class="o">:</span> <span class="p">[</span><span class="n">Person</span><span class="p">]</span><span class="o">?</span><span class="p">)</span> <span class="n">in</span>
       <span class="k">if</span> <span class="n">let</span> <span class="n">contacts</span> <span class="o">=</span> <span class="n">contacts</span> <span class="p">{</span>
         <span class="n">self</span><span class="p">.</span><span class="n">dataProvider</span><span class="p">.</span><span class="n">setData</span><span class="p">(</span><span class="n">contacts</span><span class="p">,</span> <span class="n">cacheKey</span><span class="o">:</span> <span class="s">&quot;contacts&quot;</span><span class="p">)</span>
@@ -273,7 +277,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="020_requirements.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="015_architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../index.html" class="btn btn-neutral" title="Welcome to Rocket Data’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

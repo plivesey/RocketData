@@ -32,7 +32,7 @@
   
     <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
         <link rel="next" title="Data Providers" href="030_dataProviders.html"/>
-        <link rel="prev" title="Rocket Data" href="010_rocketData.html"/> 
+        <link rel="prev" title="Architecture" href="015_architecture.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -84,6 +84,7 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="010_rocketData.html">Rocket Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_architecture.html">Architecture</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="030_dataProviders.html">Data Providers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="040_setup.html">Setup</a></li>
@@ -92,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="070_networking.html">Networking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="080_updatingModels.html">Updating Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="095_projections.html">Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="100_coreData.html">Core Data Comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="110_threading.html">Threading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
@@ -110,8 +112,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">Rocket Data</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Rocket Data</a>
+        
       </nav>
 
 
@@ -156,7 +160,7 @@
             
   <div class="section" id="requirements">
 <h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
-<p>Models - Your models must be immutable and thread-safe. They must implement the <tt class="docutils literal"><span class="pre">Model</span></tt> or <tt class="docutils literal"><span class="pre">SimpleModel</span></tt> protocol. See <a class="reference internal" href="050_models.html"><em>Models</em></a> for more information.
+<p>Models - Your models must be immutable and thread-safe. They must implement the <tt class="docutils literal"><span class="pre">`Model</span></tt> or <tt class="docutils literal"><span class="pre">`SimpleModel</span></tt> protocol. See <a class="reference internal" href="050_models.html"><em>Models</em></a> for more information.
 Cache Delegate - You must implement a cache delegate which implements your caching solution. See <a class="reference internal" href="060_cacheDelegate.html"><em>Cache Delegate</em></a> for more information.</p>
 </div>
 
@@ -170,7 +174,7 @@ Cache Delegate - You must implement a cache delegate which implements your cachi
         <a href="030_dataProviders.html" class="btn btn-neutral float-right" title="Data Providers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="010_rocketData.html" class="btn btn-neutral" title="Rocket Data" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="015_architecture.html" class="btn btn-neutral" title="Architecture" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

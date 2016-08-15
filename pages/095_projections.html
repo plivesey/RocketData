@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Future Plans &mdash; Rocket Data 1.0 documentation</title>
+  <title>Projections &mdash; Rocket Data 1.0 documentation</title>
   
 
   
@@ -31,7 +31,8 @@
 
   
     <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
-        <link rel="prev" title="FAQ" href="140_FAQ.html"/> 
+        <link rel="next" title="Core Data Comparison" href="100_coreData.html"/>
+        <link rel="prev" title="Other Features" href="090_otherFeatures.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -92,13 +93,13 @@
 <li class="toctree-l1"><a class="reference internal" href="070_networking.html">Networking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="080_updatingModels.html">Updating Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="090_otherFeatures.html">Other Features</a></li>
-<li class="toctree-l1"><a class="reference internal" href="095_projections.html">Projections</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="100_coreData.html">Core Data Comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="110_threading.html">Threading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="130_immutability.html">A Case for Immutability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="140_FAQ.html">FAQ</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Future Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="150_futurePlans.html">Future Plans</a></li>
 </ul>
 
             
@@ -140,13 +141,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Future Plans</li>
+      <li>Projections</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/pages/150_futurePlans.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/pages/095_projections.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,15 +158,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="future-plans">
-<h1>Future Plans<a class="headerlink" href="#future-plans" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="projections">
+<h1>Projections<a class="headerlink" href="#projections" title="Permalink to this headline">¶</a></h1>
+<p>Usually, IDs must be globally unique. However, you can use the same ID for two different classes if you want to use projections. This feature is advanced and not particularly common.</p>
+<p>For the full docs on this, please see: <a class="reference external" href="https://linkedin.github.io/ConsistencyManager-iOS/pages/055_projections.html">https://linkedin.github.io/ConsistencyManager-iOS/pages/055_projections.html</a>.</p>
+<p>However, there are a few additional things to note:</p>
 <blockquote>
-<div><ul class="simple">
-<li>Adding a listener functionality which allows you to listen for certain changes. For instance, you may want to listen for any new Message model with unread property equal to true that&#8217;s been added. This is similar to using predicates to identify changes which haven&#8217;t even happened yet.</li>
-<li>Adding support for projections. We could allow two models with the same id if they provide a merge function. This could be useful if you want to have two representations of the same model with different fields.</li>
-</ul>
+<div><ol class="arabic simple">
+<li>This feature only works on <tt class="docutils literal"><span class="pre">Model</span></tt> objects (not <tt class="docutils literal"><span class="pre">SimpleModel</span></tt>).</li>
+<li>You should implement <tt class="docutils literal"><span class="pre">mergeModel(model:</span> <span class="pre">Model)</span></tt> instead of <tt class="docutils literal"><span class="pre">mergeModel(model:</span> <span class="pre">ConsistencyManagerModel)</span></tt>.</li>
+<li>Collections that hold different types are not automatically shared. You should not make two collections of different types share the same collection ID. (However, the models contained by collections can have different classes with the same ID. Only the collection IDs must be unique.)</li>
+</ol>
 </div></blockquote>
-<p>For Consistency Manager plans, see <a class="reference external" href="https://linkedin.github.io/ConsistencyManager-iOS/pages/180_futurePlans.html">https://linkedin.github.io/ConsistencyManager-iOS/pages/180_futurePlans.html</a>.</p>
 </div>
 
 
@@ -175,8 +179,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="100_coreData.html" class="btn btn-neutral float-right" title="Core Data Comparison" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="140_FAQ.html" class="btn btn-neutral" title="FAQ" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="090_otherFeatures.html" class="btn btn-neutral" title="Other Features" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

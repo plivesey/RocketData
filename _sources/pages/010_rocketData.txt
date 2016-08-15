@@ -27,7 +27,7 @@ The application has two view controllers. One shows a message from a person. The
         self.refreshView()
       }
 
-      // This is your applications NetworkManager
+      // This is your application's NetworkManager
       NetworkManager.fetchMessageWithId(self.id) { (message: Message?) in
         self.dataProvider.setData(message)
         self.refreshView()
@@ -50,7 +50,7 @@ The application has two view controllers. One shows a message from a person. The
     let dataProvider = CollectionDataProvider<Person>()
 
     override func viewDidLoad() {
-      super.viewDidLoad()
+      super.viewDidLoad
 
       dataProvider.delegate = self
 
@@ -58,7 +58,7 @@ The application has two view controllers. One shows a message from a person. The
         self.tableView.reloadData()
       }
 
-      // This is your applications NetworkManager
+      // This is your application's NetworkManager
       NetworkManager.fetchContacts() { (contacts: [Person]?) in
         if let contacts = contacts {
           self.dataProvider.setData(contacts, cacheKey: "contacts")

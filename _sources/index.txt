@@ -25,6 +25,13 @@ The library is optimized for applications that fetch data from an external sourc
 
 With Rocket Data, you can choose your own caching solution. We recommend a fast key-value store, but you can use any solution that you can imagine. This also makes it easy to add LRU eviction.
 
+Talk on Rocket Data
+-------------------
+
+This talk gives an overview of Rocket Data and some details on how it works.
+
+https://realm.io/news/slug-peter-livesey-managing-consistency-immutable-models/
+
 Consistency Manager
 -------------------
 

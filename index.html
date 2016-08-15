@@ -83,6 +83,7 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pages/010_rocketData.html">Rocket Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/015_architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/020_requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/030_dataProviders.html">Data Providers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/040_setup.html">Setup</a></li>
@@ -91,6 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pages/070_networking.html">Networking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/080_updatingModels.html">Updating Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/095_projections.html">Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/100_coreData.html">Core Data Comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/110_threading.html">Threading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/120_testing.html">Testing</a></li>
@@ -109,8 +111,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="#">Rocket Data</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Rocket Data</a>
+        
       </nav>
 
 
@@ -159,6 +163,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pages/010_rocketData.html">Rocket Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/015_architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/020_requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/030_dataProviders.html">Data Providers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/040_setup.html">Setup</a></li>
@@ -167,6 +172,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pages/070_networking.html">Networking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/080_updatingModels.html">Updating Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/090_otherFeatures.html">Other Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/095_projections.html">Projections</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/100_coreData.html">Core Data Comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/110_threading.html">Threading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages/120_testing.html">Testing</a></li>
@@ -182,6 +188,11 @@
 <p>Rocket Data scales extremely well to large numbers of models and data providers. Since it does nearly all of its work on a background thread, you never need to worry about one change slowing down the whole application. You can also choose to stop listening to changes when a view controller is off screen to further increase performance.</p>
 <p>The library is optimized for applications that fetch data from an external source, display it on the device, and allow the user to perform actions on this data. It implements an easy model for synchronizing this data in memory between view controllers and with the cache.</p>
 <p>With Rocket Data, you can choose your own caching solution. We recommend a fast key-value store, but you can use any solution that you can imagine. This also makes it easy to add LRU eviction.</p>
+<div class="section" id="talk-on-rocket-data">
+<h2>Talk on Rocket Data<a class="headerlink" href="#talk-on-rocket-data" title="Permalink to this headline">¶</a></h2>
+<p>This talk gives an overview of Rocket Data and some details on how it works.</p>
+<p><a class="reference external" href="https://realm.io/news/slug-peter-livesey-managing-consistency-immutable-models/">https://realm.io/news/slug-peter-livesey-managing-consistency-immutable-models/</a></p>
+</div>
 <div class="section" id="consistency-manager">
 <h2>Consistency Manager<a class="headerlink" href="#consistency-manager" title="Permalink to this headline">¶</a></h2>
 <p>Rocket Data uses ConsistencyManager-iOS to manage the in memory consistency of models. While you never need to access the Consistency Manager directly, understanding how it works will help you understand Rocket Data.</p>

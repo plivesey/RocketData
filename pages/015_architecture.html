@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Future Plans &mdash; Rocket Data 1.0 documentation</title>
+  <title>Architecture &mdash; Rocket Data 1.0 documentation</title>
   
 
   
@@ -31,7 +31,8 @@
 
   
     <link rel="top" title="Rocket Data 1.0 documentation" href="../index.html"/>
-        <link rel="prev" title="FAQ" href="140_FAQ.html"/> 
+        <link rel="next" title="Requirements" href="020_requirements.html"/>
+        <link rel="prev" title="Rocket Data" href="010_rocketData.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -83,7 +84,10 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="010_rocketData.html">Rocket Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="015_architecture.html">Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#diagram-elements">Diagram Elements</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="020_requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="030_dataProviders.html">Data Providers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="040_setup.html">Setup</a></li>
@@ -98,7 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="120_testing.html">Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="130_immutability.html">A Case for Immutability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="140_FAQ.html">FAQ</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Future Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="150_futurePlans.html">Future Plans</a></li>
 </ul>
 
             
@@ -140,13 +144,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Future Plans</li>
+      <li>Architecture</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/pages/150_futurePlans.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/pages/015_architecture.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,15 +161,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="future-plans">
-<h1>Future Plans<a class="headerlink" href="#future-plans" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="architecture">
+<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<p>This diagram shows a high level of Rocket Data.</p>
+<img alt="../_images/architecture.png" src="../_images/architecture.png" />
+<div class="section" id="diagram-elements">
+<h2>Diagram Elements<a class="headerlink" href="#diagram-elements" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><ul class="simple">
-<li>Adding a listener functionality which allows you to listen for certain changes. For instance, you may want to listen for any new Message model with unread property equal to true that&#8217;s been added. This is similar to using predicates to identify changes which haven&#8217;t even happened yet.</li>
-<li>Adding support for projections. We could allow two models with the same id if they provide a merge function. This could be useful if you want to have two representations of the same model with different fields.</li>
-</ul>
+<div><ol class="arabic simple">
+<li>View Controller. Application code which mainly talks to <tt class="docutils literal"><span class="pre">DataProviders</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">DataProvider&lt;T&gt;</span></tt>. The main API which view controllers interact with. See <a class="reference internal" href="030_dataProviders.html"><em>Data Providers</em></a></li>
+<li><tt class="docutils literal"><span class="pre">ConsistencyManager</span></tt>. The consistency engine which drives Rocket Data. See <a class="reference external" href="https://linkedin.github.io/ConsistencyManager-iOS/">https://linkedin.github.io/ConsistencyManager-iOS/</a>.</li>
+<li>Rocket Data Model Manager. A light-weight class which coordinates between <tt class="docutils literal"><span class="pre">DataProviders</span></tt> and the cache.</li>
+<li>Cache. The cache implemented by the application. See <a class="reference internal" href="060_cacheDelegate.html"><em>Cache Delegate</em></a>.</li>
+</ol>
 </div></blockquote>
-<p>For Consistency Manager plans, see <a class="reference external" href="https://linkedin.github.io/ConsistencyManager-iOS/pages/180_futurePlans.html">https://linkedin.github.io/ConsistencyManager-iOS/pages/180_futurePlans.html</a>.</p>
+<p>For a more detailed walk-through of this diagram, see our Realm talk:</p>
+<p><a class="reference external" href="https://realm.io/news/slug-peter-livesey-managing-consistency-immutable-models/">https://realm.io/news/slug-peter-livesey-managing-consistency-immutable-models/</a></p>
+</div>
 </div>
 
 
@@ -175,8 +188,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="020_requirements.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="140_FAQ.html" class="btn btn-neutral" title="FAQ" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="010_rocketData.html" class="btn btn-neutral" title="Rocket Data" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
