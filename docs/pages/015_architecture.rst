@@ -5,6 +5,9 @@ This diagram shows a high level of Rocket Data.
 
 .. image:: ../images/architecture.png
 
+Diagram Elements
+----------------
+
 	1. View Controller. Application code which mainly talks to ``DataProviders``.
 	2. ``DataProvider<T>``. The main API which view controllers interact with. See :doc:`030_dataProviders`
 	3. ``ConsistencyManager``. The consistency engine which drives Rocket Data. See https://linkedin.github.io/ConsistencyManager-iOS/.
