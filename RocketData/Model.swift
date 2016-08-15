@@ -68,6 +68,13 @@ public protocol Model: SimpleModel {
      - parameter function: The iterating function to be called on each child element.
      */
     func forEach(visit: Model -> Void)
+
+    /**
+     Optional method. Do not implement this method unless you want to support projections (not common).
+     
+     See the docs for `func mergeModel(model: ConsistencyManagerModel) -> ConsistencyManagerModel` in `ConsistencyManagerModel.swift` for more information on projections and this method.
+     */
+    func mergeModel(model: Model) -> Self
 }
 
 // MARK: - Extensions
@@ -154,6 +161,31 @@ extension Model {
     public func forEach(visit: ConsistencyManagerModel -> Void) {
         forEach { (model: Model) in
             visit(model)
+        }
+    }
+}
+
+/**
+ This extension replaces the ConsistencyManager version of `mergeModel` with the RocketData version (which uses `Model`).
+ It also implements the default version of `mergeModel` which should just return the other model (since it will be the same class).
+ */
+extension Model {
+    public func mergeModel(model: Model) -> Self {
+        // This cast should always succeed.
+        if let model = model as? Self {
+            return model
+        } else {
+            Log.sharedInstance.assert(false, "Two objects with the same ID have difference classes. In most setups, this is not allowed. You should override mergeModel(:) if you want to support projections. See the docs for more information.")
+            return self
+        }
+    }
+
+    public func mergeModel(model: ConsistencyManagerModel) -> ConsistencyManagerModel {
+        if let model = model as? Model {
+            return mergeModel(model)
+        } else {
+            Log.sharedInstance.assert(false, "Model detected that doesn't implement Model. If you want to use projections, all models should implement the Model protocol.")
+            return model
         }
     }
 }

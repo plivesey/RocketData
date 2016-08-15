@@ -40,6 +40,20 @@ final class ChildModel: Model, Equatable {
 
     func forEach(visit: Model -> Void) {
     }
+
+    /**
+     This method allows this model to be merged with FullChildModel.
+     */
+    func mergeModel(model: Model) -> ChildModel {
+        if let model = model as? ChildModel {
+            return model
+        } else if let model = model as? FullChildModel {
+            return ChildModel(id: model.id, name: model.name)
+        } else {
+            assertionFailure("Unable to merge model with this class.")
+            return self
+        }
+    }
 }
 
 func ==(r: ChildModel, l: ChildModel) -> Bool {

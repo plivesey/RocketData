@@ -102,7 +102,7 @@ public class ConsistencyManager {
     /**
      Private queue used for all the real work this library does. It's serial so all the requests to this class are made in order.
      */
-    let dispatchQueue = dispatch_queue_create("com.consistencyManager.internalQueue", DISPATCH_QUEUE_SERIAL)
+    let queue = NSOperationQueue()
 
     /// Small class which listens for memory warnings. When we get a memory warning, we'll purge as much memory as we can.
     private let memoryWarningListener = MemoryWarningListener()
@@ -116,6 +116,11 @@ public class ConsistencyManager {
      Designated initializer.
      */
     public init() {
+        // Make it a serial queue
+        queue.maxConcurrentOperationCount = 1
+        // This seems like a good value for the ConsistencyManager.
+        queue.qualityOfService = .Utility
+        queue.name = "com.consistencyManager.internalQueue"
         memoryWarningListener.delegate = self
         // Doing this in the next tick to give the caller a chance to set garbageCollectionInterval
         dispatch_async(dispatch_get_main_queue()) { 
@@ -150,7 +155,7 @@ public class ConsistencyManager {
      - parameter onModel: the model you want to listen to with this listener
      */
     public func listenForUpdates(listener: ConsistencyManagerListener, onModel model: ConsistencyManagerModel) {
-        dispatch_async(dispatchQueue) {
+        dispatchTask { _ in
             self.addListener(listener, recursivelyToChildModels: model)
         }
     }
@@ -170,7 +175,7 @@ public class ConsistencyManager {
         if let index = self.pausedListeners.indexOf({ listener === $0.listener }) {
             self.pausedListeners.removeAtIndex(index)
         }
-        dispatch_async(dispatchQueue) {
+        dispatchTask { _ in
             for (key, listenerArray) in self.listeners {
                 // Let's map the listener array so that we remove any occurance of the listener
                 var newListeners = listenerArray.map { element in
@@ -242,7 +247,7 @@ public class ConsistencyManager {
             return
         }
 
-        dispatch_async(dispatchQueue) {
+        dispatchTask { _ in
 
             // Here, we are doing three steps to verify model updates.
             // When looking at batch model updates, there may be inconsistencies (such as a model which was both deleted and updated).
@@ -303,10 +308,10 @@ public class ConsistencyManager {
      - parameter context: any context parameter, to be passed on to each listener in the delegate method
     */
     public func updateWithNewModel(model: ConsistencyManagerModel, context: Any? = nil) {
-        dispatch_async(dispatchQueue) {
+        dispatchTask { cancelled in
             let tuple = self.childrenAndListenersForModel(model)
             let optionalModelUpdates = CollectionHelpers.optionalValueDictionaryFromDictionary(tuple.modelUpdates)
-            self.updateListeners(tuple.listeners, withUpdatedModels: optionalModelUpdates, context: context)
+            self.updateListeners(tuple.listeners, withUpdatedModels: optionalModelUpdates, context: context, cancelled: cancelled)
         }
     }
 
@@ -324,7 +329,7 @@ public class ConsistencyManager {
      - parameter context: anything you want to pass to each associated listener via the delegate method upon update
      */
     public func deleteModel(model: ConsistencyManagerModel, context: Any? = nil) {
-        dispatch_async(dispatchQueue) {
+        dispatchTask { cancelled in
             if let id = model.modelIdentifier {
                 // First, let's get all the listeners that care about this id
                 let listenersArray: [ConsistencyManagerListener] = {
@@ -340,8 +345,8 @@ public class ConsistencyManager {
                 }()
 
                 // A simple update dictionary. We're just deleting a model with this id. Nothing else.
-                let updatesDictionary: [String: ConsistencyManagerModel?] = [ id: nil ]
-                self.updateListeners(listenersArray, withUpdatedModels: updatesDictionary, context: context)
+                let updatesDictionary: [String: [ConsistencyManagerModel]?] = [ id: nil ]
+                self.updateListeners(listenersArray, withUpdatedModels: updatesDictionary, context: context, cancelled: cancelled)
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.delegate?.consistencyManager(self, failedWithCriticalError: CriticalError.DeleteIDFailure.rawValue)
@@ -353,12 +358,36 @@ public class ConsistencyManager {
     // MARK: Other
 
     /**
+     This function will clear all current listeners and cancel all pending tasks including any updates.
+
+     This is mainly useful things like running tests when you want to ensure a clean state.
+     The recommended way of removing listeners is to call `removeListener` or dealloc the listener.
+     Due to the unpredictability of cancelling operations, it's possible that updates may occur
+     between calling this method and the completion block being called.
+
+     - parameter completion: Since some of the cleanup is asynchronous, this block is called once the cleanup is complete.
+     Called on the main queue.
+     */
+    public func clearListenersAndCancelAllTasks(completion: (()->Void)?) {
+        pausedListeners.removeAll()
+        queue.cancelAllOperations()
+        dispatchTask { _ in
+            self.listeners.removeAll()
+            // Finally, we should actually wait for the main queue to complete (because we dispatch updates there after checking cancellation)
+            // This also allows us to call the completion on the main queue
+            dispatch_async(dispatch_get_main_queue()) {
+                completion?()
+            }
+        }
+    }
+
+    /**
      This will remove any unnecessary memory held by the consistency manager.
      This is called automatically whenever there is a memory warning, so usually you should not need to ever call this method.
      The class also cleans up memory automatically as it is used, so you shouldn't worry about memory usage.
     */
     public func cleanMemory() {
-        dispatch_async(dispatchQueue) {
+        dispatchTask { _ in
             NSNotificationCenter.defaultCenter().postNotificationName(ConsistencyManager.kCleanMemoryAsynchronousWorkStarted, object: self)
             for (key, var listenersArray) in self.listeners {
                 listenersArray.prune()
@@ -385,10 +414,15 @@ public class ConsistencyManager {
         let garbageCollectionInterval = self.garbageCollectionInterval
         // If garbageCollectionInterval is 0, this means it's disabled.
         if garbageCollectionInterval > 0 {
+            // We're going to use a low priority queue for this timer
+            // We need to use a dispatch queue because NSOperationQueue doesn't support delays
+            let dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)
             // Weak here is necessary, otherwise, we'd have a retain cycle.
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(UInt64(garbageCollectionInterval) * NSEC_PER_SEC)), dispatchQueue) { [weak self] in
+                // Don't need to dispatch here. We'll dispatch in cleanMemory. We never want this to be cancelled.
                 self?.cleanMemory()
                 dispatch_async(dispatch_get_main_queue()) {
+                    // Should dispatch here because garbageCollectionInterval is not thread-safe
                     self?.startGarbageCollection()
                 }
             }
@@ -449,10 +483,12 @@ public class ConsistencyManager {
     /**
      This is a wrapper function to provide a functional API.
      It takes in a model and returns all the models contained in the model (flattened in a dictionary with ID for lookup).
+     The value here is an array of `ConsistencyManagerModel`. This should contain one model of each projection.
+     If the application is not using projections, it will always just contain one model.
      It also has an array of listeners that need to be updated because of this model change.
      */
-    private func childrenAndListenersForModel(model: ConsistencyManagerModel) -> (modelUpdates: [String: ConsistencyManagerModel], listeners: [ConsistencyManagerListener]) {
-        let updates = DictionaryHolder<String, ConsistencyManagerModel>()
+    private func childrenAndListenersForModel(model: ConsistencyManagerModel) -> (modelUpdates: [String: [ConsistencyManagerModel]], listeners: [ConsistencyManagerListener]) {
+        let updates = DictionaryHolder<String, [ConsistencyManagerModel]>()
         let listenersArray = ArrayHolder<ConsistencyManagerListener>()
         childrenAndListenersForModel(model, modelUpdates: updates, listenersArray: listenersArray)
         return (updates.dictionary, listenersArray.array)
@@ -464,10 +500,27 @@ public class ConsistencyManager {
      I tried doing this with inout instead of making it truly functional, but turns out that inout doesn't work very well.
      Changing to inout helped me about 10%, but after changing to a DictionaryHolder and ArrayHolder, performance was improved ~50x.
      */
-    private func childrenAndListenersForModel(model: ConsistencyManagerModel, modelUpdates: DictionaryHolder<String, ConsistencyManagerModel>, listenersArray: ArrayHolder<ConsistencyManagerListener>) {
+    private func childrenAndListenersForModel(model: ConsistencyManagerModel, modelUpdates: DictionaryHolder<String, [ConsistencyManagerModel]>, listenersArray: ArrayHolder<ConsistencyManagerListener>) {
 
         if let id = model.modelIdentifier {
-            modelUpdates.dictionary[id] = model
+            // Here, we want to store a list of all the projections for a model
+            // Normally, this will just be one element as all models with the same id have the same projection
+            // However, if we have multiple versions of the same model, we want to make sure they are all used to merge a new model
+            let projections: [ConsistencyManagerModel]
+            if var currentUpdates = modelUpdates.dictionary[id] {
+                let alreadyContainsProjection = currentUpdates.contains { currentProjection in
+                    return currentProjection.projectionIdentifier == model.projectionIdentifier
+                }
+                // Only add the new projection if we don't already have one
+                if !alreadyContainsProjection {
+                    currentUpdates.append(model)
+                }
+                projections = currentUpdates
+            } else {
+                // If we don't have any models from this ID yet, we should just add the new model
+                projections = [model]
+            }
+            modelUpdates.dictionary[id] = projections
 
             // Here, we're going to take all the listeners to this model and add it to our listeners array
             // We're not going to prune the listeners array because of performance reasons (we want updates to go fast)
@@ -514,7 +567,7 @@ public class ConsistencyManager {
      In the case of this listener being in a paused state, the function updates
      the listener's PausedListener struct accordingly, without notifying the delegate.
      */
-    private func updateListeners(listeners: [ConsistencyManagerListener], withUpdatedModels updatedModels: [String: ConsistencyManagerModel?], context: Any?) {
+    private func updateListeners(listeners: [ConsistencyManagerListener], withUpdatedModels updatedModels: [String: [ConsistencyManagerModel]?], context: Any?, cancelled: ()->Bool) {
 
         var currentModels: [(listener: ConsistencyManagerListener, currentModel: ConsistencyManagerModel?)] = []
 
@@ -550,6 +603,11 @@ public class ConsistencyManager {
             }
         }
 
+        if cancelled() {
+            // Let's cancel this operation.
+            return
+        }
+
         // Again, we're just going to use one dispatch_async.
         // In this block, we're going to return the results to the listener or update our paused listeners.
         dispatch_async(dispatch_get_main_queue()) {
@@ -576,29 +634,37 @@ public class ConsistencyManager {
         }
     }
 
+    // MARK: Model Changes
+
     /**
      This function uses the map functionality of the models to generate a new model given a list of modelUpdates.
      It returns a new model, a list of changes (ModelUpdates) and a list of any new models which were not contained in the old model.
      */
-    private func updatedModelFromOriginalModel(model: ConsistencyManagerModel, updatedModels: [String: ConsistencyManagerModel?], context: Any?) -> (model: ConsistencyManagerModel?, updates: ModelUpdates, newModels: [ConsistencyManagerModel]) {
+    private func updatedModelFromOriginalModel(model: ConsistencyManagerModel, updatedModels: [String: [ConsistencyManagerModel]?], context: Any?) -> (model: ConsistencyManagerModel?, updates: ModelUpdates, newModels: [ConsistencyManagerModel]) {
         if let id = model.modelIdentifier {
             if let replacementModel = updatedModels[id] {
                 // The id matches, so we should replace this model with a different model
                 // Important: replacementModel could actually be nil here. This is because modelUpdates[id] is actually type: ConsistencyManagerModel??.
                 // So, the let statement only unwraps it once. This is a good thing since if it is nil, we want to delete the model.
-                if replacementModel == nil {
+                // At the point, we know that this is an id we care about. Let's see if it's an update or a delete.
+                if let replacementModel = replacementModel {
+                    // It's an update. Let's apply the changes.
+                    let mergedReplacementModel = mergedModelFromModel(model, withUpdates: replacementModel)
+                    if !mergedReplacementModel.isEqualToModel(model) {
+                        // We've found something to replace, and there's actually an update
+                        delegate?.consistencyManager(self, willReplaceModel: model, withModel: mergedReplacementModel, context: context)
+                        // There may be other changed models in the subtree of the model we're replacing. Let's search to see if anything else changed.
+                        var updates = changedSubmodelIdsFromModel(model, modelUpdates: updatedModels)
+                        updates.insert(id)
+                        return (mergedReplacementModel, ModelUpdates(changedModelIds: updates, deletedModelIds: []), [mergedReplacementModel])
+                    } else {
+                        // We've found there's an update here, but there's no actual change. So let's short curcuit here so we don't waste time recursing.
+                        return (model, ModelUpdates(changedModelIds: [], deletedModelIds: []), [])
+                    }
+                } else {
+                    // It was a delete.
                     // nil was an update, so returning it in updates
                     return (nil, ModelUpdates(changedModelIds: [], deletedModelIds: [id]), [])
-                } else if let replacementModel = replacementModel where !replacementModel.isEqualToModel(model) {
-                    // We've found something to replace, and there's actually an update
-                    delegate?.consistencyManager(self, willReplaceModel: model, withModel: replacementModel, context: context)
-                    // There may be other changed models in the subtree of the model we're replacing. Let's search to see if anything else changed.
-                    var updates = changedSubmodelIdsFromModel(model, modelUpdates: updatedModels)
-                    updates.insert(id)
-                    return (replacementModel, ModelUpdates(changedModelIds: updates, deletedModelIds: []), [replacementModel])
-                } else {
-                    // We've found there's an update here, but there's no actual change. So let's short curcuit here so we don't waste time recursing.
-                    return (model, ModelUpdates(changedModelIds: [], deletedModelIds: []), [])
                 }
             }
         }
@@ -642,13 +708,14 @@ public class ConsistencyManager {
      It does not include models which have been deleted.
      It's useful for detecting the full set of updates for an UpdateModel.
      */
-    private func changedSubmodelIdsFromModel(model: ConsistencyManagerModel, modelUpdates: [String: ConsistencyManagerModel?]) -> Set<String> {
+    private func changedSubmodelIdsFromModel(model: ConsistencyManagerModel, modelUpdates: [String: [ConsistencyManagerModel]?]) -> Set<String> {
         var changedModels = Set<String>()
         model.forEach { child in
             if let id = child.modelIdentifier, let update = modelUpdates[id] {
                 // Update is still an optional because the value of model updates is optional
                 // We can ignore deletes because we are only looking for updated models.
-                if let update = update where !update.isEqualToModel(child) {
+                // Here, we should merge and check for equality to see if anything has actually changed.
+                if let update = update where !self.mergedModelFromModel(child, withUpdates: update).isEqualToModel(child) {
                     // There's another update here
                     changedModels.insert(id)
                 }
@@ -657,6 +724,39 @@ public class ConsistencyManager {
             changedModels.unionInPlace(self.changedSubmodelIdsFromModel(child, modelUpdates: modelUpdates))
         }
         return changedModels
+    }
+
+    /**
+     This function takes an original model and a list of updates. It merges each of these models into the original model.
+     If the model is not using projections, then there will be one model in this array and the implementation will just return the new model.
+     */
+    private func mergedModelFromModel(model: ConsistencyManagerModel, withUpdates updates: [ConsistencyManagerModel]) -> ConsistencyManagerModel {
+        // We want to merge each projection into the current model
+        return updates.reduce(model) { current, modelToMerge in
+            return current.mergeModel(modelToMerge)
+        }
+    }
+
+    // MARK: Threading
+
+    /**
+     A helper function which wraps our queue.
+     You can call the closure provided by the block to check if the operation has been cancelled.
+     */
+    private func dispatchTask(task: (()->Bool)->Void) {
+        // In order to get cancelled for an NSBlockOperation, you need to do a weak dance
+        // If this is strong, then the block will hold a reference to itself and cause a retain cycle
+        weak var weakOperation: NSBlockOperation?
+        let operation = NSBlockOperation() {
+            // Create a function which returns true if the block has been cancelled
+            let cancelled = {
+                // Default to true if weakOperation is nil
+                return weakOperation?.cancelled ?? true
+            }
+            task(cancelled)
+        }
+        weakOperation = operation
+        queue.addOperation(operation)
     }
 
     // MARK: - Memory Warnings

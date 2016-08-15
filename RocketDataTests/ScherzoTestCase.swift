@@ -21,9 +21,10 @@ class RocketDataTestCase: XCTestCase {
      */
     func waitForConsistencyManagerToFlush(consistencyManager: ConsistencyManager) {
         var expectation = expectationWithDescription("Wait for consistency manager to complete pending tasks")
-        dispatch_barrier_async(consistencyManager.dispatchQueue) {
+        let operation = NSBlockOperation() {
             expectation.fulfill()
         }
+        consistencyManager.queue.addOperation(operation)
         waitForExpectationsWithTimeout(10, handler: nil)
 
         expectation = expectationWithDescription("Wait for main thread to complete pending tasks")

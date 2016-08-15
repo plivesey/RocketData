@@ -706,4 +706,78 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
             waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
         }
     }
+
+    // MARK: Projection Tests
+
+    /**
+     This test is a sanity check that different model projections work.
+     Most of the tests for this feature are in the ConsistencyManager project.
+     It takes two data providers with different versions of the same model.
+     Then, it updates one data provider and expects the other to update as well.
+     */
+    func testDataProviderUpdatesWhenUsingProjections() {
+        let dataProvider = CollectionDataProvider<FullChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = CollectionDataProvider<ChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+
+        let initialModel = FullChildModel(id: 1, name: "initial", otherData: 42)
+        let newModel = ChildModel(id: 1, name: "new")
+
+        let expectation = expectationWithDescription("Wait for delegate")
+        let delegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            XCTAssertEqual(context as? String, "context")
+            XCTAssertEqual(dataProvider[0].name, "new")
+            XCTAssertEqual(collectionChanges.count, 1)
+            XCTAssertEqual(collectionChanges[0], CollectionChangeInformation.update(index: 0))
+            expectation.fulfill()
+        }
+        dataProvider.delegate = delegate
+        let otherDelegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            XCTFail()
+        }
+        otherDataProvider.delegate = otherDelegate
+
+        dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
+        otherDataProvider.setData([newModel], cacheKey: nil, context: "context")
+
+        waitForExpectationsWithTimeout(10, handler: nil)
+    }
+
+    /**
+     This test is a sanity check that different model projections work.
+     Most of the tests for this feature are in the ConsistencyManager project.
+     It takes two data providers with different versions of the same model.
+     It updates one data provider with a new model which doesn't affect the original model in any way.
+     Then does the same thing the other way.
+     */
+    func testDataProviderDoesntUpdateWhenNewModelHasNoChanges() {
+        let dataProvider = CollectionDataProvider<ChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = CollectionDataProvider<FullChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+
+        let initialModel = ChildModel(id: 1, name: "initial")
+        // No actual change here
+        let newModel = FullChildModel(id: 1, name: "initial", otherData: 42)
+
+        let delegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            XCTFail()
+        }
+        dataProvider.delegate = delegate
+        let otherDelegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            XCTFail()
+        }
+        otherDataProvider.delegate = otherDelegate
+
+        dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
+        otherDataProvider.setData([newModel], cacheKey: nil, context: "context")
+
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+
+        XCTAssertEqual(dataProvider.data[0].name, "initial")
+
+        dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
+
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+
+        XCTAssertEqual(otherDataProvider.data[0].name, "initial")
+        XCTAssertEqual(otherDataProvider.data[0].otherData, 42)
+    }
 }
