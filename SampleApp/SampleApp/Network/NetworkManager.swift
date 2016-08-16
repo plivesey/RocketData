@@ -39,7 +39,11 @@ class NetworkManager {
             // All this is just mocking though
             DataModelManager.sharedInstance.collectionFromCache(CollectionCacheKey.messages(user.id).cacheKey(), context: nil) { (messages: [MessageModel]?, nil) in
                 var messages = messages ?? []
-                let newMessage = MessageModel(id: nextMessageId(), text: "hey", sender: user)
+                // Prefer to use the same user as in the current models if there is one. Otherwise, we'll use the user passed in.
+                let currentUser = messages.indexOf({ (candidate: MessageModel) -> Bool in
+                    return candidate.sender.id == user.id
+                }).flatMap { messages[$0].sender }
+                let newMessage = MessageModel(id: nextMessageId(), text: "hey", sender: currentUser ?? user)
                 messages.append(newMessage)
                 dispatch_async(dispatch_get_main_queue()) {
                     completion(messages, nil)
