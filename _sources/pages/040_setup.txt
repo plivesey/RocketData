@@ -21,7 +21,7 @@ Applications can have multiple DataModelManagers, but in most cases, you'll just
 .. code-block:: c
 
   extension DataModelManager {
-    let sharedInstance = DataModelManager(cacheDelegate: MyCacheDelegate())
+    static let sharedInstance = DataModelManager(cacheDelegate: MyCacheDelegate())
   }
 
 Implement Model or SimpleModel
