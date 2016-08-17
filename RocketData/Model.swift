@@ -73,8 +73,15 @@ public protocol Model: SimpleModel {
      Optional method. Do not implement this method unless you want to support projections (not common).
      
      See the docs for `func mergeModel(model: ConsistencyManagerModel) -> ConsistencyManagerModel` in `ConsistencyManagerModel.swift` for more information on projections and this method.
+     
+     This method should always return Self.
+     However, Swift currently has a bug which doesn't allow this to return Self without needing it to be overridden in every class.
+     See https://bugs.swift.org/browse/SR-2357
+     
+     - parameter model: The model which should be merged into the current model.
+     - Returns: A model of type Self which contains the merged field from model.
      */
-    func mergeModel(model: Model) -> Self
+    func mergeModel(model: Model) -> Model
 }
 
 // MARK: - Extensions
@@ -170,7 +177,7 @@ extension Model {
  It also implements the default version of `mergeModel` which should just return the other model (since it will be the same class).
  */
 extension Model {
-    public func mergeModel(model: Model) -> Self {
+    public func mergeModel(model: Model) -> Model {
         // This cast should always succeed.
         if let model = model as? Self {
             return model
