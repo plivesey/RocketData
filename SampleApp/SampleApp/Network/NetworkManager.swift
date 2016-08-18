@@ -38,10 +38,18 @@ class NetworkManager {
             // This allows the data to grow as it would likely in real life
             // All this is just mocking though
             DataModelManager.sharedInstance.collectionFromCache(CollectionCacheKey.messages(user.id).cacheKey(), context: nil) { (messages: [MessageModel]?, nil) in
-                var messages = messages ?? []
-                let newMessage = MessageModel(id: nextMessageId(), text: "hey", sender: user)
-                messages.append(newMessage)
                 dispatch_async(dispatch_get_main_queue()) {
+                    var messages = messages ?? []
+                    // Some of the messages may have the wrong online status. Since we're simulating a 'server response', let's reset all the users to the correct online status
+                    messages = messages.map { message in
+                        if message.sender.id == user.id {
+                            return MessageModel(id: message.id, text: message.text, sender: user)
+                        } else {
+                            return message
+                        }
+                    }
+                    let newMessage = MessageModel(id: nextMessageId(), text: "hey", sender: user)
+                    messages.append(newMessage)
                     completion(messages, nil)
                 }
             }
