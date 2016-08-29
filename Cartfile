@@ -1,2 +1,3 @@
 
-github "floriankrueger/ConsistencyManager-iOS" "carthage-support"
+github "linkedin/ConsistencyManager-iOS" ~> 2.0.0
+
