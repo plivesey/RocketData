@@ -23,11 +23,23 @@ With Rocket Data, you can choose your own caching solution. We recommend a fast 
 
 ## Installation
 
+Installation via both [CocoaPods](https://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage) is supported.
+
+### CocoaPods
+
 Add this to your Podspec:
-```
+```ruby
 pod 'RocketData'
 ```
 Then run `pod install`.
+
+### Carthage
+
+Add this to your `Cartfile`:
+```ogdl
+github "linkedin/RocketData"
+```
+Then run `carthage update RocketData`
 
 ## Documentation
 
