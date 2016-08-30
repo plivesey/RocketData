@@ -1,3 +1,2 @@
 
-github "linkedin/ConsistencyManager-iOS" ~> 2.0.0
-
+github "linkedin/ConsistencyManager-iOS"
