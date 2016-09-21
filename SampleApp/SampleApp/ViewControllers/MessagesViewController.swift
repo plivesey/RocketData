@@ -16,12 +16,12 @@ import RocketData
 class MessagesViewController: UIViewController, CollectionDataProviderDelegate, DataProviderDelegate, UITableViewDataSource, UITableViewDelegate {
 
     /// This data provider is for the other user. We only use this to display the title of the view controller.
-    private let userDataProvider = DataProvider<UserModel>()
+    fileprivate let userDataProvider = DataProvider<UserModel>()
     /// This data provider is for all the messages in our table view.
-    private let dataProvider = CollectionDataProvider<MessageModel>()
+    fileprivate let dataProvider = CollectionDataProvider<MessageModel>()
 
     /// This is the cache key we use for the CollectionDataProvider. It's generated based on the other user's id.
-    private let cacheKey: String
+    fileprivate let cacheKey: String
 
     // MARK: - IBOutlets
 
@@ -51,7 +51,7 @@ class MessagesViewController: UIViewController, CollectionDataProviderDelegate, 
             title = "Chat with \(user.name)"
         }
 
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
         // We're going to do two things in parallel - access the cache and the network.
         // RocketData ensures there is no race condition here. If the cache returns after the network, the cache result is automatically discarded.
@@ -83,13 +83,13 @@ class MessagesViewController: UIViewController, CollectionDataProviderDelegate, 
 
     // MARK: - TableView
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataProvider.count
     }
 
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         let message = dataProvider[indexPath.row]
         var text = message.sender.name
@@ -103,14 +103,14 @@ class MessagesViewController: UIViewController, CollectionDataProviderDelegate, 
 
     // MARK: - DataProviderDelegates
 
-    func dataProviderHasUpdatedData<T>(dataProvider: DataProvider<T>, context: Any?) {
+    func dataProviderHasUpdatedData<T>(_ dataProvider: DataProvider<T>, context: Any?) {
         // Since we only use this model to set the title, it's the only UI we need to update.
         if let user = userDataProvider.data {
             title = "Chat with \(user.name)"
         }
     }
 
-    func collectionDataProviderHasUpdatedData<T>(dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {
+    func collectionDataProviderHasUpdatedData<T>(_ dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {
         // This will be called whenever one of the models changes. In our case, this happens whenever someone comes online/offline.
         // Optional: Use collectionChanges to do tableview animations
         self.tableView.reloadData()

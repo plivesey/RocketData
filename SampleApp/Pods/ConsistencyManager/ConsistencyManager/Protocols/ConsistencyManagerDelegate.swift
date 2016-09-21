@@ -29,7 +29,7 @@ public protocol ConsistencyManagerDelegate: class {
      - parameter error: An english string describing the error.
      This is useful for logging, but should NOT be shown to the user as it will not be very useful.
      */
-    func consistencyManager(consistencyManager: ConsistencyManager, failedWithCriticalError error: String)
+    func consistencyManager(_ consistencyManager: ConsistencyManager, failedWithCriticalError error: String)
 
     /**
      This is called whenever the consistency manager finds a model which has changed and will replace it.
@@ -43,17 +43,17 @@ public protocol ConsistencyManagerDelegate: class {
      - parameter newModel: The new model which will replace the old model.
      - parameter context: The context passed in to the consistency manager which caused this change.
      */
-    func consistencyManager(consistencyManager: ConsistencyManager, willReplaceModel oldModel: ConsistencyManagerModel, withModel newModel: ConsistencyManagerModel, context: Any?)
+    func consistencyManager(_ consistencyManager: ConsistencyManager, willReplaceModel oldModel: ConsistencyManagerModel, withModel newModel: ConsistencyManagerModel, context: Any?)
 }
 
 // MARK: Optional Methods Extension
 
 public extension ConsistencyManagerDelegate {
-    func consistencyManager(consistencyManager: ConsistencyManager, failedWithCriticalError error: String) {
+    func consistencyManager(_ consistencyManager: ConsistencyManager, failedWithCriticalError error: String) {
         // No implementation. This makes this method optional.
     }
 
-    func consistencyManager(consistencyManager: ConsistencyManager, willReplaceModel oldModel: ConsistencyManagerModel, withModel newModel: ConsistencyManagerModel, context: Any?) {
+    func consistencyManager(_ consistencyManager: ConsistencyManager, willReplaceModel oldModel: ConsistencyManagerModel, withModel newModel: ConsistencyManagerModel, context: Any?) {
         // No implementation. This makes this method optional.
     }
 }

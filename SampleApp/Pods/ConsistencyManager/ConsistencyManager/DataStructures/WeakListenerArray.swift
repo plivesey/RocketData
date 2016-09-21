@@ -15,12 +15,12 @@ import Foundation
 
  https://bugs.swift.org/browse/SR-1176
  */
-public struct WeakListenerArray: ArrayLiteralConvertible {
+public struct WeakListenerArray: ExpressibleByArrayLiteral {
 
     // MARK: Internal
 
     /// The internal data is an array of closures which return weak T's
-    private var data: [() -> ConsistencyManagerListener?]
+    fileprivate var data: [() -> ConsistencyManagerListener?]
 
     // MARK: Initializers
 
@@ -35,9 +35,9 @@ public struct WeakListenerArray: ArrayLiteralConvertible {
      Creates an array with a certain capacity. All elements in the array will be nil.
     */
     public init(count: Int) {
-        data = Array<() -> ConsistencyManagerListener?>(count: count, repeatedValue: {
+        data = Array<() -> ConsistencyManagerListener?>(repeating: {
             return nil
-        })
+        }, count: count)
     }
 
     /**
@@ -62,7 +62,7 @@ public struct WeakListenerArray: ArrayLiteralConvertible {
     /**
      Append an element to the array.
     */
-    public mutating func append(element: ConsistencyManagerListener?) {
+    public mutating func append(_ element: ConsistencyManagerListener?) {
         data.append(weakClosureWithValue(element))
     }
 
@@ -88,7 +88,7 @@ public struct WeakListenerArray: ArrayLiteralConvertible {
         return nonOptionalElements
     }
 
-    public func map(function: ConsistencyManagerListener? -> ConsistencyManagerListener?) -> WeakListenerArray {
+    public func map(_ function: (ConsistencyManagerListener?) -> ConsistencyManagerListener?) -> WeakListenerArray {
         var newArray = WeakListenerArray()
         // TODO: Fix this once apple fixes their bug
         // This currently crashes with EXC_BAD_ACCESS
@@ -105,7 +105,7 @@ public struct WeakListenerArray: ArrayLiteralConvertible {
 
     // MARK: Private Methods
 
-    private func weakClosureWithValue(object: ConsistencyManagerListener?) -> () -> ConsistencyManagerListener? {
+    fileprivate func weakClosureWithValue(_ object: ConsistencyManagerListener?) -> () -> ConsistencyManagerListener? {
         return { [weak object] in
             return object
         }
@@ -114,12 +114,17 @@ public struct WeakListenerArray: ArrayLiteralConvertible {
 
 // MARK: MutableCollectionType Implementation
 
-extension WeakListenerArray: MutableCollectionType {
+extension WeakListenerArray: MutableCollection {
 
     // Required by SequenceType
-    public func generate() -> IndexingGenerator<WeakListenerArray> {
+    public func makeIterator() -> IndexingIterator<WeakListenerArray> {
         // Rather than implement our own generator, let's take advantage of the generator provided by IndexingGenerator
-        return IndexingGenerator<WeakListenerArray>(self)
+        return IndexingIterator<WeakListenerArray>(_elements: self)
+    }
+    
+    // Required by _CollectionType
+    public func index(after i: Int) -> Int {
+        return i + 1
     }
 
     // Required by _CollectionType

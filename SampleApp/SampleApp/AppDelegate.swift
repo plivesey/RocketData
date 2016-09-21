@@ -14,8 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
 
         let chatsViewController = ChatsViewController()
         let navigationController = UINavigationController(rootViewController: chatsViewController)
@@ -30,14 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func pushNotificationReceivedWithUpdatedUser(user: UserModel) {
+    func pushNotificationReceivedWithUpdatedUser(_ user: UserModel) {
         // This simulates what happens if we get a push notification which makes a user come online or goes offline
         // This probably isn't where this code should be, but it shows how you could handle this type of event
 
         DataModelManager.sharedInstance.updateModel(user)
     }
 
-    func pushNotificationReceivedWithNewMessage(message: MessageModel) {
+    func pushNotificationReceivedWithNewMessage(_ message: MessageModel) {
         // We use the sender id as the collection id
         let collectionCacheKey = CollectionCacheKey.messages(message.sender.id)
         // We can use this class method to update all collection data providers with this cache key

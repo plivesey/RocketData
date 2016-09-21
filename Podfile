@@ -10,13 +10,13 @@ target :'RocketDataTests' do
   pod 'ConsistencyManager', '~> 3.0.0'
 end
 
-# This is necessary to convert the target to swift 2.3
+# This is necessary to convert the target to swift 3.0
 # This isn't detected automatically by cocoapods or supported in the podspec
 # We can remove this once Cocoapods has a better solution
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '2.3'
+            config.build_settings['SWIFT_VERSION'] = '3.0'
         end
     end
 end

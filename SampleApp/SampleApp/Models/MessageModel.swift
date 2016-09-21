@@ -22,11 +22,11 @@ final class MessageModel: SampleAppModel, Equatable {
 
     // MARK: - SampleAppModel
 
-    required init?(data: [NSObject : AnyObject]) {
+    required init?(data: [AnyHashable: Any]) {
         guard let id = data["id"] as? Int,
             let text = data["text"] as? String,
-            let senderData = data["sender"] as? [NSObject: AnyObject],
-            let sender = UserModel(data: senderData) else {
+            let senderData = data["sender"] as? [AnyHashable: Any],
+            let sender = UserModel(data: senderData as [AnyHashable: Any]) else {
                 return nil
         }
         self.id = id
@@ -34,7 +34,7 @@ final class MessageModel: SampleAppModel, Equatable {
         self.sender = sender
     }
 
-    func data() -> [NSObject : AnyObject] {
+    func data() -> [AnyHashable: Any] {
         return [
             "id": id,
             "text": text,
@@ -49,7 +49,7 @@ final class MessageModel: SampleAppModel, Equatable {
         return "MessageModel:\(id)"
     }
 
-    func map(transform: Model -> Model?) -> MessageModel? {
+    func map(_ transform: (Model) -> Model?) -> MessageModel? {
         guard let newSender = transform(sender) as? UserModel else {
             // If transform returns nil, we should cascade this delete
             return nil
@@ -57,7 +57,7 @@ final class MessageModel: SampleAppModel, Equatable {
         return MessageModel(id: id, text: text, sender: newSender)
     }
 
-    func forEach(visit: Model -> Void) {
+    func forEach(_ visit: (Model) -> Void) {
         visit(sender)
     }
 }

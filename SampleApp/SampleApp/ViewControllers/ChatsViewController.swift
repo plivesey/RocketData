@@ -17,9 +17,9 @@ import RocketData
 class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UITableViewDataSource, UITableViewDelegate {
 
     /// The data provider which backs this view controller
-    private let dataProvider = CollectionDataProvider<UserModel>()
+    fileprivate let dataProvider = CollectionDataProvider<UserModel>()
     /// The cache key for our data provider
-    private let cacheKey = CollectionCacheKey.chat.cacheKey()
+    fileprivate let cacheKey = CollectionCacheKey.chat.cacheKey()
 
     // MARK: - IBOutlets
 
@@ -41,7 +41,7 @@ class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UIT
 
         title = "Hey Chat App"
 
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
         // In parallel, we're going to fetch from the cache and fetch from the network
         // There's no chance of a race condition here, because it's handled by RocketData
@@ -59,12 +59,12 @@ class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UIT
 
     // MARK: - TableView
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataProvider.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         // You can use subscript notation to access models from the CollectionDataProvider
         let user = dataProvider[indexPath.row]
         var text = user.name
@@ -75,16 +75,16 @@ class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UIT
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = dataProvider[indexPath.row]
         let messagesViewController = MessagesViewController(otherUser: user)
         navigationController?.pushViewController(messagesViewController, animated: true)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     // MARK: - CollectionDataProviderDelegate
 
-    func collectionDataProviderHasUpdatedData<T>(dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {
+    func collectionDataProviderHasUpdatedData<T>(_ dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {
         // This will be called whenever one of the models changes. In our case, this happens whenever someone comes online/offline.
         // Optional: Use collectionChanges to do tableview animations
         self.tableView.reloadData()
