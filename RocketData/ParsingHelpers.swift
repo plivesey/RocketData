@@ -12,7 +12,7 @@ import Foundation
 /**
  This class defines a bunch of helpers for parsing models. They are paticularly useful when implementing the CacheDelegate.
  */
-public class ParsingHelpers {
+open class ParsingHelpers {
     /**
      This function is useful when trying to parse a generic type T into a specific class.
      For instance, let's say you have to return a type T, but you know that it must be a subtype of MyModelClass.
@@ -30,7 +30,7 @@ public class ParsingHelpers {
      
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    public static func parseModel<T, U>(parseBlock: U.Type -> U?) -> (T?, NSError?) {
+    open static func parseModel<T, U>(_ parseBlock: (U.Type) -> U?) -> (T?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model) as? T
             return (model, nil)
@@ -60,7 +60,7 @@ public class ParsingHelpers {
 
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    public static func parseModel<T, U>(parseBlock: U.Type -> (U?, NSError?)) -> (T?, NSError?) {
+    open static func parseModel<T, U>(_ parseBlock: (U.Type) -> (U?, NSError?)) -> (T?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             return (model.0 as? T, model.1)
@@ -88,7 +88,7 @@ public class ParsingHelpers {
 
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    public static func parseCollection<T, U>(parseBlock: U.Type -> [U]?) -> ([T]?, NSError?) {
+    open static func parseCollection<T, U>(_ parseBlock: (U.Type) -> [U]?) -> ([T]?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             // Though this is a flat map, this should never fail since T is a subtype of U
@@ -120,7 +120,7 @@ public class ParsingHelpers {
 
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    public static func parseCollection<T, U>(parseBlock: U.Type -> ([U]?, NSError?)) -> ([T]?, NSError?) {
+    open static func parseCollection<T, U>(_ parseBlock: (U.Type) -> ([U]?, NSError?)) -> ([T]?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             // Though this is a flat map, this should never fail since T is a subtype of U

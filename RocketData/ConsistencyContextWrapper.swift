@@ -26,7 +26,7 @@ class ConsistencyContextWrapper {
     /**
      This function converts from the context given by the consistency manager to the context the user of this library expects to be returned.
      */
-    class func actualContextFromConsistencyManagerContext(context: Any?) -> Any? {
+    class func actualContextFromConsistencyManagerContext(_ context: Any?) -> Any? {
         if let context = context as? ConsistencyContextWrapper {
             return context.context
         } else {

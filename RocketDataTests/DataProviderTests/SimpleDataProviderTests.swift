@@ -26,7 +26,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
         let cache = ExpectCacheDelegate()
         let dataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager(cacheDelegate: cache))
 
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         cache.setModelCalled = { model, cacheKey, context in
             XCTAssertTrue(model is ParentModel)
             XCTAssertEqual((model as? ParentModel)?.id, 1)
@@ -38,7 +38,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
         let model = ParentModel(id: 1)
         dataProvider.setData(model, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testSetDataNoCaching() {
@@ -62,14 +62,14 @@ class SimpleDataProviderTests: RocketDataTestCase {
             completion(model, nil)
         }
 
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         dataProvider.fetchDataFromCache(cacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
             XCTAssertEqual(model?.id, 1)
             XCTAssertNil(error)
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
     }
@@ -86,14 +86,14 @@ class SimpleDataProviderTests: RocketDataTestCase {
             completion(nil, expectedError)
         }
 
-        let expectation = expectationWithDescription("")
+        let expectation = self.expectation(description: "")
         dataProvider.fetchDataFromCache(cacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
             XCTAssertNil(model)
             XCTAssertTrue(error === expectedError)
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertNil(dataProvider.data)
     }
@@ -112,20 +112,20 @@ class SimpleDataProviderTests: RocketDataTestCase {
             completion(model, nil)
         }
 
-        var expectation = expectationWithDescription("waitForCache1")
+        var expectation = self.expectation(description: "waitForCache1")
         dataProvider.fetchDataFromCache(cacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
             XCTAssertEqual(model?.id, 1)
             XCTAssertNil(error)
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 1)
 
         // Now, let's load from the cache again. This should effectively be a no-op
-        expectation = expectationWithDescription("waitForCache2")
+        expectation = self.expectation(description: "waitForCache2")
         dataProvider.fetchDataFromCache(cacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
             // We still expect to get success back
             XCTAssertEqual(model?.id, 1)
@@ -133,7 +133,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         // Even though we called fetch again, it shouldn't have actually hit the cache
@@ -150,14 +150,14 @@ class SimpleDataProviderTests: RocketDataTestCase {
             completion(nil, NSError(domain: "", code: 0, userInfo: nil))
         }
 
-        var expectation = expectationWithDescription("waitForCache1")
+        var expectation = self.expectation(description: "waitForCache1")
         dataProvider.fetchDataFromCache(cacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
             XCTAssertNil(model)
             XCTAssertNotNil(error)
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertNil(dataProvider.data)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 1)
@@ -171,14 +171,14 @@ class SimpleDataProviderTests: RocketDataTestCase {
         }
 
         // Now, let's load from the cache again. This should actually hit the cache again since we failed first time.
-        expectation = expectationWithDescription("waitForCache2")
+        expectation = self.expectation(description: "waitForCache2")
         dataProvider.fetchDataFromCache(cacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
             XCTAssertEqual(model?.id, 1)
             XCTAssertNil(error)
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 2)
@@ -202,7 +202,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 0)
 
         // Now, let's load from the cache again. This should effectively be a no-op
-        let expectation = expectationWithDescription("waitForCache")
+        let expectation = self.expectation(description: "waitForCache")
         dataProvider.fetchDataFromCache(cacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
             // We still expect to get success back
             XCTAssertEqual(model?.id, 1)
@@ -210,7 +210,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         // We should never have hit the cache
@@ -231,7 +231,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
 
         // Let's load from the cache with a nil cacheKey
         // We should still fetch using the context
-        let expectation = expectationWithDescription("waitForCache")
+        let expectation = self.expectation(description: "waitForCache")
         dataProvider.fetchDataFromCache(cacheKey: nil, context: "context") { (model, error) -> () in
             // We still expect to get success back
             XCTAssertEqual(model?.id, 1)
@@ -239,7 +239,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(dataProvider.data?.id, 1)
         XCTAssertEqual(dataModelManager.modelFromCacheCalled, 1)
@@ -250,12 +250,12 @@ class SimpleDataProviderTests: RocketDataTestCase {
         var cacheModelCalled = 0
         var modelFromCacheCalled = 0
 
-        override func cacheModel<T : SimpleModel>(model: T, forKey cacheKey: String, context: Any?) {
+        override func cacheModel<T : SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
             cacheModelCalled += 1
             super.cacheModel(model, forKey: cacheKey, context: context)
         }
 
-        override func modelFromCache<T : SimpleModel>(cacheKey: String?, context: Any?, completion: (T?, NSError?) -> ()) {
+        override func modelFromCache<T : SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping (T?, NSError?) -> ()) {
             modelFromCacheCalled += 1
             super.modelFromCache(cacheKey, context: context, completion: completion)
         }

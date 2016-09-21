@@ -24,23 +24,23 @@ import ConsistencyManager
  In general, you probably don't need to worry about this; it's just recommended you don't try to batch listen on every data provider in your app.
  The intended use case is when you have a view controller which has multiple data providers and wants to update in just one place.
  */
-public class BatchDataProviderListener: BatchListenerDelegate {
+open class BatchDataProviderListener: BatchListenerDelegate {
 
     /// You must assign a delegate if you want a callback when one of the data providers gets updated
-    public weak var delegate: BatchDataProviderListenerDelegate?
+    open weak var delegate: BatchDataProviderListenerDelegate?
 
     /// The consistency manager which is backed by this instance
-    public let consistencyManager: ConsistencyManager
+    open let consistencyManager: ConsistencyManager
 
     /// This is the batch listener from the consistency manager which contains most of the logic for doing batch listening
-    private let batchListener: BatchListener
+    fileprivate let batchListener: BatchListener
 
     /**
      Determines whether the listener is notified when data changes.
      When the the listener is paused, the data providers' data will not change unless setData is called on them directly.
      Changes that happen while the batch listener is paused will be queued and applied when the batch listener is unpaused.
      */
-    public var paused: Bool {
+    open var paused: Bool {
         get {
             return consistencyManager.isPaused(batchListener)
         }
@@ -63,7 +63,7 @@ public class BatchDataProviderListener: BatchListenerDelegate {
      - parameter dataProvider: The data providers you want to batch listen on. Should be a DataProvider or a CollectionDataProvider.
      - parameter dataModelManager: The DataModelManager which you are using to back these data providers.
      */
-    public init(dataProviders: [protocol<ConsistencyManagerListener, BatchListenable>], dataModelManager: DataModelManager) {
+    public init(dataProviders: [ConsistencyManagerListener & BatchListenable], dataModelManager: DataModelManager) {
         let listeners = dataProviders.map { $0 as ConsistencyManagerListener }
         batchListener = BatchListener(listeners: listeners, consistencyManager: dataModelManager.consistencyManager)
         consistencyManager = dataModelManager.consistencyManager
@@ -81,14 +81,14 @@ public class BatchDataProviderListener: BatchListenerDelegate {
     /**
      Data providers need to call this method whenever their model is manually changed.
      */
-    func listenerHasUpdatedModel(listener: ConsistencyManagerListener) {
+    func listenerHasUpdatedModel(_ listener: ConsistencyManagerListener) {
         batchListener.listenerHasUpdatedModel(listener, consistencyManager: consistencyManager)
     }
 
     /**
      Data providers can call this whenever their model is changed if they want to specify a specific model which has changed.
      */
-    func listenerHasUpdatedModel(model: ConsistencyManagerModel) {
+    func listenerHasUpdatedModel(_ model: ConsistencyManagerModel) {
         batchListener.listenerHasUpdatedModel(model, consistencyManager: consistencyManager)
     }
 
@@ -96,7 +96,7 @@ public class BatchDataProviderListener: BatchListenerDelegate {
      This is the batch listener delegate method. It is only public because it's a requirement of the class.
      You should never call this directly.
      */
-    public func batchListener(batchListener: BatchListener, hasUpdatedListeners listeners: [ConsistencyManagerListener], updates: ModelUpdates, context: Any?) {
+    open func batchListener(_ batchListener: BatchListener, hasUpdatedListeners listeners: [ConsistencyManagerListener], updates: ModelUpdates, context: Any?) {
         // Some data providers may have ignored the change because it's out of date
         // We'll exlude these from the updated list
         let listeners = listeners.filter { listener in
@@ -124,7 +124,7 @@ public protocol BatchDataProviderListenerDelegate: class {
      - parameter dataProviders: A list of data providers which have been updated.
      - parameter context: The context associated with this change.
      */
-    func batchDataProviderListener(batchListener: BatchDataProviderListener, hasUpdatedDataProviders dataProviders: [ConsistencyManagerListener], context: Any?)
+    func batchDataProviderListener(_ batchListener: BatchDataProviderListener, hasUpdatedDataProviders dataProviders: [ConsistencyManagerListener], context: Any?)
 }
 
 public protocol BatchListenable: class {
@@ -134,7 +134,7 @@ public protocol BatchListenable: class {
      Returns true if the data provider actually updated to the current context.
      If the data provider ignored this change, the it will return false.
      */
-    func syncedWithContext(context: Any?) -> Bool
+    func syncedWithContext(_ context: Any?) -> Bool
     /**
      Called when a BatchDataProviderListener unpauses and before the consistency manager is notified.
      */

@@ -15,11 +15,11 @@ class ClosureDataProviderDelegate: DataProviderDelegate {
 
     let modelUpdated: (Any?)->()
 
-    init(modelUpdated: (Any?)->()) {
+    init(modelUpdated: @escaping (Any?)->()) {
         self.modelUpdated = modelUpdated
     }
 
-    func dataProviderHasUpdatedData<T>(dataProvider: DataProvider<T>, context: Any?) {
+    func dataProviderHasUpdatedData<T>(_ dataProvider: DataProvider<T>, context: Any?) {
         modelUpdated(context)
     }
 }
@@ -28,11 +28,11 @@ class ClosureCollectionDataProviderDelegate: CollectionDataProviderDelegate {
 
     let collectionUpdated: (CollectionChange, Any?)->()
 
-    init(collectionUpdated: (CollectionChange, Any?)->()) {
+    init(collectionUpdated: @escaping (CollectionChange, Any?)->()) {
         self.collectionUpdated = collectionUpdated
     }
 
-    func collectionDataProviderHasUpdatedData<T>(dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {
+    func collectionDataProviderHasUpdatedData<T>(_ dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?) {
         collectionUpdated(collectionChanges, context)
     }
 }
@@ -41,11 +41,11 @@ class ClosureBatchListenerDelegate: BatchDataProviderListenerDelegate {
 
     let listenersUpdated: ([ConsistencyManagerListener], Any?)->()
 
-    init(listenersUpdated: ([ConsistencyManagerListener], Any?)->()) {
+    init(listenersUpdated: @escaping ([ConsistencyManagerListener], Any?)->()) {
         self.listenersUpdated = listenersUpdated
     }
 
-    func batchDataProviderListener(batchListener: BatchDataProviderListener, hasUpdatedDataProviders dataProviders: [ConsistencyManagerListener], context: Any?) {
+    func batchDataProviderListener(_ batchListener: BatchDataProviderListener, hasUpdatedDataProviders dataProviders: [ConsistencyManagerListener], context: Any?) {
         listenersUpdated(dataProviders, context)
     }
 }

@@ -15,12 +15,12 @@ import Foundation
 
  https://bugs.swift.org/browse/SR-1176
  */
-struct WeakSharedCollectionArray: ArrayLiteralConvertible {
+struct WeakSharedCollectionArray: ExpressibleByArrayLiteral {
 
     // MARK: Internal
 
     /// The internal data is an array of closures which return weak T's
-    private var data: [() -> SharedCollection?]
+    fileprivate var data: [() -> SharedCollection?]
 
     // MARK: Initializers
 
@@ -35,9 +35,9 @@ struct WeakSharedCollectionArray: ArrayLiteralConvertible {
      Creates an array with a certain capacity. All elements in the array will be nil.
      */
     init(count: Int) {
-        data = Array<() -> SharedCollection?>(count: count, repeatedValue: {
+        data = Array<() -> SharedCollection?>(repeating: {
             return nil
-        })
+        }, count: count)
     }
 
     /**
@@ -53,7 +53,7 @@ struct WeakSharedCollectionArray: ArrayLiteralConvertible {
     /**
      Private initializer which allows init with data.
      */
-    private init(data: [() -> SharedCollection?]) {
+    fileprivate init(data: [() -> SharedCollection?]) {
         self.data = data
     }
 
@@ -67,7 +67,7 @@ struct WeakSharedCollectionArray: ArrayLiteralConvertible {
     /**
     Append an element to the array.
     */
-    mutating func append(element: SharedCollection?) {
+    mutating func append(_ element: SharedCollection?) {
         data.append(weakClosureWithValue(element))
     }
 
@@ -93,7 +93,7 @@ struct WeakSharedCollectionArray: ArrayLiteralConvertible {
         return nonOptionalElements
     }
 
-    func map(function: SharedCollection? -> SharedCollection?) -> WeakSharedCollectionArray {
+    func map(_ function: (SharedCollection?) -> SharedCollection?) -> WeakSharedCollectionArray {
         var newArray = WeakSharedCollectionArray()
         // TODO: Fix this once apple fixes their bug
         // This currently crashes with EXC_BAD_ACCESS
@@ -112,7 +112,7 @@ struct WeakSharedCollectionArray: ArrayLiteralConvertible {
      Iterates over the collection with an include element closure.
      It will remove any elements that return false.
      */
-    func filter(@noescape includeElement: (SharedCollection?) -> Bool) -> WeakSharedCollectionArray {
+    func filter(_ includeElement: (SharedCollection?) -> Bool) -> WeakSharedCollectionArray {
         let newData = data.filter { closure in
             return includeElement(closure())
         }
@@ -121,7 +121,7 @@ struct WeakSharedCollectionArray: ArrayLiteralConvertible {
 
     // MARK: Private Methods
 
-    private func weakClosureWithValue(object: SharedCollection?) -> () -> SharedCollection? {
+    fileprivate func weakClosureWithValue(_ object: SharedCollection?) -> () -> SharedCollection? {
         return { [weak object] in
             return object
         }
@@ -130,12 +130,17 @@ struct WeakSharedCollectionArray: ArrayLiteralConvertible {
 
 // MARK: MutableCollectionType Implementation
 
-extension WeakSharedCollectionArray: MutableCollectionType {
+extension WeakSharedCollectionArray: MutableCollection {
 
     // Required by SequenceType
-    func generate() -> IndexingGenerator<WeakSharedCollectionArray> {
+    public func makeIterator() -> IndexingIterator<WeakSharedCollectionArray> {
         // Rather than implement our own generator, let's take advantage of the generator provided by IndexingGenerator
-        return IndexingGenerator<WeakSharedCollectionArray>(self)
+        return IndexingIterator<WeakSharedCollectionArray>(_elements: self)
+    }
+
+    // Required by _CollectionType
+    public func index(after i: Int) -> Int {
+        return i + 1
     }
 
     // Required by _CollectionType

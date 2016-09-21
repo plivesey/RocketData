@@ -21,7 +21,7 @@ class SmallSimpleModel: SimpleModel {
         return nil
     }
 
-    func isEqualToModel(model: SimpleModel) -> Bool {
+    func isEqualToModel(_ model: SimpleModel) -> Bool {
         return true
     }
 }
@@ -31,15 +31,15 @@ class SmallModel: Model {
         return nil
     }
 
-    func isEqualToModel(model: Model) -> Bool {
+    func isEqualToModel(_ model: Model) -> Bool {
         return true
     }
 
-    func map(transform: Model -> Model?) -> Self? {
+    func map(_ transform: (Model) -> Model?) -> Self? {
         return self
     }
 
-    func forEach(visit: Model -> Void) {
+    func forEach(_ visit: (Model) -> Void) {
     }
 }
 

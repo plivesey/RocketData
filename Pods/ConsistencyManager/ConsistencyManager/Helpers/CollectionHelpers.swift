@@ -13,7 +13,7 @@ class CollectionHelpers {
     /**
      This function essentially does a cast, but this cast isn't allowed in swift so we have to manually create a new dictionary.
      */
-    class func optionalValueDictionaryFromDictionary<A, B>(dictionary: [A: B]) -> [A: B?] {
+    class func optionalValueDictionaryFromDictionary<A, B>(_ dictionary: [A: B]) -> [A: B?] {
         var newDictionary = [A: B?]()
         for (key, value) in dictionary {
             newDictionary[key] = value

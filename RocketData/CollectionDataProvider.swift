@@ -13,12 +13,12 @@ import ConsistencyManager
 /**
  This class implements a data provider for a collection (array) of data. Each individual model will be kept consistent with other models in the system.
 */
-public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListenable {
+open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListenable {
 
     // MARK: - Public instance variables
 
     /// The data for this data provider
-    public var data: [T] {
+    open var data: [T] {
         get {
             return dataHolder.data
         }
@@ -28,25 +28,25 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      Returns the number of elements in the collection.
      Convenience method: equivalent to collectionDataProvider.data.count
      */
-    public var count: Int {
+    open var count: Int {
         return data.count
     }
 
     /// Delegate which is notified of changes to the data.
-    public weak var delegate: CollectionDataProviderDelegate?
+    open weak var delegate: CollectionDataProviderDelegate?
 
     /// The cache key which backs this collection. If nil, the collection will not be cached.
-    public private(set) var cacheKey: String? {
+    open fileprivate(set) var cacheKey: String? {
         didSet {
             dataModelManager.sharedCollectionManager.updateProvider(self, cacheKey: cacheKey, previousCacheKey: oldValue)
         }
     }
 
     /// The DataModelManager which backs this data provider.
-    public let dataModelManager: DataModelManager
+    open let dataModelManager: DataModelManager
 
     /// This saves the batchListener instance. It is public because it implements the BatchListenable protocol. You should never edit this directly.
-    public weak var batchListener: BatchDataProviderListener?
+    open weak var batchListener: BatchDataProviderListener?
 
     /**
      You can set this variable to pause and unpause listening for changes to data.
@@ -61,7 +61,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      Since changes can come from multiple places in different orders, it's very difficult to guarantee these will be in the correct order.
      So, for unpausing, if we do not know what to use, we will simply use `.reset`.
      */
-    public var paused: Bool {
+    open var paused: Bool {
         get {
             if let batchListener = batchListener {
                 return batchListener.paused
@@ -110,7 +110,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      Getter for models in the collection. If the index is out of bounds, it will return an error.
      Convenience method: equivalent to collectionDataProvider.data[index]
      */
-    public subscript(index: Int) -> T {
+    open subscript(index: Int) -> T {
         get {
             return data[index]
         }
@@ -128,7 +128,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      This is useful to pass on additional information you want to associate with this model such as alternate cache keys (e.g. URL), associated data, or
      anything else you want.
      */
-    public func setData(data: [T], cacheKey: String?, shouldCache: Bool = true, context: Any? = nil) {
+    open func setData(_ data: [T], cacheKey: String?, shouldCache: Bool = true, context: Any? = nil) {
         self.dataHolder.setData(data, changeTime: ChangeTime())
         self.cacheKey = cacheKey
         if shouldCache, let cacheKey = cacheKey {
@@ -156,7 +156,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter completion: Called on the main thread. This is called with the result from the cache.
      At this point, the data provider will already have new data, so there's no need to call setData.
     */
-    public func fetchDataFromCache(cacheKey cacheKey: String?, context: Any? = nil, completion: ([T]?, NSError?)->()) {
+    open func fetchDataFromCache(cacheKey: String?, context: Any? = nil, completion: @escaping ([T]?, NSError?)->()) {
 
         guard cacheKey != self.cacheKey else {
             // If the cacheKey is the same as what we currently have, there's no point in fetching again from the cache
@@ -216,10 +216,10 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter shouldCache: If false, we will not persist this to the cache.
      - parameter context: This context will be passed onto the cache delegate. Default nil.
     */
-    public func insert(newData: [T], at index: Int, shouldCache: Bool = true, context: Any? = nil) {
+    open func insert(_ newData: [T], at index: Int, shouldCache: Bool = true, context: Any? = nil) {
         if newData.count > 0 {
             var updatedData = data
-            updatedData.insertContentsOf(newData, at: index)
+            updatedData.insert(contentsOf: newData, at: index)
             dataHolder.setData(updatedData, changeTime: ChangeTime())
 
             if shouldCache, let cacheKey = cacheKey {
@@ -252,7 +252,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter shouldCache: If false, we will not persist this to the cache.
      - parameter context: Default nil. This context will be passed onto the cache delegate.
      */
-    public func append(newData: [T], shouldCache: Bool = true, context: Any? = nil) {
+    open func append(_ newData: [T], shouldCache: Bool = true, context: Any? = nil) {
         insert(newData, at: data.count, shouldCache: shouldCache, context: context)
     }
 
@@ -264,7 +264,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter shouldCache: If false, we will not persist this to the cache.
      - parameter context: This context will be passed onto the cache delegate. Default nil.
      */
-    public func update(element: T, at index: Int, shouldCache: Bool = true, context: Any? = nil) {
+    open func update(_ element: T, at index: Int, shouldCache: Bool = true, context: Any? = nil) {
         var updatedData = data
         updatedData[index] = element
         dataHolder.setData(updatedData, changeTime: ChangeTime())
@@ -295,9 +295,9 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter shouldCache: If false, we will not persist this to the cache.
      - parameter context: This context will be passed onto the cache delegate. Default nil.
      */
-    public func removeAtIndex(index: Int, shouldCache: Bool = true, context: Any? = nil) {
+    open func removeAtIndex(_ index: Int, shouldCache: Bool = true, context: Any? = nil) {
         var updatedData = data
-        updatedData.removeAtIndex(index)
+        updatedData.remove(at: index)
         dataHolder.setData(updatedData, changeTime: ChangeTime())
 
         if shouldCache, let cacheKey = cacheKey {
@@ -327,7 +327,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
     - parameter dataModelManager: The data model manager to associate with this change.
     - parameter context: This context will be passed onto the cache delegate. Default nil.
     */
-    public static func setData(data: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil) {
+    open static func setData(_ data: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.setData(data, cacheKey: cacheKey, context: context)
     }
@@ -347,7 +347,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    public static func insert(newData: [T], at index: ([T]->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: (NSError?->())? = nil) {
+    open static func insert(_ newData: [T], at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
@@ -370,7 +370,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    public static func append(newData: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: (NSError?->())? = nil) {
+    open static func append(_ newData: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
             collectionDataProvider.append(newData, context: context)
@@ -393,7 +393,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    public static func update(element: T, at index: ([T]->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: (NSError?->())? = nil) {
+    open static func update(_ element: T, at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
@@ -417,7 +417,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    public static func removeAtIndex(index: ([T]->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: (NSError?->())? = nil) {
+    open static func removeAtIndex(_ index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
@@ -429,11 +429,11 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
 
     // MARK: Batch Listenable
 
-    public func batchDataProviderUnpausedDataProvider() {
+    open func batchDataProviderUnpausedDataProvider() {
         syncWithSiblingDataProviders()
     }
 
-    public func syncedWithContext(context: Any?) -> Bool {
+    open func syncedWithContext(_ context: Any?) -> Bool {
         if let context = context as? ConsistencyContextWrapper {
             return lastUpdated == context.creationDate
         }
@@ -443,12 +443,12 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
 
     // MARK: Consistency Manager Listener
 
-    public func currentModel() -> ConsistencyManagerModel? {
+    open func currentModel() -> ConsistencyManagerModel? {
         // We will listen to a batch model with all of our submodels
         return BatchUpdateModel(models: data.map { model in model as ConsistencyManagerModel }, modelIdentifier: cacheKey)
     }
 
-    public func modelUpdated(model: ConsistencyManagerModel?, updates: ModelUpdates, context: Any?) {
+    open func modelUpdated(_ model: ConsistencyManagerModel?, updates: ModelUpdates, context: Any?) {
         guard let model = model as? BatchUpdateModel else {
             Log.sharedInstance.assert(false, "CollectionDataProvider got called with the wrong model type. This should never happen.")
             return
@@ -479,7 +479,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
         // Here we are:
         // Enumerating the array so we get indexes
         // Then, reversing the array so that deletes can be applied in order (if you mutate the array while iterating over changes, you should do this in reverse order)
-        let collectionChangesInformation = data.enumerate().reverse().flatMap { (index, element) in
+        let collectionChangesInformation = data.enumerated().reversed().flatMap { (index, element) in
             return element.modelIdentifier.flatMap { (identifier) -> CollectionChangeInformation? in
                 if updates.deletedModelIds.contains(identifier) {
                     return .delete(index: index)
@@ -513,7 +513,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
     /**
      Updates an array of models in the consistency manager and relistens to these new models.
      */
-    private func updateAndListenToNewModelsInConsistencyManager(context context: Any?, shouldListen: Bool = true) {
+    fileprivate func updateAndListenToNewModelsInConsistencyManager(context: Any?, shouldListen: Bool = true) {
         let batchModel = batchModelFromModels(data, cacheKey: cacheKey)
         dataModelManager.consistencyManager.updateWithNewModel(batchModel, context: ConsistencyContextWrapper(context: context))
         if shouldListen {
@@ -524,7 +524,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
     /**
      Returns a batch model from an array of models.
      */
-    private func batchModelFromModels(models: [T], cacheKey: String?) -> BatchUpdateModel {
+    fileprivate func batchModelFromModels(_ models: [T], cacheKey: String?) -> BatchUpdateModel {
         // Need to map to do this cast sadly
         let consistencyManagerModels = models.map { model in model as ConsistencyManagerModel }
         return BatchUpdateModel(models: consistencyManagerModels, modelIdentifier: cacheKey)
@@ -534,7 +534,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      This function takes data from sibling data providers and sets it the current provider. This updates our data to the latest if possible.
      Called whenever the listener is unpaused.
      */
-    private func syncWithSiblingDataProviders() {
+    fileprivate func syncWithSiblingDataProviders() {
         var updatedData = false
         // We should immediately set our data to the data of shared collections if possible.
         // We need to do this before we resume listening with the consistency manager.
@@ -560,7 +560,7 @@ public class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener,
      This is marked as internal so SharedCollectionManager can access this.
      - parameter model: A specific model you want to listen to. If nil, it will listen to the entire model.
      */
-    func listenForUpdates(model model: ConsistencyManagerModel? = nil) {
+    func listenForUpdates(model: ConsistencyManagerModel? = nil) {
         if let batchListener = batchListener {
             if let model = model {
                 batchListener.listenerHasUpdatedModel(model)
@@ -595,5 +595,5 @@ public protocol CollectionDataProviderDelegate: class {
      You can use this information to run animations on your data or only update certain rows of the view.
      - parameter context: Whenever you make a change to a model, you can pass in a context. This context will be passed back to you here.
      */
-    func collectionDataProviderHasUpdatedData<T>(dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?)
+    func collectionDataProviderHasUpdatedData<T>(_ dataProvider: CollectionDataProvider<T>, collectionChanges: CollectionChange, context: Any?)
 }

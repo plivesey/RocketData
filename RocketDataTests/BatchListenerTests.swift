@@ -32,7 +32,7 @@ class BatchListenerTests: RocketDataTestCase {
         dataProvider.setData(model)
         collectionDataProvider.setData(models, cacheKey: nil)
 
-        let expectation = expectationWithDescription("waitForBatchUpdate")
+        let expectation = self.expectation(description: "waitForBatchUpdate")
         let batchDelegate = ClosureBatchListenerDelegate() { listeners, context in
             XCTAssertEqual(listeners.count, 1)
             XCTAssertTrue(listeners[0] === collectionDataProvider)
@@ -67,7 +67,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         XCTAssertEqual(calledCollectionDelegate, 1)
     }
@@ -91,7 +91,7 @@ class BatchListenerTests: RocketDataTestCase {
         dataProvider.setData(model)
         collectionDataProvider.setData(models, cacheKey: nil)
 
-        let expectation = expectationWithDescription("waitForBatchUpdate")
+        let expectation = self.expectation(description: "waitForBatchUpdate")
         let batchDelegate = ClosureBatchListenerDelegate() { listeners, context in
             XCTAssertEqual(listeners.count, 2)
             XCTAssertTrue(listeners.contains { $0 === collectionDataProvider })
@@ -129,7 +129,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
         XCTAssertEqual(calledDelegate, 1)
@@ -159,7 +159,7 @@ class BatchListenerTests: RocketDataTestCase {
         dataProvider.setData(model)
         collectionDataProvider.setData(models, cacheKey: nil)
 
-        let expectation = expectationWithDescription("waitForBatchUpdate")
+        let expectation = self.expectation(description: "waitForBatchUpdate")
         let batchDelegate = ClosureBatchListenerDelegate() { listeners, context in
             XCTAssertEqual(listeners.count, 2)
             XCTAssertTrue(listeners.contains { $0 === collectionDataProvider })
@@ -199,7 +199,7 @@ class BatchListenerTests: RocketDataTestCase {
 
         DataModelManager.sharedDataManagerNoCache.updateModels([firstUpdatedModel, secondUpdatedModel], updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
         XCTAssertEqual(calledDelegate, 1)
@@ -229,7 +229,7 @@ class BatchListenerTests: RocketDataTestCase {
         collectionDataProvider1.setData(initialModels1, cacheKey: nil)
         collectionDataProvider2.setData(initialModels2, cacheKey: nil)
 
-        let expectation = expectationWithDescription("waitForBatchUpdate")
+        let expectation = self.expectation(description: "waitForBatchUpdate")
         let batchDelegate = ClosureBatchListenerDelegate() { listeners, context in
             XCTAssertEqual(listeners.count, 1)
             XCTAssertTrue(listeners[0] === collectionDataProvider1)
@@ -263,7 +263,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
     }
@@ -289,7 +289,7 @@ class BatchListenerTests: RocketDataTestCase {
         collectionDataProvider1.setData(initialModels1, cacheKey: nil)
         collectionDataProvider2.setData(initialModels2, cacheKey: nil)
 
-        let expectation = expectationWithDescription("waitForBatchUpdate")
+        let expectation = self.expectation(description: "waitForBatchUpdate")
         let batchDelegate = ClosureBatchListenerDelegate() { listeners, context in
             XCTAssertEqual(listeners.count, 1)
             XCTAssertTrue(listeners[0] === collectionDataProvider1)
@@ -323,7 +323,7 @@ class BatchListenerTests: RocketDataTestCase {
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(updatedModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         
         XCTAssertEqual(calledCollectionDelegate, 1)
     }

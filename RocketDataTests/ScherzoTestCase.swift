@@ -19,36 +19,36 @@ class RocketDataTestCase: XCTestCase {
     /**
      This function waits for a consistency manager to complete all current operations.
      */
-    func waitForConsistencyManagerToFlush(consistencyManager: ConsistencyManager) {
-        var expectation = expectationWithDescription("Wait for consistency manager to complete pending tasks")
-        let operation = NSBlockOperation() {
+    func waitForConsistencyManagerToFlush(_ consistencyManager: ConsistencyManager) {
+        var expectation = self.expectation(description: "Wait for consistency manager to complete pending tasks")
+        let operation = BlockOperation() {
             expectation.fulfill()
         }
         consistencyManager.queue.addOperation(operation)
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
-        expectation = expectationWithDescription("Wait for main thread to complete pending tasks")
-        dispatch_barrier_async(dispatch_get_main_queue()) {
+        expectation = self.expectation(description: "Wait for main thread to complete pending tasks")
+        DispatchQueue.main.async(flags: .barrier, execute: {
             expectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        }) 
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     /**
      This function waits for the cache to complete all operations.
      */
-    func waitForCacheToFinish(dataModelManager: DataModelManager) {
-        var expectation = expectationWithDescription("Wait for consistency manager to complete pending tasks")
-        dispatch_barrier_async(dataModelManager.externalDispatchQueue) {
+    func waitForCacheToFinish(_ dataModelManager: DataModelManager) {
+        var expectation = self.expectation(description: "Wait for consistency manager to complete pending tasks")
+        (dataModelManager.externalDispatchQueue).async(flags: .barrier, execute: {
             expectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        }) 
+        waitForExpectations(timeout: 10, handler: nil)
 
-        expectation = expectationWithDescription("Wait for main thread to complete pending tasks")
-        dispatch_barrier_async(dispatch_get_main_queue()) {
+        expectation = self.expectation(description: "Wait for main thread to complete pending tasks")
+        DispatchQueue.main.async(flags: .barrier, execute: {
             expectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        }) 
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
 }

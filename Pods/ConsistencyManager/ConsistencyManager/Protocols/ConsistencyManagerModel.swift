@@ -130,7 +130,7 @@ public protocol ConsistencyManagerModel {
      - parameter transform: The mapping function
      - Returns: A new version of self with the map function applied
      */
-    func map(transform: (ConsistencyManagerModel) -> ConsistencyManagerModel?) -> ConsistencyManagerModel?
+    func map(_ transform: (ConsistencyManagerModel) -> ConsistencyManagerModel?) -> ConsistencyManagerModel?
 
     /**
      This function should simply iterate over all the child models and run the function passed in.
@@ -156,7 +156,7 @@ public protocol ConsistencyManagerModel {
 
      - parameter visit: The iterating function to be called on each child element.
      */
-    func forEach(visit: (ConsistencyManagerModel) -> Void)
+    func forEach(_ visit: (ConsistencyManagerModel) -> Void)
 
     /**
      This function should compare one model to another model.
@@ -175,7 +175,7 @@ public protocol ConsistencyManagerModel {
      - parameter other: The other model to compare to.
      - Returns: True if the models are equal and we should not generate a consistency manager change.
      */
-    func isEqualToModel(other: ConsistencyManagerModel) -> Bool
+    func isEqualToModel(_ other: ConsistencyManagerModel) -> Bool
 
     // MARK: Projections
 
@@ -198,7 +198,7 @@ public protocol ConsistencyManagerModel {
      - parameter model: The other model to merge into the current model.
      - Returns: A new version of the current model with the changes from the other model.
      */
-    func mergeModel(model: ConsistencyManagerModel) -> ConsistencyManagerModel
+    func mergeModel(_ model: ConsistencyManagerModel) -> ConsistencyManagerModel
 
     /**
      You can override to distinguish different projections. Usually, you would have a different class for each projection.
@@ -215,7 +215,7 @@ public extension ConsistencyManagerModel where Self: Equatable {
      This is a default implementation for isEqualToModel for models which are equatable.
      This can be overridden in subclasses if you don't want this default behavior.
      */
-    public func isEqualToModel(other: ConsistencyManagerModel) -> Bool {
+    public func isEqualToModel(_ other: ConsistencyManagerModel) -> Bool {
         if let other = other as? Self {
             return self == other
         } else {
@@ -228,17 +228,17 @@ public extension ConsistencyManagerModel where Self: Equatable {
  This extension contains the default implementations which make `mergeModel(:)` and `projectionIdentifier` optional.
  */
 public extension ConsistencyManagerModel {
-    func mergeModel(model: ConsistencyManagerModel) -> ConsistencyManagerModel {
+    func mergeModel(_ model: ConsistencyManagerModel) -> ConsistencyManagerModel {
         // Usually, we don't need to merge and instead just return the other model.
         // This is because when we're not using projections, classes of the same id will always be of the same type.
         // So, we should just replace the current model with the updated model.
-        // TODO: Should we assert that the classes are the same here?
+        assert(type(of: self) == type(of: model), "Two models of different classes have the same ID. This is not allowed without override mergeModel(:). See the documentation for more information on projections. Current Model: \(type(of: self)) - Update Model: \(type(of: model))")
         return model
     }
 
     var projectionIdentifier: String {
         // Returns the class name as a string
         // This means each class type identifies a different projection
-        return String(self.dynamicType)
+        return String(describing: type(of: self))
     }
 }

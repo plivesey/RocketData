@@ -21,12 +21,12 @@ import Foundation
 */
 
 // Here I want to do this: WeakArray<T: class>, but that doesn't work. So this is a decent work around.
-public struct WeakArray<T: AnyObject>: ArrayLiteralConvertible {
+public struct WeakArray<T: AnyObject>: ExpressibleByArrayLiteral {
 
     // MARK: Internal
 
     /// The internal data is an array of closures which return weak T's
-    private var data: [() -> T?]
+    fileprivate var data: [() -> T?]
 
     // MARK: Initializers
 
@@ -41,9 +41,9 @@ public struct WeakArray<T: AnyObject>: ArrayLiteralConvertible {
      Creates an array with a certain capacity. All elements in the array will be nil.
     */
     public init(count: Int) {
-        data = Array<() -> T?>(count: count, repeatedValue: {
+        data = Array<() -> T?>(repeating: {
             return nil
-        })
+        }, count: count)
     }
 
     /**
@@ -68,7 +68,7 @@ public struct WeakArray<T: AnyObject>: ArrayLiteralConvertible {
     /**
      Append an element to the array.
     */
-    public mutating func append(element: T?) {
+    public mutating func append(_ element: T?) {
         data.append(weakClosureWithValue(element))
     }
 
@@ -97,7 +97,7 @@ public struct WeakArray<T: AnyObject>: ArrayLiteralConvertible {
     /**
      This function is similar to the map function on Array. It takes a function that maps T to U and returns a WeakArray of the same length with this function applied to each element.
     */
-    public func map<U>(function: T? -> U?) -> WeakArray<U> {
+    public func map<U>(_ function: (T?) -> U?) -> WeakArray<U> {
         var newArray = WeakArray<U>()
         for value in self {
             let newValue = function(value)
@@ -108,7 +108,7 @@ public struct WeakArray<T: AnyObject>: ArrayLiteralConvertible {
 
     // MARK: Private Methods
 
-    private func weakClosureWithValue(object: T?) -> () -> T? {
+    fileprivate func weakClosureWithValue(_ object: T?) -> () -> T? {
         return { [weak object] in
             return object
         }
@@ -117,14 +117,19 @@ public struct WeakArray<T: AnyObject>: ArrayLiteralConvertible {
 
 // MARK: MutableCollectionType Implementation
 
-extension WeakArray: MutableCollectionType {
+extension WeakArray: MutableCollection {
 
     // Required by SequenceType
-    public func generate() -> IndexingGenerator<WeakArray<T>> {
+    public func makeIterator() -> IndexingIterator<WeakArray<T>> {
         // Rather than implement our own generator, let's take advantage of the generator provided by IndexingGenerator
-        return IndexingGenerator<WeakArray<T>>(self)
+        return IndexingIterator<WeakArray<T>>(_elements: self)
     }
 
+    // Required by _CollectionType
+    public func index(after i: Int) -> Int {
+        return i + 1
+    }
+    
     // Required by _CollectionType
     public var endIndex: Int {
         return self.count

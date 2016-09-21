@@ -34,7 +34,7 @@ public protocol CacheDelegate {
      - parameter context: A context you can pass in when fetching from the cache.
      - parameter completion: A completion block to call when you have fetched a model. You may call this on any thread and should only call it once.
     */
-    func modelForKey<T: SimpleModel>(cacheKey: String?, context: Any?, completion: (T?, NSError?)->())
+    func modelForKey<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping (T?, NSError?)->())
 
     /**
      In this method, you should save a model in the cache.
@@ -44,7 +44,7 @@ public protocol CacheDelegate {
      - parameter cacheKey: The cache key for this model. This is always equal to the modelIdentifier.
      - parameter context: A context you can pass in when saving to the cache.
      */
-    func setModel<T: SimpleModel>(model: T, forKey cacheKey: String, context: Any?)
+    func setModel<T: SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?)
 
     /**
      Given a cache key, you should retrieve a collection of type [T].
@@ -61,7 +61,7 @@ public protocol CacheDelegate {
      - parameter context: A context you can pass in when fetching from the cache.
      - parameter completion: A completion block to call when you have fetched the models. You may call this on any thread and should only call it once.
      */
-    func collectionForKey<T: SimpleModel>(cacheKey: String?, context: Any?, completion: ([T]?, NSError?)->())
+    func collectionForKey<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping ([T]?, NSError?)->())
 
     /**
      In this method, you should save a collection of models in the cache.
@@ -71,7 +71,7 @@ public protocol CacheDelegate {
      - parameter cacheKey: The cache key for this model.
      - parameter context: A context you can pass in when saving to the cache.
      */
-    func setCollection<T: SimpleModel>(collection: [T], forKey cacheKey: String, context: Any?)
+    func setCollection<T: SimpleModel>(_ collection: [T], forKey cacheKey: String, context: Any?)
 
     /**
      Called when delete is called from the DataModelManager.
@@ -81,5 +81,5 @@ public protocol CacheDelegate {
      - parameter cacheKey: The modelIdentifier of the model.
      - parameter context: A context you can pass in when deleting.
      */
-    func deleteModel(model: SimpleModel, forKey cacheKey: String?, context: Any?)
+    func deleteModel(_ model: SimpleModel, forKey cacheKey: String?, context: Any?)
 }

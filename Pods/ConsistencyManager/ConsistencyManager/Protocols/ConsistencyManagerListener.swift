@@ -40,5 +40,5 @@ public protocol ConsistencyManagerListener: class {
      - parameter updates: An update model which contains all the changes beteween the current model and the new model.
      - parameter context: This passes back the context which was passed to the consistency manager when the update occurred.
      */
-    func modelUpdated(model: ConsistencyManagerModel?, updates: ModelUpdates, context: Any?)
+    func modelUpdated(_ model: ConsistencyManagerModel?, updates: ModelUpdates, context: Any?)
 }

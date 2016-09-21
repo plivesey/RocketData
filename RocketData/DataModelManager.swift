@@ -27,18 +27,18 @@ import ConsistencyManager
 
  All the methods in this class are thread safe.
  */
-public class DataModelManager {
+open class DataModelManager {
 
     /// Cache Delegate. This is strongly retained since it is required by the library.
-    public let cacheDelegate: CacheDelegate
+    open let cacheDelegate: CacheDelegate
 
     /// Consistency Manager.
-    public let consistencyManager = ConsistencyManager()
+    open let consistencyManager = ConsistencyManager()
 
     let sharedCollectionManager = SharedCollectionManager()
 
     /// A queue for doing external requests. This means that if the app blocks on a delegate method for too long, the library and app won't be slowed down.
-    let externalDispatchQueue = dispatch_queue_create("com.rocketData.externalDispatchQueue", DISPATCH_QUEUE_CONCURRENT)
+    let externalDispatchQueue = DispatchQueue(label: "com.rocketData.externalDispatchQueue", attributes: DispatchQueue.Attributes.concurrent)
 
     public init(cacheDelegate: CacheDelegate) {
         self.cacheDelegate = cacheDelegate
@@ -52,7 +52,7 @@ public class DataModelManager {
      - parameter updateCache: You can pass in false here if you only want to update the models in memory.
      - parameter context: This context will be passed back to data provider delegates if this causes an update.
      */
-    public func updateModel<T: SimpleModel>(model: T, updateCache: Bool = true, context: Any? = nil) {
+    open func updateModel<T: SimpleModel>(_ model: T, updateCache: Bool = true, context: Any? = nil) {
         consistencyManager.updateWithNewModel(model, context: ConsistencyContextWrapper(context: context))
         if updateCache, let cacheKey = model.modelIdentifier {
             cacheModel(model, forKey: cacheKey, context: context)
@@ -68,11 +68,11 @@ public class DataModelManager {
      - parameter updateCache: You can pass in false here if you only want to update the models in memory.
      - parameter context: This context will be passed back to data provider delegates if this causes an update.
      */
-    public func updateModels<T: SimpleModel>(models: [T], updateCache: Bool = true, context: Any? = nil) {
+    open func updateModels<T: SimpleModel>(_ models: [T], updateCache: Bool = true, context: Any? = nil) {
         let batchModel = BatchUpdateModel(models: models.map { $0 as ConsistencyManagerModel })
         consistencyManager.updateWithNewModel(batchModel, context: ConsistencyContextWrapper(context: context))
         if updateCache {
-            dispatch_async(externalDispatchQueue) {
+            externalDispatchQueue.async {
                 models.forEach { model in
                     if let cacheKey = model.modelIdentifier {
                         self.cacheDelegate.setModel(model, forKey: cacheKey, context: context)
@@ -91,14 +91,14 @@ public class DataModelManager {
      - parameter updateCache: If false, the cache will not be updated.
      - parameter context: The context to pass to the updated data providers and the cache delegate.
      */
-    public func deleteModel(model: SimpleModel, updateCache: Bool = true, context: Any? = nil) {
+    open func deleteModel(_ model: SimpleModel, updateCache: Bool = true, context: Any? = nil) {
         let modelIdentifier = model.modelIdentifier
         if modelIdentifier != nil {
             // This will be a no-op if you try to delete something without an id
             consistencyManager.deleteModel(model, context: ConsistencyContextWrapper(context: context))
         }
         if updateCache {
-            dispatch_async(externalDispatchQueue) {
+            (externalDispatchQueue).async {
                 self.cacheDelegate.deleteModel(model, forKey: modelIdentifier, context: context)
             }
         }
@@ -108,8 +108,8 @@ public class DataModelManager {
      Save a model in the cache. This simply forwards the method to the cache delegate.
      The cache key you pass in here should be equal to the modelIdentifier of the model.
      */
-    public func cacheModel<T: SimpleModel>(model: T, forKey cacheKey: String, context: Any?) {
-        dispatch_async(externalDispatchQueue) {
+    open func cacheModel<T: SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
+        externalDispatchQueue.async {
             self.cacheDelegate.setModel(model, forKey: cacheKey, context: context)
         }
     }
@@ -117,10 +117,10 @@ public class DataModelManager {
     /**
      Get a model from the cache. This simply forwards the method to the cache delegate.
      */
-    public func modelFromCache<T: SimpleModel>(cacheKey: String?, context: Any?, completion: (T?, NSError?)->()) {
-        dispatch_async(externalDispatchQueue) {
+    open func modelFromCache<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping (T?, NSError?)->()) {
+        externalDispatchQueue.async {
             self.cacheDelegate.modelForKey(cacheKey, context: context) { (model: T?, error) in
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     completion(model, error)
                 }
             }
@@ -130,8 +130,8 @@ public class DataModelManager {
     /**
      Save a collection model in the cache. This simply forwards the method to the cache delegate.
      */
-    public func cacheCollection<T: SimpleModel>(collection: [T], forKey cacheKey: String, context: Any?) {
-        dispatch_async(externalDispatchQueue) {
+    open func cacheCollection<T: SimpleModel>(_ collection: [T], forKey cacheKey: String, context: Any?) {
+        externalDispatchQueue.async {
             self.cacheDelegate.setCollection(collection, forKey: cacheKey, context: context)
         }
     }
@@ -139,10 +139,10 @@ public class DataModelManager {
     /**
      Get a collection model from the cache. This simply forwards the method to the cache delegate.
      */
-    public func collectionFromCache<T: SimpleModel>(cacheKey: String?, context: Any?, completion: ([T]?, NSError?)->()) {
-        dispatch_async(externalDispatchQueue) {
+    open func collectionFromCache<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping ([T]?, NSError?)->()) {
+        externalDispatchQueue.async {
             self.cacheDelegate.collectionForKey(cacheKey, context: context) { (models: [T]?, error) in
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     completion(models, error)
                 }
             }

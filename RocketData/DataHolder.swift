@@ -17,9 +17,9 @@ import Foundation
  */
 struct DataHolder<T> {
     /// The data backed by this data holder
-    private(set) var data: T
+    fileprivate(set) var data: T
     /// The time the data was updated
-    private(set) var lastUpdated: ChangeTime
+    fileprivate(set) var lastUpdated: ChangeTime
 
     /**
      Initialize with initial data as well as a specific change time.
@@ -35,7 +35,7 @@ struct DataHolder<T> {
      - parameter data: The new data.
      - parameter changeTime: The new change time to set on lastUpdated.
      */
-    mutating func setData(data: T, changeTime: ChangeTime) {
+    mutating func setData(_ data: T, changeTime: ChangeTime) {
         if lastUpdated.after(changeTime) {
             return
         }

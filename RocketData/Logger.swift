@@ -13,20 +13,20 @@ import Foundation
  This is the class used for logs in the library.
  All methods have some default implementations, but if you want, you can implement a delegate to implement your own logs.
 */
-public class Log {
+open class Log {
 
     /// Singleton accessor
-    public static let sharedInstance = Log()
+    open static let sharedInstance = Log()
 
     /// Delegate for the class. If nil, then it will do default logging. Otherwise, it will leave it up to the delegate.
-    public weak var delegate: LogDelegate?
+    open weak var delegate: LogDelegate?
 
     /**
      This is called whenever a critical error occurs in the library. 
      These critical errors can be recovered from, but will likely cause unexpected behavior in your app.
      The default behavior is to call assertionFailure which will crash the app in DEBUG and do nothing in RELEASE configurations.
     */
-    public func assert(@autoclosure condition: () -> Bool, @autoclosure _ logText: () -> String, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) {
+    open func assert(_ condition: @autoclosure () -> Bool, _ logText: @autoclosure () -> String, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) {
         if !condition() {
             if let delegate = delegate {
                 delegate.assertionFailure(logText(), file: file, function: function, line: line)
@@ -43,5 +43,5 @@ public class Log {
 */
 public protocol LogDelegate: class {
     /// Called whenever assert is called in the library. See the docs for assert in Log.
-    func assertionFailure(message: String, file: StaticString, function: StaticString, line: UInt)
+    func assertionFailure(_ message: String, file: StaticString, function: StaticString, line: UInt)
 }

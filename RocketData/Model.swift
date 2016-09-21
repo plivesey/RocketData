@@ -27,7 +27,7 @@ public protocol SimpleModel: ConsistencyManagerModel {
      
      If your model is Equatable, you do not need to implement this method (it will be implemented automatically using ==).
      */
-    func isEqualToModel(model: SimpleModel) -> Bool
+    func isEqualToModel(_ model: SimpleModel) -> Bool
 }
 
 /**
@@ -43,7 +43,7 @@ public protocol Model: SimpleModel {
      
      If your model is Equatable, you do not need to implement this method (it will be implemented automatically using ==).
      */
-    func isEqualToModel(model: Model) -> Bool
+    func isEqualToModel(_ model: Model) -> Bool
 
     /**
      This method should run a map function on each child model and return a new version of self.
@@ -58,7 +58,7 @@ public protocol Model: SimpleModel {
      - parameter transform: The mapping function
      - Returns: A new version of self with the map function applied
      */
-    func map(transform: Model -> Model?) -> Self?
+    func map(_ transform: (Model) -> Model?) -> Self?
 
     /**
      This method should iterate over all the child models in self.
@@ -67,7 +67,7 @@ public protocol Model: SimpleModel {
 
      - parameter function: The iterating function to be called on each child element.
      */
-    func forEach(visit: Model -> Void)
+    func forEach(_ visit: (Model) -> Void)
 
     /**
      Optional method. Do not implement this method unless you want to support projections (not common).
@@ -81,7 +81,7 @@ public protocol Model: SimpleModel {
      - parameter model: The model which should be merged into the current model.
      - Returns: A model of type Self which contains the merged field from model.
      */
-    func mergeModel(model: Model) -> Model
+    func mergeModel(_ model: Model) -> Model
 }
 
 // MARK: - Extensions
@@ -90,7 +90,7 @@ public protocol Model: SimpleModel {
 This extension automatically implements isEqualToModel whenever the SimpleModel is equatable.
 */
 extension SimpleModel where Self: Equatable {
-    public func isEqualToModel(model: SimpleModel) -> Bool {
+    public func isEqualToModel(_ model: SimpleModel) -> Bool {
         if let model = model as? Self {
             return model == self
         } else {
@@ -103,7 +103,7 @@ extension SimpleModel where Self: Equatable {
  This extension automatically implements isEqualToModel whenever the Model is equatable.
 */
 extension Model where Self: Equatable {
-    public func isEqualToModel(model: Model) -> Bool {
+    public func isEqualToModel(_ model: Model) -> Bool {
         if let model = model as? Self {
             return model == self
         } else {
@@ -117,7 +117,7 @@ This extension allows SimpleModel to easily inherit ConsistencyManagerModel. It 
 with top level models. With this extension, you only need to implement two methods: modelIdentifier and isEqualToModel.
 */
 extension SimpleModel {
-    public func isEqualToModel(model: ConsistencyManagerModel) -> Bool {
+    public func isEqualToModel(_ model: ConsistencyManagerModel) -> Bool {
         if let model = model as? Model {
             return isEqualToModel(model)
         } else {
@@ -126,12 +126,12 @@ extension SimpleModel {
     }
 
     // This method is implemented with a default implementation. This causes it to be a top level model only.
-    public func map(transform: (ConsistencyManagerModel) -> ConsistencyManagerModel?) -> ConsistencyManagerModel? {
+    public func map(_ transform: (ConsistencyManagerModel) -> ConsistencyManagerModel?) -> ConsistencyManagerModel? {
         return self
     }
 
     // This method is implemented with a default implementation. This causes it to be a top level model only.
-    public func forEach(visit: (ConsistencyManagerModel) -> Void) {
+    public func forEach(_ visit: (ConsistencyManagerModel) -> Void) {
         // Do nothing
     }
 }
@@ -141,7 +141,7 @@ This extension implements the consistency manager model protocol and the simple 
 The methods are the same, but the type signatures are slightly different. This runs all the appropriate casts.
 */
 extension Model {
-    public func isEqualToModel(model: SimpleModel) -> Bool {
+    public func isEqualToModel(_ model: SimpleModel) -> Bool {
         if let model = model as? Model {
             return isEqualToModel(model)
         } else {
@@ -149,7 +149,7 @@ extension Model {
         }
     }
 
-    public func isEqualToModel(model: ConsistencyManagerModel) -> Bool {
+    public func isEqualToModel(_ model: ConsistencyManagerModel) -> Bool {
         if let model = model as? Model {
             return isEqualToModel(model)
         } else {
@@ -158,14 +158,14 @@ extension Model {
     }
 
     // Implement the consistency manager protocol to return our version of map
-    public func map(transform: ConsistencyManagerModel -> ConsistencyManagerModel?) -> ConsistencyManagerModel? {
+    public func map(_ transform: (ConsistencyManagerModel) -> ConsistencyManagerModel?) -> ConsistencyManagerModel? {
         return map { model -> Model? in
             return transform(model) as? Model
         }
     }
 
     // Implement the consistency manager protocol to return our version of forEach
-    public func forEach(visit: ConsistencyManagerModel -> Void) {
+    public func forEach(_ visit: (ConsistencyManagerModel) -> Void) {
         forEach { (model: Model) in
             visit(model)
         }
@@ -177,7 +177,7 @@ extension Model {
  It also implements the default version of `mergeModel` which should just return the other model (since it will be the same class).
  */
 extension Model {
-    public func mergeModel(model: Model) -> Model {
+    public func mergeModel(_ model: Model) -> Model {
         // This cast should always succeed.
         if let model = model as? Self {
             return model
@@ -187,7 +187,7 @@ extension Model {
         }
     }
 
-    public func mergeModel(model: ConsistencyManagerModel) -> ConsistencyManagerModel {
+    public func mergeModel(_ model: ConsistencyManagerModel) -> ConsistencyManagerModel {
         if let model = model as? Model {
             return mergeModel(model)
         } else {
