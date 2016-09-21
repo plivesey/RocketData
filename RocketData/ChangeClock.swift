@@ -16,7 +16,7 @@ import Foundation
  */
 struct ChangeTime: Equatable {
     /// Keeps track of the last time we updated
-    fileprivate static var lastTime = 1
+    private static var lastTime = 1
 
     fileprivate let time: Int
 
@@ -32,7 +32,7 @@ struct ChangeTime: Equatable {
     /**
      Private initializer for creating a time with zero.
      */
-    fileprivate init(time: Int) {
+    private init(time: Int) {
         self.time = time
     }
 

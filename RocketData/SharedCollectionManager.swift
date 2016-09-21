@@ -20,7 +20,7 @@ class SharedCollectionManager {
      This keeps track of all the providers with the same cacheKey.
      Whenever we do a change, we search this array for other collections with the same cacheKey and run the same operations on those collections.
      */
-    fileprivate var providers = [String: WeakSharedCollectionArray]()
+    private var providers = [String: WeakSharedCollectionArray]()
 
     /**
      This should be called whenever a collection data provider's cacheKey has changed.

@@ -36,7 +36,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
     open weak var delegate: CollectionDataProviderDelegate?
 
     /// The cache key which backs this collection. If nil, the collection will not be cached.
-    open fileprivate(set) var cacheKey: String? {
+    open private(set) var cacheKey: String? {
         didSet {
             dataModelManager.sharedCollectionManager.updateProvider(self, cacheKey: cacheKey, previousCacheKey: oldValue)
         }
@@ -513,7 +513,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
     /**
      Updates an array of models in the consistency manager and relistens to these new models.
      */
-    fileprivate func updateAndListenToNewModelsInConsistencyManager(context: Any?, shouldListen: Bool = true) {
+    private func updateAndListenToNewModelsInConsistencyManager(context: Any?, shouldListen: Bool = true) {
         let batchModel = batchModelFromModels(data, cacheKey: cacheKey)
         dataModelManager.consistencyManager.updateWithNewModel(batchModel, context: ConsistencyContextWrapper(context: context))
         if shouldListen {
@@ -524,7 +524,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
     /**
      Returns a batch model from an array of models.
      */
-    fileprivate func batchModelFromModels(_ models: [T], cacheKey: String?) -> BatchUpdateModel {
+    private func batchModelFromModels(_ models: [T], cacheKey: String?) -> BatchUpdateModel {
         // Need to map to do this cast sadly
         let consistencyManagerModels = models.map { model in model as ConsistencyManagerModel }
         return BatchUpdateModel(models: consistencyManagerModels, modelIdentifier: cacheKey)
@@ -534,7 +534,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      This function takes data from sibling data providers and sets it the current provider. This updates our data to the latest if possible.
      Called whenever the listener is unpaused.
      */
-    fileprivate func syncWithSiblingDataProviders() {
+    private func syncWithSiblingDataProviders() {
         var updatedData = false
         // We should immediately set our data to the data of shared collections if possible.
         // We need to do this before we resume listening with the consistency manager.

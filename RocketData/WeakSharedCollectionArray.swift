@@ -53,7 +53,7 @@ struct WeakSharedCollectionArray: ExpressibleByArrayLiteral {
     /**
      Private initializer which allows init with data.
      */
-    fileprivate init(data: [() -> SharedCollection?]) {
+    private init(data: [() -> SharedCollection?]) {
         self.data = data
     }
 

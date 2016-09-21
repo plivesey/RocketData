@@ -33,7 +33,7 @@ open class BatchDataProviderListener: BatchListenerDelegate {
     open let consistencyManager: ConsistencyManager
 
     /// This is the batch listener from the consistency manager which contains most of the logic for doing batch listening
-    fileprivate let batchListener: BatchListener
+    private let batchListener: BatchListener
 
     /**
      Determines whether the listener is notified when data changes.

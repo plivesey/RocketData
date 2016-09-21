@@ -17,9 +17,9 @@ import Foundation
  */
 struct DataHolder<T> {
     /// The data backed by this data holder
-    fileprivate(set) var data: T
+    private(set) var data: T
     /// The time the data was updated
-    fileprivate(set) var lastUpdated: ChangeTime
+    private(set) var lastUpdated: ChangeTime
 
     /**
      Initialize with initial data as well as a specific change time.

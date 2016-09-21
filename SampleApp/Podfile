@@ -5,7 +5,7 @@ target :SampleApp do
   pod 'PINCache', :git => 'https://github.com/pinterest/PINCache.git', :commit => '58635e4ff8d00fcd25084259a625c0615e9d071a'
 end
 
-# This is necessary to convert the target to swift 2.3
+# This is necessary to convert the target to swift 3.0
 # This isn't detected automatically by cocoapods or supported in the podspec
 # We can remove this once Cocoapods has a better solution
 post_install do |installer|
