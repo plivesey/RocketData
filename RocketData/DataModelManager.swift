@@ -38,7 +38,7 @@ open class DataModelManager {
     let sharedCollectionManager = SharedCollectionManager()
 
     /// A queue for doing external requests. This means that if the app blocks on a delegate method for too long, the library and app won't be slowed down.
-    let externalDispatchQueue = DispatchQueue(label: "com.rocketData.externalDispatchQueue", attributes: DispatchQueue.Attributes.concurrent)
+    let externalDispatchQueue = DispatchQueue(label: "com.rocketData.externalDispatchQueue", attributes: .concurrent)
 
     public init(cacheDelegate: CacheDelegate) {
         self.cacheDelegate = cacheDelegate
