@@ -6,7 +6,10 @@ time xcodebuild clean test \
     -scheme RocketData \
     -sdk iphonesimulator10.0 \
     -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' \
-    -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.4' \
     -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0' \
 | xcpretty
+
+# Disabling 8.4 because it's very flaky on travis
+# We can look at reenabling when it gets more stable
+#    -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.4' \
 
