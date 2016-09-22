@@ -1,5 +1,9 @@
 # Overview
 
+[![Build Status](https://travis-ci.org/linkedin/ConsistencyManager-iOS.svg?branch=master)](https://travis-ci.org/linkedin/ConsistencyManager-iOS)
+[![codecov](https://codecov.io/gh/linkedin/ConsistencyManager-iOS/branch/master/graph/badge.svg)](https://codecov.io/gh/linkedin/ConsistencyManager-iOS)
+[![GitHub release](https://img.shields.io/github/release/linkedin/ConsistencyManager-iOS.svg?maxAge=86400)](https://github.com/linkedin/ConsistencyManager-iOS/releases)
+
 This library provides a way of keeping immutable models consistent. First, listeners listen to an immutable model. Whenever this model (or any child model) is updated, the Consistency Manager will generate a new model and notify its listeners.
 
 ## Rocket Data

@@ -39,14 +39,14 @@ final class FullChildModel: Model, Equatable {
         }
     }
 
-    func map(transform: Model -> Model?) -> FullChildModel? {
+    func map(_ transform: (Model) -> Model?) -> FullChildModel? {
         return self
     }
 
-    func forEach(visit: Model -> Void) {
+    func forEach(_ visit: (Model) -> Void) {
     }
 
-    func mergeModel(model: Model) -> Model {
+    func mergeModel(_ model: Model) -> Model {
         if let model = model as? FullChildModel {
             // If the other model is the same class, we can just do a replacement
             return model

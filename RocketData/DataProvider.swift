@@ -13,22 +13,22 @@ import ConsistencyManager
 /**
  This class implements a data provider for a single model.
  */
-public class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListenable {
+open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListenable {
 
     // MARK: - Public instance variables
 
     /// The data that's backed by this data provider
-    public var data: T? {
+    open var data: T? {
         get {
             return dataHolder.data
         }
     }
 
     /// Delegate which is notified of changes to the data.
-    public weak var delegate: DataProviderDelegate?
+    open weak var delegate: DataProviderDelegate?
 
     /// The data model manager which is backing this DataProvider
-    public let dataModelManager: DataModelManager
+    open let dataModelManager: DataModelManager
 
     /**
      You can set this variable to pause and unpause listening for changes to data.
@@ -40,7 +40,7 @@ public class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchList
 
      When you resume listening to changes (setting paused to false), if there have been changes since the data provider was paused, the DataProviderDelegate will be called and the model will be updated.
      */
-    public var paused: Bool {
+    open var paused: Bool {
         get {
             return dataModelManager.consistencyManager.isPaused(self)
         }
@@ -55,7 +55,7 @@ public class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchList
     }
 
     /// This saves the batchListener instance. It is public because it implements the BatchListenable protocol. You should never edit this directly.
-    public weak var batchListener: BatchDataProviderListener?
+    open weak var batchListener: BatchDataProviderListener?
 
     // MARK: - Private instance variables
 
@@ -85,10 +85,10 @@ public class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchList
      This is useful to pass on additional information you want to associate with this model such as alternate cache keys (e.g. URL), associated data,
      or anything else you want.
     */
-    public func setData(data: T?, updateCache: Bool = true, context: Any? = nil) {
+    open func setData(_ data: T?, updateCache: Bool = true, context: Any? = nil) {
         self.dataHolder.setData(data, changeTime: ChangeTime())
         if let data = data {
-            if let cacheKey = data.modelIdentifier where updateCache {
+            if let cacheKey = data.modelIdentifier , updateCache {
                 dataModelManager.cacheModel(data, forKey: cacheKey, context: context)
             }
             // These need to be called every time the model changes
@@ -112,7 +112,7 @@ public class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchList
      At this point, the data provider will already have new data, so there's no need to call setData.
      This completion block will always be called exactly once, even if no data was updated.
      */
-    public func fetchDataFromCache(cacheKey cacheKey: String?, context: Any? = nil, completion: (T?, NSError?)->()) {
+    open func fetchDataFromCache(cacheKey: String?, context: Any? = nil, completion: @escaping (T?, NSError?)->()) {
 
         if cacheKey != nil && cacheKey == data?.modelIdentifier {
             // If the cacheKey is the same as what we currently have, there's no point in fetching again from the cache
@@ -142,11 +142,11 @@ public class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchList
 
     // MARK: Consistency Manager Implementation
 
-    public func currentModel() -> ConsistencyManagerModel? {
+    open func currentModel() -> ConsistencyManagerModel? {
         return data
     }
 
-    public func modelUpdated(model: ConsistencyManagerModel?, updates: ModelUpdates, context: Any?) {
+    open func modelUpdated(_ model: ConsistencyManagerModel?, updates: ModelUpdates, context: Any?) {
         let actualContext: Any?
         var changeTime: ChangeTime?
         if let context = context as? ConsistencyContextWrapper {
@@ -176,12 +176,12 @@ public class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchList
 
     // MARK: BatchListener Implementation
 
-    public func batchDataProviderUnpausedDataProvider() {
+    open func batchDataProviderUnpausedDataProvider() {
         // We don't need to do anything special here
         // We'll just wait for the consistency manager to update us
     }
 
-    public func syncedWithContext(context: Any?) -> Bool {
+    open func syncedWithContext(_ context: Any?) -> Bool {
         if let context = context as? ConsistencyContextWrapper {
             return lastUpdated == context.creationDate
         }
@@ -202,5 +202,5 @@ public protocol DataProviderDelegate: class {
      - paramter dataProvider: The data provider which has changed. If you have multiple data providers, you can use === to determine which one has changed.
      - paramter context: Whenever you make a change to a model, you can pass in a context. This context will be passed back to you here.
     */
-    func dataProviderHasUpdatedData<T>(dataProvider: DataProvider<T>, context: Any?)
+    func dataProviderHasUpdatedData<T>(_ dataProvider: DataProvider<T>, context: Any?)
 }

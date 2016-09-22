@@ -16,49 +16,49 @@ extension DataModelManager {
 
 class NoOpCacheDelegate: CacheDelegate {
 
-    func modelForKey<T: SimpleModel>(cacheKey: String?, context: Any?, completion: (T?, NSError?)->()) {
+    func modelForKey<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping (T?, NSError?)->()) {
         completion(nil, NSError(domain: "com.rocketData.unitTests", code: 0, userInfo: nil))
     }
 
-    func setModel<T: SimpleModel>(model: T, forKey cacheKey: String, context: Any?) {
+    func setModel<T: SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
     }
 
-    func collectionForKey<T: SimpleModel>(cacheKey: String?, context: Any?, completion: ([T]?, NSError?)->()) {
+    func collectionForKey<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping ([T]?, NSError?)->()) {
         completion(nil, NSError(domain: "com.rocketData.unitTests", code: 0, userInfo: nil))
     }
 
-    func setCollection<T: SimpleModel>(collection: [T], forKey cacheKey: String, context: Any?) {
+    func setCollection<T: SimpleModel>(_ collection: [T], forKey cacheKey: String, context: Any?) {
     }
 
-    func deleteModel(model: SimpleModel, forKey cacheKey: String?, context: Any?) {
+    func deleteModel(_ model: SimpleModel, forKey cacheKey: String?, context: Any?) {
     }
 }
 
 class ExpectCacheDelegate: CacheDelegate {
 
-    var modelForKeyCalled: ((String?, Any?, (Any?, NSError?)->Void)->Void)?
+    var modelForKeyCalled: ((String?, Any?, @escaping (Any?, NSError?)->Void)->Void)?
     var setModelCalled: ((SimpleModel, String, Any?)->Void)?
-    var collectionForKeyCalled: ((String?, Any?, ([Any]?, NSError?)->Void)->Void)?
+    var collectionForKeyCalled: ((String?, Any?, @escaping ([Any]?, NSError?)->Void)->Void)?
     var setCollectionCalled: (([SimpleModel], String, Any?)->Void)?
     var deleteModelCalled: ((SimpleModel, String?, Any?)->Void)?
 
-    func modelForKey<T: SimpleModel>(cacheKey: String?, context: Any?, completion: (T?, NSError?)->()) {
+    func modelForKey<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping (T?, NSError?)->()) {
         modelForKeyCalled?(cacheKey, context) { model, error in
             completion(model as? T, error)
         }
     }
 
-    func setModel<T: SimpleModel>(model: T, forKey cacheKey: String, context: Any?) {
+    func setModel<T: SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
         setModelCalled?(model, cacheKey, context)
     }
 
-    func collectionForKey<T: SimpleModel>(cacheKey: String?, context: Any?, completion: ([T]?, NSError?)->()) {
+    func collectionForKey<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping ([T]?, NSError?)->()) {
         collectionForKeyCalled?(cacheKey, context) { models, error in
             completion(models as? [T], error)
         }
     }
 
-    func setCollection<T: SimpleModel>(collection: [T], forKey cacheKey: String, context: Any?) {
+    func setCollection<T: SimpleModel>(_ collection: [T], forKey cacheKey: String, context: Any?) {
         // Annoying workaround for a compiler bug
         let simpleModels = collection.map { model in
             model as SimpleModel
@@ -66,7 +66,7 @@ class ExpectCacheDelegate: CacheDelegate {
         setCollectionCalled?(simpleModels, cacheKey, context)
     }
 
-    func deleteModel(model: SimpleModel, forKey cacheKey: String?, context: Any?) {
+    func deleteModel(_ model: SimpleModel, forKey cacheKey: String?, context: Any?) {
         deleteModelCalled?(model, cacheKey, context)
     }
 }

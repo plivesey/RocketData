@@ -19,7 +19,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(), otherChildren: [])
         let newModel = ParentModel(id: 1, name: "new", requiredChild: ChildModel(), otherChildren: [])
 
-        let expectation = expectationWithDescription("Wait for delegate")
+        let expectation = self.expectation(description: "Wait for delegate")
         let delegate = ClosureDataProviderDelegate() { context in
             XCTAssertEqual(context as? String, "context")
             XCTAssertEqual(dataProvider.data?.name, "new")
@@ -34,7 +34,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         otherDataProvider.setData(newModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testSettingSameModel() {
@@ -65,7 +65,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(id: 3, name: "childInitial"), otherChildren: [])
         let newModel = ParentModel(id: 4, name: "new", requiredChild: ChildModel(id: 3, name: "childNew"), otherChildren: [])
 
-        let expectation = expectationWithDescription("Wait for delegate")
+        let expectation = self.expectation(description: "Wait for delegate")
         let delegate = ClosureDataProviderDelegate() { context in
             XCTAssertEqual(context as? String, "context")
             XCTAssertEqual(dataProvider.data?.name, "initial")
@@ -81,7 +81,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         otherDataProvider.setData(newModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testDeletingModel() {
@@ -91,7 +91,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
 
         let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(), otherChildren: [])
 
-        let expectation = expectationWithDescription("Wait for delegate")
+        let expectation = self.expectation(description: "Wait for delegate")
         let delegate = ClosureDataProviderDelegate() { context in
             XCTAssertEqual(context as? String, "context")
             XCTAssertNil(dataProvider.data)
@@ -110,7 +110,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         dataModelManager.deleteModel(initialModel, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         waitForCacheToFinish(dataModelManager)
         XCTAssertEqual(numberOfTimesCalled, 1)
@@ -121,7 +121,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
 
         let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(), otherChildren: [ChildModel(id: 2, name: "child")])
 
-        let expectation = expectationWithDescription("Wait for delegate")
+        let expectation = self.expectation(description: "Wait for delegate")
         let delegate = ClosureDataProviderDelegate() { context in
             XCTAssertEqual(context as? String, "context")
             XCTAssertEqual(dataProvider.data?.name, "initial")
@@ -133,7 +133,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         DataModelManager.sharedDataManagerNoCache.deleteModel(ChildModel(id: 2, name: "child"), context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testDeletingRequiredModel() {
@@ -141,7 +141,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
 
         let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(id: 3, name: "childInitial"), otherChildren: [])
 
-        let expectation = expectationWithDescription("Wait for delegate")
+        let expectation = self.expectation(description: "Wait for delegate")
         let delegate = ClosureDataProviderDelegate() { context in
             XCTAssertEqual(context as? String, "context")
             XCTAssertNil(dataProvider.data)
@@ -152,7 +152,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         DataModelManager.sharedDataManagerNoCache.deleteModel(ChildModel(id: 3, name: "childInitial"), context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     /**
@@ -171,7 +171,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         let updateModel = ParentModel(id: 1, name: "update", requiredChild: ChildModel(), otherChildren: [])
         let finalModel = ParentModel(id: 1, name: "new", requiredChild: ChildModel(), otherChildren: [])
 
-        let expectation = expectationWithDescription("Wait for delegate")
+        let expectation = self.expectation(description: "Wait for delegate")
         let delegate = ClosureDataProviderDelegate() { context in
             // This should never get called because
             XCTFail()
@@ -193,7 +193,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         // Data provider one will soon get a consistency manager update, but first...
         dataProvider.setData(finalModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     // MARK: Timing Tests
@@ -234,7 +234,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         let initialModel = FullChildModel(id: 1, name: "initial", otherData: 42)
         let newModel = ChildModel(id: 1, name: "new")
 
-        let expectation = expectationWithDescription("Wait for delegate")
+        let expectation = self.expectation(description: "Wait for delegate")
         let delegate = ClosureDataProviderDelegate() { context in
             XCTAssertEqual(context as? String, "context")
             XCTAssertEqual(dataProvider.data?.name, "new")
@@ -250,7 +250,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         otherDataProvider.setData(newModel, updateCache: false, context: "context")
 
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     /**

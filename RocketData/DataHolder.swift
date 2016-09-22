@@ -35,7 +35,7 @@ struct DataHolder<T> {
      - parameter data: The new data.
      - parameter changeTime: The new change time to set on lastUpdated.
      */
-    mutating func setData(data: T, changeTime: ChangeTime) {
+    mutating func setData(_ data: T, changeTime: ChangeTime) {
         if lastUpdated.after(changeTime) {
             return
         }

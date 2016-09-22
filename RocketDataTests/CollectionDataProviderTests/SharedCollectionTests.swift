@@ -48,15 +48,15 @@ class SharedCollectionTests: RocketDataTestCase {
     /**
      Helper function for creating shared collections.
      */
-    func sharedCollectionDataProvider(delegate: ClosureCollectionDataProviderDelegate?) -> CollectionDataProvider<ParentModel> {
+    func sharedCollectionDataProvider(_ delegate: ClosureCollectionDataProviderDelegate?) -> CollectionDataProvider<ParentModel> {
         let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: dataModelManager)
         dataProvider.delegate = delegate
-        let expectation = expectationWithDescription("waitForCache")
+        let expectation = self.expectation(description: "waitForCache")
         // Fetching from the cache will set the cacheKey
         dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "cacheContext") { _, _ in
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
         return dataProvider
     }
 }

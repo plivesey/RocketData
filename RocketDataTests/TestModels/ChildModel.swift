@@ -34,17 +34,17 @@ final class ChildModel: Model, Equatable {
         }
     }
 
-    func map(transform: Model -> Model?) -> ChildModel? {
+    func map(_ transform: (Model) -> Model?) -> ChildModel? {
         return self
     }
 
-    func forEach(visit: Model -> Void) {
+    func forEach(_ visit: (Model) -> Void) {
     }
 
     /**
      This method allows this model to be merged with FullChildModel.
      */
-    func mergeModel(model: Model) -> Model {
+    func mergeModel(_ model: Model) -> Model {
         if let model = model as? ChildModel {
             return model
         } else if let model = model as? FullChildModel {

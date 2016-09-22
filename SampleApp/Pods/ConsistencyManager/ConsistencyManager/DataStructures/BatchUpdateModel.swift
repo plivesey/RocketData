@@ -57,18 +57,18 @@ public final class BatchUpdateModel: ConsistencyManagerModel {
         self.modelIdentifier = modelIdentifier
     }
 
-    public func map(transform: (ConsistencyManagerModel) -> ConsistencyManagerModel?) -> ConsistencyManagerModel? {
+    public func map(_ transform: (ConsistencyManagerModel) -> ConsistencyManagerModel?) -> ConsistencyManagerModel? {
         let newModels = models.map { model in
             return model.flatMap(transform)
         }
         return BatchUpdateModel(models: newModels)
     }
 
-    public func forEach(visit: (ConsistencyManagerModel) -> Void) {
+    public func forEach(_ visit: (ConsistencyManagerModel) -> Void) {
         models.flatMap { $0 }.forEach(visit)
     }
 
-    public func isEqualToModel(other: ConsistencyManagerModel) -> Bool {
+    public func isEqualToModel(_ other: ConsistencyManagerModel) -> Bool {
         guard let other = other as? BatchUpdateModel else {
             return false
         }
@@ -77,8 +77,8 @@ public final class BatchUpdateModel: ConsistencyManagerModel {
             return false
         }
 
-        for (index, model) in models.enumerate() {
-            if let model = model, otherModel = other.models[index] {
+        for (index, model) in models.enumerated() {
+            if let model = model, let otherModel = other.models[index] {
                 if !model.isEqualToModel(otherModel) {
                     return false
                 }

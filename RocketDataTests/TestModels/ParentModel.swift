@@ -33,7 +33,7 @@ final class ParentModel: Model, Equatable {
         return "ParentModel:\(id)"
     }
 
-    func map(transform: Model -> Model?) -> ParentModel? {
+    func map(_ transform: (Model) -> Model?) -> ParentModel? {
         guard let requiredChild = transform(requiredChild) as? ChildModel else {
             // Cascade the delete
             return nil
@@ -45,7 +45,7 @@ final class ParentModel: Model, Equatable {
         return ParentModel(id: id, name: name, requiredChild: requiredChild, otherChildren: otherChildren)
     }
 
-    func forEach(visit: Model -> Void) {
+    func forEach(_ visit: (Model) -> Void) {
         visit(requiredChild)
         otherChildren.forEach { child in
             visit(child)

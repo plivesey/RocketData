@@ -269,10 +269,10 @@ class WeakSharedCollectionArrayTests: RocketDataTestCase {
                     strongArray.append(testObject)
                     weakArray.append(testObject)
                 }
-                var seenArray = Array<Bool>(count: count, repeatedValue: false)
+                var seenArray = Array<Bool>(repeating: false, count: count)
 
                 // Now let's test the iterator phase 1
-                for (index, element) in weakArray.enumerate() {
+                for (index, element) in weakArray.enumerated() {
                     if element != nil {
                         seenArray[index] = true
                     } else {

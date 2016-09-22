@@ -14,6 +14,6 @@ import RocketData
  It's going to extend from Model, so we can use it with Rocket Data.
  */
 protocol SampleAppModel: Model {
-    init?(data: [NSObject: AnyObject])
-    func data() -> [NSObject: AnyObject]
+    init?(data: [AnyHashable: Any])
+    func data() -> [AnyHashable: Any]
 }

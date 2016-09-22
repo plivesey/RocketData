@@ -22,7 +22,7 @@ final class UserModel: SampleAppModel, Equatable {
 
     // MARK: - SampleAppModel
 
-    required init?(data: [NSObject : AnyObject]) {
+    required init?(data: [AnyHashable: Any]) {
         guard let id = data["id"] as? Int,
             let name = data["name"] as? String,
             let online = data["online"] as? Bool else {
@@ -33,7 +33,7 @@ final class UserModel: SampleAppModel, Equatable {
         self.online = online
     }
 
-    func data() -> [NSObject : AnyObject] {
+    func data() -> [AnyHashable: Any] {
         return [
             "id": id,
             "name": name,
@@ -48,12 +48,12 @@ final class UserModel: SampleAppModel, Equatable {
         return "UserModel:\(id)"
     }
 
-    func map(transform: Model -> Model?) -> UserModel? {
+    func map(_ transform: (Model) -> Model?) -> UserModel? {
         // No child objects, so we can just return self
         return self
     }
 
-    func forEach(visit: Model -> Void) {
+    func forEach(_ visit: (Model) -> Void) {
     }
 }
 

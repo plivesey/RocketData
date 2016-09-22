@@ -18,10 +18,10 @@ class NetworkManager {
         return UserModel(id: 0, name: "Peter", online: true)
     }
 
-    static func fetchChats(completion: ([UserModel], NSError?)->Void) {
+    static func fetchChats(_ completion: @escaping ([UserModel], NSError?)->Void) {
         let delay = 1.5
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             let chats = [
                 UserModel(id: 1, name: "Nick", online: true),
                 UserModel(id: 2, name: "Nitesh", online: false)
@@ -30,15 +30,15 @@ class NetworkManager {
         }
     }
 
-    static func fetchMessage(user: UserModel, completion: ([MessageModel], NSError?)->Void) {
+    static func fetchMessage(_ user: UserModel, completion: @escaping ([MessageModel], NSError?)->Void) {
         let delay = 1.5
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+        let delayTime = DispatchTime.now() + delay
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: delayTime) {
             // To simulate the network, let's fetch from the cache and then add one additional message from the other user
             // This allows the data to grow as it would likely in real life
             // All this is just mocking though
             DataModelManager.sharedInstance.collectionFromCache(CollectionCacheKey.messages(user.id).cacheKey(), context: nil) { (messages: [MessageModel]?, nil) in
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     var messages = messages ?? []
                     // Some of the messages may have the wrong online status. Since we're simulating a 'server response', let's reset all the users to the correct online status
                     messages = messages.map { message in
@@ -61,15 +61,15 @@ class NetworkManager {
         startRandomNewMessagesNotifications()
     }
 
-    private static func startRandomUserOnlineNotifications() {
+    fileprivate static func startRandomUserOnlineNotifications() {
         let delay = Double(arc4random_uniform(4) + 2)
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             let userId = Int(arc4random_uniform(2) + 1)
             let online = arc4random_uniform(2) == 0
             let username = userId == 1 ? "Nick" : "Nitesh"
             let newUserModel = UserModel(id: userId, name: username, online: online)
-            (UIApplication.sharedApplication().delegate as? AppDelegate)?.pushNotificationReceivedWithUpdatedUser(newUserModel)
+            (UIApplication.shared.delegate as? AppDelegate)?.pushNotificationReceivedWithUpdatedUser(newUserModel)
 
             print("Push notification: User \(online ? "came online": "went offline") (\(username)).")
 
@@ -78,16 +78,16 @@ class NetworkManager {
         }
     }
 
-    private static func startRandomNewMessagesNotifications() {
+    fileprivate static func startRandomNewMessagesNotifications() {
         let delay = Double(arc4random_uniform(10) + 2)
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        let delayTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
             let userId = Int(arc4random_uniform(2) + 1)
             let username = userId == 1 ? "Nick" : "Nitesh"
             // Let's always say they are online because they just sent a message
             let newUserModel = UserModel(id: userId, name: username, online: true)
             let newMessageModel = MessageModel(id: nextMessageId(), text: "hey", sender: newUserModel)
-            (UIApplication.sharedApplication().delegate as? AppDelegate)?.pushNotificationReceivedWithNewMessage(newMessageModel)
+            (UIApplication.shared.delegate as? AppDelegate)?.pushNotificationReceivedWithNewMessage(newMessageModel)
 
             print("Push notification: New message from (\(username)).")
 
@@ -102,8 +102,8 @@ class NetworkManager {
      */
     static func nextMessageId() -> Int {
         let key = "com.sampleapp.nextMessageId"
-        let nextMessageId = NSUserDefaults.standardUserDefaults().integerForKey(key) + 1
-        NSUserDefaults.standardUserDefaults().setInteger(nextMessageId, forKey: key)
+        let nextMessageId = UserDefaults.standard.integer(forKey: key) + 1
+        UserDefaults.standard.set(nextMessageId, forKey: key)
         return nextMessageId
     }
 }

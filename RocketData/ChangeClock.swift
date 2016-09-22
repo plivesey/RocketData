@@ -18,13 +18,13 @@ struct ChangeTime: Equatable {
     /// Keeps track of the last time we updated
     private static var lastTime = 1
 
-    private let time: Int
+    fileprivate let time: Int
 
     /**
      Creates a new ChangeTime instance. This is guarenteed to be after any previous times created.
      */
     init() {
-        Log.sharedInstance.assert(NSThread.isMainThread(), "The ChangeClock was accessed on a different thread than the main thread. This probably means you are accessing something in the library that is not thread-safe on a different thread. This can cause race conditions.")
+        Log.sharedInstance.assert(Thread.isMainThread, "The ChangeClock was accessed on a different thread than the main thread. This probably means you are accessing something in the library that is not thread-safe on a different thread. This can cause race conditions.")
         self.time = ChangeTime.lastTime
         ChangeTime.lastTime += 1
     }
@@ -46,7 +46,7 @@ struct ChangeTime: Equatable {
     /**
      Returns true if this time was created after another time.
      */
-    func after(other: ChangeTime) -> Bool {
+    func after(_ other: ChangeTime) -> Bool {
         return time > other.time
     }
 }

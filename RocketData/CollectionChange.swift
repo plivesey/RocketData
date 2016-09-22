@@ -68,7 +68,7 @@ public func ==(lhs: CollectionChangeInformation, rhs: CollectionChangeInformatio
 /**
  This extension provides some useful helpers on a collection of CollectionChanges.
  */
-public extension CollectionType where Generator.Element == CollectionChangeInformation {
+public extension Collection where Iterator.Element == CollectionChangeInformation {
     /**
      This returns the number of .delete items in the array.
      It does not dedupe for repeated elements.
