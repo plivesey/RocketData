@@ -18,7 +18,7 @@
   "frameworks": "Foundation",
   "dependencies": {
     "ConsistencyManager": [
-      "~> 3.0.0"
+      "~> 4.0.0"
     ]
   }
 }

@@ -44,7 +44,7 @@ final class ChildModel: Model, Equatable {
     /**
      This method allows this model to be merged with FullChildModel.
      */
-    func mergeModel(_ model: Model) -> Model {
+    func merge(_ model: Model) -> Model {
         if let model = model as? ChildModel {
             return model
         } else if let model = model as? FullChildModel {

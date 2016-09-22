@@ -214,7 +214,7 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
 
         dataProvider.setData(initialModel, updateCache: false, context: "wrong")
         // This uses a date before the setData, so should be a no-op
-        DataModelManager.sharedDataManagerNoCache.consistencyManager.updateWithNewModel(newModel, context: contextWrapper)
+        DataModelManager.sharedDataManagerNoCache.consistencyManager.updateModel(newModel, context: contextWrapper)
 
         waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
     }

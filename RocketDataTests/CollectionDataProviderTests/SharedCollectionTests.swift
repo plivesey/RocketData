@@ -53,7 +53,7 @@ class SharedCollectionTests: RocketDataTestCase {
         dataProvider.delegate = delegate
         let expectation = self.expectation(description: "waitForCache")
         // Fetching from the cache will set the cacheKey
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "cacheContext") { _, _ in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "cacheContext") { _, _ in
             expectation.fulfill()
         }
         waitForExpectations(timeout: 10, handler: nil)

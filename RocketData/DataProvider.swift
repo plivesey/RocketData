@@ -40,16 +40,16 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
 
      When you resume listening to changes (setting paused to false), if there have been changes since the data provider was paused, the DataProviderDelegate will be called and the model will be updated.
      */
-    open var paused: Bool {
+    open var isPaused: Bool {
         get {
-            return dataModelManager.consistencyManager.isPaused(self)
+            return dataModelManager.consistencyManager.isListenerPaused(self)
         }
         set {
             Log.sharedInstance.assert(batchListener == nil, "You should not manually set paused if you are using a batch listener. Instead, you should use the paused variable on batch listener.")
             if newValue {
-                dataModelManager.consistencyManager.pauseListeningForUpdates(self)
+                dataModelManager.consistencyManager.pauseListener(self)
             } else {
-                dataModelManager.consistencyManager.resumeListeningForUpdates(self)
+                dataModelManager.consistencyManager.resumeListener(self)
             }
         }
     }
@@ -92,11 +92,11 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
                 dataModelManager.cacheModel(data, forKey: cacheKey, context: context)
             }
             // These need to be called every time the model changes
-            dataModelManager.consistencyManager.updateWithNewModel(data, context: ConsistencyContextWrapper(context: context))
+            dataModelManager.consistencyManager.updateModel(data, context: ConsistencyContextWrapper(context: context))
             if let batchListener = batchListener {
                 batchListener.listenerHasUpdatedModel(self)
             } else {
-                dataModelManager.consistencyManager.listenForUpdates(self)
+                dataModelManager.consistencyManager.addListener(self)
             }
         }
     }
@@ -112,7 +112,7 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
      At this point, the data provider will already have new data, so there's no need to call setData.
      This completion block will always be called exactly once, even if no data was updated.
      */
-    open func fetchDataFromCache(cacheKey: String?, context: Any? = nil, completion: @escaping (T?, NSError?)->()) {
+    open func fetchDataFromCache(withCacheKey cacheKey: String?, context: Any? = nil, completion: @escaping (T?, NSError?)->()) {
 
         if cacheKey != nil && cacheKey == data?.modelIdentifier {
             // If the cacheKey is the same as what we currently have, there's no point in fetching again from the cache

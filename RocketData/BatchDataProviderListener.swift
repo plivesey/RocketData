@@ -40,19 +40,19 @@ open class BatchDataProviderListener: BatchListenerDelegate {
      When the the listener is paused, the data providers' data will not change unless setData is called on them directly.
      Changes that happen while the batch listener is paused will be queued and applied when the batch listener is unpaused.
      */
-    open var paused: Bool {
+    open var isPaused: Bool {
         get {
-            return consistencyManager.isPaused(batchListener)
+            return consistencyManager.isListenerPaused(batchListener)
         }
         set {
             if newValue {
-                consistencyManager.pauseListeningForUpdates(batchListener)
+                consistencyManager.pauseListener(batchListener)
             } else {
                 // Do this before resuming with the consistency manager to give data providers a chance to update their models before we call currentModel
                 batchListener.listeners.forEach { listener in
                     (listener as? BatchListenable)?.batchDataProviderUnpausedDataProvider()
                 }
-                consistencyManager.resumeListeningForUpdates(batchListener)
+                consistencyManager.resumeListener(batchListener)
             }
         }
     }
@@ -68,7 +68,7 @@ open class BatchDataProviderListener: BatchListenerDelegate {
         batchListener = BatchListener(listeners: listeners, consistencyManager: dataModelManager.consistencyManager)
         consistencyManager = dataModelManager.consistencyManager
         batchListener.delegate = self
-        batchListener.listenForUpdates(consistencyManager)
+        batchListener.addListener(consistencyManager)
 
         for dataProvider in dataProviders {
             Log.sharedInstance.assert(dataProvider.batchListener == nil, "Data providers can only be assigned one batch listener. You cannot add the same data provider to two batch listeners.")

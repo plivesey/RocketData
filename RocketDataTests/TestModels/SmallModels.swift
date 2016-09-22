@@ -21,7 +21,7 @@ class SmallSimpleModel: SimpleModel {
         return nil
     }
 
-    func isEqualToModel(_ model: SimpleModel) -> Bool {
+    func isEqual(to model: SimpleModel) -> Bool {
         return true
     }
 }
@@ -31,7 +31,7 @@ class SmallModel: Model {
         return nil
     }
 
-    func isEqualToModel(_ model: Model) -> Bool {
+    func isEqual(to model: Model) -> Bool {
         return true
     }
 

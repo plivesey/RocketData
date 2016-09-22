@@ -381,9 +381,9 @@ class BatchListenerTests: RocketDataTestCase {
         }
         collectionDataProvider.delegate = collectionProviderDelegate
 
-        XCTAssertFalse(batchDataProviderListener.paused)
-        batchDataProviderListener.paused = true
-        XCTAssertTrue(batchDataProviderListener.paused)
+        XCTAssertFalse(batchDataProviderListener.isPaused)
+        batchDataProviderListener.isPaused = true
+        XCTAssertTrue(batchDataProviderListener.isPaused)
 
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(ParentModel(id: 0, name: "new", requiredChild: ChildModel(id: 1, name: "child"), otherChildren: []), context: "first")
@@ -404,8 +404,8 @@ class BatchListenerTests: RocketDataTestCase {
         XCTAssertEqual(calledDataProviderDelegate, 0)
         XCTAssertEqual(calledCollectionDelegate, 0)
 
-        batchDataProviderListener.paused = false
-        XCTAssertFalse(batchDataProviderListener.paused)
+        batchDataProviderListener.isPaused = false
+        XCTAssertFalse(batchDataProviderListener.isPaused)
 
         waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
 
