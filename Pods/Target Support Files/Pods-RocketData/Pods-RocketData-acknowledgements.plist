@@ -218,6 +218,8 @@
    limitations under the License.
 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>ConsistencyManager</string>
 			<key>Type</key>
