@@ -17,15 +17,15 @@
 		49B743734DBB42D13DE2E4C95D728258 /* ConsistencyManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97041D46547400C67C2349A305FFA8C /* ConsistencyManagerModel.swift */; };
 		4B2BE5EF5BCC75C085AF6FB3DFB73BF7 /* ConsistencyManager-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D3DF36C8486F6664885AE7C411C92D /* ConsistencyManager-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A52EA1AB9E49BAF9D979C953CBA94C5 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59F67CC8F3BE06376FFAC7EA1A13CD9 /* ErrorManager.swift */; };
-		70768EA6EB9755E84BB7EC780F03F581 /* Pods-RocketData-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 271164874EA521DBF3A5E42882CA5E8C /* Pods-RocketData-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		70768EA6EB9755E84BB7EC780F03F581 /* Pods-RocketData-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B33AAE8E3297C60B5C529640186B8192 /* Pods-RocketData-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79F0359EDE2A2DE6C858B37522B08417 /* WeakListenerArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF5998704E241AD2FA83EACC216970C /* WeakListenerArray.swift */; };
 		8265AE9D9D400DF1E9B06A3955F85942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */; };
 		92E4CF92DEF26530B4633401C42CE37D /* ConsistencyManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B0768E38C7114157A02217B66C9A2 /* ConsistencyManager-dummy.m */; };
 		9E7CDDB3DBC6BD36B268726BD3C96ECF /* ConsistencyManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC81E5E6745EF8D6F4DDEC7F19D26164 /* ConsistencyManagerDelegate.swift */; };
-		B2303CDA51DB0832BAB1788C6E7984EA /* Pods-RocketDataTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7735ED8DE53508944981B891E90C0EFE /* Pods-RocketDataTests-dummy.m */; };
+		B2303CDA51DB0832BAB1788C6E7984EA /* Pods-RocketDataTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A698A45FD24BEAB6FC199968A66DCC81 /* Pods-RocketDataTests-dummy.m */; };
 		BD436656590B87187BA25C062EFA52EC /* ConsistencyManagerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1E5D20AEA5F198AF025261DD2A188B /* ConsistencyManagerListener.swift */; };
-		C8B2B67B37B8D53B63DF15B836D6A833 /* Pods-RocketDataTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 82F57EB9142715F7D70F6B909F8A1CC5 /* Pods-RocketDataTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2BBBAD54A227C2138467762482F1801 /* Pods-RocketData-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 089BD4D8DE576134661A5BBA93EC9964 /* Pods-RocketData-dummy.m */; };
+		C8B2B67B37B8D53B63DF15B836D6A833 /* Pods-RocketDataTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E2BA164619EBA0D1BC0245A0394E5D /* Pods-RocketDataTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2BBBAD54A227C2138467762482F1801 /* Pods-RocketData-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE1A6554C91646ECDB57AEE95C2753C /* Pods-RocketData-dummy.m */; };
 		E6E7ED38E1CDCE71C37187A17927D8D2 /* ConsistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8804F9D000318116CBFDE7B2BBB928 /* ConsistencyManager.swift */; };
 		F35A08C9B892520D731F0ADFCD665ECA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -48,48 +48,49 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07A5BE63B6D649CB5208AD66140448B7 /* Pods-RocketDataTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RocketDataTests-resources.sh"; sourceTree = "<group>"; };
-		089BD4D8DE576134661A5BBA93EC9964 /* Pods-RocketData-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RocketData-dummy.m"; sourceTree = "<group>"; };
+		04F9BDFD6297BF18B9EB79FA44B20EC4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10B991FFE0387E6039C11A061BA028BD /* ConsistencyManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ConsistencyManager-prefix.pch"; sourceTree = "<group>"; };
-		1306A5E433D9AAC7FFC59697BD9C9DB4 /* Pods-RocketDataTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RocketDataTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		1DBC372F8061C320E3EC8760BDA49095 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		271164874EA521DBF3A5E42882CA5E8C /* Pods-RocketData-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RocketData-umbrella.h"; sourceTree = "<group>"; };
 		304980AC492579B69D4827369DCA19F3 /* BatchUpdateModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BatchUpdateModel.swift; path = ConsistencyManager/DataStructures/BatchUpdateModel.swift; sourceTree = "<group>"; };
-		34BC35DF87360F2E7CB7A5FF8B70C85D /* Pods-RocketDataTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketDataTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3DEFF9A7C7AEE462D1ECECF5565903F6 /* Pods-RocketData-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RocketData-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3F8804F9D000318116CBFDE7B2BBB928 /* ConsistencyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManager.swift; path = ConsistencyManager/ConsistencyManager.swift; sourceTree = "<group>"; };
 		437143A8805F028E09A65AB320902072 /* ModelUpdates.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelUpdates.swift; path = ConsistencyManager/DataStructures/ModelUpdates.swift; sourceTree = "<group>"; };
 		46A35328EBD6BC6926B514A28EE41C76 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5063F94E4E75CFA2BAE770E1AA393FBE /* Pods-RocketData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketData.release.xcconfig"; sourceTree = "<group>"; };
+		5DDF3AF4A9F5500DFFD4A9165380EDB1 /* Pods-RocketData-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RocketData-resources.sh"; sourceTree = "<group>"; };
 		61D3DF36C8486F6664885AE7C411C92D /* ConsistencyManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ConsistencyManager-umbrella.h"; sourceTree = "<group>"; };
-		66C2744F8A608DA03871DB23D72F53EB /* Pods-RocketDataTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-RocketDataTests.modulemap"; sourceTree = "<group>"; };
-		6C7CAE382E5C46A01A4E6988A98B7E20 /* Pods-RocketDataTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RocketDataTests-frameworks.sh"; sourceTree = "<group>"; };
-		7595FF013E359097D30B69D1C11AF69A /* Pods-RocketData-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RocketData-acknowledgements.plist"; sourceTree = "<group>"; };
-		7735ED8DE53508944981B891E90C0EFE /* Pods-RocketDataTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RocketDataTests-dummy.m"; sourceTree = "<group>"; };
-		7EB4155B344A2C034F85FF0DEF919271 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		82F57EB9142715F7D70F6B909F8A1CC5 /* Pods-RocketDataTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RocketDataTests-umbrella.h"; sourceTree = "<group>"; };
+		7475064505FFDEFD27A0934A9DB24C97 /* Pods-RocketDataTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RocketDataTests-resources.sh"; sourceTree = "<group>"; };
 		85F646650D2CB8D60E0A9B610A5C3CDB /* ConsistencyManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConsistencyManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E29FD3DF78E68BBFB2005797218704E /* Pods-RocketDataTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-RocketDataTests.modulemap"; sourceTree = "<group>"; };
+		8FA6F9E14CC2C3C25FA29B1113E5C7A1 /* Pods-RocketDataTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketDataTests.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9C1E5D20AEA5F198AF025261DD2A188B /* ConsistencyManagerListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerListener.swift; path = ConsistencyManager/Protocols/ConsistencyManagerListener.swift; sourceTree = "<group>"; };
+		9CE1A6554C91646ECDB57AEE95C2753C /* Pods-RocketData-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RocketData-dummy.m"; sourceTree = "<group>"; };
+		9DB69459C11F34D980C2A38DFBD144F5 /* Pods-RocketDataTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RocketDataTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9ED23AF9DC693ED95F963C33D83DF07D /* Pods_RocketDataTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RocketDataTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1ECCA60503B8A52C66D1701A61563B5 /* Pods-RocketData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketData.debug.xcconfig"; sourceTree = "<group>"; };
 		A2A6FF208CEC4C2861F1E9D42D651453 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		A304558520339D84989A221FB4C054E0 /* Pods-RocketDataTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RocketDataTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		A3E6B9393562E012FF3536A02C577E19 /* ConsistencyManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConsistencyManager.xcconfig; sourceTree = "<group>"; };
+		A5C22668428D77CADDE216C6F7094A87 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A698A45FD24BEAB6FC199968A66DCC81 /* Pods-RocketDataTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RocketDataTests-dummy.m"; sourceTree = "<group>"; };
+		A73A7A2F2E3A4601A8B14BDE6ACF43FB /* Pods-RocketDataTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RocketDataTests-frameworks.sh"; sourceTree = "<group>"; };
 		AEF5998704E241AD2FA83EACC216970C /* WeakListenerArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WeakListenerArray.swift; path = ConsistencyManager/DataStructures/WeakListenerArray.swift; sourceTree = "<group>"; };
 		AF6B0768E38C7114157A02217B66C9A2 /* ConsistencyManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ConsistencyManager-dummy.m"; sourceTree = "<group>"; };
+		B0E2BA164619EBA0D1BC0245A0394E5D /* Pods-RocketDataTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RocketDataTests-umbrella.h"; sourceTree = "<group>"; };
+		B33AAE8E3297C60B5C529640186B8192 /* Pods-RocketData-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RocketData-umbrella.h"; sourceTree = "<group>"; };
 		B4486E390C3341A54D024676ADB7D077 /* Pods_RocketData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RocketData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59F67CC8F3BE06376FFAC7EA1A13CD9 /* ErrorManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ErrorManager.swift; path = ConsistencyManager/Helpers/ErrorManager.swift; sourceTree = "<group>"; };
+		BE183B4C91777AA54A6FE81047AC6504 /* Pods-RocketDataTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RocketDataTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		C3B52A8ED6AD153CCDA1E4BB3122D69D /* ConsistencyManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ConsistencyManager.modulemap; sourceTree = "<group>"; };
-		C9FEDD3F8F7CA24AAC8E600FCB9CAD7F /* Pods-RocketDataTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketDataTests.release.xcconfig"; sourceTree = "<group>"; };
+		C9B2561468622CC735F9130D2CEDE471 /* Pods-RocketData-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RocketData-acknowledgements.plist"; sourceTree = "<group>"; };
+		CD8DFC56C5118E6852FBF97C953070BF /* Pods-RocketData-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RocketData-frameworks.sh"; sourceTree = "<group>"; };
 		CFAF7A3F70884178FAD542B42E9C7374 /* WeakArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WeakArray.swift; path = ConsistencyManager/DataStructures/WeakArray.swift; sourceTree = "<group>"; };
+		D2A28350FC686865DE4989C2C08BF94B /* Pods-RocketData.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketData.release.xcconfig"; sourceTree = "<group>"; };
 		DBF2897E86ACFC66B482A811F822B961 /* BatchListener.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BatchListener.swift; path = ConsistencyManager/DataStructures/BatchListener.swift; sourceTree = "<group>"; };
 		DC81E5E6745EF8D6F4DDEC7F19D26164 /* ConsistencyManagerDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerDelegate.swift; path = ConsistencyManager/Protocols/ConsistencyManagerDelegate.swift; sourceTree = "<group>"; };
+		E74FABC81220E780E10AFFA16B46B761 /* Pods-RocketData.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-RocketData.modulemap"; sourceTree = "<group>"; };
 		E86668F20F252C440D1015B816BE59C5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		E946FB05353C144B1DD40F49317AD7CB /* Pods-RocketData-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RocketData-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E97041D46547400C67C2349A305FFA8C /* ConsistencyManagerModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsistencyManagerModel.swift; path = ConsistencyManager/Protocols/ConsistencyManagerModel.swift; sourceTree = "<group>"; };
+		EBB8D891F6044B06170C4C327B4D64DD /* Pods-RocketData.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketData.debug.xcconfig"; sourceTree = "<group>"; };
+		EFA112F5EE6AC2CF8DBF6AA8A8064B89 /* Pods-RocketDataTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RocketDataTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1F4E101C4FF06BAE52D4EB7710E9CB0 /* CollectionHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CollectionHelpers.swift; path = ConsistencyManager/Helpers/CollectionHelpers.swift; sourceTree = "<group>"; };
-		F614F9737D9CB81A40DC9CC666DD13FA /* Pods-RocketData.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-RocketData.modulemap"; sourceTree = "<group>"; };
-		FB0413A3831A098D5DC5A692B8557436 /* Pods-RocketData-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RocketData-resources.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,21 +122,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		232BAA320B9B0D379D3851CE103EEC4C /* Pods-RocketData */ = {
+		2B2388E493598820B8A0410D0D9BC66F /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1DBC372F8061C320E3EC8760BDA49095 /* Info.plist */,
-				F614F9737D9CB81A40DC9CC666DD13FA /* Pods-RocketData.modulemap */,
-				3DEFF9A7C7AEE462D1ECECF5565903F6 /* Pods-RocketData-acknowledgements.markdown */,
-				7595FF013E359097D30B69D1C11AF69A /* Pods-RocketData-acknowledgements.plist */,
-				089BD4D8DE576134661A5BBA93EC9964 /* Pods-RocketData-dummy.m */,
-				FB0413A3831A098D5DC5A692B8557436 /* Pods-RocketData-resources.sh */,
-				271164874EA521DBF3A5E42882CA5E8C /* Pods-RocketData-umbrella.h */,
-				A1ECCA60503B8A52C66D1701A61563B5 /* Pods-RocketData.debug.xcconfig */,
-				5063F94E4E75CFA2BAE770E1AA393FBE /* Pods-RocketData.release.xcconfig */,
+				AF83646799A11C0E65DB5B4E582A7685 /* Pods-RocketData */,
+				2F36A7CBFBA36410A599A654AA491015 /* Pods-RocketDataTests */,
 			);
-			name = "Pods-RocketData";
-			path = "Target Support Files/Pods-RocketData";
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		2F36A7CBFBA36410A599A654AA491015 /* Pods-RocketDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				A5C22668428D77CADDE216C6F7094A87 /* Info.plist */,
+				8E29FD3DF78E68BBFB2005797218704E /* Pods-RocketDataTests.modulemap */,
+				9DB69459C11F34D980C2A38DFBD144F5 /* Pods-RocketDataTests-acknowledgements.markdown */,
+				BE183B4C91777AA54A6FE81047AC6504 /* Pods-RocketDataTests-acknowledgements.plist */,
+				A698A45FD24BEAB6FC199968A66DCC81 /* Pods-RocketDataTests-dummy.m */,
+				A73A7A2F2E3A4601A8B14BDE6ACF43FB /* Pods-RocketDataTests-frameworks.sh */,
+				7475064505FFDEFD27A0934A9DB24C97 /* Pods-RocketDataTests-resources.sh */,
+				B0E2BA164619EBA0D1BC0245A0394E5D /* Pods-RocketDataTests-umbrella.h */,
+				8FA6F9E14CC2C3C25FA29B1113E5C7A1 /* Pods-RocketDataTests.debug.xcconfig */,
+				EFA112F5EE6AC2CF8DBF6AA8A8064B89 /* Pods-RocketDataTests.release.xcconfig */,
+			);
+			name = "Pods-RocketDataTests";
+			path = "Target Support Files/Pods-RocketDataTests";
 			sourceTree = "<group>";
 		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
@@ -165,33 +176,6 @@
 			path = ConsistencyManager;
 			sourceTree = "<group>";
 		};
-		4C755ACC96D46765BA54509600A21819 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				232BAA320B9B0D379D3851CE103EEC4C /* Pods-RocketData */,
-				4E7E7762A195520FF247CE548D21DC69 /* Pods-RocketDataTests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		4E7E7762A195520FF247CE548D21DC69 /* Pods-RocketDataTests */ = {
-			isa = PBXGroup;
-			children = (
-				7EB4155B344A2C034F85FF0DEF919271 /* Info.plist */,
-				66C2744F8A608DA03871DB23D72F53EB /* Pods-RocketDataTests.modulemap */,
-				A304558520339D84989A221FB4C054E0 /* Pods-RocketDataTests-acknowledgements.markdown */,
-				1306A5E433D9AAC7FFC59697BD9C9DB4 /* Pods-RocketDataTests-acknowledgements.plist */,
-				7735ED8DE53508944981B891E90C0EFE /* Pods-RocketDataTests-dummy.m */,
-				6C7CAE382E5C46A01A4E6988A98B7E20 /* Pods-RocketDataTests-frameworks.sh */,
-				07A5BE63B6D649CB5208AD66140448B7 /* Pods-RocketDataTests-resources.sh */,
-				82F57EB9142715F7D70F6B909F8A1CC5 /* Pods-RocketDataTests-umbrella.h */,
-				34BC35DF87360F2E7CB7A5FF8B70C85D /* Pods-RocketDataTests.debug.xcconfig */,
-				C9FEDD3F8F7CA24AAC8E600FCB9CAD7F /* Pods-RocketDataTests.release.xcconfig */,
-			);
-			name = "Pods-RocketDataTests";
-			path = "Target Support Files/Pods-RocketDataTests";
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -199,7 +183,7 @@
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				CCE19C80C9B0F62EC444E2EEAC256C2F /* Pods */,
 				A7FBE01DFB35645CFAE846405EBBF44C /* Products */,
-				4C755ACC96D46765BA54509600A21819 /* Targets Support Files */,
+				2B2388E493598820B8A0410D0D9BC66F /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,6 +209,24 @@
 				9ED23AF9DC693ED95F963C33D83DF07D /* Pods_RocketDataTests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AF83646799A11C0E65DB5B4E582A7685 /* Pods-RocketData */ = {
+			isa = PBXGroup;
+			children = (
+				04F9BDFD6297BF18B9EB79FA44B20EC4 /* Info.plist */,
+				E74FABC81220E780E10AFFA16B46B761 /* Pods-RocketData.modulemap */,
+				E946FB05353C144B1DD40F49317AD7CB /* Pods-RocketData-acknowledgements.markdown */,
+				C9B2561468622CC735F9130D2CEDE471 /* Pods-RocketData-acknowledgements.plist */,
+				9CE1A6554C91646ECDB57AEE95C2753C /* Pods-RocketData-dummy.m */,
+				CD8DFC56C5118E6852FBF97C953070BF /* Pods-RocketData-frameworks.sh */,
+				5DDF3AF4A9F5500DFFD4A9165380EDB1 /* Pods-RocketData-resources.sh */,
+				B33AAE8E3297C60B5C529640186B8192 /* Pods-RocketData-umbrella.h */,
+				EBB8D891F6044B06170C4C327B4D64DD /* Pods-RocketData.debug.xcconfig */,
+				D2A28350FC686865DE4989C2C08BF94B /* Pods-RocketData.release.xcconfig */,
+			);
+			name = "Pods-RocketData";
+			path = "Target Support Files/Pods-RocketData";
 			sourceTree = "<group>";
 		};
 		CCE19C80C9B0F62EC444E2EEAC256C2F /* Pods */ = {
@@ -409,7 +411,107 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
+		087C0E07E694E836BA805FE795DB2A3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3E6B9393562E012FF3536A02C577E19 /* ConsistencyManager.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ConsistencyManager/ConsistencyManager-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ConsistencyManager/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ConsistencyManager/ConsistencyManager.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ConsistencyManager;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		35051ADC04A8E3671155E53E25D158F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBB8D891F6044B06170C4C327B4D64DD /* Pods-RocketData.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-RocketData/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RocketData/Pods-RocketData.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_RocketData;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3D2FC594F2B2BD161F45F7FC5726C815 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2A28350FC686865DE4989C2C08BF94B /* Pods-RocketData.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-RocketData/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RocketData/Pods-RocketData.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_RocketData;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		47BEF9D903506B003EA5C2B249729489 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -427,7 +529,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -447,19 +548,16 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		1F8553D73FA4ABF6F515ED3CD4D11721 /* Release */ = {
+		545D8A2EE88FE5B282E244BA127039A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5063F94E4E75CFA2BAE770E1AA393FBE /* Pods-RocketData.release.xcconfig */;
+			baseConfigurationReference = A3E6B9393562E012FF3536A02C577E19 /* ConsistencyManager.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -468,18 +566,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-RocketData/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/ConsistencyManager/ConsistencyManager-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ConsistencyManager/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-RocketData/Pods-RocketData.modulemap";
+				MODULEMAP_FILE = "Target Support Files/ConsistencyManager/ConsistencyManager.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_RocketData;
+				PRODUCT_NAME = ConsistencyManager;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -489,7 +583,76 @@
 			};
 			name = Release;
 		};
-		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
+		64135FF89D11D45C046F33E265CF084A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FA6F9E14CC2C3C25FA29B1113E5C7A1 /* Pods-RocketDataTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-RocketDataTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_RocketDataTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6CE333249CF0131362A7666AEFB6C420 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFA112F5EE6AC2CF8DBF6AA8A8064B89 /* Pods-RocketDataTests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-RocketDataTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_RocketDataTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AAF678CED40D3499169D10F63CA0719E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -507,7 +670,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -522,185 +684,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		7492D528FEDCA4E49E96A7723C51F482 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3E6B9393562E012FF3536A02C577E19 /* ConsistencyManager.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/ConsistencyManager/ConsistencyManager-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ConsistencyManager/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ConsistencyManager/ConsistencyManager.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = ConsistencyManager;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		BEF444A127220CE5BC5385E36E98C687 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1ECCA60503B8A52C66D1701A61563B5 /* Pods-RocketData.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-RocketData/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-RocketData/Pods-RocketData.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_RocketData;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D1FCAE66C55847E7E09DA4F3FDFF6FA7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34BC35DF87360F2E7CB7A5FF8B70C85D /* Pods-RocketDataTests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-RocketDataTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_RocketDataTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		DADE78EE9F187306B1A7CFD1189BC2B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3E6B9393562E012FF3536A02C577E19 /* ConsistencyManager.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/ConsistencyManager/ConsistencyManager-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ConsistencyManager/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ConsistencyManager/ConsistencyManager.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = ConsistencyManager;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		FB8A5E574CE02E5FD49307E1442DCFD2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9FEDD3F8F7CA24AAC8E600FCB9CAD7F /* Pods-RocketDataTests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-RocketDataTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_RocketDataTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -710,8 +696,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
-				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+				47BEF9D903506B003EA5C2B249729489 /* Debug */,
+				AAF678CED40D3499169D10F63CA0719E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -719,8 +705,8 @@
 		A43C1FA3E003048B8DAE89D3918C3F25 /* Build configuration list for PBXNativeTarget "Pods-RocketData" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BEF444A127220CE5BC5385E36E98C687 /* Debug */,
-				1F8553D73FA4ABF6F515ED3CD4D11721 /* Release */,
+				35051ADC04A8E3671155E53E25D158F4 /* Debug */,
+				3D2FC594F2B2BD161F45F7FC5726C815 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -728,8 +714,8 @@
 		A49A88E0757A7066CD2FE763AF4EA0F5 /* Build configuration list for PBXNativeTarget "Pods-RocketDataTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1FCAE66C55847E7E09DA4F3FDFF6FA7 /* Debug */,
-				FB8A5E574CE02E5FD49307E1442DCFD2 /* Release */,
+				64135FF89D11D45C046F33E265CF084A /* Debug */,
+				6CE333249CF0131362A7666AEFB6C420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -737,8 +723,8 @@
 		D4860273489427FA3BC8FD45AEB05BD3 /* Build configuration list for PBXNativeTarget "ConsistencyManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7492D528FEDCA4E49E96A7723C51F482 /* Debug */,
-				DADE78EE9F187306B1A7CFD1189BC2B8 /* Release */,
+				087C0E07E694E836BA805FE795DB2A3E /* Debug */,
+				545D8A2EE88FE5B282E244BA127039A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -27,9 +27,9 @@ class PauseDataProviderTests: RocketDataTestCase {
         let initialModel = ParentModel(id: 0, name: "initial", requiredChild: ChildModel(id: 1, name: "child"), otherChildren: [])
         dataProvider.setData(initialModel)
 
-        XCTAssertFalse(dataProvider.paused)
-        dataProvider.paused = true
-        XCTAssertTrue(dataProvider.paused)
+        XCTAssertFalse(dataProvider.isPaused)
+        dataProvider.isPaused = true
+        XCTAssertTrue(dataProvider.isPaused)
 
         let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
         otherDataProvider.setData(ParentModel(id: 0, name: "new", requiredChild: ChildModel(id: 1, name: "child"), otherChildren: []), context: "first")
@@ -44,8 +44,8 @@ class PauseDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataProvider.data, initialModel)
         XCTAssertEqual(numberOfTimesCalled, 0)
 
-        dataProvider.paused = false
-        XCTAssertFalse(dataProvider.paused)
+        dataProvider.isPaused = false
+        XCTAssertFalse(dataProvider.isPaused)
 
         waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
 

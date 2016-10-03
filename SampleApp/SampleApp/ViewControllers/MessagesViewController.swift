@@ -55,7 +55,7 @@ class MessagesViewController: UIViewController, CollectionDataProviderDelegate, 
 
         // We're going to do two things in parallel - access the cache and the network.
         // RocketData ensures there is no race condition here. If the cache returns after the network, the cache result is automatically discarded.
-        dataProvider.fetchDataFromCache(cacheKey: cacheKey) { (_, _) in
+        dataProvider.fetchDataFromCache(withCacheKey: cacheKey) { (_, _) in
             self.tableView.reloadData()
         }
 

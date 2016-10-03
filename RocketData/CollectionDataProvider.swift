@@ -61,20 +61,20 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      Since changes can come from multiple places in different orders, it's very difficult to guarantee these will be in the correct order.
      So, for unpausing, if we do not know what to use, we will simply use `.reset`.
      */
-    open var paused: Bool {
+    open var isPaused: Bool {
         get {
             if let batchListener = batchListener {
-                return batchListener.paused
+                return batchListener.isPaused
             } else {
-                return dataModelManager.consistencyManager.isPaused(self)
+                return dataModelManager.consistencyManager.isListenerPaused(self)
             }
         }
         set {
             Log.sharedInstance.assert(batchListener == nil, "You should not manually set paused on the collection data provider if you are using a batch listener. Instead, you should use the paused variable on batch listener.")
             if newValue {
-                dataModelManager.consistencyManager.pauseListeningForUpdates(self)
+                dataModelManager.consistencyManager.pauseListener(self)
             } else {
-                dataModelManager.consistencyManager.resumeListeningForUpdates(self)
+                dataModelManager.consistencyManager.resumeListener(self)
                 syncWithSiblingDataProviders()
             }
         }
@@ -156,7 +156,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter completion: Called on the main thread. This is called with the result from the cache.
      At this point, the data provider will already have new data, so there's no need to call setData.
     */
-    open func fetchDataFromCache(cacheKey: String?, context: Any? = nil, completion: @escaping ([T]?, NSError?)->()) {
+    open func fetchDataFromCache(withCacheKey cacheKey: String?, context: Any? = nil, completion: @escaping ([T]?, NSError?)->()) {
 
         guard cacheKey != self.cacheKey else {
             // If the cacheKey is the same as what we currently have, there's no point in fetching again from the cache
@@ -241,7 +241,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
             updateAndListenToNewModelsInConsistencyManager(context: context)
             // NOTE: No cache key here, because this is just updating all the new models
             let newModelsBatchModel = batchModelFromModels(newData, cacheKey: nil)
-            dataModelManager.consistencyManager.updateWithNewModel(newModelsBatchModel, context: ConsistencyContextWrapper(context: context))
+            dataModelManager.consistencyManager.updateModel(newModelsBatchModel, context: ConsistencyContextWrapper(context: context))
         }
     }
 
@@ -285,7 +285,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
         // - Update the whole collection. This will actually only affect paused collections because all the other collections were updated above.
         // - Update the new model. This will possibly cause other rows in the current collection to update.
         updateAndListenToNewModelsInConsistencyManager(context: context)
-        dataModelManager.consistencyManager.updateWithNewModel(element, context: ConsistencyContextWrapper(context: context))
+        dataModelManager.consistencyManager.updateModel(element, context: ConsistencyContextWrapper(context: context))
     }
 
     /**
@@ -295,7 +295,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter shouldCache: If false, we will not persist this to the cache.
      - parameter context: This context will be passed onto the cache delegate. Default nil.
      */
-    open func removeAtIndex(_ index: Int, shouldCache: Bool = true, context: Any? = nil) {
+    open func remove(at index: Int, shouldCache: Bool = true, context: Any? = nil) {
         var updatedData = data
         updatedData.remove(at: index)
         dataHolder.setData(updatedData, changeTime: ChangeTime())
@@ -349,7 +349,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      */
     open static func insert(_ newData: [T], at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
-        collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
+        collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
                 collectionDataProvider.insert(newData, at: index(cachedData), context: context)
             }
@@ -372,7 +372,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      */
     open static func append(_ newData: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
-        collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
+        collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             collectionDataProvider.append(newData, context: context)
             completion?(error)
         }
@@ -395,7 +395,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      */
     open static func update(_ element: T, at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
-        collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
+        collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
                 collectionDataProvider.update(element, at: index(cachedData), context: context)
             }
@@ -419,9 +419,9 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      */
     open static func removeAtIndex(_ index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
-        collectionDataProvider.fetchDataFromCache(cacheKey: cacheKey) { cachedData, error in
+        collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
-                collectionDataProvider.removeAtIndex(index(cachedData), context: context)
+                collectionDataProvider.remove(at: index(cachedData), context: context)
             }
             completion?(error)
         }
@@ -515,7 +515,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      */
     private func updateAndListenToNewModelsInConsistencyManager(context: Any?, shouldListen: Bool = true) {
         let batchModel = batchModelFromModels(data, cacheKey: cacheKey)
-        dataModelManager.consistencyManager.updateWithNewModel(batchModel, context: ConsistencyContextWrapper(context: context))
+        dataModelManager.consistencyManager.updateModel(batchModel, context: ConsistencyContextWrapper(context: context))
         if shouldListen {
             listenForUpdates(model: batchModel)
         }
@@ -569,9 +569,9 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
             }
         } else {
             if let model = model {
-                dataModelManager.consistencyManager.listenForUpdates(self, onModel: model)
+                dataModelManager.consistencyManager.addListener(self, to: model)
             } else {
-                dataModelManager.consistencyManager.listenForUpdates(self)
+                dataModelManager.consistencyManager.addListener(self)
             }
         }
     }

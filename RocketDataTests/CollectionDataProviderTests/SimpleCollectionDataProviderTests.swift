@@ -67,7 +67,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         }
 
         let expectation = self.expectation(description: "Wait for delegate")
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "context") { collection, error in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "context") { collection, error in
             XCTAssertEqual(collection?[0].id, 1)
             XCTAssertNil(error)
             expectation.fulfill()
@@ -91,7 +91,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         }
 
         let expectation = self.expectation(description: "Wait for delegate")
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "context") { collection, error in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "context") { collection, error in
             XCTAssertNil(collection)
             XCTAssertTrue(error === expectedError)
             expectation.fulfill()
@@ -236,7 +236,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
             expectation.fulfill()
         }
 
-        dataProvider.removeAtIndex(1, context: "context")
+        dataProvider.remove(at: 1, context: "context")
 
         XCTAssertEqual(dataProvider.count, 1)
         XCTAssertEqual(dataProvider[0].name, "initial")
@@ -259,7 +259,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         }
 
         var expectation = self.expectation(description: "Wait for delegate")
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "context") { collection, error in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "context") { collection, error in
             XCTAssertEqual(collection?[0].id, 1)
             XCTAssertNil(error)
             expectation.fulfill()
@@ -271,7 +271,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataModelManager.collectionFromCacheCalled, 1)
 
         expectation = self.expectation(description: "Wait for delegate 2")
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "context") { collection, error in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "context") { collection, error in
             XCTAssertEqual(collection?[0].id, 1)
             XCTAssertNil(error)
             expectation.fulfill()
@@ -302,7 +302,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(dataModelManager.collectionFromCacheCalled, 0)
 
         let expectation = self.expectation(description: "Wait for delegate")
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "context") { collection, error in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "context") { collection, error in
             XCTAssertEqual(collection?[0].id, 1)
             XCTAssertNil(error)
             expectation.fulfill()
@@ -325,7 +325,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         }
 
         var expectation = self.expectation(description: "Wait for delegate")
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "context") { collection, error in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "context") { collection, error in
             XCTAssertNil(collection)
             XCTAssertNotNil(error)
             expectation.fulfill()
@@ -345,7 +345,7 @@ class SimpleCollectionDataProviderTests: RocketDataTestCase {
         }
 
         expectation = self.expectation(description: "Wait for delegate 2")
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "context") { collection, error in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "context") { collection, error in
             XCTAssertEqual(collection?[0].id, 1)
             XCTAssertNil(error)
             expectation.fulfill()

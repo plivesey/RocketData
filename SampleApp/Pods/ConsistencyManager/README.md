@@ -59,3 +59,17 @@ To get started, you should take a look at the docs:
 
 https://linkedin.github.io/ConsistencyManager-iOS
 
+## Swift Version
+
+We are currently not maintaining separate branches for different Swift versions. You can use an older and stable version of the Consistency Manager for older versions of Swift though. HEAD currently supports Swift 3.
+
+| Swift Version | Consistency Manager Version  |
+|---------------|------------------------------|
+| 1             | Not supported                |
+| 2.0 - 2.1     | 2.x.x (untested)             |
+| 2.2 - 2.3     | 2.x.x                        |
+| 3 (Easy migration API) | 3.x.x               |
+| 3 (Better API) | 4.x.x                       |
+
+NOTE: If you are migrating to Swift 3, consider using version 3.0.0 first, then migrating to 4.x.x. 3.0.0 migrates the code to the new syntax without making any API changes. 4.x.x introduces a better API which is more consistent with the new Swift 3 API guidelines.
+

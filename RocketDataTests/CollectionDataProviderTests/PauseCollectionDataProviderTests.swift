@@ -50,9 +50,9 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
 
             if initialCollectionPaused {
                 // This should have no effect on the test either way, so let's test both ways
-                XCTAssertFalse(dataProvider1.paused)
-                dataProvider1.paused = true
-                XCTAssertTrue(dataProvider1.paused)
+                XCTAssertFalse(dataProvider1.isPaused)
+                dataProvider1.isPaused = true
+                XCTAssertTrue(dataProvider1.isPaused)
             }
 
             let batchDelegate = ClosureBatchListenerDelegate() { listeners, context in
@@ -65,12 +65,12 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
             let batchListener = BatchDataProviderListener(dataProviders: [dataProvider3], dataModelManager: dataModelManager)
             batchListener.delegate = batchDelegate
 
-            XCTAssertFalse(dataProvider2.paused)
-            dataProvider2.paused = true
-            XCTAssertTrue(dataProvider2.paused)
-            XCTAssertFalse(batchListener.paused)
-            batchListener.paused = true
-            XCTAssertTrue(batchListener.paused)
+            XCTAssertFalse(dataProvider2.isPaused)
+            dataProvider2.isPaused = true
+            XCTAssertTrue(dataProvider2.isPaused)
+            XCTAssertFalse(batchListener.isPaused)
+            batchListener.isPaused = true
+            XCTAssertTrue(batchListener.isPaused)
 
             let newModel = ParentModel(id: 1)
 
@@ -94,15 +94,15 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
             XCTAssertEqual(dataProvider2.data, [ParentModel(id: 0)])
             XCTAssertEqual(dataProvider3.data, [ParentModel(id: 0)])
 
-            dataProvider1.removeAtIndex(1, context: "context")
+            dataProvider1.remove(at: 1, context: "context")
             XCTAssertEqual(delegatesCalled, 0)
             XCTAssertEqual(dataProvider2.data, [ParentModel(id: 0)])
             XCTAssertEqual(dataProvider3.data, [ParentModel(id: 0)])
 
-            dataProvider2.paused = false
-            XCTAssertFalse(dataProvider2.paused)
-            batchListener.paused = false
-            XCTAssertFalse(batchListener.paused)
+            dataProvider2.isPaused = false
+            XCTAssertFalse(dataProvider2.isPaused)
+            batchListener.isPaused = false
+            XCTAssertFalse(batchListener.isPaused)
 
             // Now we should have correct data
             dataProviders.forEach { dataProvider in
@@ -123,7 +123,7 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
             }
             batchListener.delegate = nil
 
-            dataProvider1.paused = false
+            dataProvider1.isPaused = false
 
             let otherDataProvider = DataProvider<ParentModel>(dataModelManager: dataModelManager)
             otherDataProvider.setData(ParentModel(id: 4, name: "new", requiredChild: ChildModel(), otherChildren: []))
@@ -171,9 +171,9 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
 
             if initialCollectionPaused {
                 // This should have no effect on the test either way, so let's test both ways
-                XCTAssertFalse(dataProvider1.paused)
-                dataProvider1.paused = true
-                XCTAssertTrue(dataProvider1.paused)
+                XCTAssertFalse(dataProvider1.isPaused)
+                dataProvider1.isPaused = true
+                XCTAssertTrue(dataProvider1.isPaused)
             }
 
             let batchDelegate = ClosureBatchListenerDelegate() { listeners, context in
@@ -183,12 +183,12 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
             let batchListener = BatchDataProviderListener(dataProviders: [dataProvider3], dataModelManager: dataModelManager)
             batchListener.delegate = batchDelegate
 
-            XCTAssertFalse(dataProvider2.paused)
-            dataProvider2.paused = true
-            XCTAssertTrue(dataProvider2.paused)
-            XCTAssertFalse(batchListener.paused)
-            batchListener.paused = true
-            XCTAssertTrue(batchListener.paused)
+            XCTAssertFalse(dataProvider2.isPaused)
+            dataProvider2.isPaused = true
+            XCTAssertTrue(dataProvider2.isPaused)
+            XCTAssertFalse(batchListener.isPaused)
+            batchListener.isPaused = true
+            XCTAssertTrue(batchListener.isPaused)
 
             let newModel = ParentModel(id: 1)
 
@@ -208,11 +208,11 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
             XCTAssertEqual(dataProvider2.data, [ParentModel(id: 0)])
             XCTAssertEqual(dataProvider3.data, [ParentModel(id: 0)])
 
-            dataProvider1.removeAtIndex(1, context: "context")
+            dataProvider1.remove(at: 1, context: "context")
             XCTAssertEqual(dataProvider2.data, [ParentModel(id: 0)])
             XCTAssertEqual(dataProvider3.data, [ParentModel(id: 0)])
 
-            dataProvider1.removeAtIndex(1, context: "context")
+            dataProvider1.remove(at: 1, context: "context")
             XCTAssertEqual(dataProvider2.data, [ParentModel(id: 0)])
             XCTAssertEqual(dataProvider3.data, [ParentModel(id: 0)])
 
@@ -222,10 +222,10 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
 
             // We should now be back at the start with just one thing in the array - ParentModel(id: 0)
 
-            dataProvider2.paused = false
-            XCTAssertFalse(dataProvider2.paused)
-            batchListener.paused = false
-            XCTAssertFalse(batchListener.paused)
+            dataProvider2.isPaused = false
+            XCTAssertFalse(dataProvider2.isPaused)
+            batchListener.isPaused = false
+            XCTAssertFalse(batchListener.isPaused)
 
             // Now we should have correct data
             dataProviders.forEach { dataProvider in
@@ -296,12 +296,12 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
             let dataProvider1 = sharedCollectionDataProvider(delegate1)
             weakDataProvider1 = dataProvider1
 
-            XCTAssertFalse(dataProvider2.paused)
-            dataProvider2.paused = true
-            XCTAssertTrue(dataProvider2.paused)
-            XCTAssertFalse(batchListener.paused)
-            batchListener.paused = true
-            XCTAssertTrue(batchListener.paused)
+            XCTAssertFalse(dataProvider2.isPaused)
+            dataProvider2.isPaused = true
+            XCTAssertTrue(dataProvider2.isPaused)
+            XCTAssertFalse(batchListener.isPaused)
+            batchListener.isPaused = true
+            XCTAssertTrue(batchListener.isPaused)
 
             let newModel = ParentModel(id: 1)
 
@@ -325,7 +325,7 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
             XCTAssertEqual(dataProvider2.data, [ParentModel(id: 0)])
             XCTAssertEqual(dataProvider3.data, [ParentModel(id: 0)])
 
-            dataProvider1.removeAtIndex(1, context: "context")
+            dataProvider1.remove(at: 1, context: "context")
             XCTAssertEqual(delegatesCalled, 0)
             XCTAssertEqual(dataProvider2.data, [ParentModel(id: 0)])
             XCTAssertEqual(dataProvider3.data, [ParentModel(id: 0)])
@@ -338,10 +338,10 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
 
         XCTAssertNil(weakDataProvider1)
 
-        dataProvider2.paused = false
-        XCTAssertFalse(dataProvider2.paused)
-        batchListener.paused = false
-        XCTAssertFalse(batchListener.paused)
+        dataProvider2.isPaused = false
+        XCTAssertFalse(dataProvider2.isPaused)
+        batchListener.isPaused = false
+        XCTAssertFalse(batchListener.isPaused)
 
         // Since in this case, our update is coming from the consistency manager, we need to wait here
         waitForConsistencyManagerToFlush(dataModelManager.consistencyManager)
@@ -386,9 +386,9 @@ class PauseCollectionDataProviderTests: SharedCollectionTests {
         let dataProvider2 = sharedCollectionDataProvider(nil)
         let dataProvider3 = sharedCollectionDataProvider(nil)
 
-        dataProvider1.paused = true
-        dataProvider2.paused = true
-        dataProvider3.paused = true
+        dataProvider1.isPaused = true
+        dataProvider2.isPaused = true
+        dataProvider3.isPaused = true
 
         var data: DataHolder<[ParentModel]>? = dataModelManager.sharedCollectionManager.dataFromProviders(cacheKey: "cacheKey")
         // Before we do anything, data should return 0 since all data providers have this value

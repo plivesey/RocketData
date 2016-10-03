@@ -45,7 +45,7 @@ class ChatsViewController: UIViewController, CollectionDataProviderDelegate, UIT
 
         // In parallel, we're going to fetch from the cache and fetch from the network
         // There's no chance of a race condition here, because it's handled by RocketData
-        dataProvider.fetchDataFromCache(cacheKey: cacheKey) { (_, _) in
+        dataProvider.fetchDataFromCache(withCacheKey: cacheKey) { (_, _) in
             self.tableView.reloadData()
         }
 

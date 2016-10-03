@@ -26,7 +26,7 @@ class ParsingHelpersTests: RocketDataTestCase {
             return nil
         }
 
-        func isEqualToModel(_ model: SimpleModel) -> Bool {
+        func isEqual(to model: SimpleModel) -> Bool {
             return false
         }
     }

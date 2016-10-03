@@ -46,7 +46,7 @@ final class FullChildModel: Model, Equatable {
     func forEach(_ visit: (Model) -> Void) {
     }
 
-    func mergeModel(_ model: Model) -> Model {
+    func merge(_ model: Model) -> Model {
         if let model = model as? FullChildModel {
             // If the other model is the same class, we can just do a replacement
             return model

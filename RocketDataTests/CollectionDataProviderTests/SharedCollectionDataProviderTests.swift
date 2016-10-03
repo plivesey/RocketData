@@ -673,7 +673,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         let batchListener = BatchDataProviderListener(dataProviders: [dataProvider3], dataModelManager: dataModelManager)
         batchListener.delegate = batchDelegate
 
-        dataProvider1.removeAtIndex(0, context: "context")
+        dataProvider1.remove(at: 0, context: "context")
         dataProviders.forEach { dataProvider in
             XCTAssertEqual(dataProvider.count, 0)
         }
@@ -752,7 +752,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
 
         let expectation = self.expectation(description: "waitForCache")
         // Fetching from the cache will set the cacheKey
-        otherDataProvider.fetchDataFromCache(cacheKey: "otherCacheKey", context: "cacheContext") { (_, _) in
+        otherDataProvider.fetchDataFromCache(withCacheKey: "otherCacheKey", context: "cacheContext") { (_, _) in
             expectation.fulfill()
         }
         waitForExpectations(timeout: 10, handler: nil)
@@ -761,7 +761,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         let model = ParentModel(id: 1)
         sharedDataProvider.update(model, at: 0, context: "context")
         sharedDataProvider.setData([model, model], cacheKey: "cacheKey", context: "context")
-        sharedDataProvider.removeAtIndex(1, context: "context")
+        sharedDataProvider.remove(at: 1, context: "context")
         sharedDataProvider.insert([model], at: 1, context: "context")
 
         // Shouldn't have changed the other data provider
@@ -806,7 +806,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         var dataProviderLoadFinished = {}
 
         // Start loading from the cache
-        dataProvider.fetchDataFromCache(cacheKey: "cacheKey", context: "cacheContext") { _, _ in
+        dataProvider.fetchDataFromCache(withCacheKey: "cacheKey", context: "cacheContext") { _, _ in
             dataProviderLoadFinished()
         }
 
@@ -861,7 +861,7 @@ class SharedCollectionDataProviderTests: SharedCollectionTests {
         }
         XCTAssertNil(weakDataProvider2)
 
-        dataProvider1.removeAtIndex(0, context: "context")
+        dataProvider1.remove(at: 0, context: "context")
 
         waitForCacheToFinish(dataModelManager)
         XCTAssertEqual(cacheUpdates, 1)

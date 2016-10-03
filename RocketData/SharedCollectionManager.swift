@@ -177,7 +177,7 @@ extension CollectionDataProvider: SharedCollection {
             let batchModel = BatchUpdateModel(models: consistencyManagerModels)
             listenForUpdates(model: batchModel)
 
-            if !paused {
+            if !isPaused {
                 dataHolder.setData(newData, changeTime: ChangeTime())
                 updateDelegatesWithChange(.reset, context: context)
             } else {
@@ -196,7 +196,7 @@ extension CollectionDataProvider: SharedCollection {
             let batchModel = BatchUpdateModel(models: consistencyManagerModels)
             listenForUpdates(model: batchModel)
 
-            if !paused {
+            if !isPaused {
                 // Index must be within range
                 // data.count is ok because it will insert at the end
                 if index > data.count || index < 0 {
@@ -229,7 +229,7 @@ extension CollectionDataProvider: SharedCollection {
 
         listenForUpdates(model: element)
 
-        if !paused {
+        if !isPaused {
             if index >= data.count || index < 0 {
                 Log.sharedInstance.assert(false, "Index out of bounds on shared collection. This means something has gotten out of sync and something has gone wrong. Make sure you are only accessing CollectionDataProviders on the main thread. If you cannot find the problem, please file a bug.")
                 return
@@ -246,7 +246,7 @@ extension CollectionDataProvider: SharedCollection {
     }
 
     func removeAnyAtIndex(_ index: Int, context: Any?) {
-        if !paused {
+        if !isPaused {
             if index >= data.count || index < 0 {
                 Log.sharedInstance.assert(false, "Index out of bounds on shared collection. This means something has gotten out of sync and something has gone wrong. Make sure you are only accessing CollectionDataProviders on the main thread. If you cannot find the problem, please file a bug.")
                 return

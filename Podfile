@@ -3,11 +3,11 @@
 use_frameworks!
 
 target :'RocketData' do
-  pod 'ConsistencyManager', '~> 3.0.0'
+  pod 'ConsistencyManager', '~> 4.0.0'
 end
 
 target :'RocketDataTests' do
-  pod 'ConsistencyManager', '~> 3.0.0'
+  pod 'ConsistencyManager', '~> 4.0.0'
 end
 
 # This is necessary to convert the target to swift 3.0

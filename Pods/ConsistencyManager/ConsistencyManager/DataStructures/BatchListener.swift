@@ -21,7 +21,7 @@ import Foundation
 
  ### SETUP
 
- You should NOT call listenForUpdates on any of the listeners that you pass into this class. Instead, you should call it directly on the instance of this class.
+ You should NOT call addListener on any of the listeners that you pass into this class. Instead, you should call it directly on the instance of this class.
  This causes the instance of this class to listen to each of the models of the listeners.
  Any time you manually change a model on one of the listeners, you need to call listenerHasUpdatedModel.
  */
@@ -35,15 +35,15 @@ open class BatchListener: ConsistencyManagerListener {
     /// Listening to all models occurs immediately upon initialization of the BatchListener object
     public init(listeners: [ConsistencyManagerListener], consistencyManager: ConsistencyManager) {
         self.listeners = listeners
-        listenForUpdates(consistencyManager)
+        addListener(consistencyManager)
     }
 
     /**
-     Instead of calling listenForUpdates on each of the child listeners, you should call this method.
+     Instead of calling addListener on each of the child listeners, you should call this method.
      You should also call it whenever you manually change any of the sublisteners.
      */
-    open func listenForUpdates(_ consistencyManager: ConsistencyManager) {
-        consistencyManager.listenForUpdates(self)
+    open func addListener(_ consistencyManager: ConsistencyManager) {
+        consistencyManager.addListener(self)
     }
 
     /**
@@ -51,7 +51,7 @@ open class BatchListener: ConsistencyManagerListener {
      */
     open func listenerHasUpdatedModel(_ listener: ConsistencyManagerListener, consistencyManager: ConsistencyManager) {
         if let model = listener.currentModel() {
-            consistencyManager.listenForUpdates(self, onModel: model)
+            consistencyManager.addListener(self, to: model)
         }
         // else the model nil, so we don't have to listen to anything new.
     }
@@ -63,7 +63,7 @@ open class BatchListener: ConsistencyManagerListener {
      - parameter consistencyManager: The consistency manager you are using to listen to these changes.
      */
     open func listenerHasUpdatedModel(_ model: ConsistencyManagerModel, consistencyManager: ConsistencyManager) {
-        consistencyManager.listenForUpdates(self, onModel: model)
+        consistencyManager.addListener(self, to: model)
     }
 
     // MARK: Consistency Manager Implementation

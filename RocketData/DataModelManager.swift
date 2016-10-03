@@ -53,7 +53,7 @@ open class DataModelManager {
      - parameter context: This context will be passed back to data provider delegates if this causes an update.
      */
     open func updateModel<T: SimpleModel>(_ model: T, updateCache: Bool = true, context: Any? = nil) {
-        consistencyManager.updateWithNewModel(model, context: ConsistencyContextWrapper(context: context))
+        consistencyManager.updateModel(model, context: ConsistencyContextWrapper(context: context))
         if updateCache, let cacheKey = model.modelIdentifier {
             cacheModel(model, forKey: cacheKey, context: context)
         }
@@ -70,7 +70,7 @@ open class DataModelManager {
      */
     open func updateModels<T: SimpleModel>(_ models: [T], updateCache: Bool = true, context: Any? = nil) {
         let batchModel = BatchUpdateModel(models: models.map { $0 as ConsistencyManagerModel })
-        consistencyManager.updateWithNewModel(batchModel, context: ConsistencyContextWrapper(context: context))
+        consistencyManager.updateModel(batchModel, context: ConsistencyContextWrapper(context: context))
         if updateCache {
             externalDispatchQueue.async {
                 models.forEach { model in
