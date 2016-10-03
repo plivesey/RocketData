@@ -183,7 +183,7 @@
 
     <span class="n">dataProvider</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span>
 
-    <span class="n">dataProvider</span><span class="p">.</span><span class="n">fetchDataFromCache</span><span class="p">(</span><span class="n">cacheKey</span><span class="o">:</span> <span class="n">self</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="n">in</span>
+    <span class="n">dataProvider</span><span class="p">.</span><span class="n">fetchDataFromCache</span><span class="p">(</span><span class="n">withCacheKey</span><span class="o">:</span> <span class="n">self</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="n">in</span>
       <span class="n">self</span><span class="p">.</span><span class="n">refreshView</span><span class="p">()</span>
     <span class="p">}</span>
 
@@ -214,7 +214,7 @@
 
     <span class="n">dataProvider</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span>
 
-    <span class="n">dataProvider</span><span class="p">.</span><span class="n">fetchDataFromCache</span><span class="p">(</span><span class="n">cacheKey</span><span class="o">:</span> <span class="s">&quot;contacts&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="n">in</span>
+    <span class="n">dataProvider</span><span class="p">.</span><span class="n">fetchDataFromCache</span><span class="p">(</span><span class="n">withCacheKey</span><span class="o">:</span> <span class="s">&quot;contacts&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="n">in</span>
       <span class="n">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
     <span class="p">}</span>
 

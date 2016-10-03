@@ -23,7 +23,7 @@ The application has two view controllers. One shows a message from a person. The
 
       dataProvider.delegate = self
 
-      dataProvider.fetchDataFromCache(cacheKey: self.id) { (model, error) in
+      dataProvider.fetchDataFromCache(withCacheKey: self.id) { (model, error) in
         self.refreshView()
       }
 
@@ -54,7 +54,7 @@ The application has two view controllers. One shows a message from a person. The
 
       dataProvider.delegate = self
 
-      dataProvider.fetchDataFromCache(cacheKey: "contacts") { (models, error) in
+      dataProvider.fetchDataFromCache(withCacheKey: "contacts") { (models, error) in
         self.tableView.reloadData()
       }
 

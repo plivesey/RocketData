@@ -183,7 +183,7 @@
 <h2>Create your DataModelManager<a class="headerlink" href="#create-your-datamodelmanager" title="Permalink to this headline">¶</a></h2>
 <p>Applications can have multiple DataModelManagers, but in most cases, you&#8217;ll just use one. The DataModelManager is the glue which connects the DataProviders with the cache and the Consistency Manager. The easiest way to do this is add a singleton in an extension. For example:</p>
 <div class="highlight-c"><div class="highlight"><pre><span class="n">extension</span> <span class="n">DataModelManager</span> <span class="p">{</span>
-  <span class="n">let</span> <span class="n">sharedInstance</span> <span class="o">=</span> <span class="n">DataModelManager</span><span class="p">(</span><span class="n">cacheDelegate</span><span class="o">:</span> <span class="n">MyCacheDelegate</span><span class="p">())</span>
+  <span class="k">static</span> <span class="n">let</span> <span class="n">sharedInstance</span> <span class="o">=</span> <span class="n">DataModelManager</span><span class="p">(</span><span class="n">cacheDelegate</span><span class="o">:</span> <span class="n">MyCacheDelegate</span><span class="p">())</span>
 <span class="p">}</span>
 </pre></div>
 </div>
