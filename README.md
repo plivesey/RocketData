@@ -41,6 +41,22 @@ github "linkedin/RocketData"
 ```
 Then run `carthage update RocketData`
 
+### Swift Version
+
+We are currently not maintaining separate branches for different Swift versions. You can use an older version of Rocket Data for older versions of Swift though. HEAD currently supports Swift 3.
+
+| Swift Version | Rocket Data Version          |
+|---------------|------------------------------|
+| 1             | Not supported                |
+| 2.0 - 2.1     | 1.x.x (untested)             |
+| 2.2           | 1.x.x                        |
+| 2.3 (Cocoapods) | 1.x.x                      |
+| 2.3 (Carthage) | 1.2.0                       |
+| 3 (Easy migration API) | 2.0.0               |
+| 3 (Better API) | 3.x.x                       |
+
+NOTE: If you are migrating to Swift 3, consider using version 2.0.0 first, then migrating to 3.x.x. 3.0.0 migrates the code to the new syntax without making any API changes. 3.x.x introduces a better API which is more consistent with the new Swift 3 API guidelines.
+
 ## Documentation
 
 To get started, you should take a look at the [docs](https://linkedin.github.io/RocketData).
