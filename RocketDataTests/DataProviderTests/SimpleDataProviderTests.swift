@@ -250,7 +250,7 @@ class SimpleDataProviderTests: RocketDataTestCase {
         var cacheModelCalled = 0
         var modelFromCacheCalled = 0
 
-        override func cacheModel<T : SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
+        override func cacheModel(_ model: SimpleModel, forKey cacheKey: String, context: Any?) {
             cacheModelCalled += 1
             super.cacheModel(model, forKey: cacheKey, context: context)
         }

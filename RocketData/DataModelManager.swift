@@ -52,7 +52,7 @@ open class DataModelManager {
      - parameter updateCache: You can pass in false here if you only want to update the models in memory.
      - parameter context: This context will be passed back to data provider delegates if this causes an update.
      */
-    open func updateModel<T: SimpleModel>(_ model: T, updateCache: Bool = true, context: Any? = nil) {
+    open func updateModel(_ model: SimpleModel, updateCache: Bool = true, context: Any? = nil) {
         consistencyManager.updateModel(model, context: ConsistencyContextWrapper(context: context))
         if updateCache, let cacheKey = model.modelIdentifier {
             cacheModel(model, forKey: cacheKey, context: context)
@@ -68,7 +68,7 @@ open class DataModelManager {
      - parameter updateCache: You can pass in false here if you only want to update the models in memory.
      - parameter context: This context will be passed back to data provider delegates if this causes an update.
      */
-    open func updateModels<T: SimpleModel>(_ models: [T], updateCache: Bool = true, context: Any? = nil) {
+    open func updateModels(_ models: [SimpleModel], updateCache: Bool = true, context: Any? = nil) {
         let batchModel = BatchUpdateModel(models: models.map { $0 as ConsistencyManagerModel })
         consistencyManager.updateModel(batchModel, context: ConsistencyContextWrapper(context: context))
         if updateCache {
@@ -108,7 +108,7 @@ open class DataModelManager {
      Save a model in the cache. This simply forwards the method to the cache delegate.
      The cache key you pass in here should be equal to the modelIdentifier of the model.
      */
-    open func cacheModel<T: SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
+    open func cacheModel(_ model: SimpleModel, forKey cacheKey: String, context: Any?) {
         externalDispatchQueue.async {
             self.cacheDelegate.setModel(model, forKey: cacheKey, context: context)
         }
