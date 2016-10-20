@@ -39,15 +39,15 @@ class RocketDataTestCase: XCTestCase {
      */
     func waitForCacheToFinish(_ dataModelManager: DataModelManager) {
         var expectation = self.expectation(description: "Wait for consistency manager to complete pending tasks")
-        (dataModelManager.externalDispatchQueue).async(flags: .barrier, execute: {
+        (dataModelManager.externalDispatchQueue).async(flags: .barrier) {
             expectation.fulfill()
-        }) 
+        }
         waitForExpectations(timeout: 10, handler: nil)
 
         expectation = self.expectation(description: "Wait for main thread to complete pending tasks")
-        DispatchQueue.main.async(flags: .barrier, execute: {
+        DispatchQueue.main.async(flags: .barrier) {
             expectation.fulfill()
-        }) 
+        }
         waitForExpectations(timeout: 10, handler: nil)
     }
     

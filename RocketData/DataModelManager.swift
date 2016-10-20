@@ -60,6 +60,19 @@ open class DataModelManager {
     }
 
     /**
+     This function updates an individual model in only the consistency manager.
+     This will cause any data providers listening to this model change to update.
+     This is necessary because you can't call `updateModel` with an object of type SimpleModel.
+     This appears to be a Swift bug, but it is unclear.
+     
+     - parameter model: The model you want to update.
+     - parameter context: This context will be passed back to data provider delegates if this causes an update.
+     */
+    open func updateModelInConsistencyManager(_ model: SimpleModel, context: Any? = nil) {
+        consistencyManager.updateModel(model, context: ConsistencyContextWrapper(context: context))
+    }
+
+    /**
      This function updates an array of models in the consistency manager and cache.
      This will cause any data providers listening to this model change to update.
      Even if each model causes a different change in the data provider, it will still only receive one delegate callback with all the changes here.
@@ -80,6 +93,21 @@ open class DataModelManager {
                 }
             }
         }
+    }
+
+    /**
+     This function updates an array of models in only the consistency manager.
+     This will cause any data providers listening to this model change to update.
+     Even if each model causes a different change in the data provider, it will still only receive one delegate callback with all the changes here.
+     This is necessary because you can't call `updateModel` with an object of type SimpleModel.
+     This appears to be a Swift bug, but it is unclear.
+
+     - parameter models: The models you want to update.
+     - parameter context: This context will be passed back to data provider delegates if this causes an update.
+     */
+    open func updateModeslInConsistencyManager(_ models: [SimpleModel], context: Any? = nil) {
+        let batchModel = BatchUpdateModel(models: models.map { $0 as ConsistencyManagerModel })
+        consistencyManager.updateModel(batchModel, context: ConsistencyContextWrapper(context: context))
     }
 
     /**
