@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'RocketData'
-  spec.version          = '3.0.0'
+  spec.version          = '4.0.0'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/RocketData'
   spec.authors          = 'LinkedIn'
