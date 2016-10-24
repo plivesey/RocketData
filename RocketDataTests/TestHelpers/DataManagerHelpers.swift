@@ -20,14 +20,14 @@ class NoOpCacheDelegate: CacheDelegate {
         completion(nil, NSError(domain: "com.rocketData.unitTests", code: 0, userInfo: nil))
     }
 
-    func setModel<T: SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
+    func setModel(_ model: SimpleModel, forKey cacheKey: String, context: Any?) {
     }
 
     func collectionForKey<T: SimpleModel>(_ cacheKey: String?, context: Any?, completion: @escaping ([T]?, NSError?)->()) {
         completion(nil, NSError(domain: "com.rocketData.unitTests", code: 0, userInfo: nil))
     }
 
-    func setCollection<T: SimpleModel>(_ collection: [T], forKey cacheKey: String, context: Any?) {
+    func setCollection(_ collection: [SimpleModel], forKey cacheKey: String, context: Any?) {
     }
 
     func deleteModel(_ model: SimpleModel, forKey cacheKey: String?, context: Any?) {
@@ -48,7 +48,7 @@ class ExpectCacheDelegate: CacheDelegate {
         }
     }
 
-    func setModel<T: SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
+    func setModel(_ model: SimpleModel, forKey cacheKey: String, context: Any?) {
         setModelCalled?(model, cacheKey, context)
     }
 
@@ -58,7 +58,7 @@ class ExpectCacheDelegate: CacheDelegate {
         }
     }
 
-    func setCollection<T: SimpleModel>(_ collection: [T], forKey cacheKey: String, context: Any?) {
+    func setCollection(_ collection: [SimpleModel], forKey cacheKey: String, context: Any?) {
         // Annoying workaround for a compiler bug
         let simpleModels = collection.map { model in
             model as SimpleModel

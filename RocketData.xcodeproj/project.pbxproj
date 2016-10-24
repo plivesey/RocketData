@@ -29,7 +29,7 @@
 		612AB3E11CCE7C1C0034EADD /* PauseDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612AB3E01CCE7C1C0034EADD /* PauseDataProviderTests.swift */; };
 		612AB3E31CCE877D0034EADD /* PauseCollectionDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612AB3E21CCE877D0034EADD /* PauseCollectionDataProviderTests.swift */; };
 		612AB3E71CCE8AC30034EADD /* SharedCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612AB3E61CCE8AC30034EADD /* SharedCollectionTests.swift */; };
-		612B73621C8F9CD2005B12B1 /* ScherzoTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B73611C8F9CD2005B12B1 /* ScherzoTestCase.swift */; };
+		612B73621C8F9CD2005B12B1 /* RocketDataTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B73611C8F9CD2005B12B1 /* RocketDataTestCase.swift */; };
 		612B736D1C8FAF17005B12B1 /* SimpleCollectionDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B736C1C8FAF17005B12B1 /* SimpleCollectionDataProviderTests.swift */; };
 		612B736F1C9079DC005B12B1 /* ConsistencyCollectionDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612B736E1C9079DC005B12B1 /* ConsistencyCollectionDataProviderTests.swift */; };
 		6137042E1CC91FAC008D0EBB /* WeakSharedCollectionArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6137042D1CC91FAC008D0EBB /* WeakSharedCollectionArrayTests.swift */; };
@@ -43,6 +43,7 @@
 		6175BEEA1C8F4BBD003A162D /* DataProviderDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6175BEE91C8F4BBD003A162D /* DataProviderDelegates.swift */; };
 		6192BEDB1CBFFC0A00212DC5 /* ChangeClockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6192BEDA1CBFFC0A00212DC5 /* ChangeClockTests.swift */; };
 		6192BEDD1CBFFDFB00212DC5 /* BatchListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6192BEDC1CBFFDFB00212DC5 /* BatchListenerTests.swift */; };
+		61B6660B1DB92CB600D9A812 /* DataModelManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B6660A1DB92CB500D9A812 /* DataModelManagerTests.swift */; };
 		61FD70A91C8E1BC800DFAD2E /* ParentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD70A81C8E1BC800DFAD2E /* ParentModel.swift */; };
 		61FD70AB1C8E1BED00DFAD2E /* ChildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FD70AA1C8E1BED00DFAD2E /* ChildModel.swift */; };
 		FA5D03BE8841FEDD5A3433AD /* Pods_RocketData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F416DEBD8929CFE59C87ED /* Pods_RocketData.framework */; };
@@ -85,7 +86,7 @@
 		612AB3E01CCE7C1C0034EADD /* PauseDataProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseDataProviderTests.swift; sourceTree = "<group>"; };
 		612AB3E21CCE877D0034EADD /* PauseCollectionDataProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseCollectionDataProviderTests.swift; sourceTree = "<group>"; };
 		612AB3E61CCE8AC30034EADD /* SharedCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedCollectionTests.swift; sourceTree = "<group>"; };
-		612B73611C8F9CD2005B12B1 /* ScherzoTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScherzoTestCase.swift; sourceTree = "<group>"; };
+		612B73611C8F9CD2005B12B1 /* RocketDataTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketDataTestCase.swift; sourceTree = "<group>"; };
 		612B736C1C8FAF17005B12B1 /* SimpleCollectionDataProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCollectionDataProviderTests.swift; sourceTree = "<group>"; };
 		612B736E1C9079DC005B12B1 /* ConsistencyCollectionDataProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsistencyCollectionDataProviderTests.swift; sourceTree = "<group>"; };
 		6137042D1CC91FAC008D0EBB /* WeakSharedCollectionArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakSharedCollectionArrayTests.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		6192BEDA1CBFFC0A00212DC5 /* ChangeClockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeClockTests.swift; sourceTree = "<group>"; };
 		6192BEDC1CBFFDFB00212DC5 /* BatchListenerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchListenerTests.swift; sourceTree = "<group>"; };
 		6195AA441D413E8400F8BABB /* Pods_RocketData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_RocketData.framework; path = "../../../Library/Developer/Xcode/DerivedData/RocketData-fakibhwbjgxxqqbhtroabdzpzvve/Build/Products/Debug-iphonesimulator/Pods_RocketData.framework"; sourceTree = "<group>"; };
+		61B6660A1DB92CB500D9A812 /* DataModelManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModelManagerTests.swift; sourceTree = "<group>"; };
 		61FD70A81C8E1BC800DFAD2E /* ParentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentModel.swift; sourceTree = "<group>"; };
 		61FD70AA1C8E1BED00DFAD2E /* ChildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildModel.swift; sourceTree = "<group>"; };
 		93F416DEBD8929CFE59C87ED /* Pods_RocketData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RocketData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,12 +179,13 @@
 		612242BF1C7B85D40017B0C4 /* RocketDataTests */ = {
 			isa = PBXGroup;
 			children = (
-				612B73611C8F9CD2005B12B1 /* ScherzoTestCase.swift */,
+				612B73611C8F9CD2005B12B1 /* RocketDataTestCase.swift */,
 				61FD70A71C8E1BB300DFAD2E /* TestModels */,
 				6175BEE41C8E3120003A162D /* TestHelpers */,
 				61FD70A51C8E1BB300DFAD2E /* CollectionDataProviderTests */,
 				61FD70A61C8E1BB300DFAD2E /* DataProviderTests */,
 				613C430D1CA091E00080B7A3 /* ParsingHelpersTests.swift */,
+				61B6660A1DB92CB500D9A812 /* DataModelManagerTests.swift */,
 				6192BEDA1CBFFC0A00212DC5 /* ChangeClockTests.swift */,
 				6192BEDC1CBFFDFB00212DC5 /* BatchListenerTests.swift */,
 				611562DA1CC16B490001F5CE /* CollectionChangeTests.swift */,
@@ -477,9 +480,10 @@
 				6175BEE31C8E30CF003A162D /* SimpleDataProviderTests.swift in Sources */,
 				612AB3E31CCE877D0034EADD /* PauseCollectionDataProviderTests.swift in Sources */,
 				61427D061D63CD800034617E /* SmallModels.swift in Sources */,
+				61B6660B1DB92CB600D9A812 /* DataModelManagerTests.swift in Sources */,
 				61FD70AB1C8E1BED00DFAD2E /* ChildModel.swift in Sources */,
 				611562DB1CC16B490001F5CE /* CollectionChangeTests.swift in Sources */,
-				612B73621C8F9CD2005B12B1 /* ScherzoTestCase.swift in Sources */,
+				612B73621C8F9CD2005B12B1 /* RocketDataTestCase.swift in Sources */,
 				611323AA1D5BB0070046625E /* FullChildModel.swift in Sources */,
 				6165455E1CC7E8F600AC68C9 /* CollectionChangeHelpers.swift in Sources */,
 				612AB3E11CCE7C1C0034EADD /* PauseDataProviderTests.swift in Sources */,
@@ -605,6 +609,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E816E0EC503C5F077273A5B3 /* Pods-RocketData.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -626,6 +631,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 997C3052192E11916F11C270 /* Pods-RocketData.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -646,7 +652,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC288B6D02498F01FECDAA0F /* Pods-RocketDataTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = RocketDataTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.RocketDataTests;
@@ -659,7 +665,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1E495CE9B06BB69A277C55E /* Pods-RocketDataTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = RocketDataTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.RocketDataTests;

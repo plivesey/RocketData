@@ -685,26 +685,24 @@ class ConsistencyCollectionDataProviderTests: RocketDataTestCase {
     // MARK: Timing Tests
 
     func testConsistencyManagerUpdateAfterSetData() {
-        func testDeletingModel() {
-            let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let dataProvider = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
 
-            // Let's create this before we do the setData. This ensures that this change happened before the setData.
-            let contextWrapper = ConsistencyContextWrapper(context: nil)
+        // Let's create this before we do the setData. This ensures that this change happened before the setData.
+        let contextWrapper = ConsistencyContextWrapper(context: nil)
 
-            let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(), otherChildren: [])
-            let newModel = ParentModel(id: 1, name: "new", requiredChild: ChildModel(), otherChildren: [])
+        let initialModel = ParentModel(id: 1, name: "initial", requiredChild: ChildModel(), otherChildren: [])
+        let newModel = ParentModel(id: 1, name: "new", requiredChild: ChildModel(), otherChildren: [])
 
-            let delegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
-                XCTFail()
-            }
-            dataProvider.delegate = delegate
-
-            dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
-            // This uses a date before the setData, so should be a no-op
-            DataModelManager.sharedDataManagerNoCache.consistencyManager.updateModel(newModel, context: contextWrapper)
-
-            waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+        let delegate = ClosureCollectionDataProviderDelegate() { (collectionChanges, context) in
+            XCTFail()
         }
+        dataProvider.delegate = delegate
+
+        dataProvider.setData([initialModel], cacheKey: nil, context: "wrong")
+        // This uses a date before the setData, so should be a no-op
+        DataModelManager.sharedDataManagerNoCache.consistencyManager.updateModel(newModel, context: contextWrapper)
+
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
     }
 
     // MARK: Projection Tests
