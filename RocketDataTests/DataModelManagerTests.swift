@@ -132,4 +132,15 @@ class DataModelManagerTests: RocketDataTestCase {
         XCTAssertEqual(dataProvider[0], newModel)
         XCTAssertEqual(dataProvider[1], otherNewModel)
     }
+
+    /**
+     Previously, this test failed because of https://bugs.swift.org/browse/SR-3038
+     This test passes if it compiles.
+
+     */
+    func testUpdateModelWithSimpleModelType() {
+        let model: Model = ParentModel(id: 1, name: "", requiredChild: ChildModel(), otherChildren: [])
+        DataModelManager.sharedDataManagerNoCache.updateModel(model)
+        DataModelManager.sharedDataManagerNoCache.updateModels([model])
+    }
 }
