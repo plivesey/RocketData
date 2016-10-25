@@ -32,7 +32,7 @@ class RocketDataCacheDelegate: CacheDelegate {
         completion(modelType.init(data: data) as? T, nil)
     }
 
-    func setModel<T : SimpleModel>(_ model: T, forKey cacheKey: String, context: Any?) {
+    func setModel(_ model: SimpleModel, forKey cacheKey: String, context: Any?) {
         if let model = model as? SampleAppModel {
             cache.setObject(model.data() as NSCoding, forKey: cacheKey, block: nil)
         } else {
@@ -62,7 +62,7 @@ class RocketDataCacheDelegate: CacheDelegate {
         completion(collection, nil)
     }
 
-    func setCollection<T : SimpleModel>(_ collection: [T], forKey cacheKey: String, context: Any?) {
+    func setCollection(_ collection: [SimpleModel], forKey cacheKey: String, context: Any?) {
         // In this method, we're going to store an array of strings for the collection and cache all the models individually
         // This means updating one of the models will automatically update the collection
 
