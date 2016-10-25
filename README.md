@@ -39,7 +39,9 @@ Add this to your `Cartfile`:
 ```ogdl
 github "linkedin/RocketData"
 ```
-Then run `carthage update RocketData`
+Then run `carthage update RocketData --platform ios`
+
+NOTE: Currently, `--platform ios` is necessary for some reason. We are investigating the issue.
 
 ### Swift Version
 
