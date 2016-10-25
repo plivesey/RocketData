@@ -40,7 +40,7 @@ public protocol CacheDelegate {
      In this method, you should save a model in the cache.
      For information on threading, see the CacheDelegate docs.
      
-     - paramter model: The model to save in the cache.
+     - parameter model: The model to save in the cache.
      - parameter cacheKey: The cache key for this model. This is always equal to the modelIdentifier.
      - parameter context: A context you can pass in when saving to the cache.
      */
@@ -67,7 +67,7 @@ public protocol CacheDelegate {
      In this method, you should save a collection of models in the cache.
      For information on threading, see the CacheDelegate docs.
 
-     - paramter collection: The models to save in the cache. This is defined by the CollectionDataProvider.
+     - parameter collection: The models to save in the cache. This is defined by the CollectionDataProvider.
      - parameter cacheKey: The cache key for this model.
      - parameter context: A context you can pass in when saving to the cache.
      */
