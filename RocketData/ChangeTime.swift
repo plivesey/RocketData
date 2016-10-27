@@ -12,11 +12,13 @@ import Foundation
 /**
  This class keeps a global clock which is used to record when changes happen.
  Whenever you create a new ChangeTime, it will be after any previous times and before any future times.
- It is not thread-safe. You must call it on the main thread.
+ This is a thread safe class. You can call it from any thread.
  */
 struct ChangeTime: Equatable {
     /// Keeps track of the last time we updated
     private static var lastTime = 1
+    /// We use this serial queue to sync on different threads
+    private static let queue = DispatchQueue(label: "com.rocketdata.changeTime")
 
     fileprivate let time: Int
 
@@ -24,9 +26,13 @@ struct ChangeTime: Equatable {
      Creates a new ChangeTime instance. This is guarenteed to be after any previous times created.
      */
     init() {
-        Log.sharedInstance.assert(Thread.isMainThread, "The ChangeClock was accessed on a different thread than the main thread. This probably means you are accessing something in the library that is not thread-safe on a different thread. This can cause race conditions.")
-        self.time = ChangeTime.lastTime
-        ChangeTime.lastTime += 1
+        var time = 0
+        ChangeTime.queue.sync {
+            time = ChangeTime.lastTime
+            ChangeTime.lastTime += 1
+        }
+        Log.sharedInstance.assert(time != 0, "Dispatch sync is behaving incorrectly. This is a bug.")
+        self.time = time
     }
 
     /**

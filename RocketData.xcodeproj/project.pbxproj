@@ -11,7 +11,7 @@
 		611562DB1CC16B490001F5CE /* CollectionChangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611562DA1CC16B490001F5CE /* CollectionChangeTests.swift */; };
 		6117DDF81CD7A8EB002F57C1 /* BatchDataProviderListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDE51CD7A8EB002F57C1 /* BatchDataProviderListener.swift */; };
 		6117DDFA1CD7A8EB002F57C1 /* CacheDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDE71CD7A8EB002F57C1 /* CacheDelegate.swift */; };
-		6117DDFB1CD7A8EB002F57C1 /* ChangeClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDE81CD7A8EB002F57C1 /* ChangeClock.swift */; };
+		6117DDFB1CD7A8EB002F57C1 /* ChangeTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDE81CD7A8EB002F57C1 /* ChangeTime.swift */; };
 		6117DDFC1CD7A8EB002F57C1 /* CollectionChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDE91CD7A8EB002F57C1 /* CollectionChange.swift */; };
 		6117DDFD1CD7A8EB002F57C1 /* CollectionDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDEA1CD7A8EB002F57C1 /* CollectionDataProvider.swift */; };
 		6117DDFE1CD7A8EB002F57C1 /* ConsistencyContextWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117DDEB1CD7A8EB002F57C1 /* ConsistencyContextWrapper.swift */; };
@@ -66,7 +66,7 @@
 		611562DA1CC16B490001F5CE /* CollectionChangeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionChangeTests.swift; sourceTree = "<group>"; };
 		6117DDE51CD7A8EB002F57C1 /* BatchDataProviderListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchDataProviderListener.swift; sourceTree = "<group>"; };
 		6117DDE71CD7A8EB002F57C1 /* CacheDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheDelegate.swift; sourceTree = "<group>"; };
-		6117DDE81CD7A8EB002F57C1 /* ChangeClock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeClock.swift; sourceTree = "<group>"; };
+		6117DDE81CD7A8EB002F57C1 /* ChangeTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeTime.swift; sourceTree = "<group>"; };
 		6117DDE91CD7A8EB002F57C1 /* CollectionChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionChange.swift; sourceTree = "<group>"; };
 		6117DDEA1CD7A8EB002F57C1 /* CollectionDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataProvider.swift; sourceTree = "<group>"; };
 		6117DDEB1CD7A8EB002F57C1 /* ConsistencyContextWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsistencyContextWrapper.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 				6117DDF41CD7A8EB002F57C1 /* ParsingHelpers.swift */,
 				6117DDF01CD7A8EB002F57C1 /* Errors.swift */,
 				6117DDF21CD7A8EB002F57C1 /* Logger.swift */,
-				6117DDE81CD7A8EB002F57C1 /* ChangeClock.swift */,
+				6117DDE81CD7A8EB002F57C1 /* ChangeTime.swift */,
 				6117DDEB1CD7A8EB002F57C1 /* ConsistencyContextWrapper.swift */,
 				6117DDED1CD7A8EB002F57C1 /* DataHolder.swift */,
 				6117DDF61CD7A8EB002F57C1 /* SharedCollectionManager.swift */,
@@ -458,7 +458,7 @@
 				6117DE041CD7A8EB002F57C1 /* Logger.swift in Sources */,
 				6117DDF81CD7A8EB002F57C1 /* BatchDataProviderListener.swift in Sources */,
 				6117DE051CD7A8EB002F57C1 /* Model.swift in Sources */,
-				6117DDFB1CD7A8EB002F57C1 /* ChangeClock.swift in Sources */,
+				6117DDFB1CD7A8EB002F57C1 /* ChangeTime.swift in Sources */,
 				6117DDFD1CD7A8EB002F57C1 /* CollectionDataProvider.swift in Sources */,
 				6117DDFA1CD7A8EB002F57C1 /* CacheDelegate.swift in Sources */,
 				6117DE091CD7A8EB002F57C1 /* WeakSharedCollectionArray.swift in Sources */,
