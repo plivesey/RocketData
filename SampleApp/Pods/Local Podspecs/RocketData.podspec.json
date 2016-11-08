@@ -1,6 +1,6 @@
 {
   "name": "RocketData",
-  "version": "2.0.0",
+  "version": "4.0.1",
   "license": {
     "type": "Apache License, Version 2.0"
   },
@@ -9,7 +9,7 @@
   "summary": "A non-blocking CoreData replacement which uses immutable models.",
   "source": {
     "git": "https://github.com/linkedin/RocketData.git",
-    "tag": "2.0.0"
+    "tag": "4.0.1"
   },
   "source_files": "RocketData/**/*.swift",
   "platforms": {

@@ -1,7 +1,7 @@
 PODS:
   - ConsistencyManager (4.0.0)
   - PINCache (2.3)
-  - RocketData (2.0.0):
+  - RocketData (4.0.1):
     - ConsistencyManager (~> 4.0.0)
 
 DEPENDENCIES:
@@ -23,8 +23,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ConsistencyManager: 323ee466a5c933973529dfa5baa5cbc238633a67
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
-  RocketData: ac8290ea0e65f422f0a259cf5b4940cafec9b462
+  RocketData: a661f6e75dd8741dbe95856ca84f5e16ab3b377e
 
 PODFILE CHECKSUM: b5eb42e36b4847085a928ca720bb30354bb63d2e
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.3

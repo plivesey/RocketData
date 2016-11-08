@@ -20,7 +20,7 @@ class NetworkManager {
 
     static func fetchChats(_ completion: @escaping ([UserModel], NSError?)->Void) {
         let delay = 1.5
-        let delayTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        let delayTime = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
             let chats = [
                 UserModel(id: 1, name: "Nick", online: true),
@@ -63,7 +63,7 @@ class NetworkManager {
 
     fileprivate static func startRandomUserOnlineNotifications() {
         let delay = Double(arc4random_uniform(4) + 2)
-        let delayTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        let delayTime = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
             let userId = Int(arc4random_uniform(2) + 1)
             let online = arc4random_uniform(2) == 0
@@ -80,7 +80,7 @@ class NetworkManager {
 
     fileprivate static func startRandomNewMessagesNotifications() {
         let delay = Double(arc4random_uniform(10) + 2)
-        let delayTime = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        let delayTime = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
             let userId = Int(arc4random_uniform(2) + 1)
             let username = userId == 1 ? "Nick" : "Nitesh"
