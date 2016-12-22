@@ -291,4 +291,65 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.data?.name, "initial")
         XCTAssertEqual(otherDataProvider.data?.otherData, 42)
     }
+    
+    // MARK: Listen to ID
+    
+    func testBasicListeningToID() {
+        let dataProvider = DataProvider<ChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        dataProvider.modelIdentifier = "ChildModel:1"
+        
+        let child = ChildModel(id: 1, name: "new")
+        let model = ParentModel(id: 1, name: "new", requiredChild: child, otherChildren: [])
+        
+        var delegateCalled = 0
+        let delegate = ClosureDataProviderDelegate() { context in
+            XCTAssertEqual(context as? String, "context")
+            delegateCalled += 1
+        }
+        dataProvider.delegate = delegate
+        let otherDelegate = ClosureDataProviderDelegate() { context in
+            XCTFail()
+        }
+        otherDataProvider.delegate = otherDelegate
+        
+        otherDataProvider.setData(model, context: "context")
+        
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+        
+        XCTAssertEqual(dataProvider.data, child)
+        XCTAssertEqual(delegateCalled, 1)
+    }
+    
+    func testBasicListeningToIDFromCache() {
+        let dataProvider = DataProvider<ChildModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        let otherDataProvider = DataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
+        
+        let waitForCacheMiss = expectation(description: "waitForCacheMiss")
+        dataProvider.fetchDataFromCache(withCacheKey: "ChildModel:1", listenToModelIdentifier: true) { _, _ in
+            waitForCacheMiss.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+        
+        let child = ChildModel(id: 1, name: "new")
+        let model = ParentModel(id: 1, name: "new", requiredChild: child, otherChildren: [])
+        
+        var delegateCalled = 0
+        let delegate = ClosureDataProviderDelegate() { context in
+            XCTAssertEqual(context as? String, "context")
+            delegateCalled += 1
+        }
+        dataProvider.delegate = delegate
+        let otherDelegate = ClosureDataProviderDelegate() { context in
+            XCTFail()
+        }
+        otherDataProvider.delegate = otherDelegate
+        
+        otherDataProvider.setData(model, context: "context")
+        
+        waitForConsistencyManagerToFlush(DataModelManager.sharedDataManagerNoCache.consistencyManager)
+        
+        XCTAssertEqual(dataProvider.data, child)
+        XCTAssertEqual(delegateCalled, 1)
+    }
 }

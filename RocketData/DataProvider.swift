@@ -13,7 +13,7 @@ import ConsistencyManager
 /**
  This class implements a data provider for a single model.
  */
-open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListenable {
+open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListenable, ConsistencyManagerUpdatesListener {
 
     // MARK: - Public instance variables
 
@@ -53,6 +53,28 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
             }
         }
     }
+    
+    open var modelIdentifier: String? {
+        get {
+            if let data = data {
+                return data.modelIdentifier
+            } else {
+                return listeningToModelIdentifier
+            }
+        }
+        set {
+            guard data == nil else {
+                Log.sharedInstance.assert(false, "You should not manually set the model identifier when you already have a model.")
+                return
+            }
+            listeningToModelIdentifier = newValue
+            if newValue != nil {
+                dataModelManager.consistencyManager.addModelUpdatesListener(self)
+            }
+        }
+    }
+    
+    var listeningToModelIdentifier: String?
 
     /// This saves the batchListener instance. It is public because it implements the BatchListenable protocol. You should never edit this directly.
     open weak var batchListener: BatchDataProviderListener?
@@ -60,7 +82,14 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
     // MARK: - Private instance variables
 
     /// This wraps the data with a lastUpdated ChangeTime and makes sure the data is never changed without updating the ChangeTime
-    var dataHolder = DataHolder<T?>(data: nil)
+    var dataHolder = DataHolder<T?>(data: nil) {
+        didSet {
+            if dataHolder.data != nil && listeningToModelIdentifier != nil {
+                listeningToModelIdentifier = nil
+                dataModelManager.consistencyManager.removeModelUpdatesListener(self)
+            }
+        }
+    }
 
     /// This is updated whenever we set data. In some circumstances, we want to check that our new update is newer than our current model.
     var lastUpdated: ChangeTime {
@@ -139,6 +168,27 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
             }
         }
     }
+    
+    /**
+     Fetches a model from the cache.
+     It will only fetch from the cache and set the model if data is nil.
+     This is because if we have data, it should be identical to the cached data so fetching from the cache is pointless.
+     
+     - parameter cacheKey: The cache key for this model.
+     - parameter context: This context is passed to the cacheDelegate when making the query. Default nil.
+     - parameter completion: Called on the main thread. This is called with the result from the cache.
+     At this point, the data provider will already have new data, so there's no need to call setData.
+     This completion block will always be called exactly once, even if no data was updated.
+     */
+    open func fetchDataFromCache(withCacheKey cacheKey: String?, listenToModelIdentifier: Bool, context: Any? = nil, completion: @escaping (T?, NSError?)->()) {
+        
+        fetchDataFromCache(withCacheKey: cacheKey, context: context) { model, error in
+            if self.data == nil && model == nil && listenToModelIdentifier {
+                self.modelIdentifier = cacheKey
+            }
+            completion(model, error)
+        }
+    }
 
     // MARK: Consistency Manager Implementation
 
@@ -171,6 +221,42 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
             delegate?.dataProviderHasUpdatedData(self, context: actualContext)
         } else {
             Log.sharedInstance.assert(false, "Consistency manager returned an incorrect model type. It looks like we have duplicate ids for different classes. This is not allowed because models must have globally unique identifiers.")
+        }
+    }
+    
+    open func consistencyManager(_ consistencyManager: ConsistencyManager,
+                            updatedModel model: ConsistencyManagerModel,
+                            changes: [String: ModelChange],
+                            context: Any?) {
+        if let modelId = listeningToModelIdentifier, data == nil {
+            if let modelChange = changes[modelId] {
+                if case ModelChange.updated(let models) = modelChange {
+                    models.forEach { newModel in
+                        // There may be multiple projections here. Let's search for one of the right class.
+                        if let newModel = newModel as? T {
+                            let actualContext: Any?
+                            var changeTime: ChangeTime?
+                            if let context = context as? ConsistencyContextWrapper {
+                                if !context.creationDate.after(lastUpdated) {
+                                    // Our current data is newer than this change so let's discard this change.
+                                    return
+                                }
+                                actualContext = context.context
+                                changeTime = context.creationDate
+                            } else {
+                                // The change came from a manual change to the consistency manager so we don't have time information
+                                // This isn't preferable, but let's assume that we actually want this change
+                                actualContext = context
+                            }
+                            dataHolder.setData(newModel, changeTime: changeTime ?? ChangeTime())
+                            delegate?.dataProviderHasUpdatedData(self, context: actualContext)
+                        }
+                    }
+                }
+                
+            }
+        } else {
+            dataModelManager.consistencyManager.removeModelUpdatesListener(self)
         }
     }
 
