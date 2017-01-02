@@ -292,6 +292,54 @@ class ConsistencyDataProviderTests: RocketDataTestCase {
         XCTAssertEqual(otherDataProvider.data?.otherData, 42)
     }
     
+    // Update after cache fetch
+    
+    func testDataProviderUpdatesAfterFetchingFromCache() {
+        let cache = ExpectCacheDelegate()
+        let dataModelManager = DataModelManager(cacheDelegate: cache)
+        let dataProvider = DataProvider<ParentModel>(dataModelManager: dataModelManager)
+        let otherDataProvider = DataProvider<ParentModel>(dataModelManager: dataModelManager)
+        
+        cache.modelForKeyCalled = { key, context, completion in
+            XCTAssertEqual(key, "ParentModel:1")
+            XCTAssertEqual(context as? String, "context")
+            let model = ParentModel(id: 1)
+            completion(model, nil)
+        }
+        
+        let expectation = self.expectation(description: "")
+        dataProvider.fetchDataFromCache(withCacheKey: "ParentModel:1", context: "context") { (model, error) -> () in
+            XCTAssertEqual(model?.id, 1)
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+        
+        XCTAssertEqual(dataProvider.data?.id, 1)
+        
+        // Now, let's set a model on the other data provider and verify that the first data provider updates
+        
+        let newModel = ParentModel(id: 1, name: "new", requiredChild: ChildModel(), otherChildren: [])
+        
+        XCTAssertNotEqual(dataProvider.data, newModel)
+        
+        var called = 0
+        let delegate = ClosureDataProviderDelegate() { context in
+            XCTAssertEqual(context as? String, "context")
+            XCTAssertEqual(dataProvider.data, newModel)
+            called += 1
+        }
+        dataProvider.delegate = delegate
+        
+        otherDataProvider.setData(newModel, updateCache: false, context: "context")
+        
+        waitForConsistencyManagerToFlush(dataModelManager.consistencyManager)
+        
+        XCTAssertEqual(dataProvider.data, newModel)
+        called += 1
+    }
+    
     // MARK: Listen to ID
     
     func testBasicListeningToID() {

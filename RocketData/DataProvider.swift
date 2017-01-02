@@ -122,11 +122,7 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
             }
             // These need to be called every time the model changes
             dataModelManager.consistencyManager.updateModel(data, context: ConsistencyContextWrapper(context: context))
-            if let batchListener = batchListener {
-                batchListener.listenerHasUpdatedModel(self)
-            } else {
-                dataModelManager.consistencyManager.addListener(self)
-            }
+            listenForUpdates()
         }
     }
 
@@ -160,6 +156,7 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
             if cacheDataFresh {
                 if let model = model {
                     self.dataHolder.setData(model, changeTime: ChangeTime())
+                    self.listenForUpdates()
                 }
                 completion(model, error)
             } else {
@@ -187,6 +184,19 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
                 self.modelIdentifier = cacheKey
             }
             completion(model, error)
+        }
+    }
+    
+    // MARK: Helpers
+    
+    /**
+     Call this whenever a new model is changed internally. This is done on setting data and fetching data.
+     */
+    func listenForUpdates() {
+        if let batchListener = batchListener {
+            batchListener.listenerHasUpdatedModel(self)
+        } else {
+            dataModelManager.consistencyManager.addListener(self)
         }
     }
 
