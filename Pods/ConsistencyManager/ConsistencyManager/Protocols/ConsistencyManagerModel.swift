@@ -41,7 +41,7 @@ class Person: ConsistencyManagerModel {
         return Person(id: id, name: name, currentLocation: newCurrentLocation, homeTown: newHomeTown!)
     }
 
-    func forEach(function: ConsistencyManagerModel -> ()) {
+    func forEach(function: ConsistencyManagerModel -> Void) {
         if let currentLocation = currentLocation {
             function(currentLocation)
         }
@@ -77,7 +77,7 @@ class Location: ConsistencyManagerModel {
         return self
     }
 
-    func forEach(function: ConsistencyManagerModel -> ()) {
+    func forEach(function: ConsistencyManagerModel -> Void) {
         // Do nothing. Nothing to iterate over.
     }
 
@@ -140,7 +140,7 @@ public protocol ConsistencyManagerModel {
      For instance:
 
      extension ConsistencyManagerModel {
-        func forEach(function: ConsistencyManagerModel -> ()) {
+        func forEach(function: ConsistencyManagerModel -> Void) {
             _ = map() { model in
                 function(model)
                 return model

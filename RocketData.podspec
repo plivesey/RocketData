@@ -9,6 +9,6 @@ Pod::Spec.new do |spec|
   spec.source_files     = 'RocketData/**/*.swift'
   spec.platform         = :ios, '8.0'
   spec.frameworks       = 'Foundation'
-  spec.dependency 'ConsistencyManager', '~> 4.0.0'
+  spec.dependency 'ConsistencyManager', '~> 5.0.0'
 end
 
