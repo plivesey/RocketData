@@ -8,17 +8,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import Foundation
-import ConsistencyManager
 
 /**
- This type alias creates a `WeakSharedCollectionArray` type which holds `SharedCollections`.
+ This is a generic implementation of `WeakHolder` which we use the in `WeakArray` class.
  */
-typealias WeakSharedCollectionArray = AnyWeakArray<WeakSharedCollectionBox>
+public struct WeakBox<T: AnyObject>: WeakHolder {
 
-/**
- This defines a WeakHolder which specifically holds a SharedCollection.
- This is useful because WeakBox<SharedCollection> is illegal in Swift. You need a concrete type like this one.
- */
-struct WeakSharedCollectionBox: WeakHolder {
-    weak var element: SharedCollection?
+    // Sadly, we need to declare this because by default, it's internal
+    public init(element: T?) {
+        self.element = element
+    }
+
+    public weak var element: T?
 }
