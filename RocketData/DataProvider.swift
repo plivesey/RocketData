@@ -103,7 +103,7 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
      This is the internal storage for the ID we are listening to.
      If `data` is not nil, this should be nil.
      */
-    var listeningToModelIdentifier: String?
+    private var listeningToModelIdentifier: String?
 
     /// This is updated whenever we set data. In some circumstances, we want to check that our new update is newer than our current model.
     var lastUpdated: ChangeTime {
