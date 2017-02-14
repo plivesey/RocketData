@@ -43,7 +43,7 @@ Since you now have a singleton DataModelManager, we recommend adding these exten
   }
 
   extension CollectionDataProvider {
-    convenience init(cacheKey: String?) {
+    convenience init() {
       self.init(dataModelManager: DataModelManager.sharedInstance)
     }
   }
