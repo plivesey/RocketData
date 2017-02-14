@@ -9,19 +9,6 @@
 
 import Foundation
 
-class CollectionHelpers {
-    /**
-     This function essentially does a cast, but this cast isn't allowed in swift so we have to manually create a new dictionary.
-     */
-    class func optionalValueDictionaryFromDictionary<A, B>(_ dictionary: [A: B]) -> [A: B?] {
-        var newDictionary = [A: B?]()
-        for (key, value) in dictionary {
-            newDictionary[key] = value
-        }
-        return newDictionary
-    }
-}
-
 /**
  This class creates a reference counted dictionary instead of doing structs.
  It's used for a specific part of the consistency manager for performance reasons.

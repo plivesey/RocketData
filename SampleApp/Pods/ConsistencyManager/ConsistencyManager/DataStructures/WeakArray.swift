@@ -9,24 +9,42 @@
 
 import Foundation
 
+/**
+ This typealias allows you to create a `WeakArray` with any class type.
+ e.g.
+ `var weakArray = WeakArray<ConsistencyManager>()`
+ */
+public typealias WeakArray<T: AnyObject> = AnyWeakArray<WeakBox<T>>
 
 /**
- This class defines an array which doesn't hold strong references to its elements. If an element in the array gets dealloced at some point, accessing that element will just return nil.
+ This typealias allows you to create a `WeakArray` with ConsistencyManagerListener.
+ */
+public typealias WeakListenerArray = AnyWeakArray<WeakListenerBox>
+
+/**
+ This typealias allows you to create a `WeakArray` with ConsistencyManagerUpdatesListener.
+ */
+public typealias WeakUpdatesListenerArray = AnyWeakArray<WeakUpdatesListenerBox>
+
+/**
+ This class defines an array which doesn't hold strong references to its elements.
+ If an element in the array gets dealloced at some point, accessing that element will just return nil.
+ It takes advantage of out Array+Weak extension, so all the functions here are just pass throughs to the Array class.
 
  You cannot put structs into the WeakArray because structs cannot be declared with weak. You can only put classes into the array.
 
  KNOWN BUGS
 
  You can't create a WeakArray<SomeProtocol>. This is because of an Apple bug: https://bugs.swift.org/browse/SR-1176.
+ So, instead of this, it's recommended to create your own wrapper class and create a typealias (as seen above).
 */
 
-// Here I want to do this: WeakArray<T: class>, but that doesn't work. So this is a decent work around.
-public struct WeakArray<T: AnyObject>: ExpressibleByArrayLiteral {
+public struct AnyWeakArray<T: WeakHolder>: ExpressibleByArrayLiteral {
 
     // MARK: Internal
 
     /// The internal data is an array of closures which return weak T's
-    fileprivate var data: [() -> T?]
+    fileprivate var data: [T]
 
     // MARK: Initializers
 
@@ -41,19 +59,23 @@ public struct WeakArray<T: AnyObject>: ExpressibleByArrayLiteral {
      Creates an array with a certain capacity. All elements in the array will be nil.
     */
     public init(count: Int) {
-        data = Array<() -> T?>(repeating: {
-            return nil
-        }, count: count)
+        data = Array(repeating: T(element: nil), count: count)
     }
 
     /**
      Array literal initializer. Allows you to initialize a WeakArray with array notation.
     */
-    public init(arrayLiteral elements: T?...) {
-        data = []
-        for element in elements {
-            data.append(weakClosureWithValue(element))
+    public init(arrayLiteral elements: T.Element?...) {
+        data = elements.map { element in
+            return T.init(element: element)
         }
+    }
+
+    /**
+     Creates an array with the inner type `[T]` where T is a WeakHolder.
+     */
+    public init(_ data: [T]) {
+        self.data = data
     }
 
     // MARK: Public Properties
@@ -68,8 +90,8 @@ public struct WeakArray<T: AnyObject>: ExpressibleByArrayLiteral {
     /**
      Append an element to the array.
     */
-    public mutating func append(_ element: T?) {
-        data.append(weakClosureWithValue(element))
+    public mutating func append(_ element: T.Element?) {
+        data.append(T.init(element: element))
     }
 
     /**
@@ -77,79 +99,75 @@ public struct WeakArray<T: AnyObject>: ExpressibleByArrayLiteral {
      It also returns an array of nonoptional values for convenience.
 
      This method runs in O(n), so you should only call this method every time you need it. You should only call it once.
-     i.e. Don't do this:
-     for _ in array.prune()
     */
-    public mutating func prune() -> [T] {
-        var nonOptionalElements = [T]()
-        data = data.filter { closure in
-            let value = closure()
-            if let value = value {
-                nonOptionalElements.append(value)
-                return true
-            } else {
-                return false
-            }
-        }
-        return nonOptionalElements
+    public mutating func prune() -> [T.Element] {
+        return data.prune()
     }
 
     /**
-     This function is similar to the map function on Array. It takes a function that maps T to U and returns a WeakArray of the same length with this function applied to each element.
+     This function is similar to the map function on Array.
+     It takes a function that maps T to U and returns a WeakArray of the same length with this function applied to each element.
+     It does not prune any nil elements as part of this map so the resulting count will be equal to the current count.
     */
-    public func map<U>(_ function: (T?) -> U?) -> WeakArray<U> {
-        var newArray = WeakArray<U>()
-        for value in self {
-            let newValue = function(value)
-            newArray.append(newValue)
-        }
-        return newArray
+    public func map<U>(_ transform: (T.Element?) throws -> U.Element?) rethrows -> AnyWeakArray<U> {
+        let newArray: [U] = try data.map(transform)
+        return AnyWeakArray<U>(newArray)
     }
 
-    // MARK: Private Methods
+    /**
+     This function is similar to the flatMap function on Array.
+     It takes a function that maps T to U? and returns a WeakArray with this function applied to each element.
+     It automatically prunes any nil elements as part of this flatMap and removes them.
+     */
+    public func flatMap<U>(_ transform: (T.Element?) throws -> U.Element?) rethrows -> AnyWeakArray<U> {
+        let newArray: [U] = try data.flatMap(transform)
+        return AnyWeakArray<U>(newArray)
+    }
 
-    fileprivate func weakClosureWithValue(_ object: T?) -> () -> T? {
-        return { [weak object] in
-            return object
-        }
+    /**
+     This function is similar to the filter function on Array.
+     The `isIncluded` closure simply returns whether you want the element in the array.
+     */
+    public func filter(_ isIncluded: (T.Element?) throws -> Bool) rethrows -> AnyWeakArray<T> {
+        let newArray: [T] = try data.filter(isIncluded)
+        return AnyWeakArray<T>(newArray)
     }
 }
 
 // MARK: MutableCollectionType Implementation
 
-extension WeakArray: MutableCollection {
+extension AnyWeakArray: MutableCollection {
 
     // Required by SequenceType
-    public func makeIterator() -> IndexingIterator<WeakArray<T>> {
+    public func makeIterator() -> IndexingIterator<AnyWeakArray<T>> {
         // Rather than implement our own generator, let's take advantage of the generator provided by IndexingGenerator
-        return IndexingIterator<WeakArray<T>>(_elements: self)
+        return IndexingIterator<AnyWeakArray<T>>(_elements: self)
     }
 
     // Required by _CollectionType
     public func index(after i: Int) -> Int {
-        return i + 1
+        return data.index(after: i)
     }
     
     // Required by _CollectionType
     public var endIndex: Int {
-        return self.count
+        return data.endIndex
     }
 
     // Required by _CollectionType
     public var startIndex: Int {
-        return 0
+        return data.startIndex
     }
 
     /**
      Getter and setter array
     */
-    public subscript(index: Int) -> T? {
+    public subscript(index: Int) -> T.Element? {
         get {
-            let closure = data[index]
-            return closure()
+            return data[index].element
         }
         set {
-            data[index] = weakClosureWithValue(newValue)
+            data[index] = T.init(element: newValue)
         }
     }
 }
