@@ -1,8 +1,8 @@
 PODS:
-  - ConsistencyManager (4.0.0)
+  - ConsistencyManager (5.0.0)
   - PINCache (2.3)
   - RocketData (4.0.1):
-    - ConsistencyManager (~> 4.0.0)
+    - ConsistencyManager (~> 5.0.0)
 
 DEPENDENCIES:
   - PINCache (from `https://github.com/pinterest/PINCache.git`, commit `58635e4ff8d00fcd25084259a625c0615e9d071a`)
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :commit: 58635e4ff8d00fcd25084259a625c0615e9d071a
     :git: https://github.com/pinterest/PINCache.git
   RocketData:
-    :path: ..
+    :path: ".."
 
 CHECKOUT OPTIONS:
   PINCache:
@@ -21,10 +21,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/pinterest/PINCache.git
 
 SPEC CHECKSUMS:
-  ConsistencyManager: 323ee466a5c933973529dfa5baa5cbc238633a67
+  ConsistencyManager: 9ef5dbdb10a90d6c5799da67bb6a6a803ac4426f
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
-  RocketData: a661f6e75dd8741dbe95856ca84f5e16ab3b377e
+  RocketData: ed8074cf6c04055b6608d5523ec45fb99af37610
 
 PODFILE CHECKSUM: b5eb42e36b4847085a928ca720bb30354bb63d2e
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.0.0
