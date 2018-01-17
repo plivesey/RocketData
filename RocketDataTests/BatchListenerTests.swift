@@ -253,7 +253,7 @@ class BatchListenerTests: RocketDataTestCase {
         }
         collectionDataProvider1.delegate = collectionProvider1Delegate
 
-        let collectionProvider2Delegate = ClosureCollectionDataProviderDelegate() { _ in
+        let collectionProvider2Delegate = ClosureCollectionDataProviderDelegate() { _,_  in
             XCTFail()
         }
         collectionDataProvider2.delegate = collectionProvider2Delegate
@@ -313,7 +313,7 @@ class BatchListenerTests: RocketDataTestCase {
         }
         collectionDataProvider1.delegate = collectionProvider1Delegate
 
-        let collectionProvider2Delegate = ClosureCollectionDataProviderDelegate() { _ in
+        let collectionProvider2Delegate = ClosureCollectionDataProviderDelegate() { _,_  in
             XCTFail()
         }
         collectionDataProvider2.delegate = collectionProvider2Delegate
