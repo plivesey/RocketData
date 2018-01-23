@@ -4,7 +4,7 @@ set -o pipefail &&
 time xcodebuild clean test \
     -workspace RocketData.xcworkspace \
     -scheme RocketData \
-    -sdk iphonesimulator11.0 \
+    -sdk iphonesimulator11.2 \
     -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' \
     -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.0' \
 | xcpretty
