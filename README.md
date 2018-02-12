@@ -9,7 +9,7 @@ Rocket Data is a model management system with persistence for immutable models.
 
 ## Motivation
 
-Immutability has [many benefits](see https://linkedin.github.io/RocketData/pages/130_immutability.html), but keeping models consistent and making changes is difficult. This library manages the consistency and caching of immutable models. It is intended to be an ideal replacement for Core Data. However, unlike Core Data, it does not block the main thread and does not crash whenever you do something slightly incorrect (see [Core Data Comparison](https://linkedin.github.io/RocketData/pages/100_coreData.html)). In most setups, the backing cache does not need a schema, and you never need to add migration logic.
+Immutability has [many benefits](https://linkedin.github.io/RocketData/pages/130_immutability.html), but keeping models consistent and making changes is difficult. This library manages the consistency and caching of immutable models. It is intended to be an ideal replacement for Core Data. However, unlike Core Data, it does not block the main thread and does not crash whenever you do something slightly incorrect (see [Core Data Comparison](https://linkedin.github.io/RocketData/pages/100_coreData.html)). In most setups, the backing cache does not need a schema, and you never need to add migration logic.
 
 ## Scale
 
