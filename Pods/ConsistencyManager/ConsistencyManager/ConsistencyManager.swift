@@ -844,6 +844,7 @@ open class ConsistencyManager {
             NotificationCenter.default.removeObserver(self)
         }
 
+        @objc
         func applicationDidReceiveMemoryWarning(_ notification: Notification) {
             delegate?.applicationDidReceiveMemoryWarning(notification)
         }

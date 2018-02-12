@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/linkedin/ConsistencyManager-iOS.svg?branch=master)](https://travis-ci.org/linkedin/ConsistencyManager-iOS)
 [![codecov](https://codecov.io/gh/linkedin/ConsistencyManager-iOS/branch/master/graph/badge.svg)](https://codecov.io/gh/linkedin/ConsistencyManager-iOS)
 [![GitHub release](https://img.shields.io/github/release/linkedin/ConsistencyManager-iOS.svg?maxAge=86400)](https://github.com/linkedin/ConsistencyManager-iOS/releases)
+![Platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20tvOS%20%7C%20macOS-blue.svg)
 
 This library provides a way of keeping immutable models consistent. First, listeners listen to an immutable model. Whenever this model (or any child model) is updated, the Consistency Manager will generate a new model and notify its listeners.
 
@@ -70,6 +71,7 @@ We are currently not maintaining separate branches for different Swift versions.
 | 2.2 - 2.3     | 2.x.x                        |
 | 3 (Easy migration API) | 3.x.x               |
 | 3 (Better API) | 4.x.x                       |
+| 4             | 5.1.1+                       |
 
 NOTE: If you are migrating to Swift 3, consider using version 3.0.0 first, then migrating to 4.x.x. 3.0.0 migrates the code to the new syntax without making any API changes. 4.x.x introduces a better API which is more consistent with the new Swift 3 API guidelines.
 
