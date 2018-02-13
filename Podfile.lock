@@ -1,12 +1,12 @@
 PODS:
-  - ConsistencyManager (5.0.0)
+  - ConsistencyManager (5.2.0)
 
 DEPENDENCIES:
-  - ConsistencyManager (~> 5.0.0)
+  - ConsistencyManager (~> 5.2.0)
 
 SPEC CHECKSUMS:
-  ConsistencyManager: 9ef5dbdb10a90d6c5799da67bb6a6a803ac4426f
+  ConsistencyManager: 66a94b64e767a85698c2cb8c0184885760810fdc
 
-PODFILE CHECKSUM: d8d2259c702b74fab70a710147bf02a03932374d
+PODFILE CHECKSUM: 6a24e5e558e36fed2c36334f0ef9ea899f50d06c
 
 COCOAPODS: 1.3.1

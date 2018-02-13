@@ -1,15 +1,15 @@
 # 🚀 Data
 
-[![Build Status](https://travis-ci.org/linkedin/RocketData.svg?branch=master)](https://travis-ci.org/linkedin/RocketData)
-[![codecov](https://codecov.io/gh/linkedin/RocketData/branch/master/graph/badge.svg)](https://codecov.io/gh/linkedin/RocketData)
-[![GitHub release](https://img.shields.io/github/release/linkedin/RocketData.svg?maxAge=86400)](https://github.com/linkedin/RocketData/releases)
+[![Build Status](https://travis-ci.org/plivesey/RocketData.svg?branch=master)](https://travis-ci.org/plivesey/RocketData)
+[![codecov](https://codecov.io/gh/plivesey/RocketData/branch/master/graph/badge.svg)](https://codecov.io/gh/plivesey/RocketData)
+[![GitHub release](https://img.shields.io/github/release/plivesey/RocketData.svg?maxAge=86400)](https://github.com/plivesey/RocketData/releases)
 [![CocoaPods](https://img.shields.io/cocoapods/p/RocketData.svg?maxAge=86400)](#)
 
 Rocket Data is a model management system with persistence for immutable models.
 
 ## Motivation
 
-Immutability has [many benefits](see https://linkedin.github.io/RocketData/pages/130_immutability.html), but keeping models consistent and making changes is difficult. This library manages the consistency and caching of immutable models. It is intended to be an ideal replacement for Core Data. However, unlike Core Data, it does not block the main thread and does not crash whenever you do something slightly incorrect (see [Core Data Comparison](https://linkedin.github.io/RocketData/pages/100_coreData.html)). In most setups, the backing cache does not need a schema, and you never need to add migration logic.
+Immutability has [many benefits](https://plivesey.github.io/RocketData/pages/130_immutability.html), but keeping models consistent and making changes is difficult. This library manages the consistency and caching of immutable models. It is intended to be an ideal replacement for Core Data. However, unlike Core Data, it does not block the main thread and does not crash whenever you do something slightly incorrect (see [Core Data Comparison](https://plivesey.github.io/RocketData/pages/100_coreData.html)). In most setups, the backing cache does not need a schema, and you never need to add migration logic.
 
 ## Scale
 
@@ -37,7 +37,7 @@ Then run `pod install`.
 
 Add this to your `Cartfile`:
 ```ogdl
-github "linkedin/RocketData"
+github "plivesey/RocketData"
 ```
 Then run `carthage update RocketData --platform ios`
 
@@ -45,7 +45,7 @@ NOTE: Currently, `--platform ios` is necessary for some reason. We are investiga
 
 ### Swift Version
 
-We are currently not maintaining separate branches for different Swift versions. You can use an older version of Rocket Data for older versions of Swift though. HEAD currently supports Swift 3.
+We are currently not maintaining separate branches for different Swift versions. You can use an older version of Rocket Data for older versions of Swift though. HEAD currently supports Swift 4.
 
 | Swift Version | Rocket Data Version          |
 |---------------|------------------------------|
@@ -56,17 +56,15 @@ We are currently not maintaining separate branches for different Swift versions.
 | 2.3 (Carthage) | 1.2.0                       |
 | 3 (Easy migration API) | 2.0.0               |
 | 3 (Better API) | 4.x.x                       |
+| 4             | 5.x.x                        |
 
 NOTE: If you are migrating to Swift 3, consider using version 2.0.0 first, then migrating to 3.x.x. 3.0.0 migrates the code to the new syntax without making any API changes. 3.x.x introduces a better API which is more consistent with the new Swift 3 API guidelines.
 
 ## Documentation
 
-To get started, you should take a look at the [docs](https://linkedin.github.io/RocketData).
+To get started, you should take a look at the [docs](https://plivesey.github.io/RocketData).
 
 ### Consistency Manager
 
-Rocket Data uses [ConsistencyManager-iOS](https://github.com/linkedin/ConsistencyManager-iOS/) to manage the in-memory consistency of models. While you never need to access the Consistency Manager directly, understanding how it works will help you understand Rocket Data.
+Rocket Data uses [ConsistencyManager-iOS](https://github.com/plivesey/ConsistencyManager-iOS/) to manage the in-memory consistency of models. While you never need to access the Consistency Manager directly, understanding how it works will help you understand Rocket Data.
 
-## Security
-
-If you believe you have discovered a security issue, please send an email to security@linkedin.com with information and detailed instructions on how to reproduce the issue.
