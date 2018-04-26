@@ -29,4 +29,9 @@ public struct ModelUpdates {
      If you return nil from map (indicating a cascading delete), multiple models may be deleted. All these ids will be included in this set.
     */
     public var deletedModelIds: Set<String>
+
+    public init(changedModelIds: Set<String>, deletedModelIds: Set<String>) {
+        self.changedModelIds = changedModelIds
+        self.deletedModelIds = deletedModelIds
+    }
 }
