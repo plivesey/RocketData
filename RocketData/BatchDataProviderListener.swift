@@ -129,7 +129,7 @@ public protocol BatchDataProviderListenerDelegate: class {
 
 public protocol BatchListenable: class {
     /// Allows the batch listener to set and read this property
-    weak var batchListener: BatchDataProviderListener? { get set }
+    var batchListener: BatchDataProviderListener? { get set }
     /**
      Returns true if the data provider actually updated to the current context.
      If the data provider ignored this change, the it will return false.
