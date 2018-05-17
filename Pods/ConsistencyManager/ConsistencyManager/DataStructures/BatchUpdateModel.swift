@@ -65,7 +65,7 @@ public final class BatchUpdateModel: ConsistencyManagerModel {
     }
 
     public func forEach(_ visit: (ConsistencyManagerModel) -> Void) {
-        models.flatMap { $0 }.forEach(visit)
+        models.compactMap { $0 }.forEach(visit)
     }
 
     public func isEqualToModel(_ other: ConsistencyManagerModel) -> Bool {

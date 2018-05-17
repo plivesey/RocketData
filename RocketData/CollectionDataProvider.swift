@@ -471,7 +471,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
 
         // Sadly, optionally casting to [T] doesn't work due to a swift bug (at runtime, accessing the model crashes)
         // So, we're forced to use a map and cast each model individually
-        let newData = model.models.flatMap { model -> T? in
+        let newData = model.models.compactMap { model -> T? in
             Log.sharedInstance.assert(model is T || model == nil, "CollectionDataProvider found a model which was of the wrong type. This should never happen and indicates a bug in the library.")
             return model as? T
         }
@@ -479,7 +479,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
         // Here we are:
         // Enumerating the array so we get indexes
         // Then, reversing the array so that deletes can be applied in order (if you mutate the array while iterating over changes, you should do this in reverse order)
-        let collectionChangesInformation = data.enumerated().reversed().flatMap { (index, element) in
+        let collectionChangesInformation = data.enumerated().reversed().compactMap { (index, element) in
             return element.modelIdentifier.flatMap { (identifier) -> CollectionChangeInformation? in
                 if updates.deletedModelIds.contains(identifier) {
                     return .delete(index: index)

@@ -106,7 +106,7 @@ class SharedCollectionManager {
      If it fails, we will return nil and no change will be made.
      */
     fileprivate static func genericArrayFromArray<T>(_ array: [Any]) -> [T]? {
-        let actualData = array.flatMap { $0 as? T }
+        let actualData = array.compactMap { $0 as? T }
         if array.count == actualData.count {
             return actualData
         } else {

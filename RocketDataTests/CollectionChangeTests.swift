@@ -61,10 +61,3 @@ class CollectionChangeTests: RocketDataTestCase {
         XCTAssertEqual(changes.deltaNumberOfElements(), -2)
     }
 }
-
-extension ModelUpdates {
-    init(changedModelIds: Set<String>, deletedModelIds: Set<String>) {
-        self.changedModelIds = changedModelIds
-        self.deletedModelIds = deletedModelIds
-    }
-}

@@ -92,7 +92,7 @@ open class ParsingHelpers {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             // Though this is a flat map, this should never fail since T is a subtype of U
-            let elements = model?.flatMap { $0 as? T }
+            let elements = model?.compactMap { $0 as? T }
             return (elements, nil)
         } else {
             return (nil, Error.wrongModelClassParsed.error())
@@ -124,7 +124,7 @@ open class ParsingHelpers {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             // Though this is a flat map, this should never fail since T is a subtype of U
-            let elements = model.0?.flatMap { $0 as? T }
+            let elements = model.0?.compactMap { $0 as? T }
             return (elements, model.1)
         } else {
             return (nil, Error.wrongModelClassParsed.error())

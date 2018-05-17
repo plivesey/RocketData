@@ -39,7 +39,7 @@ final class ParentModel: Model, Equatable {
             return nil
         }
 
-        let otherChildren = self.otherChildren.flatMap { child in
+        let otherChildren = self.otherChildren.compactMap { child in
             return transform(child) as? ChildModel
         }
         return ParentModel(id: id, name: name, requiredChild: requiredChild, otherChildren: otherChildren)
