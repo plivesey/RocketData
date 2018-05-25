@@ -636,7 +636,7 @@ open class ConsistencyManager {
         }
 
         // Given the current model, let's generate new models for each listener
-        let results: [(listener: ConsistencyManagerListener, newModel: ConsistencyManagerModel?, modelUpdates: ModelUpdates)] = currentModels.flatMap { (listener, currentModel) in
+        let results: [(listener: ConsistencyManagerListener, newModel: ConsistencyManagerModel?, modelUpdates: ModelUpdates)] = currentModels.compactMap { (listener, currentModel) in
             guard let currentModel = currentModel else {
                 // Else the model has disappeared (so the listener isn't listening to anything anymore).
                 // Let's not remove the listener though, because we could screw something up due to timing issues (we are on a different thread)

@@ -71,7 +71,7 @@ extension Array where Element: WeakHolder {
      Note how you need to specify the types of the flatMap so it doesn't conflict with the default flatMap.
      */
     public func flatMap<T, U: WeakHolder>(_ transform: (Element.Element?) throws -> T?) rethrows -> [U] where U.Element == T {
-        return try flatMap { (weakHolder: Element) in
+        return try compactMap { (weakHolder: Element) in
             let newElement = try transform(weakHolder.element)
             return newElement.flatMap(U.init)
         }
