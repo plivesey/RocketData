@@ -53,7 +53,7 @@ class RocketDataCacheDelegate: CacheDelegate {
         // For this app, we've decided to save the models from collections seperately
         // So, collectionCacheValue is an array of ids. We'll try to resolved each of these ids to a real object in the cache
         // If one fails, that's ok. We'll still return as much as we can
-        let collection: [T] = collectionCacheValue.flatMap {
+        let collection: [T] = collectionCacheValue.compactMap {
             guard let data = self.cache.object(forKey: $0) as? [AnyHashable: Any] else {
                 return nil
             }
@@ -74,7 +74,7 @@ class RocketDataCacheDelegate: CacheDelegate {
             }
         }
 
-        let collectionCacheValue = collection.flatMap {
+        let collectionCacheValue = collection.compactMap {
             return $0.modelIdentifier
         }
 
