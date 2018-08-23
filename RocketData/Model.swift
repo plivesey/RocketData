@@ -118,7 +118,7 @@ with top level models. With this extension, you only need to implement two metho
 */
 extension SimpleModel {
     public func isEqualToModel(_ model: ConsistencyManagerModel) -> Bool {
-        if let model = model as? Model {
+        if let model = model as? SimpleModel {
             return isEqual(to: model)
         } else {
             return false
