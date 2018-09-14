@@ -30,10 +30,10 @@ import ConsistencyManager
 open class DataModelManager {
 
     /// Cache Delegate. This is strongly retained since it is required by the library.
-    open let cacheDelegate: CacheDelegate
+    public let cacheDelegate: CacheDelegate
 
     /// Consistency Manager.
-    open let consistencyManager = ConsistencyManager()
+    public let consistencyManager = ConsistencyManager()
 
     let sharedCollectionManager = SharedCollectionManager()
 
