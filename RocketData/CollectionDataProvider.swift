@@ -43,7 +43,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
     }
 
     /// The DataModelManager which backs this data provider.
-    open let dataModelManager: DataModelManager
+    public let dataModelManager: DataModelManager
 
     /// This saves the batchListener instance. It is public because it implements the BatchListenable protocol. You should never edit this directly.
     open weak var batchListener: BatchDataProviderListener?
@@ -129,7 +129,10 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      anything else you want.
      */
     open func setData(_ data: [T], cacheKey: String?, shouldCache: Bool = true, context: Any? = nil) {
-        self.dataHolder.setData(data, changeTime: ChangeTime())
+        let isSuccess = self.dataHolder.setData(data, changeTime: ChangeTime())
+        if !isSuccess {
+            return
+        }
         self.cacheKey = cacheKey
         if shouldCache, let cacheKey = cacheKey {
             dataModelManager.cacheCollection(data, forKey: cacheKey, context: context)
@@ -193,7 +196,12 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
 
                     if cacheKey != self.cacheKey && cacheDataFresh {
                         if let collection = collection {
-                            self.dataHolder.setData(collection, changeTime: ChangeTime())
+                            let isSuccess = self.dataHolder.setData(collection, changeTime: ChangeTime())
+                            // If the method such as setData is not called from the main thread, it may still be inconsistent here. If so, just return
+                            if !isSuccess {
+                                return
+                            }
+                            
                             self.listenForUpdates()
                             self.cacheKey = cacheKey
                         }
@@ -218,10 +226,15 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
     */
     open func insert(_ newData: [T], at index: Int, shouldCache: Bool = true, context: Any? = nil) {
         if newData.count > 0 {
+            // Because `data` almost is a collection instance reference, we should first determine if there is a conflict and then modify the contents of the collection.
+            let changeTime = ChangeTime()
+            if dataHolder.lastUpdated.after(changeTime) {
+                return
+            }
             var updatedData = data
             updatedData.insert(contentsOf: newData, at: index)
-            dataHolder.setData(updatedData, changeTime: ChangeTime())
-
+            _ = dataHolder.setData(updatedData, changeTime: changeTime)
+            
             if shouldCache, let cacheKey = cacheKey {
                 dataModelManager.cacheCollection(data, forKey: cacheKey, context: context)
             }
@@ -265,9 +278,14 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter context: This context will be passed onto the cache delegate. Default nil.
      */
     open func update(_ element: T, at index: Int, shouldCache: Bool = true, context: Any? = nil) {
+        // Because `data` almost is a collection instance reference, we should first determine if there is a conflict and then modify the contents of the collection.
+        let changeTime = ChangeTime()
+        if dataHolder.lastUpdated.after(changeTime) {
+            return
+        }
         var updatedData = data
         updatedData[index] = element
-        dataHolder.setData(updatedData, changeTime: ChangeTime())
+        _ = dataHolder.setData(updatedData, changeTime: changeTime)
 
         if shouldCache, let cacheKey = cacheKey {
             self.dataModelManager.cacheCollection(data, forKey: cacheKey, context: context)
@@ -296,9 +314,14 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter context: This context will be passed onto the cache delegate. Default nil.
      */
     open func remove(at index: Int, shouldCache: Bool = true, context: Any? = nil) {
+        // Because `data` almost is a collection instance reference, we should first determine if there is a conflict and then modify the contents of the collection.
+        let changeTime = ChangeTime()
+        if dataHolder.lastUpdated.after(changeTime) {
+            return
+        }
         var updatedData = data
         updatedData.remove(at: index)
-        dataHolder.setData(updatedData, changeTime: ChangeTime())
+        _ = dataHolder.setData(updatedData, changeTime: changeTime)
 
         if shouldCache, let cacheKey = cacheKey {
             dataModelManager.cacheCollection(data, forKey: cacheKey, context: context)
@@ -327,7 +350,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
     - parameter dataModelManager: The data model manager to associate with this change.
     - parameter context: This context will be passed onto the cache delegate. Default nil.
     */
-    open static func setData(_ data: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil) {
+    public static func setData(_ data: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.setData(data, cacheKey: cacheKey, context: context)
     }
@@ -347,7 +370,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    open static func insert(_ newData: [T], at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
+    public static func insert(_ newData: [T], at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
@@ -370,7 +393,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    open static func append(_ newData: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
+    public static func append(_ newData: [T], cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             collectionDataProvider.append(newData, context: context)
@@ -393,7 +416,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    open static func update(_ element: T, at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
+    public static func update(_ element: T, at index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
@@ -417,7 +440,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
      - parameter completion: This completion block is called when the insert has succeeded (but the data may not yet be propegated to the cache).
      If there is no data in the cache for this cacheKey, it will return an error as the insert has failed. Default nil.
      */
-    open static func removeAtIndex(_ index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
+    public static func removeAtIndex(_ index: @escaping (([T])->Int), cacheKey: String, dataModelManager: DataModelManager, context: Any? = nil, completion: ((NSError?)->())? = nil) {
         let collectionDataProvider = CollectionDataProvider<T>(dataModelManager: dataModelManager)
         collectionDataProvider.fetchDataFromCache(withCacheKey: cacheKey) { cachedData, error in
             if let cachedData = cachedData {
@@ -503,7 +526,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
 
         // If this update came from Rocket Data, change time will not be nil.
         // Otherwise, just use current time.
-        dataHolder.setData(newData, changeTime: changeTime ?? ChangeTime())
+        _ = dataHolder.setData(newData, changeTime: changeTime ?? ChangeTime())
 
         delegate?.collectionDataProviderHasUpdatedData(self, collectionChanges: collectionChanges, context: actualContext)
     }

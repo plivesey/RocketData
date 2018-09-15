@@ -16,7 +16,7 @@ import Foundation
 open class Log {
 
     /// Singleton accessor
-    open static let sharedInstance = Log()
+    public static let sharedInstance = Log()
 
     /// Delegate for the class. If nil, then it will do default logging. Otherwise, it will leave it up to the delegate.
     open weak var delegate: LogDelegate?
