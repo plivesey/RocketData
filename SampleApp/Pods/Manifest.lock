@@ -1,7 +1,7 @@
 PODS:
   - ConsistencyManager (6.0.0)
   - PINCache (2.3)
-  - RocketData (6.0.0):
+  - RocketData (6.0.1):
     - ConsistencyManager (~> 6.0.0)
 
 DEPENDENCIES:
@@ -9,7 +9,7 @@ DEPENDENCIES:
   - RocketData (from `..`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - ConsistencyManager
     - PINCache
 
@@ -20,8 +20,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ConsistencyManager: 10d92488107167a8d9df3cd93e529a15282ceaec
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
-  RocketData: 407c9aeff026cf9281683717d78d26e15f6f8a98
+  RocketData: 2663345b70a12a0dcfb0752fb438c799866d450f
 
 PODFILE CHECKSUM: cb6653d292a93b194174111d0be6bb93b45e1b23
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

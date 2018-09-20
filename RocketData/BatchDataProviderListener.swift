@@ -30,7 +30,7 @@ open class BatchDataProviderListener: BatchListenerDelegate {
     open weak var delegate: BatchDataProviderListenerDelegate?
 
     /// The consistency manager which is backed by this instance
-    open let consistencyManager: ConsistencyManager
+    public let consistencyManager: ConsistencyManager
 
     /// This is the batch listener from the consistency manager which contains most of the logic for doing batch listening
     private let batchListener: BatchListener

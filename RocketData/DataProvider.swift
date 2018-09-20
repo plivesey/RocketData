@@ -28,7 +28,7 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
     open weak var delegate: DataProviderDelegate?
 
     /// The data model manager which is backing this DataProvider
-    open let dataModelManager: DataModelManager
+    public let dataModelManager: DataModelManager
 
     /**
      You can set this variable to pause and unpause listening for changes to data.
@@ -129,7 +129,11 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
      or anything else you want.
     */
     open func setData(_ data: T?, updateCache: Bool = true, context: Any? = nil) {
-        self.dataHolder.setData(data, changeTime: ChangeTime())
+        let isSuccess = self.dataHolder.setData(data, changeTime: ChangeTime())
+        if !isSuccess {
+            return
+        }
+        
         if let data = data {
             if let cacheKey = data.modelIdentifier , updateCache {
                 dataModelManager.cacheModel(data, forKey: cacheKey, context: context)
@@ -171,7 +175,11 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
 
             if cacheDataFresh {
                 if let model = model {
-                    self.dataHolder.setData(model, changeTime: ChangeTime())
+                    let isSuccess = self.dataHolder.setData(model, changeTime: ChangeTime())
+                    if !isSuccess {
+                        return
+                    }
+                    
                     self.listenForUpdates()
                 }
                 completion(model, error)
