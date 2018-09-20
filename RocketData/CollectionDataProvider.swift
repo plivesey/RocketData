@@ -520,7 +520,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
 
         // If this update came from Rocket Data, change time will not be nil.
         // Otherwise, just use current time.
-        _ = dataHolder.setData(newData, changeTime: changeTime ?? ChangeTime())
+        dataHolder.setData(newData, changeTime: changeTime ?? ChangeTime())
 
         delegate?.collectionDataProviderHasUpdatedData(self, collectionChanges: collectionChanges, context: actualContext)
     }

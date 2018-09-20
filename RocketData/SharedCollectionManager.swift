@@ -178,7 +178,7 @@ extension CollectionDataProvider: SharedCollection {
             listenForUpdates(model: batchModel)
 
             if !isPaused {
-                _ = dataHolder.setData(newData, changeTime: ChangeTime())
+                dataHolder.setData(newData, changeTime: ChangeTime())
                 updateDelegatesWithChange(.reset, context: context)
             } else {
                 lastPausedContext = context
@@ -206,7 +206,7 @@ extension CollectionDataProvider: SharedCollection {
 
                 var updatedData = data
                 updatedData.insert(contentsOf: newData, at: index)
-                _ = dataHolder.setData(updatedData, changeTime: ChangeTime())
+                dataHolder.setData(updatedData, changeTime: ChangeTime())
 
                 // This should create an array of indexes starting at the insert point
                 // e.g. start with [x,y] insert two elements at index 1
@@ -237,7 +237,7 @@ extension CollectionDataProvider: SharedCollection {
 
             var updatedData = data
             updatedData[index] = element
-            _ = dataHolder.setData(updatedData, changeTime: ChangeTime())
+            dataHolder.setData(updatedData, changeTime: ChangeTime())
 
             updateDelegatesWithChange(.changes([.update(index: index)]), context: context)
         } else {
@@ -254,7 +254,7 @@ extension CollectionDataProvider: SharedCollection {
 
             var updatedData = data
             updatedData.remove(at: index)
-            _ = dataHolder.setData(updatedData, changeTime: ChangeTime())
+            dataHolder.setData(updatedData, changeTime: ChangeTime())
 
             updateDelegatesWithChange(.changes([.delete(index: index)]), context: context)
         } else {

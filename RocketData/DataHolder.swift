@@ -36,7 +36,7 @@ struct DataHolder<T> {
      - parameter changeTime: The new change time to set on lastUpdated.
      - Returns: whether to successfully set the data
      */
-    mutating func setData(_ data: T, changeTime: ChangeTime) -> Bool {
+    @discardableResult mutating func setData(_ data: T, changeTime: ChangeTime) -> Bool {
         if lastUpdated.after(changeTime) {
             return false
         }

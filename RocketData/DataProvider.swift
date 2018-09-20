@@ -269,7 +269,7 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
             // It will already have been updated in the cache so we don't need to recache it
             // We are also already listening to the new model so don't need to call listenForUpdates again
             // If we updated ourselves through Rocket Data, we'll always have a ChangeTime. Otherwise, let's use now.
-            _ = dataHolder.setData(model, changeTime: changeTime)
+            dataHolder.setData(model, changeTime: changeTime)
             delegate?.dataProviderHasUpdatedData(self, context: actualContext)
         } else {
             Log.sharedInstance.assert(false, "Consistency manager returned an incorrect model type. It looks like we have duplicate ids for different classes. This is not allowed because models must have globally unique identifiers.")
@@ -293,7 +293,7 @@ open class DataProvider<T: SimpleModel>: ConsistencyManagerListener, BatchListen
                                 // This signifies that this change should be discarded because it's out of date
                                 return
                             }
-                            _ = dataHolder.setData(newModel, changeTime: changeTime)
+                            dataHolder.setData(newModel, changeTime: changeTime)
                             delegate?.dataProviderHasUpdatedData(self, context: actualContext)
                         }
                     }
