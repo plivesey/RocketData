@@ -7,6 +7,7 @@ time xcodebuild clean test \
     -sdk iphonesimulator \
     -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' \
     -destination 'platform=iOS Simulator,name=iPhone X,OS=11.1' \
+    -destination 'platform=iOS Simulator,name=iPhone XS Max,OS=12.0' \
 | xcpretty
 
 # Disabling 8.4 because it's very flaky on travis

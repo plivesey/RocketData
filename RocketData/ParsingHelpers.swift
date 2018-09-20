@@ -30,7 +30,7 @@ open class ParsingHelpers {
      
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    open static func parseModel<T, U>(_ parseBlock: (U.Type) -> U?) -> (T?, NSError?) {
+    public static func parseModel<T, U>(_ parseBlock: (U.Type) -> U?) -> (T?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model) as? T
             return (model, nil)
@@ -60,7 +60,7 @@ open class ParsingHelpers {
 
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    open static func parseModel<T, U>(_ parseBlock: (U.Type) -> (U?, NSError?)) -> (T?, NSError?) {
+    public static func parseModel<T, U>(_ parseBlock: (U.Type) -> (U?, NSError?)) -> (T?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             return (model.0 as? T, model.1)
@@ -88,7 +88,7 @@ open class ParsingHelpers {
 
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    open static func parseCollection<T, U>(_ parseBlock: (U.Type) -> [U]?) -> ([T]?, NSError?) {
+    public static func parseCollection<T, U>(_ parseBlock: (U.Type) -> [U]?) -> ([T]?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             // Though this is a flat map, this should never fail since T is a subtype of U
@@ -120,7 +120,7 @@ open class ParsingHelpers {
 
      Sadly, this does not work if U is a protocol due to a Swift bug. In this case, you'll need to optionally cast manually.
      */
-    open static func parseCollection<T, U>(_ parseBlock: (U.Type) -> ([U]?, NSError?)) -> ([T]?, NSError?) {
+    public static func parseCollection<T, U>(_ parseBlock: (U.Type) -> ([U]?, NSError?)) -> ([T]?, NSError?) {
         if let Model = T.self as? U.Type {
             let model = parseBlock(Model)
             // Though this is a flat map, this should never fail since T is a subtype of U

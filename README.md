@@ -45,7 +45,7 @@ NOTE: Currently, `--platform ios` is necessary for some reason. We are investiga
 
 ### Swift Version
 
-We are currently not maintaining separate branches for different Swift versions. You can use an older version of Rocket Data for older versions of Swift though. HEAD currently supports Swift 4.
+We are currently not maintaining separate branches for different Swift versions. You can use an older version of Rocket Data for older versions of Swift though. HEAD currently supports Swift 4.2.
 
 | Swift Version | Rocket Data Version          |
 |---------------|------------------------------|
@@ -57,6 +57,7 @@ We are currently not maintaining separate branches for different Swift versions.
 | 3 (Easy migration API) | 2.0.0               |
 | 3 (Better API) | 4.x.x                       |
 | 4             | 5.x.x                        |
+| 4.2           | 7.x.x                        |
 
 NOTE: If you are migrating to Swift 3, consider using version 2.0.0 first, then migrating to 3.x.x. 3.0.0 migrates the code to the new syntax without making any API changes. 3.x.x introduces a better API which is more consistent with the new Swift 3 API guidelines.
 
