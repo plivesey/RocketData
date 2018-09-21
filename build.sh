@@ -6,7 +6,8 @@ time xcodebuild clean test \
     -scheme RocketData \
     -sdk iphonesimulator \
     -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' \
-    -destination 'platform=iOS Simulator,name=iPhone X,OS=11.1' \
+    -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.1' \
+    -destination 'platform=iOS Simulator,name=iPhone X,OS=11.3' \
     -destination 'platform=iOS Simulator,name=iPhone XS Max,OS=12.0' \
 | xcpretty
 
