@@ -27,7 +27,7 @@ import Foundation
  */
 open class BatchListener: ConsistencyManagerListener {
 
-    open let listeners: [ConsistencyManagerListener]
+    public let listeners: [ConsistencyManagerListener]
 
     /// The delegate that is called after one or more listeners in the `listeners` array are updated
     open weak var delegate: BatchListenerDelegate?

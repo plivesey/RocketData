@@ -1,8 +1,8 @@
 # Overview
 
-[![Build Status](https://travis-ci.org/plivesey/ConsistencyManager-iOS.svg?branch=master)](https://travis-ci.org/linkedin/ConsistencyManager-iOS)
-[![codecov](https://codecov.io/gh/plivesey/ConsistencyManager-iOS/branch/master/graph/badge.svg)](https://codecov.io/gh/linkedin/ConsistencyManager-iOS)
-[![GitHub release](https://img.shields.io/github/release/plivesey/ConsistencyManager-iOS.svg?maxAge=86400)](https://github.com/linkedin/ConsistencyManager-iOS/releases)
+[![Build Status](https://travis-ci.org/plivesey/ConsistencyManager-iOS.svg?branch=master)](https://travis-ci.org/plivesey/ConsistencyManager-iOS)
+[![codecov](https://codecov.io/gh/plivesey/ConsistencyManager-iOS/branch/master/graph/badge.svg)](https://codecov.io/gh/plivesey/ConsistencyManager-iOS)
+[![GitHub release](https://img.shields.io/github/release/plivesey/ConsistencyManager-iOS.svg?maxAge=86400)](https://github.com/plivesey/ConsistencyManager-iOS/releases)
 ![Platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20tvOS%20%7C%20macOS-blue.svg)
 
 This library provides a way of keeping immutable models consistent. First, listeners listen to an immutable model. Whenever this model (or any child model) is updated, the Consistency Manager will generate a new model and notify its listeners.

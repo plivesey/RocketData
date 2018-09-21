@@ -283,7 +283,6 @@
 				612242AD1C7B85D40017B0C4 /* Frameworks */,
 				612242AE1C7B85D40017B0C4 /* Headers */,
 				612242AF1C7B85D40017B0C4 /* Resources */,
-				89AFBA691259AA065FB83006 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,7 +302,6 @@
 				612242B81C7B85D40017B0C4 /* Frameworks */,
 				612242B91C7B85D40017B0C4 /* Resources */,
 				F23AEA2B7986D85FBAEE25DF /* [CP] Embed Pods Frameworks */,
-				847D25B4EF98CC9562130A23 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -371,36 +369,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		847D25B4EF98CC9562130A23 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		89AFBA691259AA065FB83006 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RocketData/Pods-RocketData-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BAD9CFA1BEB4289CD8554F62 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -443,7 +411,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ConsistencyManager/ConsistencyManager.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -452,7 +420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RocketDataTests/Pods-RocketDataTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -1,12 +1,16 @@
 PODS:
-  - ConsistencyManager (6.0.0)
+  - ConsistencyManager (7.0.0)
 
 DEPENDENCIES:
-  - ConsistencyManager (~> 6.0.0)
+  - ConsistencyManager (~> 7.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ConsistencyManager
 
 SPEC CHECKSUMS:
-  ConsistencyManager: 10d92488107167a8d9df3cd93e529a15282ceaec
+  ConsistencyManager: f6209893e3974579109bf10b9df65fe1f024cc6f
 
-PODFILE CHECKSUM: 23217410773c338b8571eb56301ac0b04b43d886
+PODFILE CHECKSUM: e6242e3b997e6035fc5876eba5df08c1c3215ae8
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.6.0.beta.1

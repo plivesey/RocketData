@@ -3,10 +3,10 @@
 use_frameworks!
 
 target :'RocketData' do
-  pod 'ConsistencyManager', '~> 6.0.0'
+  pod 'ConsistencyManager', '~> 7.0.0'
 end
 
 target :'RocketDataTests' do
-  pod 'ConsistencyManager', '~> 6.0.0'
+  pod 'ConsistencyManager', '~> 7.0.0'
 end
 

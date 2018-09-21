@@ -119,7 +119,7 @@ open class ConsistencyManager {
     // MARK: - Initializers
 
     /// Singleton accessor for the consistency manager.
-    open static let sharedInstance = ConsistencyManager()
+    public static let sharedInstance = ConsistencyManager()
 
     /**
      Designated initializer.
@@ -836,7 +836,7 @@ open class ConsistencyManager {
             super.init()
             #if os(iOS)
                 // On OSX, we don't need this since there are no memory warnings.
-                NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidReceiveMemoryWarning(_:)), name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidReceiveMemoryWarning(_:)), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
             #endif
         }
 
