@@ -16,7 +16,7 @@ import RocketData
 
 extension DataModelManager {
     /**
-     Singleton accessor for DataModelManager. See https://linkedin.github.io/RocketData/pages/040_setup.html
+     Singleton accessor for DataModelManager. See https://plivesey.github.io/RocketData/pages/040_setup.html
      */
     static let sharedInstance = DataModelManager(cacheDelegate: RocketDataCacheDelegate())
 }
