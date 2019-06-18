@@ -7,8 +7,11 @@ Pod::Spec.new do |spec|
   spec.summary          = 'A non-blocking CoreData replacement which uses immutable models.'
   spec.source           = { :git => 'https://github.com/plivesey/RocketData.git', :tag => spec.version }
   spec.source_files     = 'RocketData/**/*.swift'
-  spec.platform         = :ios, '8.0'
-  spec.frameworks       = 'Foundation'
+  spec.ios.deployment_target  = '8.0'
+  spec.ios.frameworks         = 'Foundation'
+  spec.tvos.deployment_target = '9.0'
+  spec.tvos.frameworks        = 'Foundation'
+
   spec.dependency 'ConsistencyManager', '~> 7.0.0'
 end
 
