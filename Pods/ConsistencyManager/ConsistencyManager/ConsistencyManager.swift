@@ -181,7 +181,7 @@ open class ConsistencyManager {
         // This avoids the crash which occurs if someone calls this in deinit
         // If we lose a reference to it, it's ok since removing a listener isn't a key operation
         weak var listener = listener
-        if let index = self.pausedListeners.index(where: { listener === $0.listener }) {
+        if let index = self.pausedListeners.firstIndex(where: { listener === $0.listener }) {
             self.pausedListeners.remove(at: index)
         }
         dispatchTask { _ in
@@ -234,7 +234,7 @@ open class ConsistencyManager {
      (i.e. has most recently called the pauseListener method) to a model
      */
     open func resumeListener(_ listener: ConsistencyManagerListener) {
-        guard let index = pausedListeners.index(where: { listener === $0.listener }) else {
+        guard let index = pausedListeners.firstIndex(where: { listener === $0.listener }) else {
             return
         }
         let pausedListener = pausedListeners.remove(at: index)
@@ -627,7 +627,7 @@ open class ConsistencyManager {
         DispatchQueue.main.sync {
             currentModels = listeners.map { listener in
                 // If the listener is paused, then use the latest model (to which it has not officially listened) to do the transformation on later.
-                if let index = self.pausedListeners.index(where: { listener === $0.listener }) {
+                if let index = self.pausedListeners.firstIndex(where: { listener === $0.listener }) {
                     return (listener, self.pausedListeners[index].updatedModel)
                 } else {
                     return (listener, listener.currentModel())
@@ -673,7 +673,7 @@ open class ConsistencyManager {
                         // The next call to this function will take care of updating the model with more recent information.
                         return
                 }
-                if let index = self.pausedListeners.index(where: {listener === $0.listener}) {
+                if let index = self.pausedListeners.firstIndex(where: {listener === $0.listener}) {
                     let mergedChangedModels = modelUpdates.changedModelIds.union(self.pausedListeners[index].modelUpdates.changedModelIds)
                     let mergedDeletedModels = modelUpdates.deletedModelIds.union(self.pausedListeners[index].modelUpdates.deletedModelIds)
                     let mergedUpdates = ModelUpdates(changedModelIds: mergedChangedModels, deletedModelIds: mergedDeletedModels)

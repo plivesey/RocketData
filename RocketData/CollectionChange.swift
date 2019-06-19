@@ -73,7 +73,7 @@ public extension Collection where Iterator.Element == CollectionChangeInformatio
      This returns the number of .delete items in the array.
      It does not dedupe for repeated elements.
      */
-    public func numberOfDeletedElements() -> Int {
+    func numberOfDeletedElements() -> Int {
         return filter { element in
             switch element {
             case .delete:
@@ -88,7 +88,7 @@ public extension Collection where Iterator.Element == CollectionChangeInformatio
      This returns the number of .insert items in the array.
      It does not dedupe for repeated elements.
      */
-    public func numberOfInsertedElements() -> Int {
+    func numberOfInsertedElements() -> Int {
         return filter { element in
             switch element {
             case .insert:
@@ -108,7 +108,7 @@ public extension Collection where Iterator.Element == CollectionChangeInformatio
 
      ``numberOfInsertedItems - numberOfDeletedItems``.
      */
-    public func deltaNumberOfElements() -> Int {
+    func deltaNumberOfElements() -> Int {
         return numberOfInsertedElements() - numberOfDeletedElements()
     }
 }

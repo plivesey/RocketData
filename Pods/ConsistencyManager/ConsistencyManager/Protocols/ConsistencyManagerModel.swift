@@ -215,7 +215,7 @@ public extension ConsistencyManagerModel where Self: Equatable {
      This is a default implementation for isEqualToModel for models which are equatable.
      This can be overridden in subclasses if you don't want this default behavior.
      */
-    public func isEqualToModel(_ other: ConsistencyManagerModel) -> Bool {
+    func isEqualToModel(_ other: ConsistencyManagerModel) -> Bool {
         if let other = other as? Self {
             return self == other
         } else {

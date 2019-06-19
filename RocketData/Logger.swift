@@ -32,7 +32,7 @@ open class Log {
                 delegate.assertionFailure(logText(), file: file, function: function, line: line)
             } else {
                 // Default behavior is to just call a regular assertionFailure
-                assertionFailure(logText, file: file, line: line)
+                assertionFailure(logText(), file: file, line: line)
             }
         }
     }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'RocketData'
-  spec.version          = '7.0.1'
+  spec.version          = '8.0.0'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://plivesey.github.io/RocketData'
   spec.authors          = 'plivesey'
@@ -12,6 +12,6 @@ Pod::Spec.new do |spec|
   spec.tvos.deployment_target = '9.0'
   spec.tvos.frameworks        = 'Foundation'
 
-  spec.dependency 'ConsistencyManager', '~> 7.0.0'
+  spec.dependency 'ConsistencyManager', '~> 8.0.0'
 end
 
