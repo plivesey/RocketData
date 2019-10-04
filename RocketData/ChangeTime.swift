@@ -14,7 +14,7 @@ import Foundation
  Whenever you create a new ChangeTime, it will be after any previous times and before any future times.
  This is a thread safe class. You can call it from any thread.
  */
-struct ChangeTime: Equatable {
+public struct ChangeTime: Equatable {
     /// Keeps track of the last time we updated
     private static var lastTime = 1
     /// We use this serial queue to sync on different threads
@@ -57,6 +57,6 @@ struct ChangeTime: Equatable {
     }
 }
 
-func ==(lhs: ChangeTime, rhs: ChangeTime) -> Bool {
+public func ==(lhs: ChangeTime, rhs: ChangeTime) -> Bool {
     return lhs.time == rhs.time
 }
