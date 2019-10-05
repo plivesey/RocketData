@@ -85,7 +85,7 @@ open class CollectionDataProvider<T: SimpleModel>: ConsistencyManagerListener, B
     var dataHolder = DataHolder<[T]>(data: [])
 
     /// This is updated whenever we set data. In some circumstances, we want to check that our new update is newer than our current model.
-    var lastUpdated: ChangeTime {
+    open var lastUpdated: ChangeTime {
         return dataHolder.lastUpdated
     }
 
