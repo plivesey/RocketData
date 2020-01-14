@@ -21,7 +21,7 @@ class WeakSharedCollectionArrayTests: RocketDataTestCase {
     // MARK: Basic Functionality
 
     func testWeakArrayBasic() {
-        var array: WeakSharedCollectionArray = {
+        let array: WeakSharedCollectionArray = {
             var array = WeakSharedCollectionArray()
             let test = CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)
             array.append(test)
@@ -63,7 +63,7 @@ class WeakSharedCollectionArrayTests: RocketDataTestCase {
 
     func testArrayLiteralFull() {
         let array: WeakSharedCollectionArray = {
-            var strongArray = [CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)]
+            let strongArray = [CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)]
             let array: WeakSharedCollectionArray = [strongArray[0], strongArray[1], strongArray[2]]
             for i in 0..<3 {
                 XCTAssertTrue(array[i] === strongArray[i])
@@ -86,7 +86,7 @@ class WeakSharedCollectionArrayTests: RocketDataTestCase {
 
     func testArrayLiteralPartial() {
         let array: WeakSharedCollectionArray = {
-            var strongArray = [CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)]
+            let strongArray = [CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache), CollectionDataProvider<ParentModel>(dataModelManager: DataModelManager.sharedDataManagerNoCache)]
             let array: WeakSharedCollectionArray = [strongArray[0], nil, strongArray[1], nil, strongArray[2], nil]
             for i in 0..<6 {
                 if i % 2 == 0 {
