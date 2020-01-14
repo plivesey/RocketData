@@ -1,6 +1,14 @@
+# Build Directory
+DerivedData/
+
 # User Data
 *.pbxuser
 xcuserdata
+
+# SwiftPackageManager
+Packages
+.build/
+*.xcodeproj
 
 # Docs
 docs/_build/*
