@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "ConsistencyManager",
-        "repositoryURL": "https://github.com/plivesey/ConsistencyManager-iOS",
+        "repositoryURL": "https://github.com/plivesey/ConsistencyManager",
         "state": {
           "branch": "master",
           "revision": "ea9b0ddfb60d4a14d7a87e2f4017390f280e71b5",

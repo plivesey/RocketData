@@ -8,7 +8,7 @@ Model vs SimpleModel
 
 SimpleModel is easier to implement since there are only two methods to implement, but they are less powerful. All immutable models are trees, and if you implement the Model protocol, the library will keep all subtrees consistent. So, if a child model needs updating, the library will replace it, regenerate a new person model, and update the DataProviders. The Model protocol takes more work to implement, but we would recommend it unless your models are very simple and you only need to keep the top level models consistent.
 
-For a more detailed discussion on how child models are kept consistent, see https://linkedin.github.io/ConsistencyManager-iOS/pages/010_consistencyManager.html. However, you do not need to call the Consistency Manager directly because Rocket Data will do this automatically for you.
+For a more detailed discussion on how child models are kept consistent, see https://plivesey.github.io/ConsistencyManager/pages/010_consistencyManager.html. However, you do not need to call the Consistency Manager directly because Rocket Data will do this automatically for you.
 
 The Protocols
 -------------

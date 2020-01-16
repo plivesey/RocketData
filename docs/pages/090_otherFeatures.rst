@@ -21,4 +21,4 @@ Logging
 
 If you make a mistake in setting up or using Rocket Data, it will throw an assertion. This will not crash in release builds and the library always makes a best effort to recover (usually by ignoring a change and reverting to a previous state). This assert is implemented in the Logger class. If you want to intercept this assert, you can implement the LoggerDelegate.
 
-The Consistency Manager can make many changes while the application runs. If you want additional information for debugging purposes, you may want to register as the delegate of the ConsistencyManager owned by the DataModelManager. See https://linkedin.github.io/ConsistencyManager-iOS/pages/110_errorsAndDebugging.html for more information.
+The Consistency Manager can make many changes while the application runs. If you want additional information for debugging purposes, you may want to register as the delegate of the ConsistencyManager owned by the DataModelManager. See https://plivesey.github.io/ConsistencyManager/pages/110_errorsAndDebugging.html for more information.

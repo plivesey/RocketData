@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "RocketData", targets: ["RocketData"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/plivesey/ConsistencyManager-iOS", .branch("master"))
+        .package(url: "https://github.com/plivesey/ConsistencyManager", .branch("master"))
     ],
     targets: [
         .target(
