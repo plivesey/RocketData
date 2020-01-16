@@ -35,11 +35,11 @@ https://realm.io/news/slug-peter-livesey-managing-consistency-immutable-models/
 Consistency Manager
 -------------------
 
-Rocket Data uses ConsistencyManager-iOS to manage the in memory consistency of models. While you never need to access the Consistency Manager directly, understanding how it works will help you understand Rocket Data.
+Rocket Data uses ConsistencyManager to manage the in memory consistency of models. While you never need to access the Consistency Manager directly, understanding how it works will help you understand Rocket Data.
 
-Consistency Manager Docs: https://linkedin.github.io/ConsistencyManager-iOS/
+Consistency Manager Docs: https://plivesey.github.io/ConsistencyManager/
 
-Consistency Manager Code: https://github.com/linkedin/ConsistencyManager-iOS/
+Consistency Manager Code: https://github.com/linkedin/ConsistencyManager/
 
 Documentation
 -------------

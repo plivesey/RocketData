@@ -3,7 +3,7 @@ Projections
 
 Usually, IDs must be globally unique. However, you can use the same ID for two different classes if you want to use projections. This feature is advanced and not particularly common.
 
-For the full docs on this, please see: https://linkedin.github.io/ConsistencyManager-iOS/pages/055_projections.html.
+For the full docs on this, please see: https://plivesey.github.io/ConsistencyManager/pages/055_projections.html.
 
 However, there are a few additional things to note:
 

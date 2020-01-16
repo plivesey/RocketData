@@ -67,5 +67,5 @@ To get started, you should take a look at the [docs](https://plivesey.github.io/
 
 ### Consistency Manager
 
-Rocket Data uses [ConsistencyManager-iOS](https://github.com/plivesey/ConsistencyManager-iOS/) to manage the in-memory consistency of models. While you never need to access the Consistency Manager directly, understanding how it works will help you understand Rocket Data.
+Rocket Data uses [ConsistencyManager](https://github.com/plivesey/ConsistencyManager/) to manage the in-memory consistency of models. While you never need to access the Consistency Manager directly, understanding how it works will help you understand Rocket Data.
 
